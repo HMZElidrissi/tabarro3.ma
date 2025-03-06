@@ -36,9 +36,10 @@ type SocialIconProps = {
     kind: keyof typeof components;
     href: string | undefined;
     size?: number;
+    className?: string;
 };
 
-const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
+const SocialIcon = ({ kind, href, size = 8, className }: SocialIconProps) => {
     if (
         !href ||
         (kind === 'mail' &&
@@ -56,7 +57,7 @@ const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
             href={href}>
             <span className="sr-only">{kind}</span>
             <SocialSvg
-                className={`hover:bg-brand-200 transition-colors duration-300 h-${size} w-${size}`}
+                className={`transition-colors duration-300 ${className} h-${size} w-${size}`}
                 fill="white"
             />
         </a>

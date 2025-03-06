@@ -2,7 +2,7 @@ import { BlogPost } from '@/types/post';
 import { Calendar, Droplets, User, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { formatDate } from '@/lib/utils';
+import { cn, formatDate } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 
 interface BlogPostGridProps {
@@ -48,7 +48,12 @@ export default function BlogPostGrid({
                         <div className="p-6 flex-grow flex flex-col">
                             {/* Date and reading time */}
                             <div className="flex items-center text-gray-500 text-sm mb-3">
-                                <Calendar className="h-3 w-3 mr-1" />
+                                <Calendar
+                                    className={cn(
+                                        'h-4 w-4 pb-1',
+                                        isRTL ? 'ml-1' : 'mr-1',
+                                    )}
+                                />
                                 <span>
                                     {formatDate(post.publishDate, locale)}
                                 </span>
@@ -66,7 +71,12 @@ export default function BlogPostGrid({
 
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center text-gray-600 text-sm">
-                                    <User className="h-3 w-3 mr-1" />
+                                    <User
+                                        className={cn(
+                                            'h-4 w-4 pb-1',
+                                            isRTL ? 'ml-1' : 'mr-1',
+                                        )}
+                                    />
                                     <span>{post.author}</span>
                                 </div>
                                 <Link

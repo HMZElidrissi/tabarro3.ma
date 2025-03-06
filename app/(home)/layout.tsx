@@ -27,18 +27,6 @@ export default async function Layout({ children }: LayoutProps) {
                 <header className="sticky top-0 z-50 w-full border-b bg-gray-100">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-8xl">
                         <div className="flex h-16 items-center justify-between">
-                            {/* Logo */}
-                            {/*<Link href="/">*/}
-                            {/*    <Image*/}
-                            {/*        src="/logo.svg"*/}
-                            {/*        alt="Logo"*/}
-                            {/*        width={150}*/}
-                            {/*        height={40}*/}
-                            {/*        className="h-10 w-auto mx-4"*/}
-                            {/*        priority*/}
-                            {/*    />*/}
-                            {/*</Link>*/}
-
                             <div className="flex items-center">
                                 {/* Mobile Navigation */}
                                 <MobileNav

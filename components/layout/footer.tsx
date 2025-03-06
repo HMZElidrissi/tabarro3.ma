@@ -13,18 +13,13 @@ export default function Footer({ dict }: FooterProps) {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-12">
                 <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
                     <div className="flex flex-col items-center gap-4 md:items-start">
-                        <div className="flex items-center gap-3">
-                            <Image
-                                src="/logo_white.svg"
-                                alt="tabarro3 Logo"
-                                width={32}
-                                height={32}
-                                className="w-auto h-20"
-                            />
-                        </div>
-                        <p className="text-center text-sm text-white max-w-sm md:text-start">
-                            {dict.footer.byRotaract}
-                        </p>
+                        <Image
+                            src="/hero.svg"
+                            alt="tabarro3 Logo"
+                            width={500}
+                            height={500}
+                            className="w-auto h-36"
+                        />
                     </div>
 
                     <div className="flex flex-col items-center gap-4 md:items-end">
@@ -32,22 +27,26 @@ export default function Footer({ dict }: FooterProps) {
                             <SocialIcon
                                 kind="mail"
                                 href="mailto:rotaractlesmerinides@gmail.com"
-                                size={6}
+                                size={5}
+                                className="text-white hover:text-[#EA4335]"
                             />
                             <SocialIcon
                                 kind="instagram"
                                 href="https://www.instagram.com/rotaract_les_merinides/"
-                                size={6}
+                                size={5}
+                                className="text-white hover:text-[#E1306C]"
                             />
                             <SocialIcon
                                 kind="linkedin"
                                 href="https://www.linkedin.com/company/rotaract-les-merinides/"
-                                size={6}
+                                size={5}
+                                className="text-white hover:text-[#0A66C2]"
                             />
                             <SocialIcon
                                 kind="twitter"
                                 href="https://x.com/dondesang_maroc"
-                                size={6}
+                                size={5}
+                                className="text-white hover:text-[#1DA1F2]"
                             />
                         </div>
                     </div>
