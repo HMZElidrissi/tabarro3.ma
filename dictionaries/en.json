@@ -19,7 +19,9 @@
     "contact": "Contact",
     "saving": "Saving...",
     "saveChanges": "Save Changes",
-    "unknown": "Unknown"
+    "unknown": "Unknown",
+    "notFoundDescription": "The page you are looking for was not found.",
+    "backToHome": "Return Home"
   },
   "footer": {
     "tabarro3": "tabarro3",
@@ -27,11 +29,31 @@
     "allRightsReserved": "All rights reserved."
   },
   "menu": {
+    "home": "Home",
     "bloodRequests": "Blood Requests",
     "newCampaigns": "New Campaigns",
+    "blog": "Blog",
     "donationCenters": "Donation Centers",
     "whyDonateBlood": "Why Donate Blood?",
     "whoCanDonateBlood": "Who Can Donate Blood?"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Find the latest articles and stories to stay informed about the blood donation community.",
+    "readMore": "Read more",
+    "backToBlog": "Back to Blog",
+    "postNotFound": "Post Not Found",
+    "postNotFoundDescription": "The blog post you are looking for might have been removed or is temporarily unavailable.",
+    "featured": "Featured",
+    "aboutAuthor": "About the Author",
+    "donateNow": "Donate Blood Today",
+    "donateMessage": "Your donation can save up to three lives. Find donation centers near you.",
+    "findCampaigns": "Find Campaigns",
+    "relatedPosts": "Related Posts",
+    "saveALife": "Save a Life Today",
+    "latestPosts": "Latest Posts",
+    "minRead": "min read",
+    "share": "Share"
   },
   "metadata": {
     "defaultTitle": "tabarro3.ma | Give Blood, Save Lives",

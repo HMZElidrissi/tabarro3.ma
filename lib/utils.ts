@@ -2,6 +2,8 @@ import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { ActivityType } from '@/types/enums';
 import { prisma } from '@/lib/prisma';
+import { format, parseISO } from 'date-fns';
+import { fr, enUS, ar } from 'date-fns/locale';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -33,3 +35,17 @@ export const getStatusColor = (status: string) => {
             return 'bg-blue-50 text-blue-700 border-blue-200';
     }
 };
+
+export function formatDate(dateString: string, localeCode: string = 'fr') {
+    const date = parseISO(dateString);
+
+    const locales = {
+        fr: fr,
+        en: enUS,
+        ar: ar,
+    };
+
+    const locale = locales[localeCode as keyof typeof locales] || fr;
+
+    return format(date, 'PPP', { locale });
+}

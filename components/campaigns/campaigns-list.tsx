@@ -31,11 +31,26 @@ export default function CampaignsList({
     return (
         <div className="container mx-auto py-8">
             <div className="space-y-12">
-                <div className="text-center">
-                    <h1 className="text-3xl font-bold">{dict.New_Campaigns}</h1>
-                    <p className="text-muted-foreground">
+                <div className="text-center mb-16 relative">
+                    <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 opacity-10">
+                        <svg
+                            width="120"
+                            height="120"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            className="text-brand-600">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                        </svg>
+                    </div>
+
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400">
+                        {dict.New_Campaigns}
+                    </h1>
+                    <p className="text-gray-600 max-w-2xl mx-auto text-lg">
                         {dict.New_Campaigns_Description}
                     </p>
+
+                    <div className="mt-8 w-24 h-1 bg-brand-500 mx-auto rounded-full"></div>
                 </div>
 
                 {ongoingCampaigns.length > 0 && (

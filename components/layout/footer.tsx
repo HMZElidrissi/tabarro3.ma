@@ -7,7 +7,7 @@ interface FooterProps {
 
 export default function Footer({ dict }: FooterProps) {
     return (
-        <footer className="relative border-t bg-gradient-to-b from-brand-700 to-brand-900">
+        <footer className="relative border-t bg-gradient-to-b from-brand-600 to-brand-700">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-200 to-transparent" />
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-12">

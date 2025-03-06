@@ -4,7 +4,7 @@ import {
     Facebook,
     Youtube,
     Linkedin,
-    Twitter,
+    XTwitter,
     Mastodon,
     Threads,
     Instagram,
@@ -12,6 +12,7 @@ import {
     Pinterest,
     Reddit,
     Spotify,
+    Whatsapp,
 } from './icons';
 
 const components = {
@@ -20,7 +21,7 @@ const components = {
     facebook: Facebook,
     youtube: Youtube,
     linkedin: Linkedin,
-    twitter: Twitter,
+    twitter: XTwitter,
     mastodon: Mastodon,
     threads: Threads,
     instagram: Instagram,
@@ -28,6 +29,7 @@ const components = {
     reddit: Reddit,
     pinterest: Pinterest,
     spotify: Spotify,
+    whatsapp: Whatsapp,
 };
 
 type SocialIconProps = {

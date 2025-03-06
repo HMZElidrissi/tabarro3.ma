@@ -19,7 +19,9 @@
     "contact": "Contact",
     "saving": "Enregistrement...",
     "saveChanges": "Enregistrer les modifications",
-    "unknown": "Je ne sais pas"
+    "unknown": "Je ne sais pas",
+    "notFoundDescription": "Nous ne trouvons pas ce que vous cherchez.",
+    "backToHome": "Retour à l'accueil"
   },
   "footer": {
     "tabarro3": "tabarro3",
@@ -27,11 +29,31 @@
     "allRightsReserved": "Tous droits réservés."
   },
   "menu": {
+    "home": "Accueil",
     "bloodRequests": "Demandes de sang",
     "newCampaigns": "Nouvelles campagnes",
+    "blog": "Blog",
     "donationCenters": "Centres de transfusion",
     "whyDonateBlood": "Pourquoi donner ?",
     "whoCanDonateBlood": "Qui peut donner ?"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Découvrez les dernières nouvelles, conseils et histoires inspirantes sur le don de sang.",
+    "readMore": "Lire la suite",
+    "backToBlog": "Retour au blog",
+    "postNotFound": "Article non trouvé",
+    "postNotFoundDescription": "L'article que vous recherchez a peut-être été supprimé ou est temporairement indisponible.",
+    "featured": "À la une",
+    "aboutAuthor": "À propos de l'auteur",
+    "donateNow": "Faire un don maintenant",
+    "donateMessage": "Le don de sang est un acte héroïque qui peut sauver des vies. Faites un don aujourd'hui et faites la différence.",
+    "findCampaigns": "Trouvez des campagnes",
+    "relatedPosts": "Articles similaires",
+    "saveALife": "Sauvez une vie",
+    "latestPosts": "Derniers articles",
+    "minRead": "min de lecture",
+    "share": "Partager"
   },
   "metadata": {
     "defaultTitle": "tabarro3.ma | Donnez du sang, sauvez des vies",

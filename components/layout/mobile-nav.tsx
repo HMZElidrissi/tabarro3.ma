@@ -15,7 +15,7 @@ import {
     AccordionTrigger,
 } from '@/components/ui/accordion';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useUser } from '@/auth';
 import { useState } from 'react';
 import { signOut } from '@/actions/sign-out';
@@ -23,6 +23,7 @@ import { Role } from '@/types/enums';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { languages } from '@/config/home';
 import { switchLanguage } from '@/actions/language';
+import { cn } from '@/lib/utils';
 
 interface MobileNavProps {
     dict: any;
@@ -37,6 +38,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
     const [currentLocale, setCurrentLocale] = useState(initialLocale);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
 
     const handleLogout = async () => {
         try {
@@ -56,8 +58,10 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
     };
 
     const mobileMenu = [
+        { name: dict.menu.home, href: '/' },
         { name: dict.menu.bloodRequests, href: '/requests' },
         { name: dict.menu.newCampaigns, href: '/campaigns' },
+        { name: dict.menu.blog, href: '/blog' },
         { name: dict.menu.donationCenters, href: '/#map' },
         { name: dict.menu.whyDonateBlood, href: '/#benefits' },
         { name: dict.menu.whoCanDonateBlood, href: '/#criterias' },
@@ -82,7 +86,10 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                             key={item.name}
                             asChild
                             variant="ghost"
-                            className="w-full justify-start"
+                            className={cn(
+                                'w-full justify-start',
+                                pathname === item.href && 'text-brand-600',
+                            )}
                             onClick={() => setIsOpen(false)}>
                             <Link href={item.href}>{item.name}</Link>
                         </Button>

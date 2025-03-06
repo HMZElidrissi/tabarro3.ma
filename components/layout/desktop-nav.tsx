@@ -16,6 +16,8 @@ import { switchLanguage } from '@/actions/language';
 import { useState } from 'react';
 import { signOut } from '@/actions/sign-out';
 import { Role } from '@/types/enums';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 interface DesktopNavProps {
     dict: any;
@@ -28,6 +30,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
     const [currentLocale, setCurrentLocale] = useState(initialLocale);
     const [isLoading, setIsLoading] = useState(false);
     const isRTL = currentLocale === 'ar';
+    const pathname = usePathname();
 
     const handleLogout = async () => {
         try {
@@ -50,12 +53,20 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
 
     const desktopMenu = [
         {
+            name: dict.menu.home,
+            href: '/',
+        },
+        {
             name: dict.menu.bloodRequests,
             href: '/requests',
         },
         {
             name: dict.menu.newCampaigns,
             href: '/campaigns',
+        },
+        {
+            name: dict.menu.blog,
+            href: '/blog',
         },
         {
             name: dict.menu.donationCenters,
@@ -72,13 +83,16 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
     ];
 
     return (
-        <nav className="flex items-center space-x-2 lg:space-x-4 rtl:space-x-reverse">
+        <nav className="flex items-center space-x-2 lg:space-x-4 rtl:space-x-reverse mx-auto">
             {desktopMenu.map(item => (
                 <Button
                     asChild
                     variant="ghost"
                     key={item.name}
-                    className="hover:bg-brand-50 text-gray-900 hover:text-brand-700 transition-colors duration-200">
+                    className={cn(
+                        'text-gray-900 hover:text-brand-700 transition-colors duration-200',
+                        pathname === item.href && 'bg-brand-50 text-brand-700',
+                    )}>
                     <Link href={item.href} className="text-sm font-medium">
                         {item.name}
                     </Link>
