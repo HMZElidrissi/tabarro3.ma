@@ -16,20 +16,19 @@ export const revalidate = 3600;
 
 export async function generateStaticParams() {
     const locales = ['fr', 'ar', 'en'];
-    const allParams = [];
+    const allSlugs = new Set();
 
     for (const locale of locales) {
         const posts = await getBlogPosts(locale);
 
-        const params = posts.map(post => ({
-            locale,
-            slug: post.slug,
-        }));
-
-        allParams.push(...params);
+        posts.forEach(post => {
+            allSlugs.add(post.slug);
+        });
     }
 
-    return allParams;
+    return Array.from(allSlugs).map(slug => ({
+        slug: String(slug),
+    }));
 }
 
 export async function generateMetadata({
