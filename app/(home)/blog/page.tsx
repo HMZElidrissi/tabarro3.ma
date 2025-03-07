@@ -8,8 +8,6 @@ import { cn, formatDate } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import BlogPostGrid from '@/components/blog/blog-post-grid';
 
-export const revalidate = 3600;
-
 export async function generateMetadata(): Promise<Metadata> {
     const dict = await getDictionary();
 
