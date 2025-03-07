@@ -15,20 +15,23 @@ import ShareButtons from '@/components/blog/share-buttons';
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-    const locales = ['fr', 'ar', 'en'];
-    const allSlugs = new Set();
+    const i18n = ['ar', 'en', 'fr'];
 
-    for (const locale of locales) {
-        const posts = await getBlogPosts(locale);
+    const params = [];
 
-        posts.forEach(post => {
-            allSlugs.add(post.slug);
-        });
+    // For each locale, fetch all blog posts and create parameters
+    for (const lang of i18n) {
+        const posts = await getBlogPosts(lang);
+
+        for (const post of posts) {
+            params.push({
+                slug: post.slug,
+                locale: lang,
+            });
+        }
     }
 
-    return Array.from(allSlugs).map(slug => ({
-        slug: String(slug),
-    }));
+    return params;
 }
 
 export async function generateMetadata({
