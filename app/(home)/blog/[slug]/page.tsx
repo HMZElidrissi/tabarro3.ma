@@ -14,25 +14,25 @@ import ShareButtons from '@/components/blog/share-buttons';
 
 export const revalidate = 3600;
 
-export async function generateStaticParams() {
-    const i18n = ['ar', 'en', 'fr'];
-
-    const params = [];
-
-    // For each locale, fetch all blog posts and create parameters
-    for (const lang of i18n) {
-        const posts = await getBlogPosts(lang);
-
-        for (const post of posts) {
-            params.push({
-                slug: post.slug,
-                locale: lang,
-            });
-        }
-    }
-
-    return params;
-}
+// export async function generateStaticParams() {
+//     const i18n = ['ar', 'en', 'fr'];
+//
+//     const params = [];
+//
+//     // For each locale, fetch all blog posts and create parameters
+//     for (const lang of i18n) {
+//         const posts = await getBlogPosts(lang);
+//
+//         for (const post of posts) {
+//             params.push({
+//                 slug: post.slug,
+//                 locale: lang,
+//             });
+//         }
+//     }
+//
+//     return params;
+// }
 
 export async function generateMetadata({
     params,

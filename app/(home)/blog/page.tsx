@@ -10,10 +10,6 @@ import BlogPostGrid from '@/components/blog/blog-post-grid';
 
 export const revalidate = 3600;
 
-export async function generateStaticParams() {
-    return [{}];
-}
-
 export async function generateMetadata(): Promise<Metadata> {
     const dict = await getDictionary();
 
