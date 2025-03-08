@@ -22,6 +22,8 @@ export async function generateMetadata({
         const locale = await getLocale();
         const post = await getBlogPost(slug, locale);
 
+        const ogImageUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/og-image/${slug}`;
+
         if (!post) {
             return {
                 title: 'Blog Post Not Found | tabarro3',
@@ -34,12 +36,12 @@ export async function generateMetadata({
             openGraph: {
                 title: post.title,
                 description: post.excerpt,
-                images: [post.coverImage],
+                images: [ogImageUrl],
             },
             twitter: {
                 title: post.title,
                 description: post.excerpt,
-                images: [post.coverImage],
+                images: [ogImageUrl],
             },
         };
     } catch (error) {
