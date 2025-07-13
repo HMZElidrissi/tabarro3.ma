@@ -3,6 +3,7 @@ import {
     Calendar1Icon,
     Droplets,
     Home,
+    Mail,
     Settings,
     UsersIcon,
 } from 'lucide-react';
@@ -51,6 +52,13 @@ export const mainNavigation: NavigationItem[] = [
         icon: Calendar1Icon,
         href: '/dashboard/campaigns',
         pattern: '^/dashboard/campaigns',
+        roles: [Role.ADMIN, Role.ORGANIZATION],
+    },
+    {
+        title: 'Email Composer',
+        icon: Mail,
+        href: '/dashboard/emails',
+        pattern: '^/dashboard/emails',
         roles: [Role.ADMIN, Role.ORGANIZATION],
     },
 ];
