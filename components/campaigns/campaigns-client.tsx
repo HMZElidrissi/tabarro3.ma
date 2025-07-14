@@ -23,6 +23,8 @@ interface CampaignsClientProps {
     currentStatus: string;
     userRole: Role;
     organizationId?: string;
+    currentRegion?: string;
+    currentCityId?: string;
 }
 
 const PAGE_SIZE = 10;
@@ -33,6 +35,8 @@ export default function CampaignsClient({
     currentStatus,
     userRole,
     organizationId,
+    currentRegion,
+    currentCityId,
 }: CampaignsClientProps) {
     const router = useRouter();
     const pathname = usePathname();
@@ -73,7 +77,14 @@ export default function CampaignsClient({
     // Load campaigns with filters
     useEffect(() => {
         loadCampaigns();
-    }, [currentPage, currentSearch, currentStatus, organizationId]);
+    }, [
+        currentPage,
+        currentSearch,
+        currentStatus,
+        organizationId,
+        currentRegion,
+        currentCityId,
+    ]);
 
     useEffect(() => {
         if (deleteState.success) {
@@ -104,6 +115,8 @@ export default function CampaignsClient({
                     | 'completed'
                     | undefined,
                 organizationId,
+                region: currentRegion || undefined,
+                cityId: currentCityId || undefined,
             });
 
             if (result) {

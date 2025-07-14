@@ -14,9 +14,11 @@ export default async function CampaignsPage({
         page: number;
         search: string;
         status: string;
+        region?: string;
+        cityId?: string;
     }>;
 }) {
-    const { page, search, status } = await searchParams;
+    const { page, search, status, region, cityId } = await searchParams;
     const currentPage = page || 1;
     const currentSearch = search ?? '';
     const currentUser = await getUser();
@@ -32,14 +34,15 @@ export default async function CampaignsPage({
                         Add Campaign
                     </Button>
                 </Link>
-            }
-        >
+            }>
             <CampaignFilters />
             <CampaignsClient
                 currentPage={currentPage}
                 currentSearch={currentSearch}
                 currentStatus={status}
                 userRole={currentUser!.role as Role}
+                currentRegion={region}
+                currentCityId={cityId}
             />
         </DashboardShell>
     );

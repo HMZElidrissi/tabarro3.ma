@@ -73,7 +73,7 @@ export function BloodRequestsTable({
                 <TableBody>
                     {requests.map(request => (
                         <TableRow key={request.id}>
-                            <TableCell className="font-medium">
+                            <TableCell className="font-medium whitespace-pre-line break-words max-w-xs">
                                 {request.description}
                             </TableCell>
                             <TableCell>
@@ -92,8 +92,7 @@ export function BloodRequestsTable({
                                 <Badge
                                     variant={getStatusBadgeVariant(
                                         request.status,
-                                    )}
-                                >
+                                    )}>
                                     {request.status}
                                 </Badge>
                             </TableCell>
@@ -108,8 +107,7 @@ export function BloodRequestsTable({
                                     <DropdownMenuTrigger asChild>
                                         <Button
                                             variant="ghost"
-                                            className="h-8 w-8 p-0"
-                                        >
+                                            className="h-8 w-8 p-0">
                                             <MoreHorizontal className="h-4 w-4" />
                                         </Button>
                                     </DropdownMenuTrigger>
@@ -117,8 +115,7 @@ export function BloodRequestsTable({
                                         <DropdownMenuItem
                                             onClick={() =>
                                                 onEditRequest(request.id)
-                                            }
-                                        >
+                                            }>
                                             Edit details
                                         </DropdownMenuItem>
                                         {(userRole === Role.ADMIN ||
@@ -129,8 +126,7 @@ export function BloodRequestsTable({
                                                 onClick={() =>
                                                     onDeleteRequest(request.id)
                                                 }
-                                                disabled={isDeleting}
-                                            >
+                                                disabled={isDeleting}>
                                                 {isDeleting ? (
                                                     <>
                                                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />

@@ -23,6 +23,8 @@ interface GetCampaignsParams {
     search?: string;
     organizationId?: string;
     status?: 'upcoming' | 'ongoing' | 'completed';
+    region?: string;
+    cityId?: string;
 }
 
 export async function getCampaigns({
@@ -31,10 +33,12 @@ export async function getCampaigns({
     search = '',
     organizationId,
     status,
+    region,
+    cityId,
 }: GetCampaignsParams) {
     const now = new Date();
 
-    const where = {
+    const where: any = {
         AND: [
             search
                 ? {
@@ -77,6 +81,11 @@ export async function getCampaigns({
                     : {},
         ],
     };
+    if (cityId) {
+        where.AND.push({ cityId: Number(cityId) });
+    } else if (region) {
+        where.AND.push({ city: { regionId: Number(region) } });
+    }
 
     const [campaigns, totalCount] = await Promise.all([
         prisma.campaign.findMany({

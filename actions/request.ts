@@ -23,6 +23,8 @@ interface GetRequestsParams {
     status?: string;
     bloodGroup?: BloodGroup;
     userId?: string;
+    region?: string;
+    cityId?: string;
 }
 
 export async function getBloodRequests({
@@ -31,8 +33,10 @@ export async function getBloodRequests({
     search = '',
     status,
     bloodGroup,
+    region,
+    cityId,
 }: GetRequestsParams) {
-    const where = {
+    const where: any = {
         AND: [
             search
                 ? {
@@ -58,6 +62,11 @@ export async function getBloodRequests({
             bloodGroup ? { bloodGroup } : {},
         ],
     };
+    if (cityId) {
+        where.AND.push({ cityId: Number(cityId) });
+    } else if (region) {
+        where.AND.push({ city: { regionId: Number(region) } });
+    }
 
     const [requests, totalCount] = await Promise.all([
         prisma.bloodRequest.findMany({

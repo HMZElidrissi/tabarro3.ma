@@ -15,9 +15,12 @@ export default async function RequestsPage({
         search: string;
         status: string;
         bloodGroup: BloodGroup;
+        region?: string;
+        cityId?: string;
     }>;
 }) {
-    const { page, search, status, bloodGroup } = await searchParams;
+    const { page, search, status, bloodGroup, region, cityId } =
+        await searchParams;
     const currentPage = page || 1;
     const currentSearch = search ?? '';
     const currentUser = await getUser();
@@ -33,8 +36,7 @@ export default async function RequestsPage({
                         Add Request
                     </Button>
                 </Link>
-            }
-        >
+            }>
             <BloodRequestFilters />
             <BloodRequestsClient
                 currentPage={currentPage}
@@ -42,6 +44,8 @@ export default async function RequestsPage({
                 currentStatus={status}
                 currentBloodGroup={bloodGroup}
                 userRole={currentUser!.role as Role}
+                currentRegion={region}
+                currentCityId={cityId}
             />
         </DashboardShell>
     );

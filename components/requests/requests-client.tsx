@@ -23,6 +23,8 @@ interface BloodRequestsClientProps {
     currentStatus: string;
     currentBloodGroup?: BloodGroup;
     userRole: Role;
+    currentRegion?: string;
+    currentCityId?: string;
 }
 
 const PAGE_SIZE = 10;
@@ -33,6 +35,8 @@ export default function BloodRequestsClient({
     currentStatus,
     currentBloodGroup,
     userRole,
+    currentRegion,
+    currentCityId,
 }: BloodRequestsClientProps) {
     const router = useRouter();
     const pathname = usePathname();
@@ -70,7 +74,14 @@ export default function BloodRequestsClient({
 
     useEffect(() => {
         loadRequests();
-    }, [currentPage, currentSearch, currentStatus, currentBloodGroup]);
+    }, [
+        currentPage,
+        currentSearch,
+        currentStatus,
+        currentBloodGroup,
+        currentRegion,
+        currentCityId,
+    ]);
 
     useEffect(() => {
         if (deleteState.success) {
@@ -97,6 +108,8 @@ export default function BloodRequestsClient({
                 search: currentSearch,
                 status: currentStatus || undefined,
                 bloodGroup: currentBloodGroup,
+                region: currentRegion || undefined,
+                cityId: currentCityId || undefined,
             });
 
             if (result) {
