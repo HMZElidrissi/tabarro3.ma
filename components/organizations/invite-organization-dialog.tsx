@@ -105,7 +105,8 @@ export function InviteOrganizationDialog({
                         <Button
                             variant="outline"
                             onClick={() => setOpen(false)}
-                            type="button">
+                            type="button"
+                        >
                             Cancel
                         </Button>
                         <Button type="submit" disabled={pending}>

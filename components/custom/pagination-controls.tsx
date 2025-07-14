@@ -46,7 +46,8 @@ export function PaginationControls({
                             currentPage === 1
                                 ? 'bg-primary text-primary-foreground hover:bg-primary/90'
                                 : 'hover:bg-accent hover:text-accent-foreground'
-                        }>
+                        }
+                    >
                         1
                     </PaginationLink>
                 </PaginationItem>,
@@ -70,7 +71,8 @@ export function PaginationControls({
                             currentPage === i
                                 ? 'bg-primary text-primary-foreground hover:bg-primary/90'
                                 : 'hover:bg-accent hover:text-accent-foreground'
-                        }>
+                        }
+                    >
                         {i}
                     </PaginationLink>
                 </PaginationItem>,
@@ -94,7 +96,8 @@ export function PaginationControls({
                             currentPage === totalPages
                                 ? 'bg-primary text-primary-foreground hover:bg-primary/90'
                                 : 'hover:bg-accent hover:text-accent-foreground'
-                        }>
+                        }
+                    >
                         {totalPages}
                     </PaginationLink>
                 </PaginationItem>,

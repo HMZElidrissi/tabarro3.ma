@@ -6,7 +6,8 @@ export default async function AddRequest() {
     return (
         <DashboardShell
             header="Add Request"
-            description="Create a new blood request.">
+            description="Create a new blood request."
+        >
             <RequestForm mode="add" action={createBloodRequest} />
         </DashboardShell>
     );

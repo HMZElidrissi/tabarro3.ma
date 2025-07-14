@@ -19,7 +19,8 @@ export default async function EditParticipant({
     return (
         <DashboardShell
             header="Edit Participant"
-            description="Update the participant's details.">
+            description="Update the participant's details."
+        >
             <ParticipantForm
                 mode="edit"
                 participant={participant as User}

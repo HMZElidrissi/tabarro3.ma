@@ -53,7 +53,8 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                 </p>
                 <Link
                     href="/sign-in"
-                    className="text-gray-600 hover:text-gray-900 underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+                    className="text-gray-600 hover:text-gray-900 underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
+                >
                     {dict.auth.invitation.returnToSignIn}
                 </Link>
             </div>
@@ -212,7 +213,8 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                         {bloodGroups.map(group => (
                                             <SelectItem
                                                 key={group.value}
-                                                value={group.value}>
+                                                value={group.value}
+                                            >
                                                 {getBloodGroupLabel(
                                                     group.value,
                                                     dict,
@@ -232,7 +234,8 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                 name="region"
                                 onValueChange={(value: string) => {
                                     setSelectedRegion(value);
-                                }}>
+                                }}
+                            >
                                 <SelectTrigger>
                                     <SelectValue
                                         placeholder={
@@ -244,7 +247,8 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                     {REGIONS_AND_CITIES.map(region => (
                                         <SelectItem
                                             key={region.id}
-                                            value={region.id.toString()}>
+                                            value={region.id.toString()}
+                                        >
                                             {region.name}
                                         </SelectItem>
                                     ))}
@@ -273,7 +277,8 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                         )?.cities.map(city => (
                                             <SelectItem
                                                 key={city.id}
-                                                value={city.id.toString()}>
+                                                value={city.id.toString()}
+                                            >
                                                 {city.name}
                                             </SelectItem>
                                         ))}
@@ -292,7 +297,8 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                         <div className="flex items-center justify-between">
                             <label
                                 htmlFor="remember_me"
-                                className="inline-flex items-center">
+                                className="inline-flex items-center"
+                            >
                                 <input
                                     id="remember_me"
                                     type="checkbox"
@@ -306,7 +312,8 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
 
                             <Link
                                 href="/forgot-password"
-                                className="text-sm text-gray-600 hover:text-gray-900 underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+                                className="text-sm text-gray-600 hover:text-gray-900 underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
+                            >
                                 {dict.auth.signIn.forgotPassword}
                             </Link>
                         </div>
@@ -316,7 +323,8 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                 <div className="flex items-center justify-end">
                     <Button2
                         className="w-full justify-center"
-                        disabled={pending}>
+                        disabled={pending}
+                    >
                         {pending ? (
                             <>
                                 <Loader2 className="animate-spin mr-2 h-4 w-4" />
@@ -352,14 +360,16 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                         <>
                             <Link
                                 href="/sign-up"
-                                className="text-sm text-gray-600 hover:text-gray-900 underline">
+                                className="text-sm text-gray-600 hover:text-gray-900 underline"
+                            >
                                 {dict.auth.signIn.signUpLink}
                             </Link>
                         </>
                     ) : (
                         <Link
                             href="/sign-in"
-                            className="text-sm text-gray-600 hover:text-gray-900 underline">
+                            className="text-sm text-gray-600 hover:text-gray-900 underline"
+                        >
                             {dict.auth.signUp.signInLink}
                         </Link>
                     )}

@@ -83,7 +83,8 @@ export function ResetPasswordForm({ token, dict }: ResetPasswordFormProps) {
             <Button
                 type="submit"
                 className="w-full bg-brand-600 hover:bg-brand-700"
-                disabled={pending}>
+                disabled={pending}
+            >
                 {pending ? (
                     <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />

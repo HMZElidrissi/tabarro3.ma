@@ -72,7 +72,8 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                     </Label>
                     <Select
                         name="bloodGroup"
-                        defaultValue={request?.bloodGroup || ''}>
+                        defaultValue={request?.bloodGroup || ''}
+                    >
                         <SelectTrigger>
                             <SelectValue
                                 placeholder={
@@ -84,7 +85,8 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                             {bloodGroups.map(group => (
                                 <SelectItem
                                     key={group.value}
-                                    value={group.value}>
+                                    value={group.value}
+                                >
                                     {getBloodGroupLabel(group.value, dict)}
                                 </SelectItem>
                             ))}
@@ -96,7 +98,8 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                     <Label htmlFor="region">{dict.forms.labels.region}</Label>
                     <Select
                         value={selectedRegion}
-                        onValueChange={setSelectedRegion}>
+                        onValueChange={setSelectedRegion}
+                    >
                         <SelectTrigger>
                             <SelectValue
                                 placeholder={
@@ -108,7 +111,8 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                             {REGIONS_AND_CITIES.map(region => (
                                 <SelectItem
                                     key={region.id}
-                                    value={region.id.toString()}>
+                                    value={region.id.toString()}
+                                >
                                     {region.name}
                                 </SelectItem>
                             ))}
@@ -120,7 +124,8 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                     <Label htmlFor="cityId">{dict.forms.labels.city}</Label>
                     <Select
                         name="cityId"
-                        defaultValue={request?.cityId?.toString() || ''}>
+                        defaultValue={request?.cityId?.toString() || ''}
+                    >
                         <SelectTrigger>
                             <SelectValue
                                 placeholder={dict.forms.placeholders.selectCity}
@@ -133,7 +138,8 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                                 )?.cities.map(city => (
                                     <SelectItem
                                         key={city.id}
-                                        value={city.id.toString()}>
+                                        value={city.id.toString()}
+                                    >
                                         {city.name}
                                     </SelectItem>
                                 ))}
@@ -187,7 +193,8 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                         </Label>
                         <Select
                             name="status"
-                            defaultValue={request?.status || 'active'}>
+                            defaultValue={request?.status || 'active'}
+                        >
                             <SelectTrigger>
                                 <SelectValue
                                     placeholder={
@@ -214,7 +221,8 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                     <Button
                         type="button"
                         variant="outline"
-                        onClick={() => router.back()}>
+                        onClick={() => router.back()}
+                    >
                         {dict.common.cancel}
                     </Button>
                     <Button type="submit" disabled={pending}>

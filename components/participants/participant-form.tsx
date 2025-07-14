@@ -119,7 +119,8 @@ export default function ParticipantForm({
                         <Label htmlFor="bloodGroup">Blood Group</Label>
                         <Select
                             name="bloodGroup"
-                            defaultValue={participant?.bloodGroup || ''}>
+                            defaultValue={participant?.bloodGroup || ''}
+                        >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select blood group" />
                             </SelectTrigger>
@@ -127,7 +128,8 @@ export default function ParticipantForm({
                                 {bloodGroups.map(group => (
                                     <SelectItem
                                         key={group.value}
-                                        value={group.value}>
+                                        value={group.value}
+                                    >
                                         {group.label}
                                     </SelectItem>
                                 ))}
@@ -144,7 +146,8 @@ export default function ParticipantForm({
                             }
                             onValueChange={(value: string) => {
                                 setSelectedRegion(value);
-                            }}>
+                            }}
+                        >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select your region" />
                             </SelectTrigger>
@@ -152,7 +155,8 @@ export default function ParticipantForm({
                                 {REGIONS_AND_CITIES.map(region => (
                                     <SelectItem
                                         key={region.id}
-                                        value={region.id.toString()}>
+                                        value={region.id.toString()}
+                                    >
                                         {region.name}
                                     </SelectItem>
                                 ))}
@@ -164,9 +168,8 @@ export default function ParticipantForm({
                         <Label2 htmlFor="cityId">City</Label2>
                         <Select
                             name="cityId"
-                            defaultValue={
-                                participant?.cityId?.toString() || ''
-                            }>
+                            defaultValue={participant?.cityId?.toString() || ''}
+                        >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select your city" />
                             </SelectTrigger>
@@ -177,7 +180,8 @@ export default function ParticipantForm({
                                     )?.cities.map(city => (
                                         <SelectItem
                                             key={city.id}
-                                            value={city.id.toString()}>
+                                            value={city.id.toString()}
+                                        >
                                             {city.name}
                                         </SelectItem>
                                     ))}
@@ -191,7 +195,8 @@ export default function ParticipantForm({
                             variant="outline"
                             onClick={() =>
                                 router.push('/dashboard/participants')
-                            }>
+                            }
+                        >
                             Cancel
                         </Button>
                         <Button type="submit" disabled={pending}>

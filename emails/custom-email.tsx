@@ -115,7 +115,8 @@ export default function CustomEmail({
                             },
                         },
                     },
-                }}>
+                }}
+            >
                 <Body className="bg-gray-50 py-10">
                     <Container className={containerStyles}>
                         {/* Header Section - Centered Layout */}
@@ -174,14 +175,16 @@ export default function CustomEmail({
                                         {primaryButton && (
                                             <Button
                                                 href={primaryButton.url}
-                                                className={`${getButtonStyles(primaryButton.style)} shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors mr-3`}>
+                                                className={`${getButtonStyles(primaryButton.style)} shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors mr-3`}
+                                            >
                                                 {primaryButton.text}
                                             </Button>
                                         )}
                                         {secondaryButton && (
                                             <Button
                                                 href={secondaryButton.url}
-                                                className={`${getButtonStyles(secondaryButton.style)} shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors`}>
+                                                className={`${getButtonStyles(secondaryButton.style)} shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors`}
+                                            >
                                                 {secondaryButton.text}
                                             </Button>
                                         )}
@@ -216,7 +219,8 @@ export default function CustomEmail({
                                                 <React.Fragment key={index}>
                                                     <Link
                                                         href={link.url}
-                                                        className="text-brand-600 text-sm hover:underline mx-2">
+                                                        className="text-brand-600 text-sm hover:underline mx-2"
+                                                    >
                                                         {link.text}
                                                     </Link>
                                                     {index <

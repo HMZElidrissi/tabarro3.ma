@@ -71,7 +71,8 @@ export function CampaignFilters() {
                     <Label>Status</Label>
                     <Select
                         value={currentStatus}
-                        onValueChange={handleStatusChange}>
+                        onValueChange={handleStatusChange}
+                    >
                         <SelectTrigger>
                             <SelectValue placeholder="Filter by status" />
                         </SelectTrigger>
@@ -89,7 +90,8 @@ export function CampaignFilters() {
                         <Button
                             variant="ghost"
                             onClick={() => router.push(pathname)}
-                            className="text-red-500 hover:text-red-600 hover:bg-red-50">
+                            className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                        >
                             <X className="w-4 h-4 mr-2" />
                             Clear Filters
                         </Button>

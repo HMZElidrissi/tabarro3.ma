@@ -1,276 +1,276 @@
 {
-  "common": {
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu",
-    "selectLanguage": "Select language",
-    "userMenu": "User menu",
-    "profile": "Profile",
-    "signOut": "Sign out",
-    "signingOut": "Signing out...",
-    "signIn": "Sign in",
-    "signUp": "Sign up",
-    "loading": "Loading...",
-    "createAccount": "Create account",
-    "error": "Error",
-    "success": "Success",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "deleting": "Deleting...",
-    "contact": "Contact",
-    "saving": "Saving...",
-    "saveChanges": "Save Changes",
-    "unknown": "Unknown",
-    "notFoundDescription": "The page you are looking for was not found.",
-    "backToHome": "Return Home"
-  },
-  "footer": {
-    "tabarro3": "tabarro3",
-    "byRotaract": "by Rotaract Les Mérinides",
-    "allRightsReserved": "All rights reserved."
-  },
-  "menu": {
-    "home": "Home",
-    "bloodRequests": "Blood Requests",
-    "newCampaigns": "New Campaigns",
-    "blog": "Blog",
-    "donationCenters": "Donation Centers",
-    "whyDonateBlood": "Why Donate Blood?",
-    "whoCanDonateBlood": "Who Can Donate Blood?"
-  },
-  "blog": {
-    "title": "Blog",
-    "description": "Find the latest articles and stories to stay informed about the blood donation community.",
-    "readMore": "Read more",
-    "backToBlog": "Back to Blog",
-    "postNotFound": "Post Not Found",
-    "postNotFoundDescription": "The blog post you are looking for might have been removed or is temporarily unavailable.",
-    "featured": "Featured",
-    "aboutAuthor": "About the Author",
-    "donateNow": "Donate Blood Today",
-    "donateMessage": "Your donation can save up to three lives. Find donation centers near you.",
-    "findCampaigns": "Find Campaigns",
-    "relatedPosts": "Related Posts",
-    "saveALife": "Save a Life Today",
-    "latestPosts": "Latest Posts",
-    "minRead": "min read",
-    "share": "Share"
-  },
-  "metadata": {
-    "defaultTitle": "tabarro3.ma | Give Blood, Save Lives",
-    "template": "%s | tabarro3",
-    "description": "Join our community of blood donors and save lives. Find blood donation campaigns, connect with donors, and respond to urgent blood requests in your area.",
-    "ogTitle": "tabarro3 - Give Blood, Save Lives",
-    "ogDescription": "Connect with blood donors, organize donation campaigns, and help save lives. Join our growing community of blood donors across the region.",
-    "ogImageAlt": "tabarro3 - Give Blood, Save Lives",
-    "twitterTitle": "tabarro3 - Blood Donation Awareness Platform",
-    "twitterDescription": "Connect with blood donors, organize donation campaigns, and help save lives. Join our growing community of blood donors.",
-    "twitterImageAlt": "tabarro3 - Give Blood, Save Lives",
-    "jsonLdDescription": "A community platform connecting blood donors with those in need, organizing blood donation campaigns, and raising awareness about the importance of blood donation.",
-    "keywords": [
-      "blood donation",
-      "blood donors",
-      "donation campaigns",
-      "blood requests",
-      "emergency blood",
-      "volunteer donors",
-      "blood donation awareness",
-      "blood donation platform",
-      "blood donation benefits",
-      "blood donation eligibility",
-      "blood donation centers"
-    ]
-  },
-  "donation_benefits": {
-    "title": "Benefits of Blood Donation",
-    "description": "Donating blood is not only beneficial for those who receive it. Donors can also enjoy many advantages, such as:",
-    "freeHealthCheckUp": {
-      "title": "Free Health Check-Up",
-      "description": "In order to give blood, you're required to undergo a health screening. A trained staff member performs this checkup. They'll check your: pulse, blood pressure, body temperature, hemoglobin levels"
+    "common": {
+        "openMenu": "Open menu",
+        "closeMenu": "Close menu",
+        "selectLanguage": "Select language",
+        "userMenu": "User menu",
+        "profile": "Profile",
+        "signOut": "Sign out",
+        "signingOut": "Signing out...",
+        "signIn": "Sign in",
+        "signUp": "Sign up",
+        "loading": "Loading...",
+        "createAccount": "Create account",
+        "error": "Error",
+        "success": "Success",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "deleting": "Deleting...",
+        "contact": "Contact",
+        "saving": "Saving...",
+        "saveChanges": "Save Changes",
+        "unknown": "Unknown",
+        "notFoundDescription": "The page you are looking for was not found.",
+        "backToHome": "Return Home"
     },
-    "improvedCardiovascularHealth": {
-      "title": "Improved Cardiovascular Health",
-      "description": "Donating blood can help reduce harmful iron stores. This can reduce the risk of heart disease. It can also reduce the risk of heart attack."
+    "footer": {
+        "tabarro3": "tabarro3",
+        "byRotaract": "by Rotaract Les Mérinides",
+        "allRightsReserved": "All rights reserved."
     },
-    "emotionalSatisfaction": {
-      "title": "Emotional Satisfaction",
-      "description": "Donating blood can help reduce harmful iron stores. This can reduce the risk of heart disease. It can also reduce the risk of heart attack."
+    "menu": {
+        "home": "Home",
+        "bloodRequests": "Blood Requests",
+        "newCampaigns": "New Campaigns",
+        "blog": "Blog",
+        "donationCenters": "Donation Centers",
+        "whyDonateBlood": "Why Donate Blood?",
+        "whoCanDonateBlood": "Who Can Donate Blood?"
     },
-    "reducedRiskOfCancer": {
-      "title": "Reduced Risk of Cancer",
-      "description": "Donating blood can help reduce the risk of cancer. This is because it can reduce the risk of iron overload in the body."
-    }
-  },
-  "criterias": {
-    "title": "Eligibility Criteria for Blood Donation",
-    "ageAndWeight": {
-      "title": "Age and Weight",
-      "description": "Donors must be between 18 and 65 years old and weigh at least 50 kg."
+    "blog": {
+        "title": "Blog",
+        "description": "Find the latest articles and stories to stay informed about the blood donation community.",
+        "readMore": "Read more",
+        "backToBlog": "Back to Blog",
+        "postNotFound": "Post Not Found",
+        "postNotFoundDescription": "The blog post you are looking for might have been removed or is temporarily unavailable.",
+        "featured": "Featured",
+        "aboutAuthor": "About the Author",
+        "donateNow": "Donate Blood Today",
+        "donateMessage": "Your donation can save up to three lives. Find donation centers near you.",
+        "findCampaigns": "Find Campaigns",
+        "relatedPosts": "Related Posts",
+        "saveALife": "Save a Life Today",
+        "latestPosts": "Latest Posts",
+        "minRead": "min read",
+        "share": "Share"
     },
-    "generalHealth": {
-      "title": "General Health",
-      "description": "Be in good general health and not suffering from any diseases transmissible by blood."
+    "metadata": {
+        "defaultTitle": "tabarro3.ma | Give Blood, Save Lives",
+        "template": "%s | tabarro3",
+        "description": "Join our community of blood donors and save lives. Find blood donation campaigns, connect with donors, and respond to urgent blood requests in your area.",
+        "ogTitle": "tabarro3 - Give Blood, Save Lives",
+        "ogDescription": "Connect with blood donors, organize donation campaigns, and help save lives. Join our growing community of blood donors across the region.",
+        "ogImageAlt": "tabarro3 - Give Blood, Save Lives",
+        "twitterTitle": "tabarro3 - Blood Donation Awareness Platform",
+        "twitterDescription": "Connect with blood donors, organize donation campaigns, and help save lives. Join our growing community of blood donors.",
+        "twitterImageAlt": "tabarro3 - Give Blood, Save Lives",
+        "jsonLdDescription": "A community platform connecting blood donors with those in need, organizing blood donation campaigns, and raising awareness about the importance of blood donation.",
+        "keywords": [
+            "blood donation",
+            "blood donors",
+            "donation campaigns",
+            "blood requests",
+            "emergency blood",
+            "volunteer donors",
+            "blood donation awareness",
+            "blood donation platform",
+            "blood donation benefits",
+            "blood donation eligibility",
+            "blood donation centers"
+        ]
     },
-    "donationFrequency": {
-      "title": "Donation Frequency",
-      "description": "Men can donate every three months, and women every four months."
-    }
-  },
-  "map": {
-    "title": "Map of Regional Blood Transfusion Centers in Morocco!",
-    "get_directions": "Get Directions",
-    "search_placeholder": "Search for a blood donation center...",
-    "legend_text": "Click on a marker to see more information and get directions",
-    "view_on_google_maps": "View on Google Maps"
-  },
-  "popup": {
-    "title": "Join Our Blood Donation Community",
-    "subtitle": "Be part of a movement that saves lives through awareness and action",
-    "features": {
-      "impact": "Make a meaningful impact in your local community",
-      "connect": "Connect with donors and people in need",
-      "notify": "Get notified about urgent donation requests"
+    "donation_benefits": {
+        "title": "Benefits of Blood Donation",
+        "description": "Donating blood is not only beneficial for those who receive it. Donors can also enjoy many advantages, such as:",
+        "freeHealthCheckUp": {
+            "title": "Free Health Check-Up",
+            "description": "In order to give blood, you're required to undergo a health screening. A trained staff member performs this checkup. They'll check your: pulse, blood pressure, body temperature, hemoglobin levels"
+        },
+        "improvedCardiovascularHealth": {
+            "title": "Improved Cardiovascular Health",
+            "description": "Donating blood can help reduce harmful iron stores. This can reduce the risk of heart disease. It can also reduce the risk of heart attack."
+        },
+        "emotionalSatisfaction": {
+            "title": "Emotional Satisfaction",
+            "description": "Donating blood can help reduce harmful iron stores. This can reduce the risk of heart disease. It can also reduce the risk of heart attack."
+        },
+        "reducedRiskOfCancer": {
+            "title": "Reduced Risk of Cancer",
+            "description": "Donating blood can help reduce the risk of cancer. This is because it can reduce the risk of iron overload in the body."
+        }
     },
-    "cta": {
-      "create": "Create Account",
-      "member": "Already a member?",
-      "signin": "Sign in",
-      "later": "Maybe later"
-    }
-  },
-  "partners": "Our Partners",
-  "hero_title": "Give Blood, Save Lives",
-  "hero_description": "Blood donation is a crucial act that saves lives daily. A single donation can help up to three people and is used in various medical situations, from surgeries to cancer treatments. By donating regularly, you play a vital role in maintaining a healthy blood supply for your community.",
-  "donate_button": "Donate Now",
-  "carousel_image_alt": "Blood donation image {number}",
-  "New_Campaigns": "Blood Donation Campaigns",
-  "New_Campaigns_Description": "Join upcoming blood donation campaigns in your area",
-  "No_campaigns_found.": "No active campaigns at the moment. Check back later!",
-  "Past_Campaigns": "Past Campaigns",
-  "Upcoming_Campaigns": "Upcoming Campaigns",
-  "Ongoing_Campaigns": "Ongoing Campaigns",
-  "Participate": "Participate",
-  "Participating": "Already Participating",
-  "Confirm": "Confirm",
-  "Confirming": "Confirming...",
-  "Confirm_Participation": "Confirm Participation",
-  "Ongoing": "Ongoing",
-  "Upcoming": "Upcoming",
-  "Past": "Past",
-  "Cancel": "Cancel",
-  "confirming_description": "Are you sure you want to participate in the campaign",
-  "confirming_description_2": "By confirming, you agree to attend the blood donation campaign at",
-  "from": "from",
-  "to": "to",
-  "Blood_Requests": "Blood Requests",
-  "Blood_Requests_Description": "Current blood donation requests in your area",
-  "auth": {
-    "invitation": {
-      "title": "Accept Invitation",
-      "invalid": "Invalid Invitation",
-      "invalidMessage": "This invitation link is invalid or has expired.",
-      "returnToSignIn": "Return to sign in",
-      "completeRegistration": "Complete your registration",
-      "setupMessage": "You've been invited to join. Please set up your account."
+    "criterias": {
+        "title": "Eligibility Criteria for Blood Donation",
+        "ageAndWeight": {
+            "title": "Age and Weight",
+            "description": "Donors must be between 18 and 65 years old and weigh at least 50 kg."
+        },
+        "generalHealth": {
+            "title": "General Health",
+            "description": "Be in good general health and not suffering from any diseases transmissible by blood."
+        },
+        "donationFrequency": {
+            "title": "Donation Frequency",
+            "description": "Men can donate every three months, and women every four months."
+        }
     },
-    "signIn": {
-      "title": "Sign in",
-      "password": "Password",
-      "enterPassword": "Enter your password",
-      "rememberMe": "Remember me",
-      "forgotPassword": "Forgot your password?",
-      "needAccount": "Need an account?",
-      "signUpLink": "Sign up for an account"
+    "map": {
+        "title": "Map of Regional Blood Transfusion Centers in Morocco!",
+        "get_directions": "Get Directions",
+        "search_placeholder": "Search for a blood donation center...",
+        "legend_text": "Click on a marker to see more information and get directions",
+        "view_on_google_maps": "View on Google Maps"
     },
-    "signUp": {
-      "title": "Sign up",
-      "createPassword": "Create password",
-      "createSecurePassword": "Create a secure password",
-      "haveAccount": "Already have an account?",
-      "signInLink": "Sign in to your account",
-      "consentMessage": "By signing up, you agree to our Terms of Service, Privacy Policy, and consent to receive notifications about blood donation needs in your region. Your information will be used to match you with local donation opportunities."
+    "popup": {
+        "title": "Join Our Blood Donation Community",
+        "subtitle": "Be part of a movement that saves lives through awareness and action",
+        "features": {
+            "impact": "Make a meaningful impact in your local community",
+            "connect": "Connect with donors and people in need",
+            "notify": "Get notified about urgent donation requests"
+        },
+        "cta": {
+            "create": "Create Account",
+            "member": "Already a member?",
+            "signin": "Sign in",
+            "later": "Maybe later"
+        }
     },
-    "resetPassword": {
-      "title": "Reset Password",
-      "newPassword": "New Password",
-      "enterNewPassword": "Enter your new password",
-      "confirmPassword": "Confirm Password",
-      "confirmPasswordPlaceholder": "Confirm your new password",
-      "resetPassword": "Reset Password",
-      "resettingPassword": "Resetting password..."
+    "partners": "Our Partners",
+    "hero_title": "Give Blood, Save Lives",
+    "hero_description": "Blood donation is a crucial act that saves lives daily. A single donation can help up to three people and is used in various medical situations, from surgeries to cancer treatments. By donating regularly, you play a vital role in maintaining a healthy blood supply for your community.",
+    "donate_button": "Donate Now",
+    "carousel_image_alt": "Blood donation image {number}",
+    "New_Campaigns": "Blood Donation Campaigns",
+    "New_Campaigns_Description": "Join upcoming blood donation campaigns in your area",
+    "No_campaigns_found.": "No active campaigns at the moment. Check back later!",
+    "Past_Campaigns": "Past Campaigns",
+    "Upcoming_Campaigns": "Upcoming Campaigns",
+    "Ongoing_Campaigns": "Ongoing Campaigns",
+    "Participate": "Participate",
+    "Participating": "Already Participating",
+    "Confirm": "Confirm",
+    "Confirming": "Confirming...",
+    "Confirm_Participation": "Confirm Participation",
+    "Ongoing": "Ongoing",
+    "Upcoming": "Upcoming",
+    "Past": "Past",
+    "Cancel": "Cancel",
+    "confirming_description": "Are you sure you want to participate in the campaign",
+    "confirming_description_2": "By confirming, you agree to attend the blood donation campaign at",
+    "from": "from",
+    "to": "to",
+    "Blood_Requests": "Blood Requests",
+    "Blood_Requests_Description": "Current blood donation requests in your area",
+    "auth": {
+        "invitation": {
+            "title": "Accept Invitation",
+            "invalid": "Invalid Invitation",
+            "invalidMessage": "This invitation link is invalid or has expired.",
+            "returnToSignIn": "Return to sign in",
+            "completeRegistration": "Complete your registration",
+            "setupMessage": "You've been invited to join. Please set up your account."
+        },
+        "signIn": {
+            "title": "Sign in",
+            "password": "Password",
+            "enterPassword": "Enter your password",
+            "rememberMe": "Remember me",
+            "forgotPassword": "Forgot your password?",
+            "needAccount": "Need an account?",
+            "signUpLink": "Sign up for an account"
+        },
+        "signUp": {
+            "title": "Sign up",
+            "createPassword": "Create password",
+            "createSecurePassword": "Create a secure password",
+            "haveAccount": "Already have an account?",
+            "signInLink": "Sign in to your account",
+            "consentMessage": "By signing up, you agree to our Terms of Service, Privacy Policy, and consent to receive notifications about blood donation needs in your region. Your information will be used to match you with local donation opportunities."
+        },
+        "resetPassword": {
+            "title": "Reset Password",
+            "newPassword": "New Password",
+            "enterNewPassword": "Enter your new password",
+            "confirmPassword": "Confirm Password",
+            "confirmPasswordPlaceholder": "Confirm your new password",
+            "resetPassword": "Reset Password",
+            "resettingPassword": "Resetting password..."
+        },
+        "forgotPassword": {
+            "title": "Forgot Password",
+            "description": "Enter your email address and we'll send you instructions to reset your password.",
+            "sending": "Sending...",
+            "sendInstructions": "Send Reset Instructions"
+        }
     },
-    "forgotPassword": {
-      "title": "Forgot Password",
-      "description": "Enter your email address and we'll send you instructions to reset your password.",
-      "sending": "Sending...",
-      "sendInstructions": "Send Reset Instructions"
-    }
-  },
-  "forms": {
-    "labels": {
-      "fullName": "Full Name",
-      "email": "Email",
-      "password": "Password",
-      "confirmPassword": "Confirm password",
-      "phoneNumber": "Phone Number",
-      "bloodGroup": "Blood Group",
-      "region": "Region",
-      "city": "City",
-      "location": "Location Details",
-      "description": "Description",
-      "status": "Status"
+    "forms": {
+        "labels": {
+            "fullName": "Full Name",
+            "email": "Email",
+            "password": "Password",
+            "confirmPassword": "Confirm password",
+            "phoneNumber": "Phone Number",
+            "bloodGroup": "Blood Group",
+            "region": "Region",
+            "city": "City",
+            "location": "Location Details",
+            "description": "Description",
+            "status": "Status"
+        },
+        "placeholders": {
+            "enterFullName": "Enter your full name",
+            "enterEmail": "Enter your email",
+            "confirmPassword": "Confirm your password",
+            "enterPhoneNumber": "Enter your phone number",
+            "selectBloodGroup": "Select your blood group",
+            "selectRegion": "Select your region",
+            "selectCity": "Select your city",
+            "enterLocation": "Enter specific location",
+            "enterDescription": "Enter additional details or requirements",
+            "selectStatus": "Select status"
+        },
+        "validation": {
+            "passwordRequirements": "Password must be at least 8 characters long"
+        }
     },
-    "placeholders": {
-      "enterFullName": "Enter your full name",
-      "enterEmail": "Enter your email",
-      "confirmPassword": "Confirm your password",
-      "enterPhoneNumber": "Enter your phone number",
-      "selectBloodGroup": "Select your blood group",
-      "selectRegion": "Select your region",
-      "selectCity": "Select your city",
-      "enterLocation": "Enter specific location",
-      "enterDescription": "Enter additional details or requirements",
-      "selectStatus": "Select status"
+    "profile": {
+        "title": "Profile Settings",
+        "description": "Manage your personal information and blood donation requests",
+        "tabs": {
+            "bloodRequests": "Blood Requests",
+            "accountInfo": "Account Information"
+        }
     },
-    "validation": {
-      "passwordRequirements": "Password must be at least 8 characters long"
-    }
-  },
-  "profile": {
-    "title": "Profile Settings",
-    "description": "Manage your personal information and blood donation requests",
-    "tabs": {
-      "bloodRequests": "Blood Requests",
-      "accountInfo": "Account Information"
-    }
-  },
-  "bloodRequests": {
-    "myRequests": "My Blood Requests",
-    "newRequest": "New Request",
-    "noRequests": "No blood requests found. Click \"New Request\" to create one.",
-    "status": {
-      "active": "Active",
-      "fulfilled": "Fulfilled",
-      "cancelled": "Cancelled"
+    "bloodRequests": {
+        "myRequests": "My Blood Requests",
+        "newRequest": "New Request",
+        "noRequests": "No blood requests found. Click \"New Request\" to create one.",
+        "status": {
+            "active": "Active",
+            "fulfilled": "Fulfilled",
+            "cancelled": "Cancelled"
+        },
+        "deleteDialog": {
+            "title": "Are you sure?",
+            "description": "This will permanently delete this blood request. This action cannot be undone."
+        },
+        "creating": "Creating...",
+        "updating": "Updating...",
+        "createRequest": "Create Request",
+        "updateRequest": "Update Request",
+        "editRequest": "Edit Blood Request",
+        "editRequestDescription": "Update your blood request details"
     },
-    "deleteDialog": {
-      "title": "Are you sure?",
-      "description": "This will permanently delete this blood request. This action cannot be undone."
-    },
-    "creating": "Creating...",
-    "updating": "Updating...",
-    "createRequest": "Create Request",
-    "updateRequest": "Update Request",
-    "editRequest": "Edit Blood Request",
-    "editRequestDescription": "Update your blood request details"
-  },
-  "how_it_works_title": "How It Works",
-  "how_it_works_description": "tabarro3 is a platform that connects blood donors with those in need. Here's how it works:",
-  "how_it_works_step1_title": "Create an Account",
-  "how_it_works_step1_description": "Sign up and create your profile, providing your blood group and other necessary information.",
-  "how_it_works_step2_title": "Create a Blood Request",
-  "how_it_works_step2_description": "If you need blood, create a request specifying the blood group, contact info, and location.",
-  "how_it_works_step3_title": "Notification Sent",
-  "how_it_works_step3_description": "The system sends notifications to matching donors in the specified area via SMS and email.",
-  "how_it_works_step4_title": "Donors Respond",
-  "how_it_works_step4_description": "If you're a matching donor, you'll receive a notification and can choose to help."
+    "how_it_works_title": "How It Works",
+    "how_it_works_description": "tabarro3 is a platform that connects blood donors with those in need. Here's how it works:",
+    "how_it_works_step1_title": "Create an Account",
+    "how_it_works_step1_description": "Sign up and create your profile, providing your blood group and other necessary information.",
+    "how_it_works_step2_title": "Create a Blood Request",
+    "how_it_works_step2_description": "If you need blood, create a request specifying the blood group, contact info, and location.",
+    "how_it_works_step3_title": "Notification Sent",
+    "how_it_works_step3_description": "The system sends notifications to matching donors in the specified area via SMS and email.",
+    "how_it_works_step4_title": "Donors Respond",
+    "how_it_works_step4_description": "If you're a matching donor, you'll receive a notification and can choose to help."
 }

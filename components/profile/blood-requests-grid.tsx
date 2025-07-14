@@ -103,7 +103,8 @@ export function BloodRequestsGrid({
                             <div className="flex justify-between items-start">
                                 <Badge
                                     variant="outline"
-                                    className={`${getStatusColor(request.status)}`}>
+                                    className={`${getStatusColor(request.status)}`}
+                                >
                                     {
                                         dict.bloodRequests.status[
                                             request.status.toLowerCase()
@@ -112,7 +113,8 @@ export function BloodRequestsGrid({
                                 </Badge>
                                 <div className="flex gap-2">
                                     <Link
-                                        href={`/profile/requests/${request.id}`}>
+                                        href={`/profile/requests/${request.id}`}
+                                    >
                                         <Button variant="ghost" size="sm">
                                             <Pencil className="h-4 w-4" />
                                         </Button>
@@ -123,7 +125,8 @@ export function BloodRequestsGrid({
                                         onClick={() => {
                                             setSelectedRequest(request);
                                             setDeleteDialogOpen(true);
-                                        }}>
+                                        }}
+                                    >
                                         <Trash2 className="h-4 w-4 text-destructive" />
                                     </Button>
                                 </div>
@@ -169,7 +172,8 @@ export function BloodRequestsGrid({
 
             <AlertDialog
                 open={deleteDialogOpen}
-                onOpenChange={setDeleteDialogOpen}>
+                onOpenChange={setDeleteDialogOpen}
+            >
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
@@ -188,7 +192,8 @@ export function BloodRequestsGrid({
                                 selectedRequest && handleDelete(selectedRequest)
                             }
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                            disabled={pending}>
+                            disabled={pending}
+                        >
                             {pending
                                 ? dict.common.deleting
                                 : dict.common.delete}

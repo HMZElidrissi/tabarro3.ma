@@ -39,7 +39,8 @@ export default async function BlogPage() {
                             height="120"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="text-brand-600">
+                            className="text-brand-600"
+                        >
                             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                         </svg>
                     </div>
@@ -70,7 +71,8 @@ export default async function BlogPage() {
                                     <div className="absolute top-4 left-4">
                                         <Badge
                                             variant="secondary"
-                                            className="bg-brand-600 text-white hover:bg-brand-700 px-3 py-1 text-sm">
+                                            className="bg-brand-600 text-white hover:bg-brand-700 px-3 py-1 text-sm"
+                                        >
                                             {dict.blog?.featured || 'Featured'}
                                         </Badge>
                                     </div>
@@ -105,7 +107,8 @@ export default async function BlogPage() {
                                         </div>
                                         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 hover:text-brand-600 transition-colors">
                                             <Link
-                                                href={`/blog/${featuredPost.slug}`}>
+                                                href={`/blog/${featuredPost.slug}`}
+                                            >
                                                 {featuredPost.title}
                                             </Link>
                                         </h2>
@@ -115,7 +118,8 @@ export default async function BlogPage() {
                                     </div>
                                     <Link
                                         href={`/blog/${featuredPost.slug}`}
-                                        className="inline-flex items-center text-brand-600 hover:text-brand-700 font-medium">
+                                        className="inline-flex items-center text-brand-600 hover:text-brand-700 font-medium"
+                                    >
                                         {dict.blog?.readMore || 'Read more'}
                                         <ChevronRight
                                             className={`h-4 w-4 ${isRTL ? 'mr-1 rotate-180' : 'ml-1'}`}

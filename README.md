@@ -6,11 +6,11 @@ tabarro3 is a platform aimed at raising awareness about blood donation in Morocc
 
 ## Technologies Used
 
-- Next.js 15 - App Router
-- TypeScript
-- Tailwind CSS + shadcn/ui
-- Supabase (PostgreSQL)
-- Prisma
+-   Next.js 15 - App Router
+-   TypeScript
+-   Tailwind CSS + shadcn/ui
+-   Supabase (PostgreSQL)
+-   Prisma
 
 ## Getting Started
 
@@ -30,9 +30,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## TODO
 
-- [x] Add i18n support
-- [x] Setup home page
-- [ ] Integrate WhatsApp API for notifications
-- [ ] Add consent message into signup page
-- [ ] i18n for auth pages
-- [ ] Add a blog
+-   [x] Add i18n support
+-   [x] Setup home page
+-   [ ] Integrate WhatsApp API for notifications
+-   [ ] Add consent message into signup page
+-   [ ] i18n for auth pages
+-   [ ] Add a blog

@@ -86,10 +86,12 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
 
                         <Button
                             asChild
-                            className="bg-white text-brand-700 hover:bg-brand-50 hover:text-brand-800 shadow-xl transition-all duration-300 py-6 px-8 text-lg">
+                            className="bg-white text-brand-700 hover:bg-brand-50 hover:text-brand-800 shadow-xl transition-all duration-300 py-6 px-8 text-lg"
+                        >
                             <Link
                                 href="/requests"
-                                className="inline-flex items-center gap-2">
+                                className="inline-flex items-center gap-2"
+                            >
                                 <HeartHandshake className="h-6 w-6" />
                                 {dict.donate_button}
                             </Link>
@@ -98,7 +100,8 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
 
                     {/* Right Carousel Section */}
                     <div
-                        className={`relative aspect-[6/3] w-full ${isRTL ? 'lg:order-1' : 'lg:order-2'}`}>
+                        className={`relative aspect-[6/3] w-full ${isRTL ? 'lg:order-1' : 'lg:order-2'}`}
+                    >
                         <div className="absolute inset-0 bg-gradient-to-r from-brand-900/20 to-transparent rounded-2xl overflow-hidden">
                             <div className="relative h-full w-full">
                                 {carouselImages.map((image, index) => (
@@ -108,7 +111,8 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
                                             index === currentSlide
                                                 ? 'opacity-100'
                                                 : 'opacity-0'
-                                        }`}>
+                                        }`}
+                                    >
                                         <Image
                                             src={image.src}
                                             alt={image.alt}
@@ -124,7 +128,8 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
                                         variant="outline"
                                         size="icon"
                                         onClick={handlePrev}
-                                        className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border-white/30 text-white rounded-full">
+                                        className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border-white/30 text-white rounded-full"
+                                    >
                                         {isRTL ? (
                                             <ChevronRight className="h-6 w-6" />
                                         ) : (
@@ -136,7 +141,8 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
                                         variant="outline"
                                         size="icon"
                                         onClick={handleNext}
-                                        className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border-white/30 text-white rounded-full">
+                                        className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border-white/30 text-white rounded-full"
+                                    >
                                         {isRTL ? (
                                             <ChevronLeft className="h-6 w-6" />
                                         ) : (

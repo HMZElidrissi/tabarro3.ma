@@ -89,7 +89,8 @@ export default function BloodRequestForm({
                         <Label htmlFor="bloodGroup">Blood Group</Label>
                         <Select
                             name="bloodGroup"
-                            defaultValue={request?.bloodGroup || ''}>
+                            defaultValue={request?.bloodGroup || ''}
+                        >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select blood group" />
                             </SelectTrigger>
@@ -112,7 +113,8 @@ export default function BloodRequestForm({
                             }
                             onValueChange={(value: string) => {
                                 setSelectedRegion(value);
-                            }}>
+                            }}
+                        >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select region" />
                             </SelectTrigger>
@@ -120,7 +122,8 @@ export default function BloodRequestForm({
                                 {REGIONS_AND_CITIES.map(region => (
                                     <SelectItem
                                         key={region.id}
-                                        value={region.id.toString()}>
+                                        value={region.id.toString()}
+                                    >
                                         {region.name}
                                     </SelectItem>
                                 ))}
@@ -132,7 +135,8 @@ export default function BloodRequestForm({
                         <Label htmlFor="cityId">City</Label>
                         <Select
                             name="cityId"
-                            defaultValue={request?.cityId?.toString() || ''}>
+                            defaultValue={request?.cityId?.toString() || ''}
+                        >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select city" />
                             </SelectTrigger>
@@ -143,7 +147,8 @@ export default function BloodRequestForm({
                                     )?.cities.map(city => (
                                         <SelectItem
                                             key={city.id}
-                                            value={city.id.toString()}>
+                                            value={city.id.toString()}
+                                        >
                                             {city.name}
                                         </SelectItem>
                                     ))}
@@ -176,7 +181,8 @@ export default function BloodRequestForm({
                         <Label htmlFor="status">Status</Label>
                         <Select
                             name="status"
-                            defaultValue={request?.status || 'active'}>
+                            defaultValue={request?.status || 'active'}
+                        >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select status" />
                             </SelectTrigger>
@@ -194,7 +200,8 @@ export default function BloodRequestForm({
                         <Button
                             type="button"
                             variant="outline"
-                            onClick={() => router.push('/dashboard/requests')}>
+                            onClick={() => router.push('/dashboard/requests')}
+                        >
                             Cancel
                         </Button>
                         <Button type="submit" disabled={pending}>

@@ -16,7 +16,8 @@ export default async function AddCampaign() {
     return (
         <DashboardShell
             header="Add Campaign"
-            description="Create a new campaign.">
+            description="Create a new campaign."
+        >
             <CampaignForm
                 mode="add"
                 action={createCampaign}

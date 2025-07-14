@@ -36,7 +36,8 @@ export const PasswordChangedEmail = () => (
                         },
                     },
                 },
-            }}>
+            }}
+        >
             <Body className="bg-gray-50 py-10">
                 <Container className="bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[580px]">
                     <Section className="text-center mb-8">
@@ -69,8 +70,9 @@ export const PasswordChangedEmail = () => (
 
                     <Section className="text-center my-8">
                         <Button
-                            href="mailto:rotaractlesmerinides@gmail.com"
-                            className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors">
+                            href="mailto:dondesang.ma@gmail.com"
+                            className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors"
+                        >
                             Contacter le support
                         </Button>
                     </Section>

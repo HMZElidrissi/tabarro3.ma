@@ -19,7 +19,8 @@ export default async function EditRequest({
     return (
         <DashboardShell
             header="Edit Request"
-            description="Update the request's details.">
+            description="Update the request's details."
+        >
             <RequestForm
                 mode="edit"
                 request={request as unknown as BloodRequest}

@@ -29,7 +29,8 @@ export default async function DashboardLayout({
             <ThemeProvider
                 attribute="class"
                 defaultTheme="system"
-                storageKey="theme">
+                storageKey="theme"
+            >
                 <SidebarProvider>
                     <div className="w-full flex h-screen overflow-x-auto">
                         <DashboardSidebar />

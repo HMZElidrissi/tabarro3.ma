@@ -80,7 +80,8 @@ export function ParticipantsTable({
                                     <DropdownMenuTrigger asChild>
                                         <Button
                                             variant="ghost"
-                                            className="h-8 w-8 p-0">
+                                            className="h-8 w-8 p-0"
+                                        >
                                             <MoreHorizontal className="h-4 w-4" />
                                         </Button>
                                     </DropdownMenuTrigger>
@@ -90,7 +91,8 @@ export function ParticipantsTable({
                                                 onEditParticipant(
                                                     participant.id,
                                                 )
-                                            }>
+                                            }
+                                        >
                                             Edit details
                                         </DropdownMenuItem>
                                         <DropdownMenuItem
@@ -100,7 +102,8 @@ export function ParticipantsTable({
                                                     participant.id,
                                                 )
                                             }
-                                            disabled={isDeleting}>
+                                            disabled={isDeleting}
+                                        >
                                             {isDeleting ? (
                                                 <>
                                                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

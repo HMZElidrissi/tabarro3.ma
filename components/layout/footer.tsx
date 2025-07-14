@@ -26,7 +26,7 @@ export default function Footer({ dict }: FooterProps) {
                         <div className="flex items-center gap-4">
                             <SocialIcon
                                 kind="mail"
-                                href="mailto:rotaractlesmerinides@gmail.com"
+                                href="mailto:dondesang.ma@gmail.com"
                                 size={5}
                                 className="text-white hover:text-[#EA4335]"
                             />

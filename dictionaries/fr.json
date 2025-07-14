@@ -1,278 +1,278 @@
 {
-  "common": {
-    "openMenu": "Ouvrir le menu",
-    "closeMenu": "Fermer le menu",
-    "selectLanguage": "Choisir la langue",
-    "userMenu": "Menu utilisateur",
-    "profile": "Mon Profil",
-    "signOut": "Se déconnecter",
-    "signingOut": "Déconnexion...",
-    "signIn": "Se connecter",
-    "signUp": "S'inscrire",
-    "loading": "Chargement...",
-    "createAccount": "Créer un compte",
-    "error": "Erreur",
-    "success": "Succès",
-    "cancel": "Annuler",
-    "delete": "Supprimer",
-    "deleting": "Suppression...",
-    "contact": "Contact",
-    "saving": "Enregistrement...",
-    "saveChanges": "Enregistrer les modifications",
-    "unknown": "Je ne sais pas",
-    "notFoundDescription": "Nous ne trouvons pas ce que vous cherchez.",
-    "backToHome": "Retour à l'accueil"
-  },
-  "footer": {
-    "tabarro3": "tabarro3",
-    "byRotaract": "par le Rotaract Les Mérinides",
-    "allRightsReserved": "Tous droits réservés."
-  },
-  "menu": {
-    "home": "Accueil",
-    "bloodRequests": "Demandes de sang",
-    "newCampaigns": "Nouvelles campagnes",
-    "blog": "Blog",
-    "donationCenters": "Centres de transfusion",
-    "whyDonateBlood": "Pourquoi donner ?",
-    "whoCanDonateBlood": "Qui peut donner ?"
-  },
-  "blog": {
-    "title": "Blog",
-    "description": "Découvrez les dernières nouvelles, conseils et histoires inspirantes sur le don de sang.",
-    "readMore": "Lire la suite",
-    "backToBlog": "Retour au blog",
-    "postNotFound": "Article non trouvé",
-    "postNotFoundDescription": "L'article que vous recherchez a peut-être été supprimé ou est temporairement indisponible.",
-    "featured": "À la une",
-    "aboutAuthor": "À propos de l'auteur",
-    "donateNow": "Faire un don maintenant",
-    "donateMessage": "Le don de sang est un acte héroïque qui peut sauver des vies. Faites un don aujourd'hui et faites la différence.",
-    "findCampaigns": "Trouvez des campagnes",
-    "relatedPosts": "Articles similaires",
-    "saveALife": "Sauvez une vie",
-    "latestPosts": "Derniers articles",
-    "minRead": "min de lecture",
-    "share": "Partager"
-  },
-  "metadata": {
-    "defaultTitle": "tabarro3.ma | Donnez du sang, sauvez des vies",
-    "template": "%s | tabarro3",
-    "description": "Rejoignez notre communauté de donneurs de sang et sauvez des vies. Trouvez des campagnes de don de sang, connectez-vous avec des donneurs et répondez aux demandes de sang urgentes dans votre région.",
-    "ogTitle": "tabarro3 - Donnez du sang, sauvez des vies",
-    "ogDescription": "Connectez-vous avec des donneurs de sang, organisez des campagnes de don et aidez à sauver des vies. Rejoignez notre communauté croissante de donneurs de sang à travers la région.",
-    "ogImageAlt": "tabarro3 - Donnez du sang, sauvez des vies",
-    "twitterTitle": "tabarro3 - Donnez du sang, sauvez des vies",
-    "twitterDescription": "Connectez-vous avec des donneurs de sang, organisez des campagnes de don et aidez à sauver des vies. Rejoignez notre communauté croissante de donneurs de sang.",
-    "twitterImageAlt": "tabarro3 - Donnez du sang, sauvez des vies",
-    "jsonLdDescription": "Une communauté qui met en relation les donneurs de sang avec ceux qui en ont besoin, organise des campagnes de don de sang et sensibilise à l'importance du don de sang.",
-    "keywords": [
-      "tabarro3",
-      "don de sang",
-      "donneurs de sang",
-      "campagnes de don",
-      "demandes de sang",
-      "sang d'urgence",
-      "donneurs bénévoles",
-      "sensibilisation au don de sang",
-      "plateforme de don de sang",
-      "avantages du don de sang",
-      "éligibilité au don de sang",
-      "centres de transfusion sanguine",
-      "centres de transfusion sanguine au Maroc"
-    ]
-  },
-  "donation_benefits": {
-    "title": "Avantages du don de sang",
-    "description": "Le don de sang n'est pas seulement bénéfique pour ceux qui le reçoivent. Les donneurs peuvent également profiter de nombreux avantages, tels que :",
-    "freeHealthCheckUp": {
-      "title": "Bilan de santé gratuit",
-      "description": "Avant chaque don, un examen de santé est obligatoire. Un professionnel de santé qualifié effectue ce bilan. Il vérifiera votre : pouls, tension artérielle, température corporelle, taux d'hémoglobine"
+    "common": {
+        "openMenu": "Ouvrir le menu",
+        "closeMenu": "Fermer le menu",
+        "selectLanguage": "Choisir la langue",
+        "userMenu": "Menu utilisateur",
+        "profile": "Mon Profil",
+        "signOut": "Se déconnecter",
+        "signingOut": "Déconnexion...",
+        "signIn": "Se connecter",
+        "signUp": "S'inscrire",
+        "loading": "Chargement...",
+        "createAccount": "Créer un compte",
+        "error": "Erreur",
+        "success": "Succès",
+        "cancel": "Annuler",
+        "delete": "Supprimer",
+        "deleting": "Suppression...",
+        "contact": "Contact",
+        "saving": "Enregistrement...",
+        "saveChanges": "Enregistrer les modifications",
+        "unknown": "Je ne sais pas",
+        "notFoundDescription": "Nous ne trouvons pas ce que vous cherchez.",
+        "backToHome": "Retour à l'accueil"
     },
-    "improvedCardiovascularHealth": {
-      "title": "Meilleure santé cardiovasculaire",
-      "description": "Le don de sang peut aider à réduire les réserves de fer nocives. Cela peut diminuer le risque de maladies cardiaques et d'infarctus."
+    "footer": {
+        "tabarro3": "tabarro3",
+        "byRotaract": "par le Rotaract Les Mérinides",
+        "allRightsReserved": "Tous droits réservés."
     },
-    "emotionalSatisfaction": {
-      "title": "Satisfaction émotionnelle",
-      "description": "Donner son sang procure un sentiment de bien-être. Cela peut aussi vous faire sentir plus proche de votre communauté."
+    "menu": {
+        "home": "Accueil",
+        "bloodRequests": "Demandes de sang",
+        "newCampaigns": "Nouvelles campagnes",
+        "blog": "Blog",
+        "donationCenters": "Centres de transfusion",
+        "whyDonateBlood": "Pourquoi donner ?",
+        "whoCanDonateBlood": "Qui peut donner ?"
     },
-    "reducedRiskOfCancer": {
-      "title": "Risque réduit de cancer",
-      "description": "Le don de sang peut contribuer à réduire le risque de cancer en diminuant le risque de surcharge en fer dans l'organisme."
-    }
-  },
-  "criterias": {
-    "title": "Critères d'éligibilité pour le don de sang",
-    "ageAndWeight": {
-      "title": "Âge et poids",
-      "description": "Les donneurs doivent avoir entre 18 et 65 ans et peser au moins 50 kg."
+    "blog": {
+        "title": "Blog",
+        "description": "Découvrez les dernières nouvelles, conseils et histoires inspirantes sur le don de sang.",
+        "readMore": "Lire la suite",
+        "backToBlog": "Retour au blog",
+        "postNotFound": "Article non trouvé",
+        "postNotFoundDescription": "L'article que vous recherchez a peut-être été supprimé ou est temporairement indisponible.",
+        "featured": "À la une",
+        "aboutAuthor": "À propos de l'auteur",
+        "donateNow": "Faire un don maintenant",
+        "donateMessage": "Le don de sang est un acte héroïque qui peut sauver des vies. Faites un don aujourd'hui et faites la différence.",
+        "findCampaigns": "Trouvez des campagnes",
+        "relatedPosts": "Articles similaires",
+        "saveALife": "Sauvez une vie",
+        "latestPosts": "Derniers articles",
+        "minRead": "min de lecture",
+        "share": "Partager"
     },
-    "generalHealth": {
-      "title": "État de santé général",
-      "description": "Être en bonne santé générale et ne pas souffrir de maladies transmissibles par le sang."
+    "metadata": {
+        "defaultTitle": "tabarro3.ma | Donnez du sang, sauvez des vies",
+        "template": "%s | tabarro3",
+        "description": "Rejoignez notre communauté de donneurs de sang et sauvez des vies. Trouvez des campagnes de don de sang, connectez-vous avec des donneurs et répondez aux demandes de sang urgentes dans votre région.",
+        "ogTitle": "tabarro3 - Donnez du sang, sauvez des vies",
+        "ogDescription": "Connectez-vous avec des donneurs de sang, organisez des campagnes de don et aidez à sauver des vies. Rejoignez notre communauté croissante de donneurs de sang à travers la région.",
+        "ogImageAlt": "tabarro3 - Donnez du sang, sauvez des vies",
+        "twitterTitle": "tabarro3 - Donnez du sang, sauvez des vies",
+        "twitterDescription": "Connectez-vous avec des donneurs de sang, organisez des campagnes de don et aidez à sauver des vies. Rejoignez notre communauté croissante de donneurs de sang.",
+        "twitterImageAlt": "tabarro3 - Donnez du sang, sauvez des vies",
+        "jsonLdDescription": "Une communauté qui met en relation les donneurs de sang avec ceux qui en ont besoin, organise des campagnes de don de sang et sensibilise à l'importance du don de sang.",
+        "keywords": [
+            "tabarro3",
+            "don de sang",
+            "donneurs de sang",
+            "campagnes de don",
+            "demandes de sang",
+            "sang d'urgence",
+            "donneurs bénévoles",
+            "sensibilisation au don de sang",
+            "plateforme de don de sang",
+            "avantages du don de sang",
+            "éligibilité au don de sang",
+            "centres de transfusion sanguine",
+            "centres de transfusion sanguine au Maroc"
+        ]
     },
-    "donationFrequency": {
-      "title": "Fréquence des dons",
-      "description": "Les hommes peuvent donner tous les trois mois, et les femmes tous les quatre mois."
-    }
-  },
-  "map": {
-    "title": "La carte des centres régionaux de transfusion sanguine au Maroc!",
-    "get_directions": "Obtenir des directions",
-    "search_placeholder": "Rechercher un centre de transfusion sanguine...",
-    "legend_text": "Cliquer sur un marqueur pour obtenir plus d'informations",
-    "view_on_google_maps": "Voir sur Google Maps"
-  },
-  "popup": {
-    "title": "Rejoignez Notre Communauté de Don de Sang",
-    "subtitle": "Faites partie d'un mouvement qui sauve des vies par la sensibilisation et l'action",
-    "features": {
-      "impact": "Avoir un impact significatif dans votre communauté locale",
-      "connect": "Connectez-vous avec les donneurs et les personnes dans le besoin",
-      "notify": "Soyez informé des demandes de don urgentes"
+    "donation_benefits": {
+        "title": "Avantages du don de sang",
+        "description": "Le don de sang n'est pas seulement bénéfique pour ceux qui le reçoivent. Les donneurs peuvent également profiter de nombreux avantages, tels que :",
+        "freeHealthCheckUp": {
+            "title": "Bilan de santé gratuit",
+            "description": "Avant chaque don, un examen de santé est obligatoire. Un professionnel de santé qualifié effectue ce bilan. Il vérifiera votre : pouls, tension artérielle, température corporelle, taux d'hémoglobine"
+        },
+        "improvedCardiovascularHealth": {
+            "title": "Meilleure santé cardiovasculaire",
+            "description": "Le don de sang peut aider à réduire les réserves de fer nocives. Cela peut diminuer le risque de maladies cardiaques et d'infarctus."
+        },
+        "emotionalSatisfaction": {
+            "title": "Satisfaction émotionnelle",
+            "description": "Donner son sang procure un sentiment de bien-être. Cela peut aussi vous faire sentir plus proche de votre communauté."
+        },
+        "reducedRiskOfCancer": {
+            "title": "Risque réduit de cancer",
+            "description": "Le don de sang peut contribuer à réduire le risque de cancer en diminuant le risque de surcharge en fer dans l'organisme."
+        }
     },
-    "cta": {
-      "create": "Créer un compte",
-      "member": "Déjà membre ?",
-      "signin": "Se connecter",
-      "later": "Plus tard"
-    }
-  },
-  "partners": "Nos partenaires",
-  "hero_title": "Donnez du sang, sauvez des vies",
-  "hero_description": "Le don de sang est un geste vital qui sauve des vies quotidiennement. Un seul don peut aider jusqu'à trois personnes et est utilisé dans diverses situations médicales, des chirurgies aux traitements contre le cancer. En donnant régulièrement, vous jouez un rôle essentiel dans le maintien d'un approvisionnement en sang suffisant pour votre communauté.",
-  "donate_button": "Faire un don",
-  "carousel_image_alt": "Image de don de sang {number}",
-  "New_Campaigns": "Campagnes du don de sang",
-  "New_Campaigns_Description": "Rejoignez les prochaines campagnes de don de sang dans votre région",
-  "No_campaigns_found.": "Aucune campagne active pour le moment. Revenez plus tard !",
-  "Past_Campaigns": "Campagnes passées",
-  "Upcoming_Campaigns": "Campagnes à venir",
-  "Ongoing_Campaigns": "Campagnes en cours",
-  "Participate": "Participer",
-  "Participating": "Déjà participé",
-  "Confirm": "Confirmer",
-  "Confirming": "Confirmation...",
-  "Confirm_Participation": "Confirmer la participation",
-  "Ongoing": "En cours",
-  "Upcoming": "À venir",
-  "Past": "Passé",
-  "Cancel": "Annuler",
-  "confirming_description": "Êtes-vous sûr de vouloir participer à la campagne",
-  "confirming_description_2": "En confirmant, vous acceptez de participer à la campagne de don de sang à",
-  "from": "de",
-  "to": "à",
-  "Blood_Requests": "Demandes de sang",
-  "Blood_Requests_Description": "Demandes de don de sang actuelles dans votre région",
-  "auth": {
-    "invitation": {
-      "title": "Accepter l'invitation",
-      "invalid": "Invitation non valide",
-      "invalidMessage": "Ce lien d'invitation n'est pas valide ou a expiré.",
-      "returnToSignIn": "Retour à la connexion",
-      "completeRegistration": "Complétez votre inscription",
-      "setupMessage": "Vous avez été invité à nous rejoindre. Veuillez configurer votre compte."
+    "criterias": {
+        "title": "Critères d'éligibilité pour le don de sang",
+        "ageAndWeight": {
+            "title": "Âge et poids",
+            "description": "Les donneurs doivent avoir entre 18 et 65 ans et peser au moins 50 kg."
+        },
+        "generalHealth": {
+            "title": "État de santé général",
+            "description": "Être en bonne santé générale et ne pas souffrir de maladies transmissibles par le sang."
+        },
+        "donationFrequency": {
+            "title": "Fréquence des dons",
+            "description": "Les hommes peuvent donner tous les trois mois, et les femmes tous les quatre mois."
+        }
     },
-    "signIn": {
-      "title": "Se connecter",
-      "password": "Mot de passe",
-      "enterPassword": "Entrez votre mot de passe",
-      "rememberMe": "Se souvenir de moi",
-      "forgotPassword": "Mot de passe oublié ?",
-      "needAccount": "Besoin d'un compte ?",
-      "signUpLink": "Créer un compte"
+    "map": {
+        "title": "La carte des centres régionaux de transfusion sanguine au Maroc!",
+        "get_directions": "Obtenir des directions",
+        "search_placeholder": "Rechercher un centre de transfusion sanguine...",
+        "legend_text": "Cliquer sur un marqueur pour obtenir plus d'informations",
+        "view_on_google_maps": "Voir sur Google Maps"
     },
-    "signUp": {
-      "title": "S'inscrire",
-      "createPassword": "Créer un mot de passe",
-      "createSecurePassword": "Créez un mot de passe sécurisé",
-      "haveAccount": "Vous avez déjà un compte ?",
-      "signInLink": "Connectez-vous à votre compte",
-      "consentMessage": "En vous inscrivant, vous acceptez nos Conditions d'utilisation, notre Politique de confidentialité et consentez à recevoir des notifications concernant les besoins en dons de sang dans votre région. Vos informations seront utilisées pour vous mettre en relation avec les opportunités de don locales."
+    "popup": {
+        "title": "Rejoignez Notre Communauté de Don de Sang",
+        "subtitle": "Faites partie d'un mouvement qui sauve des vies par la sensibilisation et l'action",
+        "features": {
+            "impact": "Avoir un impact significatif dans votre communauté locale",
+            "connect": "Connectez-vous avec les donneurs et les personnes dans le besoin",
+            "notify": "Soyez informé des demandes de don urgentes"
+        },
+        "cta": {
+            "create": "Créer un compte",
+            "member": "Déjà membre ?",
+            "signin": "Se connecter",
+            "later": "Plus tard"
+        }
     },
-    "resetPassword": {
-      "title": "Réinitialiser le mot de passe",
-      "newPassword": "Nouveau mot de passe",
-      "enterNewPassword": "Entrez votre nouveau mot de passe",
-      "confirmPassword": "Confirmer le mot de passe",
-      "confirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
-      "resetPassword": "Réinitialiser le mot de passe",
-      "resettingPassword": "Réinitialisation du mot de passe..."
+    "partners": "Nos partenaires",
+    "hero_title": "Donnez du sang, sauvez des vies",
+    "hero_description": "Le don de sang est un geste vital qui sauve des vies quotidiennement. Un seul don peut aider jusqu'à trois personnes et est utilisé dans diverses situations médicales, des chirurgies aux traitements contre le cancer. En donnant régulièrement, vous jouez un rôle essentiel dans le maintien d'un approvisionnement en sang suffisant pour votre communauté.",
+    "donate_button": "Faire un don",
+    "carousel_image_alt": "Image de don de sang {number}",
+    "New_Campaigns": "Campagnes du don de sang",
+    "New_Campaigns_Description": "Rejoignez les prochaines campagnes de don de sang dans votre région",
+    "No_campaigns_found.": "Aucune campagne active pour le moment. Revenez plus tard !",
+    "Past_Campaigns": "Campagnes passées",
+    "Upcoming_Campaigns": "Campagnes à venir",
+    "Ongoing_Campaigns": "Campagnes en cours",
+    "Participate": "Participer",
+    "Participating": "Déjà participé",
+    "Confirm": "Confirmer",
+    "Confirming": "Confirmation...",
+    "Confirm_Participation": "Confirmer la participation",
+    "Ongoing": "En cours",
+    "Upcoming": "À venir",
+    "Past": "Passé",
+    "Cancel": "Annuler",
+    "confirming_description": "Êtes-vous sûr de vouloir participer à la campagne",
+    "confirming_description_2": "En confirmant, vous acceptez de participer à la campagne de don de sang à",
+    "from": "de",
+    "to": "à",
+    "Blood_Requests": "Demandes de sang",
+    "Blood_Requests_Description": "Demandes de don de sang actuelles dans votre région",
+    "auth": {
+        "invitation": {
+            "title": "Accepter l'invitation",
+            "invalid": "Invitation non valide",
+            "invalidMessage": "Ce lien d'invitation n'est pas valide ou a expiré.",
+            "returnToSignIn": "Retour à la connexion",
+            "completeRegistration": "Complétez votre inscription",
+            "setupMessage": "Vous avez été invité à nous rejoindre. Veuillez configurer votre compte."
+        },
+        "signIn": {
+            "title": "Se connecter",
+            "password": "Mot de passe",
+            "enterPassword": "Entrez votre mot de passe",
+            "rememberMe": "Se souvenir de moi",
+            "forgotPassword": "Mot de passe oublié ?",
+            "needAccount": "Besoin d'un compte ?",
+            "signUpLink": "Créer un compte"
+        },
+        "signUp": {
+            "title": "S'inscrire",
+            "createPassword": "Créer un mot de passe",
+            "createSecurePassword": "Créez un mot de passe sécurisé",
+            "haveAccount": "Vous avez déjà un compte ?",
+            "signInLink": "Connectez-vous à votre compte",
+            "consentMessage": "En vous inscrivant, vous acceptez nos Conditions d'utilisation, notre Politique de confidentialité et consentez à recevoir des notifications concernant les besoins en dons de sang dans votre région. Vos informations seront utilisées pour vous mettre en relation avec les opportunités de don locales."
+        },
+        "resetPassword": {
+            "title": "Réinitialiser le mot de passe",
+            "newPassword": "Nouveau mot de passe",
+            "enterNewPassword": "Entrez votre nouveau mot de passe",
+            "confirmPassword": "Confirmer le mot de passe",
+            "confirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
+            "resetPassword": "Réinitialiser le mot de passe",
+            "resettingPassword": "Réinitialisation du mot de passe..."
+        },
+        "forgotPassword": {
+            "title": "Mot de passe oublié",
+            "description": "Entrez votre adresse e-mail et nous vous enverrons les instructions pour réinitialiser votre mot de passe.",
+            "sending": "Envoi en cours...",
+            "sendInstructions": "Envoyer les instructions"
+        }
     },
-    "forgotPassword": {
-      "title": "Mot de passe oublié",
-      "description": "Entrez votre adresse e-mail et nous vous enverrons les instructions pour réinitialiser votre mot de passe.",
-      "sending": "Envoi en cours...",
-      "sendInstructions": "Envoyer les instructions"
-    }
-  },
-  "forms": {
-    "labels": {
-      "fullName": "Nom complet",
-      "email": "Email",
-      "password": "Mot de passe",
-      "confirmPassword": "Confirmer le mot de passe",
-      "phoneNumber": "Numéro de téléphone",
-      "bloodGroup": "Groupe sanguin",
-      "region": "Région",
-      "city": "Ville",
-      "location": "Détails de l'emplacement",
-      "description": "Description",
-      "status": "Statut"
+    "forms": {
+        "labels": {
+            "fullName": "Nom complet",
+            "email": "Email",
+            "password": "Mot de passe",
+            "confirmPassword": "Confirmer le mot de passe",
+            "phoneNumber": "Numéro de téléphone",
+            "bloodGroup": "Groupe sanguin",
+            "region": "Région",
+            "city": "Ville",
+            "location": "Détails de l'emplacement",
+            "description": "Description",
+            "status": "Statut"
+        },
+        "placeholders": {
+            "enterFullName": "Entrez votre nom complet",
+            "enterEmail": "Entrez votre email",
+            "confirmPassword": "Confirmez votre mot de passe",
+            "enterPhoneNumber": "Entrez votre numéro de téléphone",
+            "selectBloodGroup": "Sélectionnez votre groupe sanguin",
+            "selectRegion": "Sélectionnez votre région",
+            "selectCity": "Sélectionnez votre ville",
+            "enterLocation": "Entrez l'emplacement spécifique",
+            "enterDescription": "Entrez les détails ou exigences supplémentaires",
+            "selectStatus": "Sélectionnez le statut"
+        },
+        "validation": {
+            "passwordRequirements": "Le mot de passe doit contenir au moins 8 caractères"
+        }
     },
-    "placeholders": {
-      "enterFullName": "Entrez votre nom complet",
-      "enterEmail": "Entrez votre email",
-      "confirmPassword": "Confirmez votre mot de passe",
-      "enterPhoneNumber": "Entrez votre numéro de téléphone",
-      "selectBloodGroup": "Sélectionnez votre groupe sanguin",
-      "selectRegion": "Sélectionnez votre région",
-      "selectCity": "Sélectionnez votre ville",
-      "enterLocation": "Entrez l'emplacement spécifique",
-      "enterDescription": "Entrez les détails ou exigences supplémentaires",
-      "selectStatus": "Sélectionnez le statut"
+    "profile": {
+        "title": "Paramètres du profil",
+        "description": "Gérez vos informations personnelles et vos demandes de don de sang",
+        "tabs": {
+            "bloodRequests": "Demandes de sang",
+            "accountInfo": "Informations du compte"
+        }
     },
-    "validation": {
-      "passwordRequirements": "Le mot de passe doit contenir au moins 8 caractères"
-    }
-  },
-  "profile": {
-    "title": "Paramètres du profil",
-    "description": "Gérez vos informations personnelles et vos demandes de don de sang",
-    "tabs": {
-      "bloodRequests": "Demandes de sang",
-      "accountInfo": "Informations du compte"
-    }
-  },
-  "bloodRequests": {
-    "myRequests": "Mes demandes de sang",
-    "newRequest": "Nouvelle demande",
-    "noRequests": "Aucune demande de sang trouvée. Cliquez sur \"Nouvelle demande\" pour en créer une.",
-    "status": {
-      "active": "Active",
-      "fulfilled": "Accomplie",
-      "cancelled": "Annulée"
+    "bloodRequests": {
+        "myRequests": "Mes demandes de sang",
+        "newRequest": "Nouvelle demande",
+        "noRequests": "Aucune demande de sang trouvée. Cliquez sur \"Nouvelle demande\" pour en créer une.",
+        "status": {
+            "active": "Active",
+            "fulfilled": "Accomplie",
+            "cancelled": "Annulée"
+        },
+        "deleteDialog": {
+            "title": "Êtes-vous sûr ?",
+            "description": "Cela supprimera définitivement cette demande de sang. Cette action ne peut pas être annulée."
+        },
+        "creating": "Création en cours...",
+        "updating": "Mise à jour en cours...",
+        "createRequest": "Créer une demande",
+        "updateRequest": "Mettre à jour la demande",
+        "editRequest": "Modifier la demande",
+        "editRequestDescription": "Modifiez les détails de votre demande de sang"
     },
-    "deleteDialog": {
-      "title": "Êtes-vous sûr ?",
-      "description": "Cela supprimera définitivement cette demande de sang. Cette action ne peut pas être annulée."
-    },
-    "creating": "Création en cours...",
-    "updating": "Mise à jour en cours...",
-    "createRequest": "Créer une demande",
-    "updateRequest": "Mettre à jour la demande",
-    "editRequest": "Modifier la demande",
-    "editRequestDescription": "Modifiez les détails de votre demande de sang"
-  },
-  "how_it_works_title": "Comment ça marche",
-  "how_it_works_description": "tabarro3 est une plateforme qui met en relation les donneurs de sang et les personnes ayant besoin de sang dans leur région. Voici comment ça marche :",
-  "how_it_works_step1_title": "Créez un compte",
-  "how_it_works_step1_description": "Créez un compte en fournissant votre nom, votre email, votre numéro de téléphone, votre ville et votre groupe sanguin.",
-  "how_it_works_step2_title": "Créez une demande de sang",
-  "how_it_works_step2_description": "Si vous avez besoin de sang, créez une demande en fournissant une description, un emplacement et un numéro de téléphone de contact.",
-  "how_it_works_step3_title": "Notification envoyée",
-  "how_it_works_step3_description": "Le système envoie une notification aux donneurs de sang qui correspondent à votre groupe sanguin et à votre région.",
-  "how_it_works_step4_title": "Les donneurs répondent",
-  "how_it_works_step4_description": "Si vous êtes un donneur correspondant, vous recevrez une notification et pourrez choisir d'aider."
+    "how_it_works_title": "Comment ça marche",
+    "how_it_works_description": "tabarro3 est une plateforme qui met en relation les donneurs de sang et les personnes ayant besoin de sang dans leur région. Voici comment ça marche :",
+    "how_it_works_step1_title": "Créez un compte",
+    "how_it_works_step1_description": "Créez un compte en fournissant votre nom, votre email, votre numéro de téléphone, votre ville et votre groupe sanguin.",
+    "how_it_works_step2_title": "Créez une demande de sang",
+    "how_it_works_step2_description": "Si vous avez besoin de sang, créez une demande en fournissant une description, un emplacement et un numéro de téléphone de contact.",
+    "how_it_works_step3_title": "Notification envoyée",
+    "how_it_works_step3_description": "Le système envoie une notification aux donneurs de sang qui correspondent à votre groupe sanguin et à votre région.",
+    "how_it_works_step4_title": "Les donneurs répondent",
+    "how_it_works_step4_description": "Si vous êtes un donneur correspondant, vous recevrez une notification et pourrez choisir d'aider."
 }

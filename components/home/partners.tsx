@@ -60,7 +60,8 @@ export default function Partners({ dict }: { dict: any }) {
                             {partners.map((partner, index) => (
                                 <div
                                     key={index}
-                                    className="flex items-center justify-center h-24 overflow-hidden">
+                                    className="flex items-center justify-center h-24 overflow-hidden"
+                                >
                                     <Image
                                         src={partner.logo}
                                         alt={partner.name}

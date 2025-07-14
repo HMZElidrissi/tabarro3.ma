@@ -30,7 +30,8 @@ export default async function EditCampaign({
     return (
         <DashboardShell
             header="Edit Campaign"
-            description="Update the campaign's details.">
+            description="Update the campaign's details."
+        >
             <CampaignForm
                 mode="edit"
                 campaign={campaign as unknown as Campaign}

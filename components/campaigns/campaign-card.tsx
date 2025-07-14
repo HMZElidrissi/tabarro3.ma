@@ -87,7 +87,8 @@ export function CampaignCard({
                                         ? 'bg-blue-100 text-blue-800'
                                         : '',
                                     isPast ? 'bg-gray-100 text-gray-800' : '',
-                                )}>
+                                )}
+                            >
                                 {cn(
                                     isOngoing
                                         ? dict.Ongoing
@@ -143,7 +144,8 @@ export function CampaignCard({
                             variant={isParticipating ? 'outline' : 'brand'}
                             className="w-full"
                             onClick={handleParticipate}
-                            disabled={isParticipating || isLoading}>
+                            disabled={isParticipating || isLoading}
+                        >
                             {isParticipating
                                 ? dict.Participating
                                 : dict.Participate}
@@ -170,7 +172,8 @@ export function CampaignCard({
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
                         <AlertDialogAction
                             onClick={confirmParticipation}
-                            disabled={isLoading}>
+                            disabled={isLoading}
+                        >
                             {isLoading ? dict.Confirming : dict.Confirm}
                         </AlertDialogAction>
                     </AlertDialogFooter>

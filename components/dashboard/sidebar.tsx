@@ -120,7 +120,8 @@ export function DashboardSidebar() {
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton
                                     size="lg"
-                                    className="w-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                                    className="w-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                >
                                     <Avatar className="h-8 w-8 border-2 border-white ring-2 ring-gray-100 dark:border-gray-900 dark:ring-gray-800">
                                         <AvatarFallback className="bg-primary text-primary-foreground">
                                             {initials}
@@ -140,7 +141,8 @@ export function DashboardSidebar() {
                             <DropdownMenuContent
                                 className="w-56"
                                 align="end"
-                                forceMount>
+                                forceMount
+                            >
                                 <DropdownMenuLabel className="font-normal">
                                     <div className="flex flex-col space-y-1">
                                         <p className="text-sm font-medium">
@@ -156,7 +158,8 @@ export function DashboardSidebar() {
                                     className="flex items-center"
                                     onClick={() =>
                                         router.push('/dashboard/settings')
-                                    }>
+                                    }
+                                >
                                     <Settings className="mr-2 h-4 w-4" />
                                     <span>Settings</span>
                                 </DropdownMenuItem>
@@ -166,7 +169,8 @@ export function DashboardSidebar() {
                                     onSelect={e => {
                                         e.preventDefault();
                                         handleLogout();
-                                    }}>
+                                    }}
+                                >
                                     {isLoading ? (
                                         <>
                                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />

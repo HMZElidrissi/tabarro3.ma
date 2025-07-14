@@ -92,7 +92,8 @@ export default async function BlogPostPage({
                                 <Badge
                                     key={tag}
                                     variant="outline"
-                                    className="text-white border-white/30 bg-white/10 backdrop-blur-sm">
+                                    className="text-white border-white/30 bg-white/10 backdrop-blur-sm"
+                                >
                                     <TagIcon className="w-3 h-3 mr-1" />
                                     {tag}
                                 </Badge>
@@ -149,7 +150,8 @@ export default async function BlogPostPage({
                                 {post.tags.map(tag => (
                                     <span
                                         key={tag}
-                                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
+                                    >
                                         #{tag}
                                     </span>
                                 ))}
@@ -170,7 +172,8 @@ export default async function BlogPostPage({
                         <div className="pt-6">
                             <Link
                                 href="/blog"
-                                className="inline-flex items-center text-brand-600 hover:text-brand-700 hover:underline font-medium">
+                                className="inline-flex items-center text-brand-600 hover:text-brand-700 hover:underline font-medium"
+                            >
                                 <ChevronLeft
                                     className={cn(
                                         'h-5 w-5',
@@ -193,7 +196,8 @@ export default async function BlogPostPage({
                                     className={cn(
                                         'w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center',
                                         isRTL ? 'ml-2' : 'mr-2',
-                                    )}>
+                                    )}
+                                >
                                     <User className="w-6 h-6 text-brand-600" />
                                 </div>
                                 <div>
@@ -215,7 +219,8 @@ export default async function BlogPostPage({
                             </p>
                             <Link
                                 href="/campaigns"
-                                className="inline-block bg-white text-brand-600 font-medium px-4 py-2 rounded-md hover:bg-white/90 transition-colors">
+                                className="inline-block bg-white text-brand-600 font-medium px-4 py-2 rounded-md hover:bg-white/90 transition-colors"
+                            >
                                 {dict.blog?.findCampaigns || 'Find Campaigns'}
                             </Link>
                         </div>
@@ -230,7 +235,8 @@ export default async function BlogPostPage({
                                     {relatedPosts.map(post => (
                                         <Link
                                             key={post.id}
-                                            href={`/blog/${post.slug}`}>
+                                            href={`/blog/${post.slug}`}
+                                        >
                                             <div className="flex gap-3 group">
                                                 <div className="relative w-16 h-16 rounded-md overflow-hidden flex-shrink-0">
                                                     <Image

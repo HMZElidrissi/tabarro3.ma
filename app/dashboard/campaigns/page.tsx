@@ -32,7 +32,8 @@ export default async function CampaignsPage({
                         Add Campaign
                     </Button>
                 </Link>
-            }>
+            }
+        >
             <CampaignFilters />
             <CampaignsClient
                 currentPage={currentPage}

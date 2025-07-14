@@ -116,7 +116,8 @@ export default function CampaignForm({
                                     name="organizationId"
                                     defaultValue={
                                         campaign?.organizationId || ''
-                                    }>
+                                    }
+                                >
                                     <SelectTrigger>
                                         <SelectValue placeholder="Select organization" />
                                     </SelectTrigger>
@@ -124,7 +125,8 @@ export default function CampaignForm({
                                         {organizations.map(org => (
                                             <SelectItem
                                                 key={org.id}
-                                                value={org.id}>
+                                                value={org.id}
+                                            >
                                                 {org.name}
                                             </SelectItem>
                                         ))}
@@ -142,7 +144,8 @@ export default function CampaignForm({
                             }
                             onValueChange={(value: string) => {
                                 setSelectedRegion(value);
-                            }}>
+                            }}
+                        >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select region" />
                             </SelectTrigger>
@@ -150,7 +153,8 @@ export default function CampaignForm({
                                 {REGIONS_AND_CITIES.map(region => (
                                     <SelectItem
                                         key={region.id}
-                                        value={region.id.toString()}>
+                                        value={region.id.toString()}
+                                    >
                                         {region.name}
                                     </SelectItem>
                                 ))}
@@ -162,7 +166,8 @@ export default function CampaignForm({
                         <Label htmlFor="cityId">City</Label>
                         <Select
                             name="cityId"
-                            defaultValue={campaign?.cityId?.toString() || ''}>
+                            defaultValue={campaign?.cityId?.toString() || ''}
+                        >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select city" />
                             </SelectTrigger>
@@ -173,7 +178,8 @@ export default function CampaignForm({
                                     )?.cities.map(city => (
                                         <SelectItem
                                             key={city.id}
-                                            value={city.id.toString()}>
+                                            value={city.id.toString()}
+                                        >
                                             {city.name}
                                         </SelectItem>
                                     ))}
@@ -230,7 +236,8 @@ export default function CampaignForm({
                         <Button
                             type="button"
                             variant="outline"
-                            onClick={() => router.push('/dashboard/campaigns')}>
+                            onClick={() => router.push('/dashboard/campaigns')}
+                        >
                             Cancel
                         </Button>
                         <Button type="submit" disabled={pending}>

@@ -37,7 +37,8 @@ export default function BlogPostGrid({
                                 <div className="absolute top-4 right-4">
                                     <Badge
                                         variant="outline"
-                                        className="bg-white/80 backdrop-blur-sm text-brand-600 border-brand-200">
+                                        className="bg-white/80 backdrop-blur-sm text-brand-600 border-brand-200"
+                                    >
                                         <Droplets className="h-3 w-3 mr-1" />
                                         {post.tags[0]}
                                     </Badge>
@@ -81,7 +82,8 @@ export default function BlogPostGrid({
                                 </div>
                                 <Link
                                     href={`/blog/${post.slug}`}
-                                    className="text-sm text-brand-600 hover:text-brand-700 font-medium flex items-center">
+                                    className="text-sm text-brand-600 hover:text-brand-700 font-medium flex items-center"
+                                >
                                     {dictionary.blog?.readMore || 'Read more'}
                                     <ChevronRight
                                         className={`h-3 w-3 ${isRTL ? 'mr-1 rotate-180' : 'ml-1'}`}

@@ -6,7 +6,8 @@ export default function AddParticipant() {
     return (
         <DashboardShell
             header="Add Participant"
-            description="Create a new participant account.">
+            description="Create a new participant account."
+        >
             <ParticipantForm mode="add" action={createParticipant} />
         </DashboardShell>
     );

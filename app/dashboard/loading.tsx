@@ -5,7 +5,8 @@ export default function DashboardLoading() {
     return (
         <DashboardShell
             header="Dashboard"
-            description="Loading your dashboard...">
+            description="Loading your dashboard..."
+        >
             <DashboardSkeleton />
         </DashboardShell>
     );

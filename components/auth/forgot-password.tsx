@@ -54,7 +54,8 @@ export function ForgotPasswordForm({ dict }: ForgotPasswordFormProps) {
                 <Button
                     type="submit"
                     className="w-full bg-brand-600 hover:bg-brand-700"
-                    disabled={pending}>
+                    disabled={pending}
+                >
                     {pending
                         ? dict.auth.forgotPassword.sending
                         : dict.auth.forgotPassword.sendInstructions}

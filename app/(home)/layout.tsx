@@ -23,7 +23,8 @@ export default async function Layout({ children }: LayoutProps) {
         <UserProvider userPromise={userPromise}>
             <div
                 className="flex min-h-screen flex-col bg-gray-50"
-                dir={isRTL ? 'rtl' : 'ltr'}>
+                dir={isRTL ? 'rtl' : 'ltr'}
+            >
                 <header className="sticky top-0 z-50 w-full border-b bg-gray-100">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-8xl">
                         <div className="flex h-16 items-center justify-between">

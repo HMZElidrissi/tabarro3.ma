@@ -22,7 +22,8 @@ export default async function NotFound() {
                         <div className="mt-6">
                             <Link
                                 href="/"
-                                className="text-base font-medium text-white hover:text-background-100 mb-4">
+                                className="text-base font-medium text-white hover:text-background-100 mb-4"
+                            >
                                 {dict.common?.backToHome || 'Back to home'}
                                 {isRTL ? (
                                     <span aria-hidden="true"> &larr;</span>

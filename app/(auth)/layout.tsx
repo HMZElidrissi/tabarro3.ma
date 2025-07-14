@@ -18,7 +18,8 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
                                 className="my-5"
                             />
                         </Link>
-                    }>
+                    }
+                >
                     {children}
                 </AuthCard>
             </div>

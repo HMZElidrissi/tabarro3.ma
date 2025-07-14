@@ -104,19 +104,22 @@ export function DashboardExport({ userRole }: DashboardExportProps) {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                     disabled={isExporting}
-                    onClick={() => handleExport('campaigns')}>
+                    onClick={() => handleExport('campaigns')}
+                >
                     Campaigns Report
                 </DropdownMenuItem>
                 {userRole === Role.ADMIN && (
                     <>
                         <DropdownMenuItem
                             disabled={isExporting}
-                            onClick={() => handleExport('participants')}>
+                            onClick={() => handleExport('participants')}
+                        >
                             Participants Report
                         </DropdownMenuItem>
                         <DropdownMenuItem
                             disabled={isExporting}
-                            onClick={() => handleExport('blood-requests')}>
+                            onClick={() => handleExport('blood-requests')}
+                        >
                             Blood Requests Report
                         </DropdownMenuItem>
                     </>

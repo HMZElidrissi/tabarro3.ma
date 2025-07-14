@@ -33,7 +33,8 @@ export default async function DashboardPage() {
     return (
         <DashboardShell
             header="Dashboard"
-            toolbar={<DashboardExport userRole={role} />}>
+            toolbar={<DashboardExport userRole={role} />}
+        >
             <DashboardStats userRole={role} stats={stats as any} />
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">

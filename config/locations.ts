@@ -11,19 +11,20 @@ function processLocationData(rawData: any[]): Region[] {
             regionMap.set(regionId, {
                 id: regionId,
                 name: city.region.name,
-                cities: []
+                cities: [],
             });
         }
 
         regionMap.get(regionId)!.cities.push({
             id: city.id,
             name: city.name,
-            regionId: regionId
+            regionId: regionId,
         });
     });
 
-    return Array.from(regionMap.values())
-        .sort((a, b) => a.name.localeCompare(b.name));
+    return Array.from(regionMap.values()).sort((a, b) =>
+        a.name.localeCompare(b.name),
+    );
 }
 
 export const REGIONS_AND_CITIES = processLocationData(rawLocationsData);

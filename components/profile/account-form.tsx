@@ -104,7 +104,8 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                     </Label>
                     <Select
                         name="bloodGroup"
-                        defaultValue={user.bloodGroup || ''}>
+                        defaultValue={user.bloodGroup || ''}
+                    >
                         <SelectTrigger>
                             <SelectValue
                                 placeholder={
@@ -116,7 +117,8 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                             {bloodGroups.map(group => (
                                 <SelectItem
                                     key={group.value}
-                                    value={group.value}>
+                                    value={group.value}
+                                >
                                     {getBloodGroupLabel(group.value, dict)}
                                 </SelectItem>
                             ))}
@@ -130,7 +132,8 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                         value={selectedRegion}
                         onValueChange={(value: string) => {
                             setSelectedRegion(value);
-                        }}>
+                        }}
+                    >
                         <SelectTrigger>
                             <SelectValue
                                 placeholder={
@@ -142,7 +145,8 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                             {REGIONS_AND_CITIES.map(region => (
                                 <SelectItem
                                     key={region.id}
-                                    value={region.id.toString()}>
+                                    value={region.id.toString()}
+                                >
                                     {region.name}
                                 </SelectItem>
                             ))}
@@ -154,7 +158,8 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                     <Label htmlFor="cityId">{dict.forms.labels.city}</Label>
                     <Select
                         name="cityId"
-                        defaultValue={user.cityId?.toString()}>
+                        defaultValue={user.cityId?.toString()}
+                    >
                         <SelectTrigger>
                             <SelectValue
                                 placeholder={dict.forms.placeholders.selectCity}
@@ -167,7 +172,8 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                                 )?.cities.map(city => (
                                     <SelectItem
                                         key={city.id}
-                                        value={city.id.toString()}>
+                                        value={city.id.toString()}
+                                    >
                                         {city.name}
                                     </SelectItem>
                                 ))}

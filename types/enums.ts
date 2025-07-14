@@ -1,7 +1,7 @@
 export enum Role {
     ADMIN = 'ADMIN',
     ORGANIZATION = 'ORGANIZATION',
-    PARTICIPANT = 'PARTICIPANT'
+    PARTICIPANT = 'PARTICIPANT',
 }
 
 export enum BloodGroup {
@@ -13,7 +13,7 @@ export enum BloodGroup {
     O_NEGATIVE = 'O_NEGATIVE',
     AB_POSITIVE = 'AB_POSITIVE',
     AB_NEGATIVE = 'AB_NEGATIVE',
-    UNKNOWN = 'UNKNOWN'
+    UNKNOWN = 'UNKNOWN',
 }
 
 export enum ActivityType {

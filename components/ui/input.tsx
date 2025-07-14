@@ -32,7 +32,8 @@ const InputError = ({
                 {messages.map((message, index) => (
                     <p
                         className={`${className} text-sm text-red-600`}
-                        key={index}>
+                        key={index}
+                    >
                         {message}
                     </p>
                 ))}

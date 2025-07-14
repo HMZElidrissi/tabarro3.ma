@@ -74,7 +74,8 @@ export function ParticipantFilters() {
                     <Label>Blood Group</Label>
                     <Select
                         value={currentBloodGroup}
-                        onValueChange={handleBloodGroupChange}>
+                        onValueChange={handleBloodGroupChange}
+                    >
                         <SelectTrigger>
                             <SelectValue placeholder="Filter by blood group" />
                         </SelectTrigger>
@@ -85,7 +86,8 @@ export function ParticipantFilters() {
                             {bloodGroups.map(group => (
                                 <SelectItem
                                     key={group.value}
-                                    value={group.value}>
+                                    value={group.value}
+                                >
                                     {group.label}
                                 </SelectItem>
                             ))}
@@ -98,7 +100,8 @@ export function ParticipantFilters() {
                         <Button
                             variant="ghost"
                             onClick={() => router.push(pathname)}
-                            className="text-red-500 hover:text-red-600 hover:bg-red-50">
+                            className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                        >
                             <X className="w-4 h-4 mr-2" />
                             Clear Filters
                         </Button>

@@ -61,7 +61,8 @@ export default function DeleteAccountDialog() {
             <CardContent>
                 <Dialog
                     open={confirmDeleteOpen}
-                    onOpenChange={setConfirmDeleteOpen}>
+                    onOpenChange={setConfirmDeleteOpen}
+                >
                     <DialogTrigger asChild>
                         <Button variant="destructive">Delete Account</Button>
                     </DialogTrigger>
@@ -89,13 +90,15 @@ export default function DeleteAccountDialog() {
                                 <Button
                                     type="button"
                                     variant="outline"
-                                    onClick={() => setConfirmDeleteOpen(false)}>
+                                    onClick={() => setConfirmDeleteOpen(false)}
+                                >
                                     Cancel
                                 </Button>
                                 <Button
                                     type="submit"
                                     variant="destructive"
-                                    disabled={deletePending}>
+                                    disabled={deletePending}
+                                >
                                     {deletePending ? (
                                         <>
                                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />

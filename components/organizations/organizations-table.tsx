@@ -87,7 +87,8 @@ export function OrganizationsTable({
                                             onClick={() =>
                                                 onUpdateRole(
                                                     organization.id as string,
-                                                    organization.role === Role.ADMIN
+                                                    organization.role ===
+                                                        Role.ADMIN
                                                         ? Role.ORGANIZATION
                                                         : Role.ADMIN,
                                                 )
@@ -97,7 +98,9 @@ export function OrganizationsTable({
                                         </DropdownMenuItem>
                                         <DropdownMenuItem
                                             onClick={() =>
-                                                onRemoveOrganization(organization.id)
+                                                onRemoveOrganization(
+                                                    organization.id,
+                                                )
                                             }
                                             className="text-red-600"
                                         >

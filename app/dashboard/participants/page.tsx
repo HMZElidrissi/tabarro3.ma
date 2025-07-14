@@ -37,7 +37,8 @@ export default async function ParticipantsPage({
                         Add Participant
                     </Button>
                 </Link>
-            }>
+            }
+        >
             {/* Filters Component */}
             <ParticipantFilters />
 

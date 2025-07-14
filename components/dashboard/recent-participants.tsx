@@ -58,7 +58,8 @@ export function RecentParticipants({ participants }: RecentParticipantsProps) {
                     <div className="ml-auto flex items-center">
                         {participant.bloodGroup && (
                             <div
-                                className={`flex items-center font-medium ${bloodGroupColors[participant.bloodGroup]}`}>
+                                className={`flex items-center font-medium ${bloodGroupColors[participant.bloodGroup]}`}
+                            >
                                 <Droplets className="h-4 w-4 mr-1" />
                                 {getBloodGroupLabel(participant.bloodGroup)}
                             </div>
