@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Eye, Monitor, Smartphone, Tablet } from 'lucide-react';
@@ -13,7 +12,7 @@ type PreviewDevice = 'desktop' | 'tablet' | 'mobile';
 interface EmailPreviewPanelProps {
     emailData: EmailData;
     previewDevice: PreviewDevice;
-    setPreviewDevice: (device: PreviewDevice) => void;
+    setPreviewDeviceAction: (device: PreviewDevice) => void;
 }
 
 const getPreviewWidth = (device: PreviewDevice) => {
@@ -30,7 +29,7 @@ const getPreviewWidth = (device: PreviewDevice) => {
 export default function EmailPreviewPanel({
     emailData,
     previewDevice,
-    setPreviewDevice,
+    setPreviewDeviceAction,
 }: EmailPreviewPanelProps) {
     const { theme } = useTheme();
 
@@ -60,7 +59,7 @@ export default function EmailPreviewPanel({
                                         }
                                         size="sm"
                                         onClick={() =>
-                                            setPreviewDevice('mobile')
+                                            setPreviewDeviceAction('mobile')
                                         }
                                         className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black">
                                         <Smartphone className="w-3 h-3" />
@@ -73,7 +72,7 @@ export default function EmailPreviewPanel({
                                         }
                                         size="sm"
                                         onClick={() =>
-                                            setPreviewDevice('tablet')
+                                            setPreviewDeviceAction('tablet')
                                         }
                                         className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black">
                                         <Tablet className="w-3 h-3" />
@@ -86,7 +85,7 @@ export default function EmailPreviewPanel({
                                         }
                                         size="sm"
                                         onClick={() =>
-                                            setPreviewDevice('desktop')
+                                            setPreviewDeviceAction('desktop')
                                         }
                                         className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black">
                                         <Monitor className="w-3 h-3" />

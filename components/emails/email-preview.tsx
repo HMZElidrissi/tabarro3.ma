@@ -46,7 +46,7 @@ export default function EmailPreview() {
         subject: 'Bienvenue sur tabarro3',
     });
     const [isSending, setIsSending] = useState(false);
-    const [previewDevice, setPreviewDevice] = useState<
+    const [previewDevice, setPreviewDeviceAction] = useState<
         'desktop' | 'tablet' | 'mobile'
     >('desktop');
 
@@ -202,7 +202,7 @@ export default function EmailPreview() {
                     <EmailPreviewPanel
                         emailData={emailData}
                         previewDevice={previewDevice}
-                        setPreviewDevice={setPreviewDevice}
+                        setPreviewDeviceAction={setPreviewDeviceAction}
                     />
                 </div>
             </div>

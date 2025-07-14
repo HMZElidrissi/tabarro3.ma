@@ -1,15 +1,45 @@
+'use client';
+
 import { BloodRequestCard } from '@/components/blood-requests/blood-request-card';
 import { BloodRequest } from '@/types/blood-request';
+import { PaginationControls } from '@/components/custom/pagination-controls';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface BloodRequestsListProps {
     requests: BloodRequest[];
     dict: any;
+    totalPages: number;
+    currentPage: number;
+    total: number;
 }
 
 export default function BloodRequestsList({
     requests,
     dict,
+    totalPages,
+    currentPage,
+    total,
 }: BloodRequestsListProps) {
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    const handlePageChange = (page: number) => {
+        const params = new URLSearchParams(searchParams);
+        params.set('page', page.toString());
+        router.push(`${pathname}?${params.toString()}`);
+    };
+
+    if (!isClient) {
+        return null;
+    }
+
     return (
         <div className="container mx-auto py-8">
             <div className="space-y-6">
@@ -20,8 +50,7 @@ export default function BloodRequestsList({
                             height="120"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="text-brand-600"
-                        >
+                            className="text-brand-600">
                             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                         </svg>
                     </div>
@@ -45,6 +74,16 @@ export default function BloodRequestsList({
                         />
                     ))}
                 </div>
+
+                {totalPages > 1 && (
+                    <div className="flex justify-center">
+                        <PaginationControls
+                            totalPages={totalPages}
+                            onPageChange={handlePageChange}
+                            dict={dict}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     );

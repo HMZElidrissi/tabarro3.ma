@@ -1,11 +1,19 @@
+'use client';
+
 import { CampaignCard } from '@/components/campaigns/campaign-card';
 import { Campaign } from '@/types/campaign';
+import { PaginationControls } from '@/components/custom/pagination-controls';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface CampaignsListProps {
     campaigns: Campaign[];
     authenticated: boolean;
     userId?: string;
     dict: any;
+    totalPages: number;
+    currentPage: number;
+    total: number;
 }
 
 export default function CampaignsList({
@@ -13,7 +21,19 @@ export default function CampaignsList({
     authenticated,
     userId,
     dict,
+    totalPages,
+    currentPage,
+    total,
 }: CampaignsListProps) {
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
     const ongoingCampaigns = campaigns.filter(
         campaign =>
             new Date(campaign.startTime) <= new Date() &&
@@ -28,6 +48,16 @@ export default function CampaignsList({
         campaign => new Date(campaign.endTime) < new Date(),
     );
 
+    const handlePageChange = (page: number) => {
+        const params = new URLSearchParams(searchParams);
+        params.set('page', page.toString());
+        router.push(`${pathname}?${params.toString()}`);
+    };
+
+    if (!isClient) {
+        return null;
+    }
+
     return (
         <div className="container mx-auto py-8">
             <div className="space-y-12">
@@ -38,8 +68,7 @@ export default function CampaignsList({
                             height="120"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="text-brand-600"
-                        >
+                            className="text-brand-600">
                             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                         </svg>
                     </div>
@@ -92,6 +121,14 @@ export default function CampaignsList({
                     </div>
                 )}
 
+                {campaigns.length === 0 && (
+                    <div className="text-center py-12">
+                        <p className="text-muted-foreground">
+                            {dict.No_campaigns_found}
+                        </p>
+                    </div>
+                )}
+
                 {pastCampaigns.length > 0 && (
                     <div className="space-y-6">
                         <h2 className="text-2xl font-semibold">
@@ -112,11 +149,13 @@ export default function CampaignsList({
                     </div>
                 )}
 
-                {campaigns.length === 0 && (
-                    <div className="text-center py-12">
-                        <p className="text-muted-foreground">
-                            {dict.No_campaigns_found}
-                        </p>
+                {totalPages > 1 && (
+                    <div className="flex justify-center">
+                        <PaginationControls
+                            totalPages={totalPages}
+                            onPageChange={handlePageChange}
+                            dict={dict}
+                        />
                     </div>
                 )}
             </div>

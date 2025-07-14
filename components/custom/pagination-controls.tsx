@@ -12,11 +12,13 @@ import { useSearchParams } from 'next/navigation';
 interface PaginationInfo {
     totalPages: number;
     onPageChange: (page: number) => void;
+    dict?: any;
 }
 
 export function PaginationControls({
     totalPages,
     onPageChange,
+    dict,
 }: PaginationInfo) {
     const searchParams = useSearchParams();
     const currentPage = Number(searchParams.get('page')) || 1;
@@ -44,10 +46,9 @@ export function PaginationControls({
                         onClick={() => onPageChange(1)}
                         className={
                             currentPage === 1
-                                ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                                : 'hover:bg-accent hover:text-accent-foreground'
-                        }
-                    >
+                                ? 'bg-brand-600 text-white hover:bg-brand-700'
+                                : 'hover:bg-brand-50 hover:text-brand-700'
+                        }>
                         1
                     </PaginationLink>
                 </PaginationItem>,
@@ -69,10 +70,9 @@ export function PaginationControls({
                         onClick={() => onPageChange(i)}
                         className={
                             currentPage === i
-                                ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                                : 'hover:bg-accent hover:text-accent-foreground'
-                        }
-                    >
+                                ? 'bg-brand-600 text-white hover:bg-brand-700'
+                                : 'hover:bg-brand-50 hover:text-brand-700'
+                        }>
                         {i}
                     </PaginationLink>
                 </PaginationItem>,
@@ -94,10 +94,9 @@ export function PaginationControls({
                         onClick={() => onPageChange(totalPages)}
                         className={
                             currentPage === totalPages
-                                ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                                : 'hover:bg-accent hover:text-accent-foreground'
-                        }
-                    >
+                                ? 'bg-brand-600 text-white hover:bg-brand-700'
+                                : 'hover:bg-brand-50 hover:text-brand-700'
+                        }>
                         {totalPages}
                     </PaginationLink>
                 </PaginationItem>,
@@ -116,9 +115,10 @@ export function PaginationControls({
                         className={
                             currentPage <= 1
                                 ? 'pointer-events-none opacity-50'
-                                : 'cursor-pointer hover:bg-accent hover:text-accent-foreground'
-                        }
-                    />
+                                : 'cursor-pointer hover:bg-brand-50 hover:text-brand-700'
+                        }>
+                        {dict?.pagination?.previous || 'Previous'}
+                    </PaginationPrevious>
                 </PaginationItem>
 
                 {generatePaginationItems()}
@@ -129,9 +129,10 @@ export function PaginationControls({
                         className={
                             currentPage >= totalPages
                                 ? 'pointer-events-none opacity-50'
-                                : 'cursor-pointer hover:bg-accent hover:text-accent-foreground'
-                        }
-                    />
+                                : 'cursor-pointer hover:bg-brand-50 hover:text-brand-700'
+                        }>
+                        {dict?.pagination?.next || 'Next'}
+                    </PaginationNext>
                 </PaginationItem>
             </PaginationContent>
         </Pagination>

@@ -14,8 +14,16 @@ export async function generateMetadata(): Promise<Metadata> {
     };
 }
 
-export default async function CampaignsPage() {
-    const campaigns = await getCampaigns();
+interface CampaignsPageProps {
+    searchParams: Promise<{ page?: string }>;
+}
+
+export default async function CampaignsPage({
+    searchParams,
+}: CampaignsPageProps) {
+    const params = await searchParams;
+    const page = params.page ? parseInt(params.page) : 1;
+    const campaignsData = await getCampaigns(page, 9);
     const dict = await getDictionary();
     const user = await getUser();
     const authenticated = !!user;
@@ -25,10 +33,13 @@ export default async function CampaignsPage() {
         <main className="container mx-auto py-8">
             <Suspense fallback={<CardsLoading />}>
                 <CampaignsList
-                    campaigns={campaigns as Campaign[]}
+                    campaigns={campaignsData.campaigns as Campaign[]}
                     authenticated={authenticated}
                     userId={userId}
                     dict={dict}
+                    totalPages={campaignsData.totalPages}
+                    currentPage={campaignsData.currentPage}
+                    total={campaignsData.total}
                 />
             </Suspense>
         </main>

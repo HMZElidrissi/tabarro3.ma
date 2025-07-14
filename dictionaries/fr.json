@@ -274,5 +274,14 @@
     "how_it_works_step3_title": "Notification envoyée",
     "how_it_works_step3_description": "Le système envoie une notification aux donneurs de sang qui correspondent à votre groupe sanguin et à votre région.",
     "how_it_works_step4_title": "Les donneurs répondent",
-    "how_it_works_step4_description": "Si vous êtes un donneur correspondant, vous recevrez une notification et pourrez choisir d'aider."
+    "how_it_works_step4_description": "Si vous êtes un donneur correspondant, vous recevrez une notification et pourrez choisir d'aider.",
+    "pagination": {
+        "previous": "Précédent",
+        "next": "Suivant",
+        "page": "Page",
+        "of": "sur",
+        "showing": "Affichage",
+        "to": "à",
+        "results": "résultats"
+    }
 }
