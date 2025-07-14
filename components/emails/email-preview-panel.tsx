@@ -1,8 +1,12 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Eye, Monitor, Smartphone, Tablet } from 'lucide-react';
 import { EmailData } from '@/types/email';
 import { generatePreviewHTML } from '@/lib/email-composer';
+import { useTheme } from 'next-themes';
 
 type PreviewDevice = 'desktop' | 'tablet' | 'mobile';
 
@@ -28,6 +32,10 @@ export default function EmailPreviewPanel({
     previewDevice,
     setPreviewDevice,
 }: EmailPreviewPanelProps) {
+    const { theme } = useTheme();
+
+    const isDark = theme === 'dark';
+
     return (
         <div className="lg:col-span-3">
             <div className="sticky top-24">
@@ -54,8 +62,7 @@ export default function EmailPreviewPanel({
                                         onClick={() =>
                                             setPreviewDevice('mobile')
                                         }
-                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black"
-                                    >
+                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black">
                                         <Smartphone className="w-3 h-3" />
                                     </Button>
                                     <Button
@@ -68,8 +75,7 @@ export default function EmailPreviewPanel({
                                         onClick={() =>
                                             setPreviewDevice('tablet')
                                         }
-                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black"
-                                    >
+                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black">
                                         <Tablet className="w-3 h-3" />
                                     </Button>
                                     <Button
@@ -82,8 +88,7 @@ export default function EmailPreviewPanel({
                                         onClick={() =>
                                             setPreviewDevice('desktop')
                                         }
-                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black"
-                                    >
+                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black">
                                         <Monitor className="w-3 h-3" />
                                     </Button>
                                 </div>
@@ -94,8 +99,7 @@ export default function EmailPreviewPanel({
                         <div className="border-t border-gray-200 dark:border-gray-700">
                             <div className="bg-gray-50 dark:bg-black p-4 h-[calc(100vh-300px)] overflow-auto">
                                 <div
-                                    className={`mx-auto bg-white dark:bg-background rounded-lg shadow-sm transition-all duration-300 ${getPreviewWidth(previewDevice)}`}
-                                >
+                                    className={`mx-auto bg-white dark:bg-background rounded-lg shadow-sm transition-all duration-300 ${getPreviewWidth(previewDevice)}`}>
                                     {/* Email Client Header */}
                                     <div className="border-b border-gray-200 dark:border-gray-800 p-3 bg-gray-50 dark:bg-black rounded-t-lg">
                                         <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
@@ -127,11 +131,7 @@ export default function EmailPreviewPanel({
                                         dangerouslySetInnerHTML={{
                                             __html: generatePreviewHTML(
                                                 emailData,
-                                                document
-                                                    .querySelector('html')
-                                                    ?.classList.contains(
-                                                        'dark',
-                                                    ),
+                                                isDark,
                                             ),
                                         }}
                                     />
