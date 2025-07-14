@@ -33,6 +33,8 @@ interface GetParticipantsParams {
     pageSize: number;
     search?: string;
     bloodGroup?: BloodGroup | 'all';
+    region?: string;
+    cityId?: string;
 }
 
 export async function getParticipants({
@@ -40,8 +42,10 @@ export async function getParticipants({
     pageSize,
     search = '',
     bloodGroup,
+    region,
+    cityId,
 }: GetParticipantsParams) {
-    const where = {
+    const where: any = {
         role: Role.PARTICIPANT,
         OR: search
             ? [
@@ -58,6 +62,11 @@ export async function getParticipants({
             : undefined,
         bloodGroup: bloodGroup && bloodGroup !== 'all' ? bloodGroup : undefined,
     };
+    if (cityId) {
+        where.cityId = Number(cityId);
+    } else if (region) {
+        where.city = { ...where.city, regionId: Number(region) };
+    }
 
     const [participants, totalCount] = await Promise.all([
         prisma.user.findMany({

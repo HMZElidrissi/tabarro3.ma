@@ -21,6 +21,8 @@ interface ParticipantsClientProps {
     currentPage: number;
     currentSearch: string;
     currentBloodGroup: BloodGroup | null;
+    currentRegion?: string;
+    currentCityId?: string;
 }
 
 const PAGE_SIZE = 10;
@@ -29,6 +31,8 @@ export default function ParticipantsClient({
     currentPage,
     currentSearch,
     currentBloodGroup,
+    currentRegion,
+    currentCityId,
 }: ParticipantsClientProps) {
     const router = useRouter();
     const pathname = usePathname();
@@ -69,7 +73,13 @@ export default function ParticipantsClient({
     // Load participants with filters
     useEffect(() => {
         loadParticipants();
-    }, [currentPage, currentSearch, currentBloodGroup]);
+    }, [
+        currentPage,
+        currentSearch,
+        currentBloodGroup,
+        currentRegion,
+        currentCityId,
+    ]);
 
     useEffect(() => {
         if (deleteState.success) {
@@ -95,6 +105,8 @@ export default function ParticipantsClient({
                 pageSize: PAGE_SIZE,
                 search: currentSearch,
                 bloodGroup: currentBloodGroup || undefined,
+                region: currentRegion || undefined,
+                cityId: currentCityId || undefined,
             });
 
             if (result) {

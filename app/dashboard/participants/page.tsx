@@ -15,6 +15,8 @@ export default async function ParticipantsPage({
         page: number;
         search: string;
         bloodGroup: BloodGroup;
+        region?: string;
+        cityId?: string;
     }>;
 }) {
     const user = await getUser();
@@ -22,7 +24,7 @@ export default async function ParticipantsPage({
         redirect('/dashboard');
     }
 
-    const { page, search, bloodGroup } = await searchParams;
+    const { page, search, bloodGroup, region, cityId } = await searchParams;
     const currentPage = page || 1;
     const currentSearch = search ?? undefined;
 
@@ -37,8 +39,7 @@ export default async function ParticipantsPage({
                         Add Participant
                     </Button>
                 </Link>
-            }
-        >
+            }>
             {/* Filters Component */}
             <ParticipantFilters />
 
@@ -46,6 +47,8 @@ export default async function ParticipantsPage({
                 currentBloodGroup={bloodGroup}
                 currentPage={currentPage}
                 currentSearch={currentSearch}
+                currentRegion={region}
+                currentCityId={cityId}
             />
         </DashboardShell>
     );

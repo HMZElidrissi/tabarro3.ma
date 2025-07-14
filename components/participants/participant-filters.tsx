@@ -15,6 +15,8 @@ import {
 } from '@/components/ui/select';
 import { BloodGroup } from '@/types/enums';
 import { bloodGroups } from '@/config/blood-group';
+import { REGIONS_AND_CITIES } from '@/config/locations';
+import { useState, useEffect } from 'react';
 
 export function ParticipantFilters() {
     const router = useRouter();
@@ -24,6 +26,18 @@ export function ParticipantFilters() {
     const currentSearch = searchParams.get('search') ?? '';
     const currentBloodGroup =
         (searchParams.get('bloodGroup') as BloodGroup | 'all') ?? 'all';
+    const currentRegion = searchParams.get('region') ?? '';
+    const currentCityId = searchParams.get('cityId') ?? '';
+
+    const [selectedRegion, setSelectedRegion] = useState(currentRegion);
+    const [selectedCity, setSelectedCity] = useState(currentCityId);
+
+    useEffect(() => {
+        setSelectedRegion(currentRegion);
+    }, [currentRegion]);
+    useEffect(() => {
+        setSelectedCity(currentCityId);
+    }, [currentCityId]);
 
     const handleBloodGroupChange = (value: string) => {
         router.push(
@@ -32,6 +46,50 @@ export function ParticipantFilters() {
                 page: '1',
             })}`,
         );
+    };
+
+    const handleRegionChange = (value: string) => {
+        if (value === 'all') {
+            setSelectedRegion('all');
+            setSelectedCity('all');
+            router.push(
+                `${pathname}?${createQueryString({
+                    region: '',
+                    cityId: '',
+                    page: '1',
+                })}`,
+            );
+        } else {
+            setSelectedRegion(value);
+            setSelectedCity('all');
+            router.push(
+                `${pathname}?${createQueryString({
+                    region: value,
+                    cityId: '',
+                    page: '1',
+                })}`,
+            );
+        }
+    };
+
+    const handleCityChange = (value: string) => {
+        if (value === 'all') {
+            setSelectedCity('all');
+            router.push(
+                `${pathname}?${createQueryString({
+                    cityId: '',
+                    page: '1',
+                })}`,
+            );
+        } else {
+            setSelectedCity(value);
+            router.push(
+                `${pathname}?${createQueryString({
+                    cityId: value,
+                    page: '1',
+                })}`,
+            );
+        }
     };
 
     const handleSearch = (term: string) => {
@@ -59,7 +117,7 @@ export function ParticipantFilters() {
 
     return (
         <div className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-5">
                 <div className="space-y-2">
                     <Label htmlFor="search">Search</Label>
                     <Input
@@ -74,8 +132,7 @@ export function ParticipantFilters() {
                     <Label>Blood Group</Label>
                     <Select
                         value={currentBloodGroup}
-                        onValueChange={handleBloodGroupChange}
-                    >
+                        onValueChange={handleBloodGroupChange}>
                         <SelectTrigger>
                             <SelectValue placeholder="Filter by blood group" />
                         </SelectTrigger>
@@ -86,8 +143,7 @@ export function ParticipantFilters() {
                             {bloodGroups.map(group => (
                                 <SelectItem
                                     key={group.value}
-                                    value={group.value}
-                                >
+                                    value={group.value}>
                                     {group.label}
                                 </SelectItem>
                             ))}
@@ -95,13 +151,62 @@ export function ParticipantFilters() {
                     </Select>
                 </div>
 
-                {(currentSearch || currentBloodGroup !== 'all') && (
+                <div className="space-y-2">
+                    <Label>Region</Label>
+                    <Select
+                        value={selectedRegion || 'all'}
+                        onValueChange={handleRegionChange}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Filter by region" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">All Regions</SelectItem>
+                            {REGIONS_AND_CITIES.map(region => (
+                                <SelectItem
+                                    key={region.id}
+                                    value={region.id.toString()}>
+                                    {region.name}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+
+                <div className="space-y-2">
+                    <Label>City</Label>
+                    <Select
+                        value={selectedCity || 'all'}
+                        onValueChange={handleCityChange}
+                        disabled={!selectedRegion || selectedRegion === 'all'}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Filter by city" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">All Cities</SelectItem>
+                            {selectedRegion &&
+                                selectedRegion !== 'all' &&
+                                REGIONS_AND_CITIES.find(
+                                    r => r.id.toString() === selectedRegion,
+                                )?.cities.map(city => (
+                                    <SelectItem
+                                        key={city.id}
+                                        value={city.id.toString()}>
+                                        {city.name}
+                                    </SelectItem>
+                                ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+
+                {(currentSearch ||
+                    currentBloodGroup !== 'all' ||
+                    selectedRegion ||
+                    selectedCity) && (
                     <div className="flex items-end">
                         <Button
                             variant="ghost"
                             onClick={() => router.push(pathname)}
-                            className="text-red-500 hover:text-red-600 hover:bg-red-50"
-                        >
+                            className="text-red-500 hover:text-red-600 hover:bg-red-50">
                             <X className="w-4 h-4 mr-2" />
                             Clear Filters
                         </Button>
