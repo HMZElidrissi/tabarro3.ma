@@ -81,7 +81,7 @@ export function BloodRequestsTable({
                                     {getBloodGroupLabel(request.bloodGroup)}
                                 </Badge>
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="break-words max-w-xs">
                                 {request.city.name} - {request.location}
                             </TableCell>
                             <TableCell>{request.phone}</TableCell>

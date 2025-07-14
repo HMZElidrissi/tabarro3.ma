@@ -4,6 +4,7 @@ import { DashboardShell } from '@/components/dashboard/shell';
 import { InviteOrganizationDialog } from '@/components/organizations/invite-organization-dialog';
 import { OrganizationsTable } from '@/components/organizations/organizations-table';
 import { InvitationsTable } from '@/components/organizations/invitations-table';
+import { OrganizationFilters } from '@/components/organizations/organization-filters';
 import {
     Card,
     CardContent,
@@ -25,12 +26,59 @@ import {
 } from '@/actions/organization';
 import { useActionState, useEffect, useState, useTransition } from 'react';
 import { ActionState } from '@/auth/middleware';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { PaginationControls } from '@/components/custom/pagination-controls';
 
-export default function OrganizationsClient() {
+interface OrganizationsClientProps {
+    currentPage: number;
+    currentSearch: string;
+    currentRegion?: string;
+    currentCityId?: string;
+    currentRole?: string;
+}
+
+const PAGE_SIZE = 10;
+
+export default function OrganizationsClient({
+    currentPage,
+    currentSearch,
+    currentRegion,
+    currentCityId,
+    currentRole,
+}: OrganizationsClientProps) {
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const [organizations, setOrganizations] = useState<User[]>([]);
+    const [totalCount, setTotalCount] = useState(0);
     const [invitations, setInvitations] = useState<Invitation[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
     const { toast } = useToast();
     const [isPending, startTransition] = useTransition();
+
+    const totalPages = Math.ceil(totalCount / PAGE_SIZE);
+
+    // Create query string helper
+    const createQueryString = (params: Record<string, string>) => {
+        const newParams = new URLSearchParams(searchParams);
+        Object.entries(params).forEach(([key, value]) => {
+            if (!value) {
+                newParams.delete(key);
+            } else {
+                newParams.set(key, value);
+            }
+        });
+        return newParams.toString();
+    };
+
+    // Handle page change
+    const handlePageChange = (page: number) => {
+        router.push(
+            `${pathname}?${createQueryString({
+                page: page.toString(),
+            })}`,
+        );
+    };
 
     const [updateRoleState, updateRoleAction, updateRolePending] =
         useActionState<ActionState, FormData>(updateOrganizationRole, {
@@ -45,45 +93,71 @@ export default function OrganizationsClient() {
         error: '',
     });
 
-    const loadData = async () => {
-        startTransition(async () => {
-            try {
-                const [organizationsResult, invitationsResult] =
-                    await Promise.all([
-                        getOrganizations({}, new FormData()),
-                        getPendingInvitations({}, new FormData()),
-                    ]);
+    const loadOrganizations = async () => {
+        setIsLoading(true);
+        try {
+            const formData = new FormData();
+            formData.append('page', currentPage.toString());
+            formData.append('pageSize', PAGE_SIZE.toString());
+            if (currentSearch) formData.append('search', currentSearch);
+            if (currentRegion) formData.append('region', currentRegion);
+            if (currentCityId) formData.append('cityId', currentCityId);
+            if (currentRole && currentRole !== 'all')
+                formData.append('role', currentRole);
 
-                if ('organizations' in organizationsResult) {
-                    setOrganizations(
-                        organizationsResult.organizations as User[],
-                    );
-                }
+            const result = await getOrganizations({}, formData);
 
-                if (invitationsResult.invitations) {
-                    setInvitations(
-                        invitationsResult.invitations as Invitation[],
-                    );
-                }
-            } catch (error) {
-                console.error('Error loading data:', error);
-                toast({
-                    title: 'Error',
-                    description: 'Failed to load team data',
-                    variant: 'destructive',
-                });
+            if ('organizations' in result) {
+                setOrganizations(result.organizations as User[]);
+                setTotalCount(result.totalCount || 0);
             }
-        });
+        } catch (error) {
+            console.error('Error loading organizations:', error);
+            toast({
+                title: 'Error',
+                description: 'Failed to load organizations',
+                variant: 'destructive',
+            });
+        }
+        setIsLoading(false);
     };
 
-    // Load initial data
+    const loadInvitations = async () => {
+        try {
+            const result = await getPendingInvitations({}, new FormData());
+            if (result.invitations) {
+                setInvitations(result.invitations as Invitation[]);
+            }
+        } catch (error) {
+            console.error('Error loading invitations:', error);
+            toast({
+                title: 'Error',
+                description: 'Failed to load invitations',
+                variant: 'destructive',
+            });
+        }
+    };
+
+    // Load organizations with filters
     useEffect(() => {
-        loadData();
-    }, [updateRoleState, removeOrganizationState]);
+        loadOrganizations();
+    }, [currentPage, currentSearch, currentRegion, currentCityId, currentRole]);
+
+    // Load invitations
+    useEffect(() => {
+        loadInvitations();
+    }, []);
+
+    // Reload data after actions
+    useEffect(() => {
+        if (updateRoleState.success || removeOrganizationState.success) {
+            loadOrganizations();
+        }
+    }, [updateRoleState.success, removeOrganizationState.success]);
 
     // Handle successful invite
     const handleInviteSuccess = () => {
-        loadData();
+        loadInvitations();
     };
 
     // Action handlers
@@ -137,18 +211,17 @@ export default function OrganizationsClient() {
 
     return (
         <DashboardShell
-            header="Organizations"
-            description="Manage our partners and pending invitations."
+            header="Organizations & Admins"
+            description="Manage our partners, admins, and pending invitations."
             toolbar={
                 <InviteOrganizationDialog
                     onInviteSuccess={handleInviteSuccess}
                 />
-            }
-        >
+            }>
             <Tabs defaultValue="organizations" className="space-y-4">
                 <TabsList>
                     <TabsTrigger value="organizations">
-                        Organizations
+                        Organizations & Admins
                     </TabsTrigger>
                     <TabsTrigger value="pending">
                         Pending Invitations
@@ -162,22 +235,37 @@ export default function OrganizationsClient() {
                 <TabsContent value="organizations">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Organizations</CardTitle>
+                            <CardTitle>Organizations & Admins</CardTitle>
                             <CardDescription>
-                                View and manage partners of tabarro3.
+                                {totalCount} total organizations and admins
+                                found
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <OrganizationsTable
-                                organizations={organizations}
-                                onUpdateRole={handleUpdateRole}
-                                onRemoveOrganization={handleRemoveOrganization}
-                                isLoading={
-                                    isPending ||
-                                    updateRolePending ||
-                                    removeOrganizationPending
-                                }
-                            />
+                            <OrganizationFilters />
+                            <div className="mt-6">
+                                <OrganizationsTable
+                                    organizations={organizations}
+                                    onUpdateRole={handleUpdateRole}
+                                    onRemoveOrganization={
+                                        handleRemoveOrganization
+                                    }
+                                    isLoading={
+                                        isLoading ||
+                                        updateRolePending ||
+                                        removeOrganizationPending
+                                    }
+                                />
+
+                                {totalPages > 1 && (
+                                    <div className="mt-4 flex justify-center">
+                                        <PaginationControls
+                                            totalPages={totalPages}
+                                            onPageChange={handlePageChange}
+                                        />
+                                    </div>
+                                )}
+                            </div>
                         </CardContent>
                     </Card>
                 </TabsContent>

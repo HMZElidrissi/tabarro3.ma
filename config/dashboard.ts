@@ -41,7 +41,7 @@ export const mainNavigation: NavigationItem[] = [
         roles: [Role.ADMIN],
     },
     {
-        title: 'Organizations',
+        title: 'Organizations & Admins',
         icon: Building2Icon,
         href: '/dashboard/organizations',
         pattern: '^/dashboard/organizations',

@@ -44,6 +44,7 @@ export function OrganizationsTable({
                     <TableRow>
                         <TableHead>Name</TableHead>
                         <TableHead>Email</TableHead>
+                        <TableHead>Location</TableHead>
                         <TableHead>Role</TableHead>
                         <TableHead>Joined</TableHead>
                         <TableHead></TableHead>
@@ -55,13 +56,24 @@ export function OrganizationsTable({
                             <TableCell>{organization.name || '—'}</TableCell>
                             <TableCell>{organization.email}</TableCell>
                             <TableCell>
+                                {organization.city ? (
+                                    <div className="text-sm">
+                                        <div>{organization.city.name}</div>
+                                        <div className="text-muted-foreground">
+                                            {organization.city.region?.name}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    '—'
+                                )}
+                            </TableCell>
+                            <TableCell>
                                 <Badge
                                     variant={
                                         organization.role === 'ADMIN'
                                             ? 'default'
                                             : 'secondary'
-                                    }
-                                >
+                                    }>
                                     {organization.role}
                                 </Badge>
                             </TableCell>
@@ -77,8 +89,7 @@ export function OrganizationsTable({
                                         <Button
                                             variant="ghost"
                                             size="sm"
-                                            disabled={isLoading}
-                                        >
+                                            disabled={isLoading}>
                                             <MoreHorizontal className="h-4 w-4" />
                                         </Button>
                                     </DropdownMenuTrigger>
@@ -92,8 +103,7 @@ export function OrganizationsTable({
                                                         ? Role.ORGANIZATION
                                                         : Role.ADMIN,
                                                 )
-                                            }
-                                        >
+                                            }>
                                             Change Role
                                         </DropdownMenuItem>
                                         <DropdownMenuItem
@@ -102,8 +112,7 @@ export function OrganizationsTable({
                                                     organization.id,
                                                 )
                                             }
-                                            className="text-red-600"
-                                        >
+                                            className="text-red-600">
                                             Remove
                                         </DropdownMenuItem>
                                     </DropdownMenuContent>
@@ -113,8 +122,8 @@ export function OrganizationsTable({
                     ))}
                     {organizations.length === 0 && (
                         <TableRow>
-                            <TableCell colSpan={5} className="h-24 text-center">
-                                No organizations found
+                            <TableCell colSpan={6} className="h-24 text-center">
+                                No organizations or admins found
                             </TableCell>
                         </TableRow>
                     )}

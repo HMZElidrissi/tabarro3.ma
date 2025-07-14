@@ -15,31 +15,85 @@ const removeOrganizationSchema = z.object({
     userId: z.string().uuid(),
 });
 
+const getOrganizationsSchema = z.object({
+    page: z.coerce.number().default(1),
+    pageSize: z.coerce.number().default(10),
+    search: z.string().optional(),
+    region: z.string().optional(),
+    cityId: z.string().optional(),
+    role: z.string().optional(),
+});
+
 export const getOrganizations = validatedActionWithUser(
-    z.object({}),
-    async (_, __, user) => {
+    getOrganizationsSchema,
+    async (data, __, user) => {
         if (user.role !== Role.ADMIN) {
             return { error: 'Not authorized' };
         }
 
-        const organizations = await prisma.user.findMany({
-            where: {
-                deletedAt: null,
-                role: Role.ORGANIZATION,
-            },
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                role: true,
-                createdAt: true,
-            },
-            orderBy: {
-                createdAt: 'desc',
-            },
-        });
+        const { page, pageSize, search, region, cityId, role } = data;
 
-        return { organizations };
+        const where: any = {
+            deletedAt: null,
+            role: role && role !== 'all' 
+                ? role as Role
+                : {
+                    in: [Role.ORGANIZATION, Role.ADMIN],
+                },
+            OR: search
+                ? [
+                      { name: { contains: search, mode: 'insensitive' as const } },
+                      { email: { contains: search, mode: 'insensitive' as const } },
+                      {
+                          city: {
+                              name: {
+                                  contains: search,
+                                  mode: 'insensitive' as const,
+                              },
+                          },
+                      },
+                  ]
+                : undefined,
+        };
+
+        if (cityId) {
+            where.cityId = Number(cityId);
+        } else if (region) {
+            where.city = { ...where.city, regionId: Number(region) };
+        }
+
+        const [organizations, totalCount] = await Promise.all([
+            prisma.user.findMany({
+                where,
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                    city: {
+                        select: {
+                            id: true,
+                            name: true,
+                            region: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                },
+                            },
+                        },
+                    },
+                    createdAt: true,
+                },
+                skip: (page - 1) * pageSize,
+                take: pageSize,
+                orderBy: {
+                    createdAt: 'desc',
+                },
+            }),
+            prisma.user.count({ where }),
+        ]);
+
+        return { organizations, totalCount };
     },
 );
 
