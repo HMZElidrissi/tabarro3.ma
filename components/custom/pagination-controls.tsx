@@ -108,7 +108,8 @@ export function PaginationControls({
 
     return (
         <Pagination className="mt-4">
-            <PaginationContent>
+            {/* Desktop/full pagination */}
+            <PaginationContent className="hidden sm:flex">
                 <PaginationItem>
                     <PaginationPrevious
                         onClick={() => onPageChange(currentPage - 1)}
@@ -123,6 +124,37 @@ export function PaginationControls({
 
                 {generatePaginationItems()}
 
+                <PaginationItem>
+                    <PaginationNext
+                        onClick={() => onPageChange(currentPage + 1)}
+                        className={
+                            currentPage >= totalPages
+                                ? 'pointer-events-none opacity-50'
+                                : 'cursor-pointer hover:bg-brand-50 hover:text-brand-700'
+                        }>
+                        {dict?.pagination?.next || 'Next'}
+                    </PaginationNext>
+                </PaginationItem>
+            </PaginationContent>
+
+            {/* Mobile/simplified pagination */}
+            <PaginationContent className="flex sm:hidden">
+                <PaginationItem>
+                    <PaginationPrevious
+                        onClick={() => onPageChange(currentPage - 1)}
+                        className={
+                            currentPage <= 1
+                                ? 'pointer-events-none opacity-50'
+                                : 'cursor-pointer hover:bg-brand-50 hover:text-brand-700'
+                        }>
+                        {dict?.pagination?.previous || 'Previous'}
+                    </PaginationPrevious>
+                </PaginationItem>
+                <PaginationItem>
+                    <span className="px-3 py-2 text-sm font-medium">
+                        {currentPage} / {totalPages}
+                    </span>
+                </PaginationItem>
                 <PaginationItem>
                     <PaginationNext
                         onClick={() => onPageChange(currentPage + 1)}

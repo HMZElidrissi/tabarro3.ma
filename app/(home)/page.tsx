@@ -73,12 +73,12 @@ const getHomePageJsonLd = async (): Promise<WithContext<any>> => {
     return {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
-        name: 'Tabarro3 - Blood Donation Platform',
+        name: 'tabarro3 - Blood Donation Platform',
         description: dict.metadata.description,
         url: baseUrl,
         mainEntity: {
             '@type': 'Organization',
-            name: 'Tabarro3',
+            name: 'tabarro3',
             description: dict.metadata.jsonLdDescription,
             url: baseUrl,
             logo: `${baseUrl}/logo.png`,
