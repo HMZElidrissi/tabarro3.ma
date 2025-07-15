@@ -7,7 +7,14 @@ export default function robots(): MetadataRoute.Robots {
         rules: [
             {
                 userAgent: '*',
-                allow: ['/', '/campaigns', '/requests'],
+                allow: [
+                    '/',
+                    '/campaigns',
+                    '/requests',
+                    '/blog',
+                    '/campaigns/add',
+                    '/requests/add',
+                ],
                 disallow: [
                     '/api/jobs/*',
                     '/dashboard/*',
@@ -20,9 +27,17 @@ export default function robots(): MetadataRoute.Robots {
                     '/_next/*',
                     '/static/*',
                     '/_vercel/*',
+                    '/api/send-email',
+                    '/api/og-image/*',
                 ],
+            },
+            {
+                userAgent: 'Googlebot',
+                allow: ['/'],
+                crawlDelay: 1,
             },
         ],
         sitemap: `${baseUrl}/sitemap.xml`,
+        host: baseUrl,
     };
 }
