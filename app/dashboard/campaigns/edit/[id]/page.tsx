@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { Campaign } from '@/types/campaign';
 import { getUser } from '@/auth/session';
 import { Role } from '@/types/enums';
-import { getOrganizations } from '@/actions/organization';
+import { getAllOrganizations } from '@/actions/organization';
 import { User } from '@/types/user';
 
 export default async function EditCampaign({
@@ -24,7 +24,7 @@ export default async function EditCampaign({
 
     let organizations;
     if (currentUser?.role === Role.ADMIN) {
-        ({ organizations } = await getOrganizations({}, new FormData()));
+        ({ organizations } = await getAllOrganizations({}, new FormData()));
     }
 
     return (
