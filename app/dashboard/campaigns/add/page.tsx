@@ -3,21 +3,20 @@ import { DashboardShell } from '@/components/dashboard/shell';
 import { createCampaign } from '@/actions/campaign';
 import { getUser } from '@/auth/session';
 import { Role } from '@/types/enums';
-import { getOrganizations } from '@/actions/organization';
+import { getAllOrganizations } from '@/actions/organization';
 import { User } from '@/types/user';
 
 export default async function AddCampaign() {
     const currentUser = await getUser();
     let organizations;
     if (currentUser?.role === Role.ADMIN) {
-        ({ organizations } = await getOrganizations({}, new FormData()));
+        ({ organizations } = await getAllOrganizations({}, new FormData()));
     }
 
     return (
         <DashboardShell
             header="Add Campaign"
-            description="Create a new campaign."
-        >
+            description="Create a new campaign.">
             <CampaignForm
                 mode="add"
                 action={createCampaign}

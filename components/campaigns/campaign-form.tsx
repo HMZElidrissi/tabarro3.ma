@@ -21,6 +21,21 @@ import {
 import { REGIONS_AND_CITIES } from '@/config/locations';
 import { User } from '@/types/user';
 import { Role } from '@/types/enums';
+import { Check, ChevronsUpDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/components/ui/popover';
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from '@/components/ui/command';
 
 interface CampaignFormProps {
     campaign?: Campaign;
@@ -48,6 +63,11 @@ export default function CampaignForm({
     const [state, formAction, pending] = useActionState<ActionState, FormData>(
         action,
         { error: '', success: '' },
+    );
+
+    const [orgOpen, setOrgOpen] = useState(false);
+    const [selectedOrg, setSelectedOrg] = useState<string>(
+        campaign?.organizationId || '',
     );
 
     useEffect(() => {
@@ -112,26 +132,73 @@ export default function CampaignForm({
                                 <Label htmlFor="organizationId">
                                     Organization
                                 </Label>
-                                <Select
+                                <Popover
+                                    open={orgOpen}
+                                    onOpenChange={setOrgOpen}>
+                                    <PopoverTrigger asChild>
+                                        <Button
+                                            variant="outline"
+                                            role="combobox"
+                                            aria-expanded={orgOpen}
+                                            className="w-full justify-between">
+                                            {selectedOrg
+                                                ? organizations.find(
+                                                      org =>
+                                                          org.id ===
+                                                          selectedOrg,
+                                                  )?.name
+                                                : 'Select organization...'}
+                                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-full p-0">
+                                        <Command>
+                                            <CommandInput
+                                                placeholder="Search organization..."
+                                                className="h-9"
+                                            />
+                                            <CommandList>
+                                                <CommandEmpty>
+                                                    No organization found.
+                                                </CommandEmpty>
+                                                <CommandGroup>
+                                                    {organizations.map(org => (
+                                                        <CommandItem
+                                                            key={org.id}
+                                                            value={org.id}
+                                                            onSelect={currentValue => {
+                                                                setSelectedOrg(
+                                                                    currentValue ===
+                                                                        selectedOrg
+                                                                        ? ''
+                                                                        : currentValue,
+                                                                );
+                                                                setOrgOpen(
+                                                                    false,
+                                                                );
+                                                            }}>
+                                                            {org.name}
+                                                            <Check
+                                                                className={cn(
+                                                                    'ml-auto h-4 w-4',
+                                                                    selectedOrg ===
+                                                                        org.id
+                                                                        ? 'opacity-100'
+                                                                        : 'opacity-0',
+                                                                )}
+                                                            />
+                                                        </CommandItem>
+                                                    ))}
+                                                </CommandGroup>
+                                            </CommandList>
+                                        </Command>
+                                    </PopoverContent>
+                                </Popover>
+                                <input
+                                    type="hidden"
                                     name="organizationId"
-                                    defaultValue={
-                                        campaign?.organizationId || ''
-                                    }
-                                >
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select organization" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {organizations.map(org => (
-                                            <SelectItem
-                                                key={org.id}
-                                                value={org.id}
-                                            >
-                                                {org.name}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
+                                    value={selectedOrg}
+                                />
                             </div>
                         )}
 
@@ -144,8 +211,7 @@ export default function CampaignForm({
                             }
                             onValueChange={(value: string) => {
                                 setSelectedRegion(value);
-                            }}
-                        >
+                            }}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Select region" />
                             </SelectTrigger>
@@ -153,8 +219,7 @@ export default function CampaignForm({
                                 {REGIONS_AND_CITIES.map(region => (
                                     <SelectItem
                                         key={region.id}
-                                        value={region.id.toString()}
-                                    >
+                                        value={region.id.toString()}>
                                         {region.name}
                                     </SelectItem>
                                 ))}
@@ -166,8 +231,7 @@ export default function CampaignForm({
                         <Label htmlFor="cityId">City</Label>
                         <Select
                             name="cityId"
-                            defaultValue={campaign?.cityId?.toString() || ''}
-                        >
+                            defaultValue={campaign?.cityId?.toString() || ''}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Select city" />
                             </SelectTrigger>
@@ -178,8 +242,7 @@ export default function CampaignForm({
                                     )?.cities.map(city => (
                                         <SelectItem
                                             key={city.id}
-                                            value={city.id.toString()}
-                                        >
+                                            value={city.id.toString()}>
                                             {city.name}
                                         </SelectItem>
                                     ))}
@@ -236,8 +299,7 @@ export default function CampaignForm({
                         <Button
                             type="button"
                             variant="outline"
-                            onClick={() => router.push('/dashboard/campaigns')}
-                        >
+                            onClick={() => router.push('/dashboard/campaigns')}>
                             Cancel
                         </Button>
                         <Button type="submit" disabled={pending}>

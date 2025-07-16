@@ -35,15 +35,26 @@ export const getOrganizations = validatedActionWithUser(
 
         const where: any = {
             deletedAt: null,
-            role: role && role !== 'all' 
-                ? role as Role
-                : {
-                    in: [Role.ORGANIZATION, Role.ADMIN],
-                },
+            role:
+                role && role !== 'all'
+                    ? (role as Role)
+                    : {
+                          in: [Role.ORGANIZATION, Role.ADMIN],
+                      },
             OR: search
                 ? [
-                      { name: { contains: search, mode: 'insensitive' as const } },
-                      { email: { contains: search, mode: 'insensitive' as const } },
+                      {
+                          name: {
+                              contains: search,
+                              mode: 'insensitive' as const,
+                          },
+                      },
+                      {
+                          email: {
+                              contains: search,
+                              mode: 'insensitive' as const,
+                          },
+                      },
                       {
                           city: {
                               name: {
@@ -177,5 +188,47 @@ export const removeOrganization = validatedActionWithUser(
 
         revalidatePath('/dashboard/organizations');
         return { success: 'Organization removed successfully' };
+    },
+);
+
+/**
+ * Returns all organizations (role ORGANIZATION or ADMIN) without pagination.
+ * Only accessible by ADMIN users.
+ */
+export const getAllOrganizations = validatedActionWithUser(
+    z.object({}),
+    async (_, __, user) => {
+        if (user.role !== Role.ADMIN) {
+            return { error: 'Not authorized' };
+        }
+        const organizations = await prisma.user.findMany({
+            where: {
+                deletedAt: null,
+                role: Role.ORGANIZATION,
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+                city: {
+                    select: {
+                        id: true,
+                        name: true,
+                        region: {
+                            select: {
+                                id: true,
+                                name: true,
+                            },
+                        },
+                    },
+                },
+                createdAt: true,
+            },
+            orderBy: {
+                createdAt: 'desc',
+            },
+        });
+        return { organizations };
     },
 );
