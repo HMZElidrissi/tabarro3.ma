@@ -7,16 +7,23 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Globe, Loader2, LogOut, User, LogIn, Languages } from 'lucide-react';
+import {
+    Globe,
+    Languages,
+    Loader2,
+    LogOut,
+    User,
+    ChevronDown,
+} from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { languages } from '@/config/home';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useUser } from '@/auth';
 import { switchLanguage } from '@/actions/language';
 import { useState } from 'react';
 import { signOut } from '@/actions/sign-out';
 import { Role } from '@/types/enums';
-import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 interface DesktopNavProps {
@@ -83,127 +90,178 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
     ];
 
     return (
-        <nav className="flex items-center space-x-2 lg:space-x-4 rtl:space-x-reverse mx-auto">
-            {desktopMenu.map(item => (
-                <Button
-                    asChild
-                    variant="ghost"
-                    key={item.name}
-                    className={cn(
-                        'text-gray-900 hover:text-brand-700 transition-colors duration-200',
-                        pathname === item.href && 'bg-brand-50 text-brand-700',
-                    )}>
-                    <Link href={item.href} className="text-sm font-medium">
-                        {item.name}
-                    </Link>
-                </Button>
-            ))}
-
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild className="focus-visible:ring-0">
+        <nav className="relative flex items-center justify-between w-full max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Left Section - Navigation Items */}
+            <div className="flex items-center space-x-1 lg:space-x-2 rtl:space-x-reverse">
+                {desktopMenu.slice(0, 4).map(item => (
                     <Button
-                        variant="ghost"
-                        size="icon"
-                        className="shrink-0 text-foreground">
-                        <Languages className="h-[1.2rem] w-[1.2rem]" />
-                        <span className="sr-only">Switch language</span>
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="center" className="w-40">
-                    {languages.map(language => (
-                        <DropdownMenuItem
-                            key={language.code}
-                            onClick={() => handleLanguageSwitch(language.code)}
-                            className="flex items-center justify-between hover:bg-brand-50 cursor-pointer">
-                            {language.name}
-                            {language.code === currentLocale && (
-                                <span className="h-2 w-2 rounded-full bg-brand-500" />
-                            )}
-                        </DropdownMenuItem>
-                    ))}
-                </DropdownMenuContent>
-            </DropdownMenu>
-
-            {user ? (
-                <DropdownMenu>
-                    <DropdownMenuTrigger
                         asChild
-                        className="focus-visible:ring-0">
+                        variant="ghost"
+                        key={item.name}
+                        className={cn(
+                            'text-gray-900 hover:text-brand-700 hover:bg-brand-50 transition-colors duration-200 px-3 py-2 text-sm font-medium',
+                            pathname === item.href &&
+                                'bg-brand-50 text-brand-700',
+                        )}>
+                        <Link href={item.href}>{item.name}</Link>
+                    </Button>
+                ))}
+
+                {/* Additional menu items in dropdown for better space management */}
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
                         <Button
-                            variant="default"
-                            size="lg"
-                            className="flex items-center justify-items-center space-x-2 rtl:space-x-reverse bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition-colors duration-200">
-                            <User className="h-5 w-5" />
-                            <span className="text-sm font-medium">
-                                {user.name || dict.common.profile}
+                            variant="ghost"
+                            className="text-gray-900 hover:text-brand-700 hover:bg-brand-50 transition-colors duration-200 px-3 py-2 text-sm font-medium focus-visible:ring-0">
+                            {dict.menu.more}
+                            <ChevronDown className="ml-1 h-4 w-4" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start" className="w-48">
+                        {desktopMenu.slice(4).map(item => (
+                            <DropdownMenuItem
+                                key={item.name}
+                                className="hover:bg-brand-50">
+                                <Link
+                                    href={item.href}
+                                    className="w-full text-gray-700">
+                                    {item.name}
+                                </Link>
+                            </DropdownMenuItem>
+                        ))}
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
+
+            {/* Center Section - Logo */}
+            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <Link href="/" className="flex items-center">
+                    <Image
+                        src="/logo-header.svg"
+                        alt="tabarro3"
+                        width={500}
+                        height={500}
+                        className="h-auto w-24"
+                        priority
+                    />
+                </Link>
+            </div>
+
+            {/* Right Section - Language Switcher and User Actions */}
+            <div className="flex items-center space-x-2 lg:space-x-3 rtl:space-x-reverse">
+                {/* Language Switcher */}
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-200 focus-visible:ring-0">
+                            <Globe className="h-4 w-4 flex-shrink-0" />
+                            <span className="font-medium leading-none">
+                                {currentLanguage?.name}
                             </span>
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-40">
-                        <DropdownMenuItem className="hover:bg-brand-50">
-                            <Link
-                                href={
-                                    user.role === Role.PARTICIPANT
-                                        ? '/profile'
-                                        : '/dashboard'
+                        {languages.map(language => (
+                            <DropdownMenuItem
+                                key={language.code}
+                                onClick={() =>
+                                    handleLanguageSwitch(language.code)
                                 }
-                                className="w-full text-gray-700">
-                                {dict.common.profile}
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="hover:bg-brand-50">
-                            <div
-                                className="w-full text-gray-700 flex items-center space-x-2 rtl:space-x-reverse"
-                                onClick={e => {
-                                    e.preventDefault();
-                                    handleLogout();
-                                }}>
-                                {isLoading ? (
-                                    <>
-                                        <Loader2 className="h-4 w-4 animate-spin" />
-                                        <span>{dict.common.signingOut}</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <LogOut className="h-4 w-4" />
-                                        <span>{dict.common.signOut}</span>
-                                    </>
+                                className="flex items-center justify-between hover:bg-brand-50 cursor-pointer">
+                                {language.name}
+                                {language.code === currentLocale && (
+                                    <span className="h-2 w-2 rounded-full bg-brand-500" />
                                 )}
-                            </div>
-                        </DropdownMenuItem>
+                            </DropdownMenuItem>
+                        ))}
                     </DropdownMenuContent>
                 </DropdownMenu>
-            ) : (
-                <>
-                    <Button
-                        variant="default"
-                        size="lg"
-                        className="bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition-colors duration-200">
-                        <Link
-                            href="/sign-up"
-                            className="flex items-center space-x-2 rtl:space-x-reverse">
-                            <User className="h-5 w-5" />
-                            <span className="text-sm font-medium">
-                                {dict.common.signUp}
-                            </span>
-                        </Link>
-                    </Button>
-                    <Button
-                        asChild
-                        variant="outline"
-                        size="lg"
-                        className="hover:bg-brand-50 text-gray-700 shadow-sm transition-colors duration-200">
-                        <Link
-                            href="/sign-in"
-                            className="flex items-center space-x-2 rtl:space-x-reverse">
-                            <LogIn className="h-5 w-5" />
-                            <span className="text-sm font-medium">
-                                {dict.common.signIn}
-                            </span>
-                        </Link>
-                    </Button>
-                </>
-            )}
+
+                {/* User Authentication Section */}
+                {user ? (
+                    <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button
+                                    variant="brand"
+                                    size="sm"
+                                    className="flex items-center space-x-2 rtl:space-x-reverse transition-colors duration-200 px-3 py-2 focus-visible:ring-0">
+                                    <User className="h-4 w-4 flex-shrink-0" />
+                                    <span className="text-sm font-medium hidden sm:inline leading-none">
+                                        {user.name || dict.common.profile}
+                                    </span>
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-48">
+                                <DropdownMenuItem className="hover:bg-brand-50">
+                                    <Link
+                                        href={
+                                            user.role === Role.PARTICIPANT
+                                                ? '/profile'
+                                                : '/dashboard'
+                                        }
+                                        className="w-full text-brand-700 flex items-center space-x-2 rtl:space-x-reverse">
+                                        <User className="h-4 w-4" />
+                                        <span>{dict.common.profile}</span>
+                                    </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem className="hover:bg-brand-50">
+                                    <div
+                                        className="w-full text-gray-700 flex items-center space-x-2 rtl:space-x-reverse cursor-pointer"
+                                        onClick={e => {
+                                            e.preventDefault();
+                                            handleLogout();
+                                        }}>
+                                        {isLoading ? (
+                                            <>
+                                                <Loader2 className="h-4 w-4 animate-spin" />
+                                                <span>
+                                                    {dict.common.signingOut}
+                                                </span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <LogOut className="h-4 w-4" />
+                                                <span>
+                                                    {dict.common.signOut}
+                                                </span>
+                                            </>
+                                        )}
+                                    </div>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
+                ) : (
+                    <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                        <Button
+                            asChild
+                            variant="ghost"
+                            size="sm"
+                            className="text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-200 px-3 py-2 text-sm font-medium">
+                            <Link
+                                href="/sign-in"
+                                className="flex items-center space-x-1 rtl:space-x-reverse underline font-bold">
+                                <span>{dict.common.signIn}</span>
+                            </Link>
+                        </Button>
+
+                        <Button
+                            asChild
+                            variant="brand"
+                            size="sm"
+                            className="transition-colors duration-200 rounded-md px-4 py-2 text-sm font-medium focus-visible:ring-0">
+                            <Link
+                                href="/sign-up"
+                                className="flex items-center space-x-1 rtl:space-x-reverse">
+                                <span>{dict.common.signUp}</span>
+                            </Link>
+                        </Button>
+                    </div>
+                )}
+            </div>
         </nav>
     );
 }
