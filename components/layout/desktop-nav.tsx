@@ -7,7 +7,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Globe, Loader2, LogOut, User, LogIn } from 'lucide-react';
+import { Globe, Loader2, LogOut, User, LogIn, Languages } from 'lucide-react';
 import Link from 'next/link';
 import { languages } from '@/config/home';
 import { useRouter } from 'next/navigation';
@@ -92,8 +92,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                     className={cn(
                         'text-gray-900 hover:text-brand-700 transition-colors duration-200',
                         pathname === item.href && 'bg-brand-50 text-brand-700',
-                    )}
-                >
+                    )}>
                     <Link href={item.href} className="text-sm font-medium">
                         {item.name}
                     </Link>
@@ -104,13 +103,10 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                 <DropdownMenuTrigger asChild className="focus-visible:ring-0">
                     <Button
                         variant="ghost"
-                        size="lg"
-                        className="flex items-center justify-items-center space-x-2 rtl:space-x-reverse bg-white hover:bg-gray-50 text-gray-700 border-gray-200 hover:border-gray-300 shadow-sm transition-colors duration-200"
-                    >
-                        <Globe className="h-5 w-5 text-gray-500" />
-                        <span className="text-sm font-medium">
-                            {currentLanguage?.name}
-                        </span>
+                        size="icon"
+                        className="shrink-0 text-foreground">
+                        <Languages className="h-[1.2rem] w-[1.2rem]" />
+                        <span className="sr-only">Switch language</span>
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="center" className="w-40">
@@ -118,8 +114,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                         <DropdownMenuItem
                             key={language.code}
                             onClick={() => handleLanguageSwitch(language.code)}
-                            className="flex items-center justify-between hover:bg-brand-50 cursor-pointer"
-                        >
+                            className="flex items-center justify-between hover:bg-brand-50 cursor-pointer">
                             {language.name}
                             {language.code === currentLocale && (
                                 <span className="h-2 w-2 rounded-full bg-brand-500" />
@@ -133,13 +128,11 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                 <DropdownMenu>
                     <DropdownMenuTrigger
                         asChild
-                        className="focus-visible:ring-0"
-                    >
+                        className="focus-visible:ring-0">
                         <Button
                             variant="default"
                             size="lg"
-                            className="flex items-center justify-items-center space-x-2 rtl:space-x-reverse bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition-colors duration-200"
-                        >
+                            className="flex items-center justify-items-center space-x-2 rtl:space-x-reverse bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition-colors duration-200">
                             <User className="h-5 w-5" />
                             <span className="text-sm font-medium">
                                 {user.name || dict.common.profile}
@@ -154,8 +147,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                                         ? '/profile'
                                         : '/dashboard'
                                 }
-                                className="w-full text-gray-700"
-                            >
+                                className="w-full text-gray-700">
                                 {dict.common.profile}
                             </Link>
                         </DropdownMenuItem>
@@ -165,8 +157,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                                 onClick={e => {
                                     e.preventDefault();
                                     handleLogout();
-                                }}
-                            >
+                                }}>
                                 {isLoading ? (
                                     <>
                                         <Loader2 className="h-4 w-4 animate-spin" />
@@ -187,12 +178,10 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                     <Button
                         variant="default"
                         size="lg"
-                        className="bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition-colors duration-200"
-                    >
+                        className="bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition-colors duration-200">
                         <Link
                             href="/sign-up"
-                            className="flex items-center space-x-2 rtl:space-x-reverse"
-                        >
+                            className="flex items-center space-x-2 rtl:space-x-reverse">
                             <User className="h-5 w-5" />
                             <span className="text-sm font-medium">
                                 {dict.common.signUp}
@@ -203,12 +192,10 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                         asChild
                         variant="outline"
                         size="lg"
-                        className="hover:bg-brand-50 text-gray-700 shadow-sm transition-colors duration-200"
-                    >
+                        className="hover:bg-brand-50 text-gray-700 shadow-sm transition-colors duration-200">
                         <Link
                             href="/sign-in"
-                            className="flex items-center space-x-2 rtl:space-x-reverse"
-                        >
+                            className="flex items-center space-x-2 rtl:space-x-reverse">
                             <LogIn className="h-5 w-5" />
                             <span className="text-sm font-medium">
                                 {dict.common.signIn}
