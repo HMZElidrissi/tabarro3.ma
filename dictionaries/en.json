@@ -302,5 +302,13 @@
         "to": "to",
         "of": "of",
         "results": "results"
-    }
+    },
+    "Region": "Region",
+    "City": "City",
+    "All_Regions": "All Regions",
+    "All_Cities": "All Cities",
+    "Date_Range": "Date Range",
+    "Pick_a_date_range": "Pick a date range",
+    "Reset_Filters": "Reset Filters",
+    "Clear_Filters": "Clear Filters"
 }

@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 interface CampaignsPageProps {
-    searchParams: Promise<{ page?: string }>;
+    searchParams: Promise<{ page?: string; region?: string; city?: string }>;
 }
 
 export default async function CampaignsPage({
@@ -23,7 +23,10 @@ export default async function CampaignsPage({
 }: CampaignsPageProps) {
     const params = await searchParams;
     const page = params.page ? parseInt(params.page) : 1;
-    const campaignsData = await getCampaigns(page, 9);
+    const regionId = params.region || undefined;
+    const cityId = params.city || undefined;
+
+    const campaignsData = await getCampaigns(page, 9, { regionId, cityId });
     const dict = await getDictionary();
     const user = await getUser();
     const authenticated = !!user;

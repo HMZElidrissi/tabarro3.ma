@@ -284,5 +284,13 @@
         "showing": "Affichage",
         "to": "à",
         "results": "résultats"
-    }
+    },
+    "Region": "Région",
+    "City": "Ville",
+    "All_Regions": "Toutes les régions",
+    "All_Cities": "Toutes les villes",
+    "Date_Range": "Plage de dates",
+    "Pick_a_date_range": "Choisir une plage de dates",
+    "Reset_Filters": "Réinitialiser les filtres",
+    "Clear_Filters": "Effacer les filtres"
 }
