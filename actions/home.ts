@@ -49,13 +49,31 @@ export async function getBloodRequests(page: number = 1, limit: number = 9) {
     }
 }
 
-export async function getCampaigns(page: number = 1, limit: number = 9) {
+export async function getCampaigns(
+    page: number = 1,
+    limit: number = 9,
+    filters?: { regionId?: string; cityId?: string },
+) {
     try {
         const skip = (page - 1) * limit;
+        const where: any = {};
+
+        if (filters?.regionId) {
+            where.city = { regionId: Number(filters.regionId) };
+        }
+        if (filters?.cityId) {
+            where.cityId = Number(filters.cityId);
+        }
 
         const [campaigns, total] = await Promise.all([
             prisma.campaign.findMany({
+                where,
                 include: {
+                    city: {
+                        include: {
+                            region: true,
+                        },
+                    },
                     organization: {
                         select: {
                             name: true,
@@ -80,18 +98,20 @@ export async function getCampaigns(page: number = 1, limit: number = 9) {
                 skip,
                 take: limit,
             }),
-            prisma.campaign.count(),
+            prisma.campaign.count({ where }),
         ]);
+
+        const totalPages = Math.ceil(total / limit);
 
         return {
             campaigns,
             total,
-            totalPages: Math.ceil(total / limit),
+            totalPages,
             currentPage: page,
         };
     } catch (error) {
         console.error('Error fetching campaigns:', error);
-        throw new Error('Failed to fetch campaigns');
+        throw error;
     }
 }
 

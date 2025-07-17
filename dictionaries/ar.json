@@ -215,7 +215,7 @@
             "confirmPassword": "تأكيد كلمة المرور",
             "phoneNumber": "رقم الهاتف",
             "bloodGroup": "فصيلة الدم",
-            "region": "المنطقة",
+            "region": "الجهة",
             "city": "المدينة",
             "location": "تفاصيل الموقع",
             "description": "الوصف",
@@ -283,5 +283,13 @@
         "showing": "عرض",
         "to": "إلى",
         "results": "نتيجة"
-    }
+    },
+    "Region": "الجهة",
+    "City": "المدينة",
+    "All_Regions": "جميع الجهات",
+    "All_Cities": "جميع المدن",
+    "Date_Range": "نطاق التاريخ",
+    "Pick_a_date_range": "اختر نطاق التاريخ",
+    "Reset_Filters": "إعادة تعيين الفلاتر",
+    "Clear_Filters": "مسح الفلاتر"
 }
