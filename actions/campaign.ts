@@ -6,6 +6,17 @@ import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { Role } from '@/types/enums';
 import { queueCampaignNotification } from '@/jobs/helpers';
+import { REGIONS_AND_CITIES } from '@/config/locations';
+
+function getRegionFromCityId(cityId: number): string | null {
+    for (const region of REGIONS_AND_CITIES) {
+        const city = region.cities.find(c => c.id === cityId);
+        if (city) {
+            return region.id.toString();
+        }
+    }
+    return null;
+}
 
 const CampaignSchema = z.object({
     name: z.string().min(1),
@@ -196,7 +207,18 @@ export const createCampaign = validatedActionWithUser(
 
             await queueCampaignNotification(newCampaign.id);
 
-            revalidatePath('/dashboard/campaigns');
+            // Revalidate campaign pages for ISR
+            revalidatePath('/campaigns');
+
+            // Revalidate region-specific campaign page
+            const regionId = getRegionFromCityId(data.cityId);
+            if (regionId) {
+                revalidatePath(`/campaigns?region=${regionId}`);
+                revalidatePath(
+                    `/campaigns?region=${regionId}&city=${data.cityId}`,
+                );
+            }
+
             return { success: 'Campaign created successfully' };
         } catch (error) {
             return {
@@ -240,12 +262,34 @@ export const updateCampaign = validatedActionWithUser(
 
             const { id, ...updateData } = data;
 
+            // Get old region ID for revalidation
+            const oldRegionId = getRegionFromCityId(campaign.cityId);
+
             await prisma.campaign.update({
                 where: { id },
                 data: updateData,
             });
 
-            revalidatePath('/dashboard/campaigns');
+            // Revalidate campaign pages for ISR
+            revalidatePath('/campaigns');
+
+            // Revalidate old region pages (in case city changed)
+            if (oldRegionId) {
+                revalidatePath(`/campaigns?region=${oldRegionId}`);
+                revalidatePath(
+                    `/campaigns?region=${oldRegionId}&city=${campaign.cityId}`,
+                );
+            }
+
+            // Revalidate new region pages (if city changed)
+            const newRegionId = getRegionFromCityId(data.cityId);
+            if (newRegionId && newRegionId !== oldRegionId) {
+                revalidatePath(`/campaigns?region=${newRegionId}`);
+                revalidatePath(
+                    `/campaigns?region=${newRegionId}&city=${data.cityId}`,
+                );
+            }
+
             return { success: 'Campaign updated successfully' };
         } catch (error) {
             return {
@@ -292,11 +336,24 @@ export const deleteCampaign = validatedActionWithUser(
                 };
             }
 
+            // Get region ID for revalidation before deletion
+            const regionId = getRegionFromCityId(campaign.cityId);
+
             await prisma.campaign.delete({
                 where: { id: data.id },
             });
 
-            revalidatePath('/dashboard/campaigns');
+            // Revalidate campaign pages for ISR
+            revalidatePath('/campaigns');
+
+            // Revalidate region-specific campaign pages
+            if (regionId) {
+                revalidatePath(`/campaigns?region=${regionId}`);
+                revalidatePath(
+                    `/campaigns?region=${regionId}&city=${campaign.cityId}`,
+                );
+            }
+
             return { success: 'Campaign deleted successfully' };
         } catch (error) {
             return {
