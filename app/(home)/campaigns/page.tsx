@@ -6,6 +6,33 @@ import { getUser } from '@/auth/session';
 import { CardsLoading } from '@/components/loading/cards-loading';
 import { getDictionary } from '@/i18n/get-dictionary';
 import { Metadata } from 'next';
+import { REGIONS_AND_CITIES } from '@/config/locations';
+
+// Allow dynamic params for regions/cities not pre-generated
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+    // Generate static params for all regions and a default "all" page
+    const staticParams = [
+        { region: undefined, city: undefined },
+        ...REGIONS_AND_CITIES.map(region => ({
+            region: region.id.toString(),
+            city: undefined,
+        })),
+        // Also generate for popular region-city combinations
+        ...REGIONS_AND_CITIES.flatMap(region =>
+            region.cities.slice(0, 3).map(city => ({
+                // Limit to top 3 cities per region
+                region: region.id.toString(),
+                city: city.id.toString(),
+            })),
+        ),
+    ];
+
+    return staticParams.map(params => ({
+        searchParams: params,
+    }));
+}
 
 export async function generateMetadata(): Promise<Metadata> {
     const dict = await getDictionary();
