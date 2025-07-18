@@ -12,26 +12,12 @@ import { REGIONS_AND_CITIES } from '@/config/locations';
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-    // Generate static params for all regions and a default "all" page
-    const staticParams = [
-        { region: undefined, city: undefined },
-        ...REGIONS_AND_CITIES.map(region => ({
-            region: region.id.toString(),
-            city: undefined,
-        })),
-        // Also generate for popular region-city combinations
-        ...REGIONS_AND_CITIES.flatMap(region =>
-            region.cities.slice(0, 3).map(city => ({
-                // Limit to top 3 cities per region
-                region: region.id.toString(),
-                city: city.id.toString(),
-            })),
-        ),
-    ];
-
-    return staticParams.map(params => ({
-        searchParams: params,
-    }));
+  return [
+    { searchParams: { region: undefined, city: undefined } }, // all
+    ...REGIONS_AND_CITIES.map(region => ({
+      searchParams: { region: region.id.toString(), city: undefined }
+    })),
+  ];
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -54,6 +40,7 @@ export default async function CampaignsPage({
     const cityId = params.city || undefined;
 
     const campaignsData = await getCampaigns(page, 9, { regionId, cityId });
+    const campaigns = campaignsData.campaigns as Campaign[];
     const dict = await getDictionary();
     const user = await getUser();
     const authenticated = !!user;
@@ -63,7 +50,7 @@ export default async function CampaignsPage({
         <main className="container mx-auto py-8">
             <Suspense fallback={<CardsLoading />}>
                 <CampaignsList
-                    campaigns={campaignsData.campaigns as Campaign[]}
+                    campaigns={campaigns}
                     authenticated={authenticated}
                     userId={userId}
                     dict={dict}
