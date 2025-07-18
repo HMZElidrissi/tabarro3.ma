@@ -9,6 +9,7 @@ import { i18n } from '@/i18n/i18n-config';
 import { cn } from '@/lib/utils';
 import { Analytics } from '@vercel/analytics/react';
 import { NavigationProgress } from '@/components/custom/navigation-progress';
+import { NavigationProvider } from '@/components/custom/navigation-events';
 
 const nunitoFont = Nunito({
     subsets: ['latin'],
@@ -154,8 +155,10 @@ export default async function RootLayout({
             </head>
             <Analytics />
             <body className="antialiased bg-gray-50">
-                <NavigationProgress />
-                {children}
+                <NavigationProvider>
+                    <NavigationProgress />
+                    {children}
+                </NavigationProvider>
             </body>
         </html>
     );

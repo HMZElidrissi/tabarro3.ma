@@ -1,26 +1,19 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef } from 'react';
-import LoadingBar, { type LoadingBarRef } from 'react-top-loading-bar';
+import { useEffect } from 'react';
+import LoadingBar from 'react-top-loading-bar';
+import { useLoadingBar } from './navigation-events';
 
 export function NavigationProgress() {
-    const ref = useRef<LoadingBarRef>(null);
+    const { ref } = useLoadingBar();
     const pathname = usePathname();
 
     useEffect(() => {
-        if (ref.current) {
+        if (ref?.current) {
             ref.current.complete();
         }
-    }, [pathname]);
-
-    useEffect(() => {
-        // This is a workaround to show the loading bar on initial load
-        // and when the component mounts.
-        if (ref.current) {
-            ref.current.continuousStart();
-        }
-    }, []);
+    }, [pathname, ref]);
 
     return <LoadingBar color="#f54748" ref={ref} shadow={true} height={3} />;
 }

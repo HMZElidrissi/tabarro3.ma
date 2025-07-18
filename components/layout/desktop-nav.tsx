@@ -1,5 +1,8 @@
 'use client';
 
+import { switchLanguage } from '@/actions/language';
+import { signOut } from '@/actions/sign-out';
+import { useUser } from '@/auth';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -7,24 +10,20 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { languages } from '@/config/home';
+import { cn } from '@/lib/utils';
+import { Role } from '@/types/enums';
 import {
+    ChevronDown,
     Globe,
-    Languages,
     Loader2,
     LogOut,
-    User,
-    ChevronDown,
+    User
 } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { languages } from '@/config/home';
+import { ProgressLink as Link } from '@/components/custom/progress-link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useUser } from '@/auth';
-import { switchLanguage } from '@/actions/language';
 import { useState } from 'react';
-import { signOut } from '@/actions/sign-out';
-import { Role } from '@/types/enums';
-import { cn } from '@/lib/utils';
 
 interface DesktopNavProps {
     dict: any;
