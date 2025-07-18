@@ -215,22 +215,21 @@ export default function CampaignsList({
                                         </SelectContent>
                                     </Select>
                                 </div>
-
-                                {/* Reset Filters */}
-                                {(selectedRegion || selectedCity) && (
-                                    <div className="flex items-end">
-                                        <Button
-                                            variant="ghost"
-                                            onClick={handleResetFilters}
-                                            className="text-red-500 hover:text-red-600 hover:bg-red-50 w-full">
-                                            <X className="w-4 h-4 mr-2" />
-                                            {dict.Reset_Filters ||
-                                                dict.Clear_Filters ||
-                                                'Clear Filters'}
-                                        </Button>
-                                    </div>
-                                )}
                             </div>
+                            {/* Reset Filters */}
+                            {(selectedRegion || selectedCity) && (
+                                <div className="flex items-end">
+                                    <Button
+                                        variant="ghost"
+                                        onClick={handleResetFilters}
+                                        className="text-red-500 hover:text-red-600 hover:bg-red-50 w-full">
+                                        <X className="w-4 h-4 mr-2" />
+                                        {dict.Reset_Filters ||
+                                            dict.Clear_Filters ||
+                                            'Clear Filters'}
+                                    </Button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
