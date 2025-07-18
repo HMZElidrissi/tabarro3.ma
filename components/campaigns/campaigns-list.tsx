@@ -139,7 +139,7 @@ export default function CampaignsList({
                     <div className="w-full max-w-3xl">
                         {/* Filters - Dashboard style */}
                         <div className="space-y-4">
-                            <div className="grid gap-4 md:grid-cols-3">
+                            <div className="grid gap-4 md:grid-cols-2">
                                 {/* Region Filter */}
                                 <div className="space-y-2">
                                     <Label>
