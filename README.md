@@ -28,11 +28,3 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## TODO
-
--   [x] Add i18n support
--   [x] Setup home page
--   [ ] Integrate WhatsApp API for notifications
--   [ ] Add consent message into signup page
--   [ ] i18n for auth pages
--   [ ] Add a blog
