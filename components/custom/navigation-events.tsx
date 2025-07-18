@@ -1,10 +1,10 @@
 'use client';
 
-import { createRef, useContext, createContext, RefObject } from 'react';
+import { useRef, useContext, createContext, RefObject } from 'react';
 import { type LoadingBarRef } from 'react-top-loading-bar';
 
 const NavigationContext = createContext<{
-    ref: RefObject<LoadingBarRef> | null;
+    ref: RefObject<LoadingBarRef | null> | null;
 }>({ ref: null });
 
 export const useLoadingBar = () => {
@@ -22,7 +22,7 @@ export const NavigationProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
-    const ref = createRef<LoadingBarRef>();
+    const ref = useRef<LoadingBarRef>(null);
     return (
         <NavigationContext.Provider value={{ ref }}>
             {children}
