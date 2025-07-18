@@ -8,6 +8,7 @@ import { getDictionary } from '@/i18n/get-dictionary';
 import { i18n } from '@/i18n/i18n-config';
 import { cn } from '@/lib/utils';
 import { Analytics } from '@vercel/analytics/react';
+import { NavigationProgress } from '@/components/custom/navigation-progress';
 
 const nunitoFont = Nunito({
     subsets: ['latin'],
@@ -142,8 +143,7 @@ export default async function RootLayout({
                           // '[&_*]:text-right',
                       ]
                     : [nunitoFont.className, 'text-left'],
-            )}
-        >
+            )}>
             <head>
                 <link rel="canonical" href={baseUrl} />
                 <Script
@@ -153,7 +153,10 @@ export default async function RootLayout({
                 />
             </head>
             <Analytics />
-            <body className="antialiased bg-gray-50">{children}</body>
+            <body className="antialiased bg-gray-50">
+                <NavigationProgress />
+                {children}
+            </body>
         </html>
     );
 }
