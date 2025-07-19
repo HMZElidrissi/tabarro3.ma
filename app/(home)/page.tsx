@@ -6,6 +6,7 @@ import HowItWorksComponent from '@/components/home/how-it-works';
 import { getDictionary, getLocale } from '@/i18n/get-dictionary';
 import Partners from '@/components/home/partners';
 import LatestBlogPosts from '@/components/blog/latest-blog-posts';
+
 import { Metadata } from 'next';
 import { WithContext } from 'schema-dts';
 import Script from 'next/script';
@@ -88,8 +89,9 @@ const getHomePageJsonLd = async (): Promise<WithContext<any>> => {
                 availableLanguage: ['English', 'Arabic', 'French'],
             },
             sameAs: [
-                'https://www.linkedin.com/company/rotaract-les-merinides/',
-                'https://www.instagram.com/rotaract_les_merinides/',
+                'https://www.facebook.com/tabarro3maroc/',
+                'https://www.instagram.com/tabarro3_ma/',
+                'https://x.com/tabarro3_ma',
             ],
         },
         breadcrumb: {
@@ -128,7 +130,7 @@ export default async function Page() {
                 <HeroComponent dict={dict} isRTL={isRTL} />
                 <HowItWorksComponent dict={dict} />
                 <LatestBlogPosts locale={lang} dictionary={dict} />
-                <Partners dict={dict} />
+                {/* <Partners dict={dict} /> */}
                 <BenefitsComponent dict={dict} />
                 <CriteriasComponent dict={dict} />
                 <MapComponent dict={dict} />

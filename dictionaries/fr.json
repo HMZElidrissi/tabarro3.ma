@@ -26,7 +26,9 @@
     "footer": {
         "tabarro3": "tabarro3",
         "byRotaract": "par le Rotaract Les Mérinides",
-        "allRightsReserved": "Tous droits réservés."
+        "allRightsReserved": "Tous droits réservés.",
+        "followUs": "Suivez-nous sur les réseaux sociaux",
+        "proudlyOpenSource": "Open source avec fierté"
     },
     "menu": {
         "home": "Accueil",
@@ -141,6 +143,13 @@
         }
     },
     "partners": "Nos partenaires",
+    "award": {
+        "title": "Meilleur Projet d'Innovation",
+        "subtitle": "Rotaract District 9010",
+        "description": "Nous sommes fiers d'annoncer que tabarro3 a été reconnu comme lauréat du Meilleur Projet d'Innovation par le Rotaract District 9010. Cette réussite reflète notre engagement à révolutionner la sensibilisation au don de sang et à connecter les communautés pour sauver des vies.",
+        "year": "2024/2025",
+        "badge": "Excellence en Innovation"
+    },
     "hero_title": "Donnez du sang, sauvez des vies",
     "hero_description": "Le don de sang est un geste vital qui sauve des vies quotidiennement. Un seul don peut aider jusqu'à trois personnes et est utilisé dans diverses situations médicales, des chirurgies aux traitements contre le cancer. En donnant régulièrement, vous jouez un rôle essentiel dans le maintien d'un approvisionnement en sang suffisant pour votre communauté.",
     "donate_button": "Faire un don",
