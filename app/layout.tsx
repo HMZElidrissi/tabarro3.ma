@@ -113,8 +113,9 @@ const getJsonLd = async (): Promise<WithContext<Organization>> => {
             availableLanguage: ['English', 'Arabic'],
         },
         sameAs: [
-            'https://www.linkedin.com/company/rotaract-les-merinides/',
-            'https://www.instagram.com/rotaract_les_merinides/',
+            'https://www.facebook.com/tabarro3maroc/',
+            'https://www.instagram.com/tabarro3_ma/',
+            'https://x.com/tabarro3_ma',
         ],
     };
 };

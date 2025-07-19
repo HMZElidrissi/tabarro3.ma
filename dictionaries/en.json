@@ -26,7 +26,9 @@
     "footer": {
         "tabarro3": "tabarro3",
         "byRotaract": "by Rotaract Les Mérinides",
-        "allRightsReserved": "All rights reserved."
+        "allRightsReserved": "All rights reserved.",
+        "followUs": "Follow us on social media",
+        "proudlyOpenSource": "Proudly open source"
     },
     "menu": {
         "home": "Home",
@@ -158,6 +160,13 @@
         }
     },
     "partners": "Our Partners",
+    "award": {
+        "title": "Best Innovation Project",
+        "subtitle": "Rotaract District 9010",
+        "description": "We are proud to announce that tabarro3 has been recognized as the Best Innovation Project winner by Rotaract District 9010. This achievement reflects our commitment to revolutionizing blood donation awareness and connecting communities to save lives.",
+        "year": "2024/2025",
+        "badge": "Innovation Excellence"
+    },
     "hero_title": "Give Blood, Save Lives",
     "hero_description": "Blood donation is a crucial act that saves lives daily. A single donation can help up to three people and is used in various medical situations, from surgeries to cancer treatments. By donating regularly, you play a vital role in maintaining a healthy blood supply for your community.",
     "donate_button": "Donate Now",
