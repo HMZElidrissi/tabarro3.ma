@@ -32,6 +32,7 @@
     },
     "menu": {
         "home": "Home",
+        "about": "About Us",
         "bloodRequests": "Blood Requests",
         "newCampaigns": "New Campaigns",
         "blog": "Blog",
@@ -319,5 +320,55 @@
     "Date_Range": "Date Range",
     "Pick_a_date_range": "Pick a date range",
     "Reset_Filters": "Reset Filters",
-    "Clear_Filters": "Clear Filters"
+    "Clear_Filters": "Clear Filters",
+    "about": {
+        "title": "About tabarro3.ma",
+        "welcome": "Welcome to tabarro3.ma, your dedicated source for awareness and promotion of blood donation in Morocco.",
+        "mission": {
+            "title": "Our Mission",
+            "description": "Our mission is to provide accurate and detailed information about blood donation in Morocco. We believe that knowledge is essential to encourage more people to participate in this noble cause that saves lives."
+        },
+        "whatWeDo": {
+            "title": "What We Do",
+            "simplified": {
+                "title": "Simplified Information:",
+                "description": "We make information about blood donation easy to understand, covering everything from the donation process to eligibility criteria."
+            },
+            "locations": {
+                "title": "When and Where to Donate:",
+                "description": "We provide you with practical details about blood donation locations in Morocco and opening hours."
+            },
+            "news": {
+                "title": "Latest News:",
+                "description": "Stay informed about the latest news, events, and initiatives related to blood donation across the country."
+            }
+        },
+        "why": {
+            "title": "Why We Do This",
+            "description": "Every drop of blood can save a life. By sharing this information, we hope to encourage each of you to become a regular donor and contribute to saving lives."
+        },
+        "howToHelp": {
+            "title": "How You Can Help",
+            "description": "Sign up on tabarro3.ma. Share our site with your loved ones, follow us on social media, and together, let's make every donor an ambassador for blood donation in Morocco."
+        },
+        "contact": {
+            "title": "Contact",
+            "description": "For any questions or collaboration, please don't hesitate to contact us at:",
+            "email": "dondesangmaroc@gmail.com"
+        },
+        "thanks": "Thank you for being part of this vital mission.",
+        "team": {
+            "title": "Brought to you by",
+            "members": [
+                {
+                    "name": "Hamza EL IDRISSI",
+                    "url": "https://hmzelidrissi.ma/"
+                },
+                {
+                    "name": "Zineb Ramiche",
+                    "url": "https://zinebramiche.com/"
+                }
+            ]
+        }
+    }
 }

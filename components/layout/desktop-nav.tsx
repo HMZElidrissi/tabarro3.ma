@@ -13,13 +13,7 @@ import {
 import { languages } from '@/config/home';
 import { cn } from '@/lib/utils';
 import { Role } from '@/types/enums';
-import {
-    ChevronDown,
-    Globe,
-    Loader2,
-    LogOut,
-    User
-} from 'lucide-react';
+import { ChevronDown, Globe, Loader2, LogOut, User } from 'lucide-react';
 import Image from 'next/image';
 import { ProgressLink as Link } from '@/components/custom/progress-link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -75,6 +69,10 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
             href: '/blog',
         },
         {
+            name: dict.menu.about,
+            href: '/about',
+        },
+        {
             name: dict.menu.donationCenters,
             href: '/#map',
         },
@@ -117,6 +115,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="start" className="w-48">
+                        {/* / */}
                         {desktopMenu.slice(4).map(item => (
                             <DropdownMenuItem
                                 key={item.name}
