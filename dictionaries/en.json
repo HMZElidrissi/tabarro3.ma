@@ -370,5 +370,114 @@
                 }
             ]
         }
+    },
+    "eligibility": {
+        "title": "Blood Donation Conditions in Morocco",
+        "description": "Learn about the requirements and restrictions for blood donation to ensure the safety of both donors and recipients.",
+        "basicRequirementsTitle": "Basic Requirements",
+        "basicRequirementsSubtitle": "Essential criteria that all potential donors must meet",
+        "basicRequirements": {
+            "age": {
+                "title": "Age Requirement",
+                "description": "Between 18 and 60 years old"
+            },
+            "weight": {
+                "title": "Weight Requirement",
+                "description": "Minimum weight of 50 kg"
+            }
+        },
+        "temporaryDeferralsTitle": "Temporary Deferrals",
+        "temporaryDeferralsSubtitle": "Please postpone your donation for the specified period if you fall into any of these categories",
+        "temporaryDeferrals": {
+            "vaccination": {
+                "period": "3 weeks",
+                "condition": "Vaccination"
+            },
+            "covid": {
+                "period": "1 week",
+                "condition": "COVID-19 immunization"
+            },
+            "animalSerum": {
+                "period": "2 weeks",
+                "condition": "Injection of serum of animal origin (e.g., tetanus serum, scorpion venom serum)"
+            },
+            "humanSerum": {
+                "period": "3 months",
+                "condition": "Serological treatment of human origin: Anti-D, anti-tetanus globulin"
+            },
+            "dental": {
+                "period": "4 months",
+                "condition": "Tooth extraction or dental treatment"
+            },
+            "cupping": {
+                "period": "4 months",
+                "condition": "Cupping or shaved with a razor or blade at a barber"
+            },
+            "surgery": {
+                "period": "4 months",
+                "condition": "Surgery without injection"
+            },
+            "usedSyringe": {
+                "period": "4 months",
+                "condition": "Injection with a used syringe"
+            },
+            "endoscopy": {
+                "period": "4 months",
+                "condition": "Examination of the digestive tract (fibroscopy) or colon (colonoscopy)"
+            },
+            "diarrhea": {
+                "period": "1 month",
+                "condition": "Diarrhea"
+            },
+            "inflammation": {
+                "period": "1 week after treatment",
+                "condition": "Treatment for acute inflammation"
+            },
+            "piercing": {
+                "period": "4 months",
+                "condition": "Ear piercing (for earrings)"
+            },
+            "tattoo": {
+                "period": "4 months",
+                "condition": "Tattoo"
+            },
+            "tuberculosis": {
+                "period": "2 years after recovery",
+                "condition": "Tuberculosis"
+            }
+        },
+        "permanentDeferralsTitle": "Permanent Deferrals",
+        "permanentDeferralsSubtitle": "Please do not donate blood if you belong to any of these categories",
+        "permanentDeferrals": {
+            "bloodTransfusion": "Previous blood transfusion",
+            "leprosy": "Leprosy",
+            "aids": "AIDS",
+            "hepatitis": "Hepatitis"
+        },
+        "medicalDecisionTitle": "Medical Decision Required",
+        "medicalDecisionSubtitle": "Blood donation depends on the patient's health condition (doctor's decision)",
+        "medicalDecision": {
+            "hypertension": "High blood pressure",
+            "diabetes": "Diabetes",
+            "asthma": "Asthma",
+            "heartDisease": "Heart, kidney or lung disease",
+            "neurologicalDisorders": "Neurological disease or neurological disorders (such as epileptic seizures)",
+            "psychiatricDisorders": "Psychiatric disorders",
+            "cancer": "Cancer, even if treated",
+            "malaria": "Living in areas known for malaria",
+            "england": "Lived in England for at least one year between 1980 and 1996",
+            "ivDrugs": "Intravenous drug use",
+            "unprotectedSex": "Multiple sexual partners without using a condom",
+            "maleRelations": "Sexual relations with other men",
+            "cornealTransplant": "Corneal transplant",
+            "duraMaterTransplant": "Dura mater transplant",
+            "growthHormone": "Growth hormone treatment before 1986"
+        },
+        "callToAction": {
+            "title": "Ready to Donate?",
+            "description": "If you meet all the requirements, find a donation campaign near you and help save lives.",
+            "findCampaigns": "Find Campaigns",
+            "urgentRequests": "Urgent Requests"
+        }
     }
 }

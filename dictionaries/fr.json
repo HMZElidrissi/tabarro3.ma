@@ -352,5 +352,114 @@
                 }
             ]
         }
+    },
+    "eligibility": {
+        "title": "Conditions pour donner du sang au Maroc",
+        "description": "Découvrez les exigences et restrictions pour le don de sang afin d'assurer la sécurité des donneurs et des receveurs.",
+        "basicRequirementsTitle": "Conditions de base",
+        "basicRequirementsSubtitle": "Critères essentiels que tous les donneurs potentiels doivent respecter",
+        "basicRequirements": {
+            "age": {
+                "title": "Condition d'âge",
+                "description": "Âge compris entre 18 et 60 ans"
+            },
+            "weight": {
+                "title": "Condition de poids",
+                "description": "Poids minimum de 50 kg"
+            }
+        },
+        "temporaryDeferralsTitle": "Reports temporaires",
+        "temporaryDeferralsSubtitle": "Veuillez reporter votre don pour la période indiquée si vous appartenez à l'une de ces catégories",
+        "temporaryDeferrals": {
+            "vaccination": {
+                "period": "3 semaines",
+                "condition": "Vaccination"
+            },
+            "covid": {
+                "period": "1 semaine",
+                "condition": "Immunisation contre COVID-19"
+            },
+            "animalSerum": {
+                "period": "2 semaines",
+                "condition": "Injection d'un sérum d'origine animale (par exemple sérum antitétanique, sérum de venin de scorpion)"
+            },
+            "humanSerum": {
+                "period": "3 mois",
+                "condition": "Traitement sérologique d'origine humaine : Anti-D, anti-globuline antitétanique"
+            },
+            "dental": {
+                "period": "4 mois",
+                "condition": "Extraction ou traitement dentaire"
+            },
+            "cupping": {
+                "period": "4 mois",
+                "condition": "Cupping ou rasage avec un rasoir ou une lame chez un barbier"
+            },
+            "surgery": {
+                "period": "4 mois",
+                "condition": "Intervention chirurgicale sans injection"
+            },
+            "usedSyringe": {
+                "period": "4 mois",
+                "condition": "Injection avec une seringue usagée"
+            },
+            "endoscopy": {
+                "period": "4 mois",
+                "condition": "Examen du tube digestif (fibroscopie) ou du côlon (coloscopie)"
+            },
+            "diarrhea": {
+                "period": "1 mois",
+                "condition": "Diarrhée"
+            },
+            "inflammation": {
+                "period": "1 semaine après traitement",
+                "condition": "Traitement pour une inflammation aiguë"
+            },
+            "piercing": {
+                "period": "4 mois",
+                "condition": "Perçage d'oreilles (pour les boucles d'oreilles)"
+            },
+            "tattoo": {
+                "period": "4 mois",
+                "condition": "Tatouage"
+            },
+            "tuberculosis": {
+                "period": "2 ans après guérison",
+                "condition": "Tuberculose"
+            }
+        },
+        "permanentDeferralsTitle": "Reports permanents",
+        "permanentDeferralsSubtitle": "Veuillez ne pas donner votre sang si vous appartenez à l'une de ces catégories",
+        "permanentDeferrals": {
+            "bloodTransfusion": "Transfusion sanguine antérieure",
+            "leprosy": "Lèpre",
+            "aids": "SIDA",
+            "hepatitis": "Hépatite"
+        },
+        "medicalDecisionTitle": "Décision médicale requise",
+        "medicalDecisionSubtitle": "Le don de sang dépend de l'état de santé du patient (décision du médecin)",
+        "medicalDecision": {
+            "hypertension": "Hypertension artérielle",
+            "diabetes": "Diabète",
+            "asthma": "Asthme",
+            "heartDisease": "Maladie cardiaque, rénale ou pulmonaire",
+            "neurologicalDisorders": "Maladie neurologique ou troubles neurologiques (tels que des crises d'épilepsie)",
+            "psychiatricDisorders": "Troubles psychiatriques",
+            "cancer": "Cancer, même traité",
+            "malaria": "Vivre dans des zones connues pour le paludisme",
+            "england": "Avoir vécu en Angleterre pendant au moins un an entre 1980 et 1996",
+            "ivDrugs": "Usage de drogues intraveineuses",
+            "unprotectedSex": "Partenaires sexuels multiples sans utiliser de préservatif",
+            "maleRelations": "Relations sexuelles avec d'autres hommes",
+            "cornealTransplant": "Greffe de cornée",
+            "duraMaterTransplant": "Greffe de dure-mère",
+            "growthHormone": "Traitement à l'hormone de croissance avant 1986"
+        },
+        "callToAction": {
+            "title": "Prêt à donner ?",
+            "description": "Si vous remplissez toutes les conditions, trouvez une campagne de don près de chez vous et aidez à sauver des vies.",
+            "findCampaigns": "Trouver des campagnes",
+            "urgentRequests": "Demandes urgentes"
+        }
     }
 }
