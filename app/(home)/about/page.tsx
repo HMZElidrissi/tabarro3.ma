@@ -72,10 +72,18 @@ export default async function AboutPage() {
                 <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
                 <div className="container mx-auto px-4 py-12 lg:py-16 relative">
                     <div className="text-center">
-                        <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
+                        <h1
+                            className={cn(
+                                'text-3xl md:text-5xl font-bold text-white mb-4',
+                                isRTL && 'font-medium',
+                            )}>
                             {dict.about?.title}
                         </h1>
-                        <p className="text-lg md:text-xl text-brand-100 mb-6 max-w-4xl mx-auto">
+                        <p
+                            className={cn(
+                                'text-lg md:text-xl text-brand-100 mb-6 max-w-4xl mx-auto',
+                                isRTL && 'leading-relaxed',
+                            )}>
                             {dict.about?.welcome}
                         </p>
                         <div className="flex items-center justify-center space-x-2 rtl:space-x-reverse">
@@ -94,16 +102,33 @@ export default async function AboutPage() {
                         <div
                             className={cn(
                                 'order-2',
-                                isRTL ? 'lg:order-1' : 'lg:order-1',
+                                isRTL ? 'lg:order-2' : 'lg:order-1',
                             )}>
                             <div className="relative">
                                 <Card className="border-0 shadow-lg">
-                                    <CardContent className="p-6">
-                                        <Target className="w-10 h-10 text-brand-600 mb-4" />
-                                        <h2 className="text-2xl font-bold mb-3 text-gray-900">
+                                    <CardContent
+                                        className={cn(
+                                            'p-6',
+                                            isRTL && 'text-right',
+                                        )}>
+                                        <Target
+                                            className={cn(
+                                                'w-10 h-10 text-brand-600 mb-4',
+                                                isRTL && 'ml-auto',
+                                            )}
+                                        />
+                                        <h2
+                                            className={cn(
+                                                'text-2xl font-bold mb-3 text-gray-900',
+                                                isRTL && 'font-medium',
+                                            )}>
                                             {dict.about?.mission?.title}
                                         </h2>
-                                        <p className="text-gray-600 leading-relaxed">
+                                        <p
+                                            className={cn(
+                                                'text-gray-600 leading-relaxed',
+                                                isRTL && 'text-right',
+                                            )}>
                                             {dict.about?.mission?.description}
                                         </p>
                                     </CardContent>
@@ -113,7 +138,7 @@ export default async function AboutPage() {
                         <div
                             className={cn(
                                 'order-1',
-                                isRTL ? 'lg:order-2' : 'lg:order-2',
+                                isRTL ? 'lg:order-1' : 'lg:order-2',
                             )}>
                             <div className="relative h-64 lg:h-80 rounded-xl overflow-hidden shadow-xl">
                                 <Image
@@ -121,7 +146,7 @@ export default async function AboutPage() {
                                     alt="Rotaract Les Mérinides"
                                     fill
                                     className="object-cover"
-                                    sizes="(max-width: 500px)"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
                             </div>
                         </div>
@@ -133,7 +158,11 @@ export default async function AboutPage() {
             <section className="py-12 lg:py-16 bg-gray-50">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-10">
-                        <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">
+                        <h2
+                            className={cn(
+                                'text-2xl md:text-3xl font-bold mb-3 text-gray-900',
+                                isRTL && 'font-medium',
+                            )}>
                             {dict.about?.whatWeDo?.title}
                         </h2>
                         <div className="w-16 h-1 bg-brand-500 mx-auto rounded-full"></div>
@@ -166,7 +195,11 @@ export default async function AboutPage() {
                                 <Card
                                     key={item.key}
                                     className="border-0 shadow-md hover:shadow-lg transition-shadow duration-300">
-                                    <CardContent className="p-6 text-center">
+                                    <CardContent
+                                        className={cn(
+                                            'p-6 text-center',
+                                            isRTL && 'text-right',
+                                        )}>
                                         <div
                                             className={cn(
                                                 'w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3',
@@ -174,10 +207,18 @@ export default async function AboutPage() {
                                             )}>
                                             <Icon className="w-6 h-6" />
                                         </div>
-                                        <h3 className="text-lg font-bold mb-2 text-gray-900">
+                                        <h3
+                                            className={cn(
+                                                'text-lg font-bold mb-2 text-gray-900',
+                                                isRTL && 'font-medium',
+                                            )}>
                                             {item.data?.title}
                                         </h3>
-                                        <p className="text-gray-600 text-sm leading-relaxed">
+                                        <p
+                                            className={cn(
+                                                'text-gray-600 text-sm leading-relaxed',
+                                                isRTL && 'text-right',
+                                            )}>
                                             {item.data?.description}
                                         </p>
                                     </CardContent>
@@ -193,23 +234,57 @@ export default async function AboutPage() {
                 <div className="container mx-auto px-4">
                     <div className="grid lg:grid-cols-2 gap-8">
                         {/* Why We Do This */}
-                        <div className="text-center lg:text-left">
-                            <Heart className="w-12 h-12 text-red-500 mx-auto lg:mx-0 mb-4" />
-                            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
+                        <div
+                            className={cn(
+                                'text-center',
+                                isRTL ? 'lg:text-right' : 'lg:text-left',
+                            )}>
+                            <Heart
+                                className={cn(
+                                    'w-12 h-12 text-red-500 mx-auto mb-4',
+                                    isRTL ? 'lg:mr-0' : 'lg:mx-0',
+                                )}
+                            />
+                            <h2
+                                className={cn(
+                                    'text-2xl md:text-3xl font-bold mb-4 text-gray-900',
+                                    isRTL && 'font-medium',
+                                )}>
                                 {dict.about?.why?.title}
                             </h2>
-                            <p className="text-gray-600 leading-relaxed">
+                            <p
+                                className={cn(
+                                    'text-gray-600 leading-relaxed',
+                                    isRTL && 'text-right lg:text-right',
+                                )}>
                                 {dict.about?.why?.description}
                             </p>
                         </div>
 
                         {/* How You Can Help */}
-                        <div className="text-center lg:text-left">
-                            <Users className="w-12 h-12 text-brand-600 mx-auto lg:mx-0 mb-4" />
-                            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
+                        <div
+                            className={cn(
+                                'text-center',
+                                isRTL ? 'lg:text-right' : 'lg:text-left',
+                            )}>
+                            <Users
+                                className={cn(
+                                    'w-12 h-12 text-brand-600 mx-auto mb-4',
+                                    isRTL ? 'lg:mr-0' : 'lg:mx-0',
+                                )}
+                            />
+                            <h2
+                                className={cn(
+                                    'text-2xl md:text-3xl font-bold mb-4 text-gray-900',
+                                    isRTL && 'font-medium',
+                                )}>
                                 {dict.about?.howToHelp?.title}
                             </h2>
-                            <p className="text-gray-600 leading-relaxed mb-6">
+                            <p
+                                className={cn(
+                                    'text-gray-600 leading-relaxed mb-6',
+                                    isRTL && 'text-right lg:text-right',
+                                )}>
                                 {dict.about?.howToHelp?.description}
                             </p>
                             <Button
@@ -229,11 +304,19 @@ export default async function AboutPage() {
                 <div className="container mx-auto px-4">
                     <div className="grid lg:grid-cols-2 gap-8 items-center">
                         {/* Team */}
-                        <div className="text-center lg:text-left">
-                            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
+                        <div
+                            className={cn(
+                                'text-center',
+                                isRTL ? 'lg:text-right' : 'lg:text-left',
+                            )}>
+                            <h2
+                                className={cn(
+                                    'text-2xl md:text-3xl font-bold mb-6 text-white',
+                                    isRTL && 'font-medium',
+                                )}>
                                 {dict.about?.team?.title}
                             </h2>
-                            <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+                            <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
                                 {dict.about?.team?.members?.map(
                                     (member: any, index: number) => (
                                         <a
@@ -255,12 +338,29 @@ export default async function AboutPage() {
                         </div>
 
                         {/* Contact */}
-                        <div className="text-center lg:text-left">
-                            <Mail className="w-12 h-12 text-white mx-auto lg:mx-0 mb-4" />
-                            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                        <div
+                            className={cn(
+                                'text-center',
+                                isRTL ? 'lg:text-right' : 'lg:text-left',
+                            )}>
+                            <Mail
+                                className={cn(
+                                    'w-12 h-12 text-white mx-auto mb-4',
+                                    isRTL ? 'lg:mr-0' : 'lg:mx-0',
+                                )}
+                            />
+                            <h2
+                                className={cn(
+                                    'text-2xl md:text-3xl font-bold text-white mb-4',
+                                    isRTL && 'font-medium',
+                                )}>
                                 {dict.about?.contact?.title}
                             </h2>
-                            <p className="text-brand-100 mb-4">
+                            <p
+                                className={cn(
+                                    'text-brand-100 mb-4',
+                                    isRTL && 'text-right lg:text-right',
+                                )}>
                                 {dict.about?.contact?.description}
                             </p>
                             <a
@@ -269,7 +369,11 @@ export default async function AboutPage() {
                                 {dict.about?.contact?.email}
                             </a>
                             <div className="border-t border-brand-500 pt-6">
-                                <p className="text-brand-100">
+                                <p
+                                    className={cn(
+                                        'text-brand-100',
+                                        isRTL && 'text-right lg:text-right',
+                                    )}>
                                     {dict.about?.thanks}
                                 </p>
                             </div>
