@@ -64,6 +64,13 @@ export default function Footer({ dict, isRTL = false }: FooterProps) {
                         <ul className="w-full space-y-2 sm:space-y-3 text-center">
                             <li>
                                 <Link
+                                    href="/about"
+                                    className="text-white/80 hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
+                                    {dict.menu?.about}
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
                                     href="/campaigns"
                                     className="text-white/80 hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
                                     {dict.menu?.newCampaigns}
@@ -85,7 +92,7 @@ export default function Footer({ dict, isRTL = false }: FooterProps) {
                             </li>
                             <li>
                                 <Link
-                                    href="/donation-centers"
+                                    href="/#map"
                                     className="text-white/80 hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
                                     {dict.menu?.donationCenters}
                                 </Link>

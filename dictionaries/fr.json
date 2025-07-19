@@ -32,6 +32,7 @@
     },
     "menu": {
         "home": "Accueil",
+        "about": "À Propos",
         "bloodRequests": "Demandes de sang",
         "newCampaigns": "Nouvelles campagnes",
         "blog": "Blog",
@@ -301,5 +302,55 @@
     "Date_Range": "Plage de dates",
     "Pick_a_date_range": "Choisir une plage de dates",
     "Reset_Filters": "Réinitialiser les filtres",
-    "Clear_Filters": "Effacer les filtres"
+    "Clear_Filters": "Effacer les filtres",
+    "about": {
+        "title": "À propos de tabarro3.ma",
+        "welcome": "Bienvenue sur tabarro3.ma, votre source dédiée à la sensibilisation et à la promotion du don de sang au Maroc.",
+        "mission": {
+            "title": "Notre mission",
+            "description": "Notre mission est de fournir des informations précises et détaillées sur le don de sang au Maroc. Nous croyons que la connaissance est essentielle pour encourager davantage de personnes à participer à cette noble cause qui sauve des vies."
+        },
+        "whatWeDo": {
+            "title": "Ce que nous faisons",
+            "simplified": {
+                "title": "Informations simplifiées :",
+                "description": "Nous rendons les informations sur le don de sang faciles à comprendre, en couvrant tout, du processus de don aux critères d'éligibilité."
+            },
+            "locations": {
+                "title": "Quand et où faire un don :",
+                "description": "Nous vous fournissons des détails pratiques sur les lieux de don de sang au Maroc et les horaires d'ouverture."
+            },
+            "news": {
+                "title": "Dernières actualités :",
+                "description": "Restez informé des dernières nouvelles, événements et initiatives liés au don de sang à travers le pays."
+            }
+        },
+        "why": {
+            "title": "Pourquoi nous faisons cela",
+            "description": "Chaque goutte de sang peut sauver une vie. En partageant ces informations, nous espérons encourager chacun de vous à devenir un donneur régulier et à contribuer à sauver des vies."
+        },
+        "howToHelp": {
+            "title": "Comment vous pouvez aider",
+            "description": "Inscrivez-vous sur tabarro3.ma. Partagez notre site avec vos proches, suivez-nous sur les réseaux sociaux, et ensemble, faisons de chaque donneur un ambassadeur du don de sang au Maroc."
+        },
+        "contact": {
+            "title": "Contact",
+            "description": "Pour toute question ou collaboration, n'hésitez pas à nous contacter à l'adresse suivante :",
+            "email": "dondesangmaroc@gmail.com"
+        },
+        "thanks": "Merci de faire partie de cette mission vitale.",
+        "team": {
+            "title": "Présenté par",
+            "members": [
+                {
+                    "name": "Hamza EL IDRISSI",
+                    "url": "https://hmzelidrissi.ma/"
+                },
+                {
+                    "name": "Zineb Ramiche",
+                    "url": "https://zinebramiche.com/"
+                }
+            ]
+        }
+    }
 }

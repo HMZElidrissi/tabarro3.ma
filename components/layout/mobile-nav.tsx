@@ -59,6 +59,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
 
     const mobileMenu = [
         { name: dict.menu.home, href: '/' },
+        { name: dict.menu.about, href: '/about' },
         { name: dict.menu.bloodRequests, href: '/requests' },
         { name: dict.menu.newCampaigns, href: '/campaigns' },
         { name: dict.menu.blog, href: '/blog' },
@@ -90,8 +91,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                 'w-full justify-start',
                                 pathname === item.href && 'text-brand-600',
                             )}
-                            onClick={() => setIsOpen(false)}
-                        >
+                            onClick={() => setIsOpen(false)}>
                             <Link href={item.href}>{item.name}</Link>
                         </Button>
                     ))}
@@ -113,8 +113,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                                     language.code,
                                                 );
                                                 setIsOpen(false);
-                                            }}
-                                        >
+                                            }}>
                                             {language.name}
                                             {language.code ===
                                                 currentLocale && (
@@ -133,15 +132,13 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                 <Button
                                     variant="default"
                                     className="w-full bg-brand-600 text-white hover:bg-brand-700"
-                                    onClick={() => setIsOpen(false)}
-                                >
+                                    onClick={() => setIsOpen(false)}>
                                     <Link
                                         href={
                                             user.role === Role.PARTICIPANT
                                                 ? '/profile'
                                                 : '/dashboard'
-                                        }
-                                    >
+                                        }>
                                         {user.name || dict.common.profile}
                                     </Link>
                                 </Button>
@@ -149,8 +146,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                     variant="outline"
                                     className="mt-2 w-full"
                                     onClick={handleLogout}
-                                    disabled={isLoading}
-                                >
+                                    disabled={isLoading}>
                                     {isLoading ? (
                                         <>
                                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -174,8 +170,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                     onClick={() => {
                                         setIsOpen(false);
                                         router.push('/sign-in');
-                                    }}
-                                >
+                                    }}>
                                     {dict.common.signIn}
                                 </Button>
                                 <Button
@@ -184,8 +179,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                     onClick={() => {
                                         setIsOpen(false);
                                         router.push('/sign-up');
-                                    }}
-                                >
+                                    }}>
                                     {dict.common.signUp}
                                 </Button>
                             </>
