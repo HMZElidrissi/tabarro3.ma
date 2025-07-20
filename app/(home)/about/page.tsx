@@ -194,7 +194,7 @@ export default async function AboutPage() {
                             return (
                                 <Card
                                     key={item.key}
-                                    className="border-0 shadow-md hover:shadow-lg transition-shadow duration-300">
+                                    className="border-0 shadow-md hover:shadow-lg transition-shadow duration-300 relative">
                                     <CardContent
                                         className={cn(
                                             'p-6 text-center',
@@ -202,14 +202,15 @@ export default async function AboutPage() {
                                         )}>
                                         <div
                                             className={cn(
-                                                'w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3',
+                                                'absolute top-4 w-10 h-10 rounded-full flex items-center justify-center',
+                                                isRTL ? 'left-4' : 'right-4',
                                                 item.color,
                                             )}>
-                                            <Icon className="w-6 h-6" />
+                                            <Icon className="w-5 h-5" />
                                         </div>
                                         <h3
                                             className={cn(
-                                                'text-lg font-bold mb-2 text-gray-900',
+                                                'text-lg font-bold mb-2 text-gray-900 mt-2',
                                                 isRTL && 'font-medium',
                                             )}>
                                             {item.data?.title}

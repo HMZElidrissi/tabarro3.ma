@@ -60,6 +60,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
     const mobileMenu = [
         { name: dict.menu.home, href: '/' },
         { name: dict.menu.about, href: '/about' },
+        { name: dict.menu.eligibility, href: '/eligibility' },
         { name: dict.menu.bloodRequests, href: '/requests' },
         { name: dict.menu.newCampaigns, href: '/campaigns' },
         { name: dict.menu.blog, href: '/blog' },

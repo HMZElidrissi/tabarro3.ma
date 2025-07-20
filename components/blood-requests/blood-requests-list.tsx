@@ -41,10 +41,10 @@ export default function BloodRequestsList({
     }
 
     return (
-        <div className="container mx-auto py-8">
+        <div className="container mx-auto py-16">
             <div className="space-y-6">
-                <div className="text-center mb-16 relative">
-                    <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 opacity-10">
+                <div className="text-center mb-10 relative">
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 opacity-10">
                         <svg
                             width="120"
                             height="120"
@@ -55,14 +55,14 @@ export default function BloodRequestsList({
                         </svg>
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400">
+                    <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400">
                         {dict.Blood_Requests}
                     </h1>
-                    <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                    <p className="text-gray-600 max-w-2xl mx-auto text-base leading-relaxed">
                         {dict.Blood_Requests_Description}
                     </p>
 
-                    <div className="mt-8 w-24 h-1 bg-brand-500 mx-auto rounded-full"></div>
+                    <div className="mt-4 w-16 h-1 bg-brand-500 mx-auto rounded-full"></div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

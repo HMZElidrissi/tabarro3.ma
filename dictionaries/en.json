@@ -39,7 +39,8 @@
         "donationCenters": "Donation Centers",
         "whyDonateBlood": "Why Donate Blood?",
         "whoCanDonateBlood": "Who Can Donate Blood?",
-        "more": "More ..."
+        "more": "More ...",
+        "eligibility": "Blood Donation Conditions in Morocco"
     },
     "blog": {
         "title": "Blog",
@@ -310,7 +311,6 @@
         "of": "of",
         "showing": "Showing",
         "to": "to",
-        "of": "of",
         "results": "results"
     },
     "Region": "Region",

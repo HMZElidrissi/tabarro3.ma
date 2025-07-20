@@ -74,8 +74,8 @@ export default async function BlogPostPage({
         <>
             <ReadingProgressBar />
 
-            {/* Hero Banner */}
-            <div className="relative h-[50vh] min-h-[400px]">
+            {/* Compact Hero Banner */}
+            <div className="relative h-[35vh] min-h-[280px]">
                 <Image
                     src={post.coverImage}
                     alt={post.title}
@@ -83,53 +83,50 @@ export default async function BlogPostPage({
                     className="object-cover"
                     priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70"></div>
 
                 <div className="container mx-auto px-4 h-full flex items-end">
-                    <div className="relative pb-12 text-white">
-                        <div className="flex flex-wrap gap-2 mb-4">
-                            {post.tags.map(tag => (
+                    <div className="relative pb-8 text-white max-w-4xl">
+                        <div className="flex flex-wrap gap-1.5 mb-3">
+                            {post.tags.slice(0, 3).map(tag => (
                                 <Badge
                                     key={tag}
                                     variant="outline"
-                                    className="text-white border-white/30 bg-white/10 backdrop-blur-sm"
-                                >
-                                    <TagIcon className="w-3 h-3 mr-1" />
+                                    className="text-xs text-white border-white/30 bg-white/10 backdrop-blur-sm px-2 py-1">
+                                    <TagIcon className="w-2.5 h-2.5 mr-1" />
                                     {tag}
                                 </Badge>
                             ))}
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 line-clamp-2">
                             {post.title}
                         </h1>
-                        <div className="flex items-center">
+                        <div className="flex items-center text-sm opacity-90">
                             <Calendar
                                 className={cn(
-                                    'h-5 w-5 pb-1',
-                                    isRTL ? 'ml-2' : 'mr-2',
+                                    'h-4 w-4',
+                                    isRTL ? 'ml-1.5' : 'mr-1.5',
                                 )}
                             />
-                            <span className="text-sm">
-                                {formatDate(post.publishDate, locale)}
-                            </span>
-                            <span className="mx-2 text-lg font-semibold"></span>
+                            <span>{formatDate(post.publishDate, locale)}</span>
+                            <span className="mx-3">•</span>
                             <User
                                 className={cn(
-                                    'h-5 w-5 pb-1',
-                                    isRTL ? 'ml-2' : 'mr-2',
+                                    'h-4 w-4',
+                                    isRTL ? 'ml-1.5' : 'mr-1.5',
                                 )}
                             />
-                            <span className="text-sm">{post.author}</span>
+                            <span>{post.author}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="container mx-auto px-4 py-6">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                     {/* Main content */}
-                    <article className="lg:col-span-2 bg-white rounded-xl shadow-md p-6 md:p-10 mb-4">
-                        <div className="prose prose-lg max-w-none">
+                    <article className="lg:col-span-3 bg-white rounded-lg shadow-sm border p-6">
+                        <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-600">
                             {typeof post.content === 'string' && (
                                 <MDXRemote
                                     source={post.content}
@@ -144,14 +141,13 @@ export default async function BlogPostPage({
                             )}
                         </div>
 
-                        {/* Article footer with social sharing */}
-                        <div className="mt-12 pt-6 border-t border-gray-100">
-                            <div className="flex flex-wrap gap-2 mb-6">
+                        {/* Compact Article footer */}
+                        <div className="mt-8 pt-4 border-t border-gray-100">
+                            <div className="flex flex-wrap gap-1.5 mb-4">
                                 {post.tags.map(tag => (
                                     <span
                                         key={tag}
-                                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
-                                    >
+                                        className="px-2.5 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium hover:bg-gray-200 transition-colors">
                                         #{tag}
                                     </span>
                                 ))}
@@ -166,79 +162,76 @@ export default async function BlogPostPage({
                         </div>
                     </article>
 
-                    {/* Sidebar */}
+                    {/* Compact Sidebar */}
                     <aside className="space-y-4">
                         {/* Back to blog */}
-                        <div className="pt-6">
-                            <Link
-                                href="/blog"
-                                className="inline-flex items-center text-brand-600 hover:text-brand-700 hover:underline font-medium"
-                            >
-                                <ChevronLeft
-                                    className={cn(
-                                        'h-5 w-5',
-                                        isRTL ? 'ml-2 pb-1 order-last' : 'mr-2',
-                                    )}
-                                />
-                                <span>
-                                    {dict.blog?.backToBlog || 'Back to Blog'}
-                                </span>
-                            </Link>
-                        </div>
+                        <Link
+                            href="/blog"
+                            className="inline-flex items-center text-brand-600 hover:text-brand-700 font-medium text-sm group">
+                            <ChevronLeft
+                                className={cn(
+                                    'h-4 w-4 group-hover:-translate-x-0.5 transition-transform',
+                                    isRTL
+                                        ? 'ml-1 order-last'
+                                        : 'mr-1',
+                                )}
+                            />
+                            <span>
+                                {dict.blog?.backToBlog || 'Back to Blog'}
+                            </span>
+                        </Link>
 
-                        {/* Author box */}
-                        <div className="bg-white rounded-xl shadow-md p-6">
-                            <h3 className="text-lg font-bold mb-4 text-gray-900">
+                        {/* Compact Author box */}
+                        <div className="bg-white rounded-lg shadow-sm border p-4">
+                            <h3 className="text-sm font-semibold mb-3 text-gray-900">
                                 {dict.blog?.aboutAuthor || 'About the Author'}
                             </h3>
                             <div className="flex items-center">
                                 <div
                                     className={cn(
-                                        'w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center',
-                                        isRTL ? 'ml-2' : 'mr-2',
-                                    )}
-                                >
-                                    <User className="w-6 h-6 text-brand-600" />
+                                        'w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center',
+                                        isRTL ? 'ml-3' : 'mr-3',
+                                    )}>
+                                    <User className="w-5 h-5 text-brand-600" />
                                 </div>
                                 <div>
-                                    <h4 className="font-medium text-gray-900">
+                                    <h4 className="font-medium text-gray-900 text-sm">
                                         {post.author}
                                     </h4>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Call to action */}
-                        <div className="bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl shadow-md p-6 text-white">
-                            <h3 className="text-lg font-bold mb-3">
+                        {/* Compact Call to action */}
+                        <div className="bg-gradient-to-br from-brand-500 to-brand-600 rounded-lg shadow-sm p-4 text-white">
+                            <h3 className="text-sm font-semibold mb-2">
                                 {dict.blog?.donateNow || 'Donate Blood Today'}
                             </h3>
-                            <p className="mb-4 text-white/80">
+                            <p className="mb-3 text-white/90 text-xs">
                                 {dict.blog?.donateMessage ||
                                     'Your donation can save up to three lives. Find donation centers near you.'}
                             </p>
                             <Link
                                 href="/campaigns"
-                                className="inline-block bg-white text-brand-600 font-medium px-4 py-2 rounded-md hover:bg-white/90 transition-colors"
-                            >
+                                className="inline-block bg-white text-brand-600 font-medium px-3 py-1.5 rounded text-xs hover:bg-white/95 transition-colors">
                                 {dict.blog?.findCampaigns || 'Find Campaigns'}
                             </Link>
                         </div>
 
-                        {/* Related posts */}
+                        {/* Compact Related posts */}
                         {relatedPosts.length > 0 && (
-                            <div className="bg-white rounded-xl shadow-md p-6">
-                                <h3 className="text-lg font-bold mb-4 text-gray-900">
+                            <div className="bg-white rounded-lg shadow-sm border p-4">
+                                <h3 className="text-sm font-semibold mb-3 text-gray-900">
                                     {dict.blog?.relatedPosts || 'Related Posts'}
                                 </h3>
-                                <div className="space-y-4">
-                                    {relatedPosts.map(post => (
+                                <div className="space-y-3">
+                                    {relatedPosts.slice(0, 3).map(post => (
                                         <Link
                                             key={post.id}
                                             href={`/blog/${post.slug}`}
-                                        >
-                                            <div className="flex gap-3 group">
-                                                <div className="relative w-16 h-16 rounded-md overflow-hidden flex-shrink-0">
+                                            className="block group">
+                                            <div className="flex gap-3">
+                                                <div className="relative w-12 h-12 rounded overflow-hidden flex-shrink-0">
                                                     <Image
                                                         src={post.coverImage}
                                                         alt={post.title}
@@ -246,11 +239,11 @@ export default async function BlogPostPage({
                                                         className="object-cover"
                                                     />
                                                 </div>
-                                                <div>
-                                                    <h4 className="font-medium text-gray-900 group-hover:text-brand-600 transition-colors line-clamp-2">
+                                                <div className="min-w-0 flex-1">
+                                                    <h4 className="font-medium text-gray-900 group-hover:text-brand-600 transition-colors text-sm line-clamp-2 leading-tight">
                                                         {post.title}
                                                     </h4>
-                                                    <span className="text-gray-500 text-sm">
+                                                    <span className="text-gray-500 text-xs">
                                                         {formatDate(
                                                             post.publishDate,
                                                             locale,
