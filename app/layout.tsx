@@ -103,7 +103,7 @@ const getJsonLd = async (): Promise<WithContext<Organization>> => {
     return {
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        name: 'Tabarro3',
+        name: 'tabarro3.ma',
         description: dictionary.metadata.jsonLdDescription,
         url: baseUrl,
         logo: `${baseUrl}/logo.png`,

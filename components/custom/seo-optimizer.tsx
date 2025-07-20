@@ -70,10 +70,10 @@ export function SEOOptimizer({
                 },
                 {
                     '@type': 'Question',
-                    name: 'Comment fonctionne Tabarro3 ? / كيف يعمل تطبيق طبرو؟',
+                    name: 'Comment fonctionne tabarro3 ? / كيف يعمل تطبيق تبرع؟',
                     acceptedAnswer: {
                         '@type': 'Answer',
-                        text: "Tabarro3 connecte les donneurs de sang avec ceux qui en ont besoin, organise des campagnes de don et sensibilise à l'importance du don de sang au Maroc. / يربط تطبيق طبرو متبرعي الدم مع المحتاجين، وينظم حملات التبرع ويرفع الوعي بأهمية التبرع بالدم في المغرب.",
+                        text: "tabarro3 connecte les donneurs de sang avec ceux qui en ont besoin, organise des campagnes de don et sensibilise à l'importance du don de sang au Maroc. / يربط تطبيق تبرع متبرعي الدم مع المحتاجين، وينظم حملات التبرع ويرفع الوعي بأهمية التبرع بالدم في المغرب.",
                     },
                 },
             ],
@@ -160,9 +160,9 @@ export function SEOOptimizer({
                         '@type': 'LocalBusiness',
                         name:
                             locale === 'ar'
-                                ? 'طبرو - منصة التبرع بالدم'
-                                : 'Tabarro3 - Plateforme de Don de Sang',
-                        alternateName: locale === 'ar' ? 'Tabarro3' : 'طبرو',
+                                ? 'تبرع - منصة التبرع بالدم'
+                                : 'tabarro3 - Plateforme de Don de Sang',
+                        alternateName: locale === 'ar' ? 'tabarro3' : 'تبرع',
                         description:
                             locale === 'ar'
                                 ? 'منصة مجتمعية تربط متبرعي الدم مع المحتاجين في جميع أنحاء المغرب'
@@ -220,8 +220,8 @@ export function SEOOptimizer({
                     __html: JSON.stringify({
                         '@context': 'https://schema.org',
                         '@type': 'WebSite',
-                        name: locale === 'ar' ? 'طبرو' : 'Tabarro3',
-                        alternateName: locale === 'ar' ? 'Tabarro3' : 'طبرو',
+                        name: locale === 'ar' ? 'تبرع' : 'tabarro3',
+                        alternateName: locale === 'ar' ? 'tabarro3' : 'تبرع',
                         url: 'https://tabarro3.ma',
                         description:
                             locale === 'ar'

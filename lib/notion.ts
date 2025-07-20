@@ -87,7 +87,7 @@ export const getBlogPosts = cache(
                         new Date().toISOString(),
                     author:
                         properties.Author?.rich_text[0]?.plain_text ||
-                        'Tabarro3 Team',
+                        'tabarro3 Team',
                     coverImage:
                         properties.Cover?.files[0]?.file?.url ||
                         properties.Cover?.files[0]?.external?.url ||
@@ -150,7 +150,7 @@ export const getBlogPost = cache(
                     new Date().toISOString(),
                 author:
                     properties.Author?.rich_text[0]?.plain_text ||
-                    'Tabarro3 Team',
+                    'tabarro3 Team',
                 coverImage:
                     properties.Cover?.files[0]?.file?.url ||
                     properties.Cover?.files[0]?.external?.url ||
