@@ -21,9 +21,22 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
     const dict = await getDictionary();
     return {
         title: dict.New_Campaigns,
+        openGraph: {
+            title: dict.New_Campaigns,
+            description: dict.New_Campaigns,
+            images: [
+                {
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dict.New_Campaigns)}&description=${encodeURIComponent(dict.New_Campaigns)}`,
+                    width: 1200,
+                    height: 630,
+                    alt: dict.New_Campaigns,
+                },
+            ],
+        },
     };
 }
 

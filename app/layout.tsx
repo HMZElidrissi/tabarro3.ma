@@ -60,7 +60,7 @@ export async function generateMetadata(): Promise<Metadata> {
             url: baseUrl,
             images: [
                 {
-                    url: `${baseUrl}/og-image.png`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dictionary.metadata.ogTitle)}&description=${encodeURIComponent(dictionary.metadata.ogDescription)}`,
                     width: 1200,
                     height: 630,
                     alt: dictionary.metadata.ogImageAlt,
@@ -75,7 +75,7 @@ export async function generateMetadata(): Promise<Metadata> {
             description: dictionary.metadata.twitterDescription,
             images: [
                 {
-                    url: `${baseUrl}/og-image.png`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dictionary.metadata.twitterTitle)}&description=${encodeURIComponent(dictionary.metadata.twitterDescription)}`,
                     width: 1200,
                     height: 630,
                     alt: dictionary.metadata.twitterImageAlt,

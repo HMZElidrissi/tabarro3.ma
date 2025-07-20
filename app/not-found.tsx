@@ -36,7 +36,7 @@ export default async function NotFound() {
                                     <span className="sr-only">tabarro3</span>
                                     <Image
                                         className="mx-auto"
-                                        src="/logo_white.svg"
+                                        src="/logo-white.svg"
                                         alt="tabarro3"
                                         width={100}
                                         height={100}
