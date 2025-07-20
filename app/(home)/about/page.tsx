@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
                 'Learn about tabarro3, our mission to provide accurate information about blood donation in Morocco.',
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dict.about?.title)}&description=${encodeURIComponent(dict.about?.mission?.description)}`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent('À propos de tabarro3')}&description=${encodeURIComponent('Découvrez notre mission pour fournir des informations précises sur le don de sang au Maroc')}`,
                     width: 1200,
                     height: 630,
                     alt: dict.about?.title || 'About Us | tabarro3',
@@ -50,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
                 'Learn about tabarro3, our mission to provide accurate information about blood donation in Morocco.',
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dict.about?.title)}&description=${encodeURIComponent(dict.about?.mission?.description)}`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent('À propos de tabarro3')}&description=${encodeURIComponent('Découvrez notre mission pour fournir des informations précises sur le don de sang au Maroc')}`,
                     width: 1200,
                     height: 630,
                     alt: dict.about?.title || 'About Us | tabarro3',

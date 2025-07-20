@@ -29,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
             siteName: 'tabarro3',
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dict.metadata.ogTitle)}&description=${encodeURIComponent(dict.metadata.ogDescription)}`,
+                    url: `${baseUrl}/api/og`,
                     width: 1200,
                     height: 630,
                     alt: dict.metadata.ogImageAlt,
@@ -44,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
             description: dict.metadata.twitterDescription,
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dict.metadata.twitterTitle)}&description=${encodeURIComponent(dict.metadata.twitterDescription)}`,
+                    url: `${baseUrl}/api/og`,
                     width: 1200,
                     height: 630,
                     alt: dict.metadata.twitterImageAlt,
