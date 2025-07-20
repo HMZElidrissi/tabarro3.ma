@@ -32,14 +32,15 @@
     },
     "menu": {
         "home": "الرئيسية",
-        "about": "من نحن",
+        "about": "من نحن؟",
         "bloodRequests": "طلبات الدم",
         "newCampaigns": "حملات جديدة",
         "blog": "اكتشفوا آخر مستجداتنا",
         "donationCenters": "مراكز التبرع",
         "whyDonateBlood": "لماذا التبرع بالدم؟",
         "whoCanDonateBlood": "من يمكنه التبرع بالدم؟",
-        "more": "المزيد ..."
+        "more": "المزيد ...",
+        "eligibility": "ما هي شروط التبرع بالدم في المغرب؟"
     },
     "blog": {
         "title": "اكتشفوا آخر مستجداتنا",

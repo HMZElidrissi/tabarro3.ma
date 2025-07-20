@@ -73,6 +73,10 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
             href: '/about',
         },
         {
+            name: dict.menu.eligibility,
+            href: '/eligibility',
+        },
+        {
             name: dict.menu.donationCenters,
             href: '/#map',
         },

@@ -61,40 +61,40 @@ export default function Footer({ dict, isRTL = false }: FooterProps) {
 
                     {/* Column 2: Navigation Links */}
                     <div className="flex flex-col items-center">
-                        <ul className="w-full space-y-2 sm:space-y-3 text-center">
+                        <ul className="w-full space-y-2 sm:space-y-3 text-center text-white/80 font-semibold">
                             <li>
                                 <Link
                                     href="/about"
-                                    className="text-white/80 hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
+                                    className="hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
                                     {dict.menu?.about}
                                 </Link>
                             </li>
                             <li>
                                 <Link
+                                    href="/eligibility"
+                                    className="hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
+                                    {dict.menu?.eligibility}
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
                                     href="/campaigns"
-                                    className="text-white/80 hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
+                                    className="hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
                                     {dict.menu?.newCampaigns}
                                 </Link>
                             </li>
                             <li>
                                 <Link
                                     href="/requests"
-                                    className="text-white/80 hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
+                                    className="hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
                                     {dict.menu?.bloodRequests}
                                 </Link>
                             </li>
                             <li>
                                 <Link
                                     href="/blog"
-                                    className="text-white/80 hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
+                                    className="hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
                                     {dict.menu?.blog}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="/#map"
-                                    className="text-white/80 hover:text-white hover:underline transition-colors text-sm sm:text-base block py-1">
-                                    {dict.menu?.donationCenters}
                                 </Link>
                             </li>
                         </ul>

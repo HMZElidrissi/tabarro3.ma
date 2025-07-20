@@ -32,14 +32,15 @@
     },
     "menu": {
         "home": "Accueil",
-        "about": "À Propos",
+        "about": "À Propos de nous",
         "bloodRequests": "Demandes de sang",
         "newCampaigns": "Nouvelles campagnes",
         "blog": "Blog",
         "donationCenters": "Centres de transfusion",
         "whyDonateBlood": "Pourquoi donner ?",
         "whoCanDonateBlood": "Qui peut donner ?",
-        "more": "Plus ..."
+        "more": "Plus ...",
+        "eligibility": "Qui peut donner au Maroc?"
     },
     "blog": {
         "title": "Blog",

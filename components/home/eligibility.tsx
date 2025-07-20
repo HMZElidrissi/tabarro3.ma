@@ -26,23 +26,16 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
     const basicRequirements = [
         {
             icon: User,
-            title:
-                dict.eligibility?.basicRequirements?.age?.title ||
-                'Age Requirement',
-            description:
-                dict.eligibility?.basicRequirements?.age?.description ||
-                'Between 18 and 60 years old',
+            title: dict.eligibility?.basicRequirements?.age?.title,
+            description: dict.eligibility?.basicRequirements?.age?.description,
             color: 'text-blue-600',
             bgColor: 'bg-blue-50',
         },
         {
             icon: Scale,
-            title:
-                dict.eligibility?.basicRequirements?.weight?.title ||
-                'Weight Requirement',
+            title: dict.eligibility?.basicRequirements?.weight?.title,
             description:
-                dict.eligibility?.basicRequirements?.weight?.description ||
-                'Minimum weight of 50 kg',
+                dict.eligibility?.basicRequirements?.weight?.description,
             color: 'text-green-600',
             bgColor: 'bg-green-50',
         },
@@ -50,182 +43,131 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
 
     const temporaryDeferrals = [
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.vaccination?.period ||
-                '3 weeks',
+            period: dict.eligibility?.temporaryDeferrals?.vaccination?.period,
             condition:
-                dict.eligibility?.temporaryDeferrals?.vaccination?.condition ||
-                'Vaccination',
+                dict.eligibility?.temporaryDeferrals?.vaccination?.condition,
             icon: Shield,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.covid?.period || '1 week',
-            condition:
-                dict.eligibility?.temporaryDeferrals?.covid?.condition ||
-                'COVID-19 immunization',
+            period: dict.eligibility?.temporaryDeferrals?.covid?.period,
+            condition: dict.eligibility?.temporaryDeferrals?.covid?.condition,
             icon: Shield,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.animalSerum?.period ||
-                '2 weeks',
+            period: dict.eligibility?.temporaryDeferrals?.animalSerum?.period,
             condition:
-                dict.eligibility?.temporaryDeferrals?.animalSerum?.condition ||
-                'Animal serum injection',
+                dict.eligibility?.temporaryDeferrals?.animalSerum?.condition,
             icon: Activity,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.humanSerum?.period ||
-                '3 months',
+            period: dict.eligibility?.temporaryDeferrals?.humanSerum?.period,
             condition:
-                dict.eligibility?.temporaryDeferrals?.humanSerum?.condition ||
-                'Human serum treatment',
+                dict.eligibility?.temporaryDeferrals?.humanSerum?.condition,
             icon: Activity,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.dental?.period ||
-                '4 months',
-            condition:
-                dict.eligibility?.temporaryDeferrals?.dental?.condition ||
-                'Dental extraction or treatment',
+            period: dict.eligibility?.temporaryDeferrals?.dental?.period,
+            condition: dict.eligibility?.temporaryDeferrals?.dental?.condition,
             icon: Activity,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.cupping?.period ||
-                '4 months',
-            condition:
-                dict.eligibility?.temporaryDeferrals?.cupping?.condition ||
-                'Cupping or barber shaving',
+            period: dict.eligibility?.temporaryDeferrals?.cupping?.period,
+            condition: dict.eligibility?.temporaryDeferrals?.cupping?.condition,
             icon: Activity,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.surgery?.period ||
-                '4 months',
-            condition:
-                dict.eligibility?.temporaryDeferrals?.surgery?.condition ||
-                'Surgery without injection',
+            period: dict.eligibility?.temporaryDeferrals?.surgery?.period,
+            condition: dict.eligibility?.temporaryDeferrals?.surgery?.condition,
             icon: Activity,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.usedSyringe?.period ||
-                '4 months',
+            period: dict.eligibility?.temporaryDeferrals?.usedSyringe?.period,
             condition:
-                dict.eligibility?.temporaryDeferrals?.usedSyringe?.condition ||
-                'Used syringe injection',
+                dict.eligibility?.temporaryDeferrals?.usedSyringe?.condition,
             icon: AlertTriangle,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.endoscopy?.period ||
-                '4 months',
+            period: dict.eligibility?.temporaryDeferrals?.endoscopy?.period,
             condition:
-                dict.eligibility?.temporaryDeferrals?.endoscopy?.condition ||
-                'Endoscopy or colonoscopy',
+                dict.eligibility?.temporaryDeferrals?.endoscopy?.condition,
             icon: Activity,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.diarrhea?.period ||
-                '1 month',
+            period: dict.eligibility?.temporaryDeferrals?.diarrhea?.period,
             condition:
-                dict.eligibility?.temporaryDeferrals?.diarrhea?.condition ||
-                'Diarrhea',
+                dict.eligibility?.temporaryDeferrals?.diarrhea?.condition,
             icon: Activity,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.inflammation?.period ||
-                '1 week after treatment',
+            period: dict.eligibility?.temporaryDeferrals?.inflammation?.period,
             condition:
-                dict.eligibility?.temporaryDeferrals?.inflammation?.condition ||
-                'Acute inflammation treatment',
+                dict.eligibility?.temporaryDeferrals?.inflammation?.condition,
             icon: Activity,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.piercing?.period ||
-                '4 months',
+            period: dict.eligibility?.temporaryDeferrals?.piercing?.period,
             condition:
-                dict.eligibility?.temporaryDeferrals?.piercing?.condition ||
-                'Ear piercing',
+                dict.eligibility?.temporaryDeferrals?.piercing?.condition,
             icon: Activity,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.tattoo?.period ||
-                '4 months',
-            condition:
-                dict.eligibility?.temporaryDeferrals?.tattoo?.condition ||
-                'Tattoo',
+            period: dict.eligibility?.temporaryDeferrals?.tattoo?.period,
+            condition: dict.eligibility?.temporaryDeferrals?.tattoo?.condition,
             icon: Activity,
         },
         {
-            period:
-                dict.eligibility?.temporaryDeferrals?.tuberculosis?.period ||
-                '2 years after recovery',
+            period: dict.eligibility?.temporaryDeferrals?.tuberculosis?.period,
             condition:
-                dict.eligibility?.temporaryDeferrals?.tuberculosis?.condition ||
-                'Tuberculosis',
+                dict.eligibility?.temporaryDeferrals?.tuberculosis?.condition,
             icon: Activity,
         },
     ];
 
     const permanentDeferrals = [
-        dict.eligibility?.permanentDeferrals?.bloodTransfusion ||
-            'Previous blood transfusion',
-        dict.eligibility?.permanentDeferrals?.leprosy || 'Leprosy',
-        dict.eligibility?.permanentDeferrals?.aids || 'AIDS',
-        dict.eligibility?.permanentDeferrals?.hepatitis || 'Hepatitis',
+        dict.eligibility?.permanentDeferrals?.bloodTransfusion,
+        dict.eligibility?.permanentDeferrals?.leprosy,
+        dict.eligibility?.permanentDeferrals?.aids,
+        dict.eligibility?.permanentDeferrals?.hepatitis,
     ];
 
     const medicalDecisionRequired = [
-        dict.eligibility?.medicalDecision?.hypertension || 'Hypertension',
-        dict.eligibility?.medicalDecision?.diabetes || 'Diabetes',
-        dict.eligibility?.medicalDecision?.asthma || 'Asthma',
-        dict.eligibility?.medicalDecision?.heartDisease ||
-            'Heart, kidney, or lung disease',
-        dict.eligibility?.medicalDecision?.neurologicalDisorders ||
-            'Neurological disorders (e.g., epilepsy)',
-        dict.eligibility?.medicalDecision?.psychiatricDisorders ||
-            'Psychiatric disorders',
-        dict.eligibility?.medicalDecision?.cancer || 'Cancer (even if treated)',
-        dict.eligibility?.medicalDecision?.malaria ||
-            'Living in malaria-endemic areas',
-        dict.eligibility?.medicalDecision?.england ||
-            'Lived in England 1980-1996 for at least one year',
-        dict.eligibility?.medicalDecision?.ivDrugs || 'Intravenous drug use',
-        dict.eligibility?.medicalDecision?.unprotectedSex ||
-            'Multiple sexual partners without protection',
-        dict.eligibility?.medicalDecision?.maleRelations ||
-            'Sexual relations with other males',
-        dict.eligibility?.medicalDecision?.cornealTransplant ||
-            'Corneal transplant',
-        dict.eligibility?.medicalDecision?.duraMaterTransplant ||
-            'Dura mater transplant',
-        dict.eligibility?.medicalDecision?.growthHormone ||
-            'Growth hormone treatment before 1986',
+        dict.eligibility?.medicalDecision?.hypertension,
+        dict.eligibility?.medicalDecision?.diabetes,
+        dict.eligibility?.medicalDecision?.asthma,
+        dict.eligibility?.medicalDecision?.heartDisease,
+        dict.eligibility?.medicalDecision?.neurologicalDisorders,
+        dict.eligibility?.medicalDecision?.psychiatricDisorders,
+        dict.eligibility?.medicalDecision?.cancer,
+        dict.eligibility?.medicalDecision?.malaria,
+        dict.eligibility?.medicalDecision?.england,
+        dict.eligibility?.medicalDecision?.ivDrugs,
+        dict.eligibility?.medicalDecision?.unprotectedSex,
+        dict.eligibility?.medicalDecision?.maleRelations,
+        dict.eligibility?.medicalDecision?.cornealTransplant,
+        dict.eligibility?.medicalDecision?.duraMaterTransplant,
+        dict.eligibility?.medicalDecision?.growthHormone,
     ];
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-16">
             {/* Hero Section */}
             <div className="text-center mb-10 relative">
                 <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 opacity-10">
-                    <Heart className="w-20 h-20 text-brand-600" />
+                    <svg
+                        width="120"
+                        height="120"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="text-brand-600">
+                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                    </svg>
                 </div>
 
                 <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400">
-                    {dict.eligibility?.title || 'Blood Donation Eligibility'}
+                    {dict.eligibility?.title}
                 </h1>
                 <p className="text-gray-600 max-w-2xl mx-auto text-base leading-relaxed">
-                    {dict.eligibility?.description ||
-                        'Learn about the requirements and restrictions for blood donation to ensure the safety of both donors and recipients.'}
+                    {dict.eligibility?.description}
                 </p>
 
                 <div className="mt-4 w-16 h-1 bg-brand-500 mx-auto rounded-full"></div>
@@ -235,12 +177,10 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
             <div className="mb-10">
                 <div className="text-center mb-6">
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                        {dict.eligibility?.basicRequirementsTitle ||
-                            'Basic Requirements'}
+                        {dict.eligibility?.basicRequirementsTitle}
                     </h2>
                     <p className="text-gray-600 max-w-2xl mx-auto text-sm">
-                        {dict.eligibility?.basicRequirementsSubtitle ||
-                            'Essential criteria that all potential donors must meet'}
+                        {dict.eligibility?.basicRequirementsSubtitle}
                     </p>
                 </div>
 
@@ -287,12 +227,10 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                                 isRTL ? 'ml-2' : 'mr-2',
                             )}
                         />
-                        {dict.eligibility?.temporaryDeferralsTitle ||
-                            'Temporary Deferrals'}
+                        {dict.eligibility?.temporaryDeferralsTitle}
                     </h2>
                     <p className="text-gray-600 max-w-2xl mx-auto text-sm">
-                        {dict.eligibility?.temporaryDeferralsSubtitle ||
-                            'Please postpone your donation for the specified period if you fall into any of these categories'}
+                        {dict.eligibility?.temporaryDeferralsSubtitle}
                     </p>
                 </div>
 
@@ -336,12 +274,10 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                                 isRTL ? 'ml-2' : 'mr-2',
                             )}
                         />
-                        {dict.eligibility?.permanentDeferralsTitle ||
-                            'Permanent Deferrals'}
+                        {dict.eligibility?.permanentDeferralsTitle}
                     </h2>
                     <p className="text-gray-600 max-w-2xl mx-auto text-sm">
-                        {dict.eligibility?.permanentDeferralsSubtitle ||
-                            'Please do not donate blood if you belong to any of these categories'}
+                        {dict.eligibility?.permanentDeferralsSubtitle}
                     </p>
                 </div>
 
@@ -376,12 +312,10 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                                 isRTL ? 'ml-2' : 'mr-2',
                             )}
                         />
-                        {dict.eligibility?.medicalDecisionTitle ||
-                            'Medical Decision Required'}
+                        {dict.eligibility?.medicalDecisionTitle}
                     </h2>
                     <p className="text-gray-600 max-w-2xl mx-auto text-sm">
-                        {dict.eligibility?.medicalDecisionSubtitle ||
-                            "Blood donation depends on the patient's health condition (doctor's decision)"}
+                        {dict.eligibility?.medicalDecisionSubtitle}
                     </p>
                 </div>
 
@@ -414,25 +348,21 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                     <CardContent className="p-6">
                         <CheckCircle className="w-12 h-12 mx-auto mb-4 text-white" />
                         <h3 className="text-xl font-bold mb-3">
-                            {dict.eligibility?.callToAction?.title ||
-                                'Ready to Donate?'}
+                            {dict.eligibility?.callToAction?.title}
                         </h3>
                         <p className="text-sm mb-4 opacity-90">
-                            {dict.eligibility?.callToAction?.description ||
-                                'If you meet all the requirements, find a donation campaign near you and help save lives.'}
+                            {dict.eligibility?.callToAction?.description}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center">
                             <a
                                 href="/campaigns"
                                 className="bg-white text-brand-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-50 transition-colors text-sm">
-                                {dict.eligibility?.callToAction
-                                    ?.findCampaigns || 'Find Campaigns'}
+                                {dict.eligibility?.callToAction?.findCampaigns}
                             </a>
                             <a
                                 href="/requests"
                                 className="border-2 border-white text-white px-6 py-2 rounded-lg font-semibold hover:bg-white hover:text-brand-600 transition-colors text-sm">
-                                {dict.eligibility?.callToAction
-                                    ?.urgentRequests || 'Urgent Requests'}
+                                {dict.eligibility?.callToAction?.urgentRequests}
                             </a>
                         </div>
                     </CardContent>
