@@ -301,9 +301,9 @@
     "how_it_works_step2_title": "Create a Blood Request",
     "how_it_works_step2_description": "If you need blood, create a request specifying the blood group, contact info, and location.",
     "how_it_works_step3_title": "Notification Sent",
-    "how_it_works_step3_description": "The system sends notifications to matching donors in the specified area via SMS and email.",
+    "how_it_works_step3_description": "The system sends notifications to all compatible blood donors in the specified region via email.",
     "how_it_works_step4_title": "Donors Respond",
-    "how_it_works_step4_description": "If you're a matching donor, you'll receive a notification and can choose to help.",
+    "how_it_works_step4_description": "If you're a compatible donor, you'll receive a notification and can choose to help.",
     "pagination": {
         "previous": "Previous",
         "next": "Next",
