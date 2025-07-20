@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { Button2 } from '@/components/ui/button';
 import { Input, InputError } from '@/components/ui/input';
 import { Label2 } from '@/components/ui/label';
-import { Loader2, Pin } from 'lucide-react';
+import { Loader2, Pin, Eye, EyeOff } from 'lucide-react';
 import { signIn } from '@/actions/sign-in';
 import { signUp } from '@/actions/sign-up';
 import { acceptInvitation } from '@/actions/invitation';
@@ -32,6 +32,8 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
     const token = searchParams.get('token');
     const email = searchParams.get('email');
     const [selectedRegion, setSelectedRegion] = useState<string>();
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [state, formAction, pending] = useActionState<ActionState, FormData>(
         mode === 'signin'
             ? signIn
@@ -53,8 +55,7 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                 </p>
                 <Link
                     href="/sign-in"
-                    className="text-gray-600 hover:text-gray-900 underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
-                >
+                    className="text-gray-600 hover:text-gray-900 underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
                     {dict.auth.invitation.returnToSignIn}
                 </Link>
             </div>
@@ -130,25 +131,37 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                             ? dict.auth.signIn.password
                             : dict.auth.signUp.createPassword}
                     </Label2>
-                    <Input
-                        id="password"
-                        name="password"
-                        type="password"
-                        autoComplete={
-                            mode === 'signin'
-                                ? 'current-password'
-                                : 'new-password'
-                        }
-                        required
-                        minLength={8}
-                        maxLength={100}
-                        className="block mt-1 w-full"
-                        placeholder={
-                            mode === 'signin'
-                                ? dict.auth.signIn.enterPassword
-                                : dict.auth.signUp.createSecurePassword
-                        }
-                    />
+                    <div className="relative">
+                        <Input
+                            id="password"
+                            name="password"
+                            type={showPassword ? 'text' : 'password'}
+                            autoComplete={
+                                mode === 'signin'
+                                    ? 'current-password'
+                                    : 'new-password'
+                            }
+                            required
+                            minLength={8}
+                            maxLength={100}
+                            className="block mt-1 w-full pr-10 rtl:pr-4 rtl:pl-10"
+                            placeholder={
+                                mode === 'signin'
+                                    ? dict.auth.signIn.enterPassword
+                                    : dict.auth.signUp.createSecurePassword
+                            }
+                        />
+                        <button
+                            type="button"
+                            className="absolute inset-y-0 right-0 flex items-center pr-3 rtl:right-auto rtl:left-0 rtl:pr-0 rtl:pl-3"
+                            onClick={() => setShowPassword(!showPassword)}>
+                            {showPassword ? (
+                                <EyeOff className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                            ) : (
+                                <Eye className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                            )}
+                        </button>
+                    </div>
                     {isRegistrationMode && (
                         <p className="mt-1 text-sm text-gray-500">
                             {dict.forms.validation.passwordRequirements}
@@ -161,19 +174,33 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                         <Label2 htmlFor="confirmPassword">
                             {dict.forms.labels.confirmPassword}
                         </Label2>
-                        <Input
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            type="password"
-                            autoComplete="new-password"
-                            required
-                            minLength={8}
-                            maxLength={100}
-                            className="block mt-1 w-full"
-                            placeholder={
-                                dict.forms.placeholders.confirmPassword
-                            }
-                        />
+                        <div className="relative">
+                            <Input
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                autoComplete="new-password"
+                                required
+                                minLength={8}
+                                maxLength={100}
+                                className="block mt-1 w-full pr-10 rtl:pr-4 rtl:pl-10"
+                                placeholder={
+                                    dict.forms.placeholders.confirmPassword
+                                }
+                            />
+                            <button
+                                type="button"
+                                className="absolute inset-y-0 right-0 flex items-center pr-3 rtl:right-auto rtl:left-0 rtl:pr-0 rtl:pl-3"
+                                onClick={() =>
+                                    setShowConfirmPassword(!showConfirmPassword)
+                                }>
+                                {showConfirmPassword ? (
+                                    <EyeOff className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                                ) : (
+                                    <Eye className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                                )}
+                            </button>
+                        </div>
                     </div>
                 )}
 
@@ -213,8 +240,7 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                         {bloodGroups.map(group => (
                                             <SelectItem
                                                 key={group.value}
-                                                value={group.value}
-                                            >
+                                                value={group.value}>
                                                 {getBloodGroupLabel(
                                                     group.value,
                                                     dict,
@@ -234,8 +260,7 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                 name="region"
                                 onValueChange={(value: string) => {
                                     setSelectedRegion(value);
-                                }}
-                            >
+                                }}>
                                 <SelectTrigger>
                                     <SelectValue
                                         placeholder={
@@ -247,8 +272,7 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                     {REGIONS_AND_CITIES.map(region => (
                                         <SelectItem
                                             key={region.id}
-                                            value={region.id.toString()}
-                                        >
+                                            value={region.id.toString()}>
                                             {region.name}
                                         </SelectItem>
                                     ))}
@@ -277,8 +301,7 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                         )?.cities.map(city => (
                                             <SelectItem
                                                 key={city.id}
-                                                value={city.id.toString()}
-                                            >
+                                                value={city.id.toString()}>
                                                 {city.name}
                                             </SelectItem>
                                         ))}
@@ -293,38 +316,19 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                 )}
 
                 {mode === 'signin' && (
-                    <div className="block">
-                        <div className="flex items-center justify-between">
-                            <label
-                                htmlFor="remember_me"
-                                className="inline-flex items-center"
-                            >
-                                <input
-                                    id="remember_me"
-                                    type="checkbox"
-                                    name="remember"
-                                    className="rounded border-gray-300 text-brand-600 shadow-sm focus:border-brand-300 focus:ring focus:ring-brand-200 focus:ring-opacity-50"
-                                />
-                                <span className="ml-2 text-sm text-gray-600">
-                                    {dict.auth.signIn.rememberMe}
-                                </span>
-                            </label>
-
-                            <Link
-                                href="/forgot-password"
-                                className="text-sm text-gray-600 hover:text-gray-900 underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
-                            >
-                                {dict.auth.signIn.forgotPassword}
-                            </Link>
-                        </div>
+                    <div className="text-right">
+                        <Link
+                            href="/forgot-password"
+                            className="text-sm text-gray-600 hover:text-gray-900 underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+                            {dict.auth.signIn.forgotPassword}
+                        </Link>
                     </div>
                 )}
 
                 <div className="flex items-center justify-end">
                     <Button2
                         className="w-full justify-center"
-                        disabled={pending}
-                    >
+                        disabled={pending}>
                         {pending ? (
                             <>
                                 <Loader2 className="animate-spin mr-2 h-4 w-4" />
@@ -360,16 +364,14 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                         <>
                             <Link
                                 href="/sign-up"
-                                className="text-sm text-gray-600 hover:text-gray-900 underline"
-                            >
+                                className="text-sm text-gray-600 hover:text-gray-900 underline">
                                 {dict.auth.signIn.signUpLink}
                             </Link>
                         </>
                     ) : (
                         <Link
                             href="/sign-in"
-                            className="text-sm text-gray-600 hover:text-gray-900 underline"
-                        >
+                            className="text-sm text-gray-600 hover:text-gray-900 underline">
                             {dict.auth.signUp.signInLink}
                         </Link>
                     )}

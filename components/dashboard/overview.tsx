@@ -1,16 +1,14 @@
 'use client';
 
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
-    PointElement,
-    LineElement,
+    BarElement,
     Title,
     Tooltip,
     Legend,
-    Filler,
     ChartData,
     ChartOptions,
 } from 'chart.js';
@@ -19,48 +17,36 @@ import {
 ChartJS.register(
     CategoryScale,
     LinearScale,
-    PointElement,
-    LineElement,
+    BarElement,
     Title,
     Tooltip,
     Legend,
-    Filler,
 );
 
 interface OverviewProps {
     data: {
         labels: string[];
-        thisYear: number[];
-        lastYear: number[];
+        data: number[];
     };
 }
 
 export function Overview({ data }: OverviewProps) {
-    const chartData: ChartData<'line'> = {
+    const chartData: ChartData<'bar'> = {
         labels: data.labels,
         datasets: [
             {
-                label: 'This year',
-                data: data.thisYear,
+                label: 'Participants',
+                data: data.data,
+                backgroundColor: 'rgba(99, 102, 241, 0.8)',
                 borderColor: 'rgb(99, 102, 241)',
-                backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                tension: 0.4,
-                fill: true,
-                pointStyle: 'circle',
-            },
-            {
-                label: 'Last year',
-                data: data.lastYear,
-                borderColor: 'rgb(234, 179, 8)',
-                backgroundColor: 'rgba(234, 179, 8, 0.1)',
-                tension: 0.4,
-                fill: true,
-                pointStyle: 'circle',
+                borderWidth: 1,
+                borderRadius: 4,
+                borderSkipped: false,
             },
         ],
     };
 
-    const options: ChartOptions<'line'> = {
+    const options: ChartOptions<'bar'> = {
         responsive: true,
         maintainAspectRatio: false,
         interaction: {
@@ -69,13 +55,7 @@ export function Overview({ data }: OverviewProps) {
         },
         plugins: {
             legend: {
-                display: true,
-                position: 'top',
-                labels: {
-                    boxWidth: 8,
-                    usePointStyle: true,
-                    pointStyle: 'circle',
-                },
+                display: false,
             },
             title: {
                 display: false,
@@ -94,12 +74,13 @@ export function Overview({ data }: OverviewProps) {
                     font: {
                         size: 12,
                     },
+                    maxRotation: 45,
+                    minRotation: 0,
                 },
             },
             y: {
                 border: {
                     display: false,
-                    dash: [4, 4],
                 },
                 grid: {
                     color: '#e2e8f0',
@@ -111,13 +92,14 @@ export function Overview({ data }: OverviewProps) {
                     },
                     stepSize: 1,
                 },
+                beginAtZero: true,
             },
         },
     };
 
     return (
         <div className="h-[350px] w-full">
-            <Line options={options} data={chartData} />
+            <Bar options={options} data={chartData} />
         </div>
     );
 }

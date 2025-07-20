@@ -235,3 +235,107 @@ export async function getCampaignsOverview(userId: string, userRole: Role) {
         lastYear: campaignsPreviousYear,
     };
 }
+
+export async function getParticipantsPerCity(userId: string, userRole: Role) {
+    // Base query conditions based on user role
+    const whereCondition =
+        userRole === Role.ORGANIZATION ? { organizationId: userId } : {};
+
+    // Get participants grouped by city
+    const participantsByCity = await prisma.user.groupBy({
+        by: ['cityId'],
+        where: {
+            role: Role.PARTICIPANT,
+            deletedAt: null,
+            cityId: {
+                not: null,
+            },
+        },
+        _count: {
+            id: true,
+        },
+        orderBy: {
+            _count: {
+                id: 'desc',
+            },
+        },
+        take: 10, // Limit to top 10 cities
+    });
+
+    // Get city names for the grouped data
+    const cityIds = participantsByCity.map(item => item.cityId!);
+    const cities = await prisma.city.findMany({
+        where: {
+            id: {
+                in: cityIds,
+            },
+        },
+        select: {
+            id: true,
+            name: true,
+        },
+    });
+
+    // Create a map for easy lookup
+    const cityMap = new Map(cities.map(city => [city.id, city.name]));
+
+    // Format the data
+    const labels = participantsByCity.map(
+        item => cityMap.get(item.cityId!) || 'Unknown',
+    );
+    const data = participantsByCity.map(item => item._count.id);
+
+    return {
+        labels,
+        data,
+    };
+}
+
+export async function getParticipantsPerRegion(userId: string, userRole: Role) {
+    // Get participants with their city and region information
+    const participantsByRegion = await prisma.user.findMany({
+        where: {
+            role: Role.PARTICIPANT,
+            deletedAt: null,
+            cityId: {
+                not: null,
+            },
+        },
+        select: {
+            id: true,
+            city: {
+                select: {
+                    region: {
+                        select: {
+                            id: true,
+                            name: true,
+                        },
+                    },
+                },
+            },
+        },
+    });
+
+    // Group by region and count
+    const regionCounts = new Map<string, number>();
+
+    participantsByRegion.forEach(participant => {
+        if (participant.city?.region) {
+            const regionName = participant.city.region.name;
+            regionCounts.set(
+                regionName,
+                (regionCounts.get(regionName) || 0) + 1,
+            );
+        }
+    });
+
+    // Convert to arrays sorted by count
+    const sortedRegions = Array.from(regionCounts.entries()).sort(
+        (a, b) => b[1] - a[1],
+    );
+
+    return {
+        labels: sortedRegions.map(([name]) => name),
+        data: sortedRegions.map(([, count]) => count),
+    };
+}
