@@ -4,9 +4,27 @@ import { CardsLoading } from '@/components/loading/cards-loading';
 import { getBloodRequests } from '@/actions/home';
 import { BloodRequest } from '@/types/blood-request';
 import { getDictionary } from '@/i18n/get-dictionary';
+import { Metadata } from 'next';
 
 interface RequestsPageProps {
     searchParams: Promise<{ page?: string }>;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
+    const dict = await getDictionary();
+    return {
+        title: dict.Blood_Requests,
+        openGraph: {
+            title: dict.Blood_Requests,
+            description: dict.Blood_Requests,
+            images: [
+                {
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dict.Blood_Requests)}&description=${encodeURIComponent(dict.Blood_Requests)}`,
+                },
+            ],
+        },
+    };
 }
 
 export default async function BloodRequestsPage({

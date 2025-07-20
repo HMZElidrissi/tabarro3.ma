@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
             siteName: 'tabarro3',
             images: [
                 {
-                    url: `${baseUrl}/og-image.png`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dict.eligibility?.title)}&description=${encodeURIComponent(dict.eligibility?.description)}`,
                     width: 1200,
                     height: 630,
                     alt: 'Blood Donation Eligibility - tabarro3',
