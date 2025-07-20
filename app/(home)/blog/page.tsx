@@ -8,6 +8,8 @@ import { cn, formatDate } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import BlogPostGrid from '@/components/blog/blog-post-grid';
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
+
 export async function generateMetadata(): Promise<Metadata> {
     const dict = await getDictionary();
 
@@ -16,6 +18,46 @@ export async function generateMetadata(): Promise<Metadata> {
         description:
             dict.blog?.description ||
             'The latest blood donation news and articles',
+        keywords: [
+            'Blog - tabarro3',
+            'Dernières actualités et articles sur le don de sang au Maroc',
+            'Don de sang au Maroc',
+            'Actualités du don de sang',
+            'Articles sur le don de sang',
+            'Blog du don de sang',
+            'Don de sang au Maroc',
+        ],
+        openGraph: {
+            title: dict.blog?.title || 'Blog | tabarro3',
+            description:
+                dict.blog?.description ||
+                'The latest blood donation news and articles',
+            images: [
+                {
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Blog - tabarro3")}&description=${encodeURIComponent("Découvrez les dernières actualités et articles sur le don de sang au Maroc")}`,
+                    width: 1200,
+                    height: 630,
+                    alt: 'Blog - tabarro3',
+                },
+            ],
+        },
+        twitter: {
+            title: dict.blog?.title || 'Blog | tabarro3',
+            description:
+                dict.blog?.description ||
+                'The latest blood donation news and articles',
+            images: [
+                {
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Blog - tabarro3")}&description=${encodeURIComponent("Découvrez les dernières actualités et articles sur le don de sang au Maroc")}`,
+                    width: 1200,
+                    height: 630,
+                    alt: 'Blog - tabarro3',
+                },
+            ],
+        },
+        alternates: {
+            canonical: `${baseUrl}/blog`,
+        },
     };
 }
 

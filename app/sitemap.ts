@@ -10,12 +10,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${baseUrl}/blog/${post.slug}`,
         lastModified: post.publishDate,
         changeFrequency: 'weekly' as const,
-        priority: 0.7,
+        priority: 0.8,
     }));
 
     const routes = [
         {
             url: `${baseUrl}`,
+            lastModified: new Date(),
+            changeFrequency: 'daily' as const,
+            priority: 1.0,
+        },
+        {
+            url: `${baseUrl}/eligibility`,
+            lastModified: new Date(),
+            changeFrequency: 'daily' as const,
+            priority: 1.0,
+        },
+        {
+            url: `${baseUrl}/about`,
             lastModified: new Date(),
             changeFrequency: 'daily' as const,
             priority: 1.0,
@@ -36,10 +48,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${baseUrl}/blog`,
             lastModified: new Date(),
             changeFrequency: 'daily' as const,
-            priority: 0.8,
+            priority: 1.0,
         },
-
-        // Additional important pages
         {
             url: `${baseUrl}/campaigns/add`,
             lastModified: new Date(),

@@ -4,7 +4,7 @@ import HeroComponent from '@/components/home/hero';
 import MapComponent from '@/components/home/map';
 import HowItWorksComponent from '@/components/home/how-it-works';
 import { getDictionary, getLocale } from '@/i18n/get-dictionary';
-import Partners from '@/components/home/partners';
+// import Partners from '@/components/home/partners';
 import LatestBlogPosts from '@/components/blog/latest-blog-posts';
 
 import { Metadata } from 'next';
