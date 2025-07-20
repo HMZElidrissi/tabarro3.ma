@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
             siteName: 'tabarro3',
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dict.eligibility?.title)}&description=${encodeURIComponent(dict.eligibility?.description)}`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Critères d'éligibilité - Don de sang")}&description=${encodeURIComponent("Découvrez les critères d'éligibilité et les exigences pour le don de sang au Maroc")}`,
                     width: 1200,
                     height: 630,
                     alt: 'Blood Donation Eligibility - tabarro3',
