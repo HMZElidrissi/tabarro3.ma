@@ -4,7 +4,10 @@ import { Job, JobType, JobStatus } from '@/types/job';
 import { render } from '@react-email/components';
 import { UrgentBloodRequestEmail } from '@/emails/urgent-blood-request';
 import { NearbyCampaignEmail } from '@/emails/nearby-campaign';
-import { getBloodGroupLabel } from '@/config/blood-group';
+import {
+    getBloodGroupLabel,
+    getCompatibleDonorBloodGroups,
+} from '@/config/blood-group';
 import { BloodGroup } from '@/types/enums';
 
 const transporter = nodemailer.createTransport({
@@ -88,10 +91,21 @@ const jobHandlers = {
 
         if (!request) throw new Error('Blood request not found');
 
+        // Get all blood groups that can donate to the requested blood group
+        const compatibleBloodGroups = getCompatibleDonorBloodGroups(
+            request.bloodGroup as BloodGroup,
+        );
+
+        console.log(
+            `Blood request ${request.id}: Requested ${request.bloodGroup}, compatible groups: ${compatibleBloodGroups.join(', ')}`,
+        );
+
         const recipients = await prisma.user.findMany({
             where: {
                 role: 'PARTICIPANT',
-                bloodGroup: request.bloodGroup,
+                bloodGroup: {
+                    in: compatibleBloodGroups,
+                },
                 city: {
                     regionId: request.city.regionId,
                 },
@@ -99,8 +113,13 @@ const jobHandlers = {
             select: {
                 email: true,
                 name: true,
+                bloodGroup: true, // Include blood group for logging/debugging
             },
         });
+
+        console.log(
+            `Found ${recipients.length} compatible donors in region ${request.city.regionId} for blood request ${request.id}`,
+        );
 
         // Send individual emails to each recipient
         for (const recipient of recipients) {
@@ -120,7 +139,7 @@ const jobHandlers = {
             await transporter.sendMail({
                 from: FROM_EMAIL,
                 to: recipient.email, // Send to individual recipient
-                subject: `Besoin urgent de sang ${getBloodGroupLabel(request.bloodGroup as BloodGroup)} à ${request.city.name}`,
+                subject: `Besoin urgent de sang ${getBloodGroupLabel(request.bloodGroup as BloodGroup)} à ${request.city.name} - Votre sang est compatible`,
                 html: emailHtml,
             });
 

@@ -24,7 +24,7 @@ export default function AwardBadge({ dict, isRTL = false }: AwardBadgeProps) {
                         alt="Best Innovation Project Award"
                         fill
                         className="object-cover"
-                        sizes="192px"
+                        sizes="500px"
                     />
                 </div>
 

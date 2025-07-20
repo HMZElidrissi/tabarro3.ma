@@ -284,9 +284,9 @@
     "how_it_works_step2_title": "Créez une demande de sang",
     "how_it_works_step2_description": "Si vous avez besoin de sang, créez une demande en fournissant une description, un emplacement et un numéro de téléphone de contact.",
     "how_it_works_step3_title": "Notification envoyée",
-    "how_it_works_step3_description": "Le système envoie une notification aux donneurs de sang qui correspondent à votre groupe sanguin et à votre région.",
+    "how_it_works_step3_description": "Le système envoie une notification à tous les donneurs de sang compatibles de votre région par email.",
     "how_it_works_step4_title": "Les donneurs répondent",
-    "how_it_works_step4_description": "Si vous êtes un donneur correspondant, vous recevrez une notification et pourrez choisir d'aider.",
+    "how_it_works_step4_description": "Si vous êtes un donneur compatible, vous recevrez une notification et pourrez choisir d'aider.",
     "pagination": {
         "previous": "Précédent",
         "next": "Suivant",
