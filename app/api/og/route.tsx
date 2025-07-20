@@ -25,11 +25,8 @@ export async function GET(request: NextRequest) {
     try {
         const { searchParams } = new URL(request.url);
 
-        const title =
-            searchParams.get('title') || 'Donnez du sang, sauvez des vies';
-        const description =
-            searchParams.get('description') ||
-            'Rejoignez notre communauté de donneurs de sang au Maroc';
+        const title = searchParams.get('title');
+        const description = searchParams.get('description');
 
         // Brand colors and configuration
         const brandConfig = {
@@ -44,14 +41,14 @@ export async function GET(request: NextRequest) {
 
         // Gradient template configuration
         const templateConfig = {
-                        background: `linear-gradient(135deg, ${brandConfig.primary} 0%, ${brandConfig.primaryDark} 100%)`,
-                        containerBg: 'rgba(255, 255, 255, 0.95)',
-                        titleColor: brandConfig.text,
-                        descColor: brandConfig.textLight,
-                        showPattern: true,
-                        showShadow: true,
-                        borderRadius: '16px',
-                    };
+            background: `linear-gradient(135deg, ${brandConfig.primary} 0%, ${brandConfig.primaryDark} 100%)`,
+            containerBg: 'rgba(255, 255, 255, 0.95)',
+            titleColor: brandConfig.text,
+            descColor: brandConfig.textLight,
+            showPattern: true,
+            showShadow: true,
+            borderRadius: '16px',
+        };
 
         // Professional logo component (simplified version of the SVG)
         const LogoComponent = () => (
@@ -70,7 +67,7 @@ export async function GET(request: NextRequest) {
                     preserveAspectRatio="xMidYMid meet"
                     version="1.0"
                     viewBox="52.88 117.9 269.25 146.4"
-                     zoomAndPan="magnify">
+                    zoomAndPan="magnify">
                     <defs>
                         <clipPath id="8777a53df8">
                             <path
@@ -189,17 +186,17 @@ export async function GET(request: NextRequest) {
                         padding: '80px 60px',
                     }}>
                     {/* Background Pattern */}
-                        <div
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                right: 0,
-                                bottom: 0,
-                                backgroundImage:
-                                    'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 20%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 20%)',
-                            }}
-                        />
+                    <div
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            backgroundImage:
+                                'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 20%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 20%)',
+                        }}
+                    />
 
                     {/* Main Content Container */}
                     <div
@@ -222,7 +219,7 @@ export async function GET(request: NextRequest) {
                         {/* Title */}
                         <h1
                             style={{
-                                fontSize: title.length > 40 ? '48px' : '56px',
+                                fontSize: (title?.length ?? 0) > 40 ? '48px' : '56px',
                                 fontWeight: '700',
                                 color: templateConfig.titleColor,
                                 marginBottom: '24px',
@@ -239,7 +236,7 @@ export async function GET(request: NextRequest) {
                         <p
                             style={{
                                 fontSize:
-                                    description.length > 100 ? '24px' : '28px',
+                                    (description?.length ?? 0) > 100 ? '24px' : '28px',
                                 color: templateConfig.descColor,
                                 lineHeight: '1.4',
                                 maxWidth: '800px',

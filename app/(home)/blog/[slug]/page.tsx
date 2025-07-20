@@ -22,7 +22,7 @@ export async function generateMetadata({
         const locale = await getLocale();
         const post = await getBlogPost(slug, locale);
 
-        const ogImageUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/og-image/${slug}`;
+        const ogImageUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/blog-image/${slug}`;
 
         if (!post) {
             return {

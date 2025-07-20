@@ -15,14 +15,43 @@ export async function generateMetadata(): Promise<Metadata> {
     const dict = await getDictionary();
     return {
         title: dict.Blood_Requests,
+        description: dict.Blood_Requests,
+        keywords: [
+            'Demandes de don de sang',
+            'Don de sang au Maroc',
+            'Demandes de don de sang',
+            'Don de sang',
+            'Demandes de don de sang au Maroc',
+            'Don de sang au Maroc',
+            'Demandes de don de sang',
+            'Don de sang',
+        ],
         openGraph: {
             title: dict.Blood_Requests,
             description: dict.Blood_Requests,
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dict.Blood_Requests)}&description=${encodeURIComponent(dict.Blood_Requests)}`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Demandes de don de sang")}&description=${encodeURIComponent("Découvrez les demandes de don de sang au Maroc")}`,
+                    width: 1200,
+                    height: 630,
+                    alt: 'Demandes de don de sang',
                 },
             ],
+        },
+        twitter: {
+            title: dict.Blood_Requests,
+            description: dict.Blood_Requests,
+            images: [
+                {
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Demandes de don de sang")}&description=${encodeURIComponent("Découvrez les demandes de don de sang au Maroc")}`,
+                    width: 1200,
+                    height: 630,
+                    alt: 'Demandes de don de sang',
+                },
+            ],
+        },
+        alternates: {
+            canonical: `${baseUrl}/requests`,
         },
     };
 }

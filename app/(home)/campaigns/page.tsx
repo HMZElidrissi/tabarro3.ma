@@ -25,17 +25,39 @@ export async function generateMetadata(): Promise<Metadata> {
     const dict = await getDictionary();
     return {
         title: dict.New_Campaigns,
+        description: dict.New_Campaigns,
+        keywords: [
+            'Nouvelles campagnes de don de sang',
+            'Campagnes de don de sang au Maroc',
+            'Don de sang au Maroc',
+            'Campagnes de don de sang',
+        ],
         openGraph: {
             title: dict.New_Campaigns,
             description: dict.New_Campaigns,
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent(dict.New_Campaigns)}&description=${encodeURIComponent(dict.New_Campaigns)}`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Nouvelles campagnes de don de sang")}&description=${encodeURIComponent("Découvrez les nouvelles campagnes de don de sang au Maroc")}`,
                     width: 1200,
                     height: 630,
-                    alt: dict.New_Campaigns,
+                    alt: 'Nouvelles campagnes de don de sang',
                 },
             ],
+        },
+        twitter: {
+            title: dict.New_Campaigns,
+            description: dict.New_Campaigns,
+            images: [
+                {
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Nouvelles campagnes de don de sang")}&description=${encodeURIComponent("Découvrez les nouvelles campagnes de don de sang au Maroc")}`,
+                    width: 1200,
+                    height: 630,
+                    alt: 'Nouvelles campagnes de don de sang',
+                },
+            ],
+        },
+        alternates: {
+            canonical: `${baseUrl}/campaigns`,
         },
     };
 }
