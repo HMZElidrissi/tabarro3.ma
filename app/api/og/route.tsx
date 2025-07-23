@@ -1,5 +1,6 @@
+/** biome-ignore-all lint/a11y/noSvgWithoutTitle: <explanation> */
 import { ImageResponse } from 'next/og';
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
@@ -13,7 +14,7 @@ async function loadGoogleFont(font: string, text: string) {
 
     if (resource) {
         const response = await fetch(resource[1]);
-        if (response.status == 200) {
+        if (response.status === 200) {
             return await response.arrayBuffer();
         }
     }
@@ -27,6 +28,16 @@ export async function GET(request: NextRequest) {
 
         const title = searchParams.get('title');
         const description = searchParams.get('description');
+
+        if (!title || !description) {
+            return new Response(null, {
+                status: 302,
+                headers: {
+                    Location: '/og-image.png',
+                    'Cache-Control': 'public, max-age=31536000, immutable',
+                },
+            });
+        }
 
         // Brand colors and configuration
         const brandConfig = {
@@ -62,6 +73,7 @@ export async function GET(request: NextRequest) {
                     marginBottom: '40px',
                 }}>
                 <svg
+                    aria-label="Logo"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlnsXlink="http://www.w3.org/1999/xlink"
                     preserveAspectRatio="xMidYMid meet"
@@ -219,7 +231,8 @@ export async function GET(request: NextRequest) {
                         {/* Title */}
                         <h1
                             style={{
-                                fontSize: (title?.length ?? 0) > 40 ? '48px' : '56px',
+                                fontSize:
+                                    (title?.length ?? 0) > 40 ? '48px' : '56px',
                                 fontWeight: '700',
                                 color: templateConfig.titleColor,
                                 marginBottom: '24px',
@@ -236,7 +249,9 @@ export async function GET(request: NextRequest) {
                         <p
                             style={{
                                 fontSize:
-                                    (description?.length ?? 0) > 100 ? '24px' : '28px',
+                                    (description?.length ?? 0) > 100
+                                        ? '24px'
+                                        : '28px',
                                 color: templateConfig.descColor,
                                 lineHeight: '1.4',
                                 maxWidth: '800px',
