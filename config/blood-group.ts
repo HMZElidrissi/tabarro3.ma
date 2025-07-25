@@ -35,15 +35,25 @@ export const BLOOD_COMPATIBILITY: Record<BloodGroup, BloodGroup[]> = {
         BloodGroup.A_NEGATIVE,
         BloodGroup.O_POSITIVE,
         BloodGroup.O_NEGATIVE,
+        BloodGroup.UNKNOWN,
     ],
-    [BloodGroup.A_NEGATIVE]: [BloodGroup.A_NEGATIVE, BloodGroup.O_NEGATIVE],
+    [BloodGroup.A_NEGATIVE]: [
+        BloodGroup.A_NEGATIVE,
+        BloodGroup.O_NEGATIVE,
+        BloodGroup.UNKNOWN,
+    ],
     [BloodGroup.B_POSITIVE]: [
         BloodGroup.B_POSITIVE,
         BloodGroup.B_NEGATIVE,
         BloodGroup.O_POSITIVE,
         BloodGroup.O_NEGATIVE,
+        BloodGroup.UNKNOWN,
     ],
-    [BloodGroup.B_NEGATIVE]: [BloodGroup.B_NEGATIVE, BloodGroup.O_NEGATIVE],
+    [BloodGroup.B_NEGATIVE]: [
+        BloodGroup.B_NEGATIVE,
+        BloodGroup.O_NEGATIVE,
+        BloodGroup.UNKNOWN,
+    ],
     [BloodGroup.AB_POSITIVE]: [
         BloodGroup.A_POSITIVE,
         BloodGroup.A_NEGATIVE,
@@ -53,15 +63,21 @@ export const BLOOD_COMPATIBILITY: Record<BloodGroup, BloodGroup[]> = {
         BloodGroup.AB_NEGATIVE,
         BloodGroup.O_POSITIVE,
         BloodGroup.O_NEGATIVE,
+        BloodGroup.UNKNOWN,
     ],
     [BloodGroup.AB_NEGATIVE]: [
         BloodGroup.A_NEGATIVE,
         BloodGroup.B_NEGATIVE,
         BloodGroup.AB_NEGATIVE,
         BloodGroup.O_NEGATIVE,
+        BloodGroup.UNKNOWN,
     ],
-    [BloodGroup.O_POSITIVE]: [BloodGroup.O_POSITIVE, BloodGroup.O_NEGATIVE],
-    [BloodGroup.O_NEGATIVE]: [BloodGroup.O_NEGATIVE],
+    [BloodGroup.O_POSITIVE]: [
+        BloodGroup.O_POSITIVE,
+        BloodGroup.O_NEGATIVE,
+        BloodGroup.UNKNOWN,
+    ],
+    [BloodGroup.O_NEGATIVE]: [BloodGroup.O_NEGATIVE, BloodGroup.UNKNOWN],
     [BloodGroup.UNKNOWN]: [], // No donations for unknown blood group
 };
 
