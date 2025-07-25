@@ -48,20 +48,19 @@ export default function Partners({ dict }: { dict: any }) {
     ];
 
     return (
-        <section className="py-8">
+        <section className="py-8 bg-background">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400">
+                <h2 className="text-3xl font-bold text-foreground sm:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
                     {dict.partners}
                 </h2>
 
                 <div className="py-8">
                     <Marquee gradient={false} speed={50}>
                         <div className="flex items-center gap-8">
-                            {partners.map((partner, index) => (
+                            {partners.map(partner => (
                                 <div
-                                    key={index}
-                                    className="flex items-center justify-center h-24 overflow-hidden"
-                                >
+                                    key={partner.name}
+                                    className="flex items-center justify-center h-24 overflow-hidden">
                                     <Image
                                         src={partner.logo}
                                         alt={partner.name}

@@ -7,11 +7,13 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import moroccoGeoJSON from '@/config/maroc.geo.json';
+import { useTheme } from 'next-themes';
 
 const BloodCentersMap = ({ dict }: { dict: any }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [map, setMap] = useState(null);
     const [markers, setMarkers] = useState([]);
+    const { theme } = useTheme();
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -43,22 +45,23 @@ const BloodCentersMap = ({ dict }: { dict: any }) => {
                 maxZoom: 18,
             });
 
-            // Using CartoDB Positron tiles without labels
-            L.tileLayer(
-                'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
-                {
-                    attribution: '©OpenStreetMap, ©CartoDB',
-                    subdomains: 'abcd',
-                },
-            ).addTo(mapInstance);
+            const tileLayerUrl =
+                theme === 'dark'
+                    ? 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png'
+                    : 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png';
+
+            L.tileLayer(tileLayerUrl, {
+                attribution: '©OpenStreetMap, ©CartoDB',
+                subdomains: 'abcd',
+            }).addTo(mapInstance);
 
             // Add GeoJSON layer for Morocco's boundaries
             L.geoJSON(moroccoGeoJSON, {
                 style: {
-                    color: '#ff4444',
+                    color: theme === 'dark' ? '#b91c1c' : '#ff4444',
                     weight: 2,
                     opacity: 0.6,
-                    fillColor: '#ff4444',
+                    fillColor: theme === 'dark' ? '#b91c1c' : '#ff4444',
                     fillOpacity: 0.1,
                 },
             }).addTo(mapInstance);
@@ -70,9 +73,11 @@ const BloodCentersMap = ({ dict }: { dict: any }) => {
                 iconCreateFunction: function (cluster: {
                     getChildCount: () => any;
                 }) {
+                    const childCount = cluster.getChildCount();
+                    const clusterSize = childCount < 100 ? 'small' : 'medium';
                     return L.divIcon({
-                        html: `<div class="cluster-icon">${cluster.getChildCount()}</div>`,
-                        className: 'custom-cluster',
+                        html: `<div class="cluster-icon">${childCount}</div>`,
+                        className: `custom-cluster ${clusterSize}`,
                         iconSize: L.point(40, 40),
                     });
                 },
@@ -83,7 +88,7 @@ const BloodCentersMap = ({ dict }: { dict: any }) => {
                     icon: customIcon,
                 }).bindPopup(
                     `
-                    <div class="p-3">
+                    <div class="p-3 bg-card text-foreground">
                         <h3 class="font-bold text-lg mb-2">${center.name}</h3>
                         <div class="flex flex-col gap-2">
                             <a 
@@ -145,14 +150,14 @@ const BloodCentersMap = ({ dict }: { dict: any }) => {
                     transform: scale(1.1);
                 }
                 .custom-cluster {
-                    background: #dc2626;
+                    background: ${theme === 'dark' ? '#b91c1c' : '#dc2626'};
                     border-radius: 50%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     color: white;
                     font-weight: bold;
-                    border: 2px solid white;
+                    border: 2px solid ${theme === 'dark' ? '#4b5563' : 'white'};
                     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
                 }
                 .cluster-icon {
@@ -164,6 +169,8 @@ const BloodCentersMap = ({ dict }: { dict: any }) => {
                 }
                 .blood-center-popup .leaflet-popup-content-wrapper {
                     border-radius: 8px;
+                    background-color: ${theme === 'dark' ? '#1f2937' : '#ffffff'};
+                    color: ${theme === 'dark' ? '#f9fafb' : '#111827'};
                 }
                 .blood-center-popup .leaflet-popup-tip-container {
                     margin-top: -1px;
@@ -179,7 +186,7 @@ const BloodCentersMap = ({ dict }: { dict: any }) => {
                 document.head.removeChild(style);
             };
         }
-    }, [dict]);
+    }, [dict, theme]);
 
     useEffect(() => {
         if (map && markers.length > 0) {
@@ -205,9 +212,9 @@ const BloodCentersMap = ({ dict }: { dict: any }) => {
     }, [searchQuery, map, markers]);
 
     return (
-        <div className="py-16 bg-gradient-to-b from-white via-gray-50 to-white">
+        <div className="py-16 bg-background">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-                <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 mb-8">
+                <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300 mb-8">
                     {dict?.map.title || 'Blood Donation Centers'}
                 </h2>
 
@@ -218,21 +225,21 @@ const BloodCentersMap = ({ dict }: { dict: any }) => {
                             dict?.map.search_placeholder ||
                             'Search for a blood donation center...'
                         }
-                        className="w-full max-w-md mx-auto block px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-500 focus:border-brand-500"
+                        className="w-full max-w-md mx-auto block px-4 py-2 border rounded-md shadow-sm focus:ring-brand-500 focus:border-brand-500 bg-card text-foreground"
                         value={searchQuery}
                         onChange={e => setSearchQuery(e.target.value)}
                     />
                 </div>
 
-                <Card className="relative overflow-hidden">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-brand-100 via-brand-200 to-brand-100 rounded-lg blur opacity-20" />
+                <Card className="relative overflow-hidden border">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-brand-100 via-brand-200 to-brand-100 dark:from-brand-900 dark:via-brand-800 dark:to-brand-900 rounded-lg blur opacity-20" />
                     <div
                         id="map"
                         className="relative w-full h-96 md:h-[600px] rounded-lg z-10"
                     />
                 </Card>
 
-                <div className="mt-4 text-sm text-gray-600 text-center">
+                <div className="mt-4 text-sm text-muted-foreground text-center">
                     {dict?.map.legend_text ||
                         'Click on a marker to see more information and get directions'}
                 </div>

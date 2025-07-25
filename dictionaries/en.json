@@ -269,6 +269,7 @@
     "profile": {
         "title": "Profile Settings",
         "description": "Manage your personal information and blood donation requests",
+        "accountInformation": "Account Information",
         "tabs": {
             "bloodRequests": "Blood Requests",
             "accountInfo": "Account Information"
@@ -277,6 +278,7 @@
     "bloodRequests": {
         "myRequests": "My Blood Requests",
         "newRequest": "New Request",
+        "createRequestDescription": "Create a new blood request with your requirements",
         "noRequests": "No blood requests found. Click \"New Request\" to create one.",
         "status": {
             "active": "Active",
@@ -479,5 +481,11 @@
             "findCampaigns": "Find Campaigns",
             "urgentRequests": "Urgent Requests"
         }
+    },
+    "theme": {
+        "label": "Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
     }
 }

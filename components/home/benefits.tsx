@@ -30,15 +30,14 @@ export function BenefitsComponent({ dict }: { dict: any }) {
 
     return (
         <div
-            className="py-16 bg-gradient-to-b from-white to-gray-50"
-            id="benefits"
-        >
+            className="py-16 bg-gradient-to-b from-background to-muted/50"
+            id="benefits">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center">
-                    <p className="text-3xl font-bold text-gray-900">
+                    <p className="text-3xl font-bold text-foreground">
                         {dict.donation_benefits.title}
                     </p>
-                    <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+                    <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
                         {dict.donation_benefits.description}
                     </p>
                 </div>
@@ -48,20 +47,19 @@ export function BenefitsComponent({ dict }: { dict: any }) {
                         {benefits.map(benefit => (
                             <div
                                 key={benefit.name}
-                                className="relative bg-white rounded-lg p-6 transition-all duration-300 hover:shadow-md border border-gray-100"
-                            >
+                                className="relative bg-card rounded-lg p-6 transition-all duration-300 hover:shadow-md border">
                                 <dt className="flex gap-4">
-                                    <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-brand-100 text-brand-600 flex-shrink-0">
+                                    <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-brand-100 text-brand-600 dark:bg-brand-900/50 dark:text-brand-400 flex-shrink-0">
                                         <benefit.icon
                                             className="h-5 w-5"
                                             aria-hidden="true"
                                         />
                                     </div>
-                                    <p className="text-lg font-medium text-gray-900">
+                                    <p className="text-lg font-medium text-foreground">
                                         {benefit.name}
                                     </p>
                                 </dt>
-                                <dd className="mt-2 ps-14 text-sm text-gray-500">
+                                <dd className="mt-2 ps-14 text-sm text-muted-foreground">
                                     {benefit.description}
                                 </dd>
                             </div>

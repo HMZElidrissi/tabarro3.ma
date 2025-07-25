@@ -182,7 +182,7 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                 </div>
             </CardContent>
             <CardFooter>
-                <Button type="submit" disabled={pending}>
+                <Button variant="brand" type="submit" disabled={pending}>
                     {pending ? (
                         <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />

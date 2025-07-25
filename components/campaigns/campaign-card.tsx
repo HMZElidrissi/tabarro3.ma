@@ -75,18 +75,20 @@ export function CampaignCard({
         if (isOngoing) {
             return {
                 text: dict.Ongoing,
-                className: 'bg-green-100 text-green-700 border-green-200',
+                className:
+                    'bg-green-100 text-green-700 border-green-200 dark:bg-green-900/50 dark:text-green-400 dark:border-green-800',
             };
         }
         if (isUpcoming) {
             return {
                 text: dict.Upcoming,
-                className: 'bg-blue-100 text-blue-700 border-blue-200',
+                className:
+                    'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/50 dark:text-blue-400 dark:border-blue-800',
             };
         }
         return {
             text: dict.Past,
-            className: 'bg-gray-100 text-gray-600 border-gray-200',
+            className: 'bg-muted text-muted-foreground border-border',
         };
     };
 
@@ -94,7 +96,7 @@ export function CampaignCard({
 
     return (
         <>
-            <Card className="group h-full flex flex-col transition-all duration-200 hover:shadow-lg hover:-translate-y-1 border-0 shadow-sm bg-white/50 backdrop-blur-sm">
+            <Card className="group h-full flex flex-col transition-all duration-200 hover:shadow-lg hover:-translate-y-1 border-0 shadow-sm bg-card/50 backdrop-blur-sm">
                 <CardContent className="flex-1 p-4">
                     {/* Header with status badge */}
                     <div className="flex items-start justify-between mb-3 gap-2">
@@ -110,35 +112,35 @@ export function CampaignCard({
                         {isParticipating && (
                             <Badge
                                 variant="outline"
-                                className="bg-brand-50 text-brand-700 border-brand-200 text-xs shrink-0">
+                                className="bg-brand-50 text-brand-700 border-brand-200 dark:bg-brand-900/50 dark:text-brand-400 dark:border-brand-800 text-xs shrink-0">
                                 {dict.Participating}
                             </Badge>
                         )}
                     </div>
 
                     {/* Campaign Title */}
-                    <h3 className="font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-brand-600 transition-colors">
+                    <h3 className="font-semibold text-foreground mb-3 line-clamp-2 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
                         {campaign.name}
                     </h3>
 
                     {/* Campaign Details - Compact Grid */}
                     <div className="space-y-2.5 text-sm">
-                        <div className="flex items-center gap-2 text-gray-600">
-                            <User className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                            <User className="h-3.5 w-3.5 text-muted-foreground/80 shrink-0" />
                             <span className="truncate">
                                 {campaign.organization!.name}
                             </span>
                         </div>
 
-                        <div className="flex items-center gap-2 text-gray-600">
-                            <MapPin className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                            <MapPin className="h-3.5 w-3.5 text-muted-foreground/80 shrink-0" />
                             <span className="truncate">
                                 {campaign.location}
                             </span>
                         </div>
 
-                        <div className="flex items-center gap-2 text-gray-600">
-                            <Calendar className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                            <Calendar className="h-3.5 w-3.5 text-muted-foreground/80 shrink-0" />
                             <span className="truncate">
                                 {format(campaign.startTime, 'dd/MM/yy')} -{' '}
                                 {format(campaign.endTime, 'dd/MM/yy')}
@@ -146,8 +148,8 @@ export function CampaignCard({
                         </div>
 
                         {campaign.organization?.phone && (
-                            <div className="flex items-center gap-2 text-gray-600">
-                                <Phone className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+                            <div className="flex items-center gap-2 text-muted-foreground">
+                                <Phone className="h-3.5 w-3.5 text-muted-foreground/80 shrink-0" />
                                 <span className="truncate">
                                     {campaign.organization.phone}
                                 </span>
@@ -157,7 +159,7 @@ export function CampaignCard({
 
                     {/* Description - Compact */}
                     {campaign.description && (
-                        <p className="text-sm text-gray-600 mt-4">
+                        <p className="text-sm text-muted-foreground mt-4">
                             {campaign.description}
                         </p>
                     )}
@@ -171,7 +173,7 @@ export function CampaignCard({
                             className={cn(
                                 'w-full font-medium transition-all',
                                 !isParticipating &&
-                                    'bg-brand-600 hover:bg-brand-700 text-white shadow-sm',
+                                    'bg-brand-600 hover:bg-brand-700 text-white dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90 shadow-sm',
                             )}
                             onClick={handleParticipate}
                             disabled={isParticipating || isLoading}>

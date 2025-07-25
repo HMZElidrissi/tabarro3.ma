@@ -4,7 +4,7 @@ const MdxComponents = {
     h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h1
             className={cn(
-                "mt-2 scroll-m-20 text-4xl font-bold tracking-tight text-gray-900 relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-24 after:h-1 after:bg-brand-500",
+                "mt-2 scroll-m-20 text-4xl font-bold tracking-tight text-foreground relative pb-4 mb-6 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-24 after:h-1 after:bg-brand-500 dark:after:bg-brand-400",
                 className,
             )}
             {...props}
@@ -14,7 +14,7 @@ const MdxComponents = {
     h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h2
             className={cn(
-                'mt-12 scroll-m-20 text-3xl font-semibold tracking-tight text-gray-900 first:mt-0 border-b border-gray-100 pb-2',
+                'mt-12 scroll-m-20 text-3xl font-semibold tracking-tight text-foreground first:mt-0 border-b border-border pb-2',
                 className,
             )}
             {...props}
@@ -24,7 +24,7 @@ const MdxComponents = {
     h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h3
             className={cn(
-                'mt-8 scroll-m-20 text-2xl font-semibold tracking-tight text-gray-900',
+                'mt-8 scroll-m-20 text-2xl font-semibold tracking-tight text-foreground',
                 className,
             )}
             {...props}
@@ -37,7 +37,7 @@ const MdxComponents = {
     }: React.HTMLAttributes<HTMLParagraphElement>) => (
         <p
             className={cn(
-                'leading-7 text-gray-700 [&:not(:first-child)]:mt-6',
+                'leading-7 text-foreground [&:not(:first-child)]:mt-6',
                 className,
             )}
             {...props}
@@ -47,7 +47,7 @@ const MdxComponents = {
     ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
         <ul
             className={cn(
-                'my-6 ml-6 list-disc text-gray-700 marker:text-brand-500',
+                'my-6 ml-6 list-disc text-foreground marker:text-brand-500 dark:marker:text-brand-400',
                 className,
             )}
             {...props}
@@ -57,7 +57,7 @@ const MdxComponents = {
     ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
         <ol
             className={cn(
-                'my-6 ml-6 list-decimal text-gray-700 marker:text-brand-500',
+                'my-6 ml-6 list-decimal text-foreground marker:text-brand-500 dark:marker:text-brand-400',
                 className,
             )}
             {...props}
@@ -74,12 +74,12 @@ const MdxComponents = {
     }: React.HTMLAttributes<HTMLQuoteElement>) => (
         <blockquote
             className={cn(
-                'mt-6 border-l-4 border-brand-500 pl-6 italic text-gray-800 bg-gray-50 py-4 pr-4 rounded-r-md relative',
+                'mt-6 border-l-4 border-brand-500 dark:border-brand-400 pl-6 italic text-foreground bg-muted py-4 pr-4 rounded-r-md relative',
                 className,
             )}
             {...props}
         >
-            <div className="absolute top-4 left-2 opacity-10 text-brand-500">
+            <div className="absolute top-4 left-2 opacity-10 text-brand-500 dark:text-brand-400">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-8 w-8"
@@ -95,7 +95,7 @@ const MdxComponents = {
 
     hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
         <hr
-            className="my-8 border-none h-px bg-gradient-to-r from-brand-200 via-brand-400 to-brand-200"
+            className="my-8 border-none h-px bg-gradient-to-r from-brand-200 via-brand-400 to-brand-200 dark:from-brand-800 dark:via-brand-600 dark:to-brand-800"
             {...props}
         />
     ),
@@ -106,7 +106,7 @@ const MdxComponents = {
     }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
         <a
             className={cn(
-                'font-medium text-brand-600 underline underline-offset-4 hover:text-brand-800 decoration-brand-300 hover:decoration-brand-500 transition-colors',
+                'font-medium text-brand-600 dark:text-brand-400 underline underline-offset-4 hover:text-brand-800 dark:hover:text-brand-300 decoration-brand-300 dark:decoration-brand-600 hover:decoration-brand-500 dark:hover:decoration-brand-400 transition-colors',
                 className,
             )}
             {...props}
@@ -119,7 +119,7 @@ const MdxComponents = {
         ...props
     }: React.ImgHTMLAttributes<HTMLImageElement>) => (
         <figure className="my-8">
-            <div className="overflow-hidden rounded-lg shadow-md">
+            <div className="overflow-hidden rounded-lg shadow-md border border-border">
                 <img
                     className={cn(
                         'w-full h-auto transition-transform hover:scale-105 duration-300',
@@ -130,7 +130,7 @@ const MdxComponents = {
                 />
             </div>
             {alt && (
-                <figcaption className="text-center text-sm text-gray-500 mt-2">
+                <figcaption className="text-center text-sm text-muted-foreground mt-2">
                     {alt}
                 </figcaption>
             )}
@@ -141,10 +141,10 @@ const MdxComponents = {
         className,
         ...props
     }: React.TableHTMLAttributes<HTMLTableElement>) => (
-        <div className="my-6 w-full overflow-y-auto rounded-lg border border-gray-200">
+        <div className="my-6 w-full overflow-y-auto rounded-lg border border-border">
             <table
                 className={cn(
-                    'w-full min-w-full divide-y divide-gray-200',
+                    'w-full min-w-full divide-y divide-border',
                     className,
                 )}
                 {...props}
@@ -158,7 +158,7 @@ const MdxComponents = {
     }: React.ThHTMLAttributes<HTMLTableCellElement>) => (
         <th
             className={cn(
-                'px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider',
+                'px-6 py-3 bg-muted text-left text-xs font-medium text-muted-foreground uppercase tracking-wider',
                 className,
             )}
             {...props}
@@ -171,7 +171,7 @@ const MdxComponents = {
     }: React.TdHTMLAttributes<HTMLTableCellElement>) => (
         <td
             className={cn(
-                'px-6 py-4 whitespace-nowrap text-sm text-gray-900 border-b border-gray-100',
+                'px-6 py-4 whitespace-nowrap text-sm text-foreground border-b border-border',
                 className,
             )}
             {...props}
@@ -181,7 +181,7 @@ const MdxComponents = {
     code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
         <code
             className={cn(
-                'relative rounded bg-gray-100 py-[0.2rem] px-[0.3rem] font-mono text-sm text-brand-600',
+                'relative rounded bg-muted py-[0.2rem] px-[0.3rem] font-mono text-sm text-brand-600 dark:text-brand-400',
                 className,
             )}
             {...props}
@@ -191,7 +191,7 @@ const MdxComponents = {
     pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
         <pre
             className={cn(
-                'mt-6 mb-6 overflow-x-auto rounded-lg bg-gray-900 p-4',
+                'mt-6 mb-6 overflow-x-auto rounded-lg bg-slate-900 dark:bg-slate-950 p-4 border border-border',
                 className,
             )}
             {...props}
@@ -273,10 +273,10 @@ const MdxComponents = {
             });
 
         const styles = {
-            default: 'bg-brand-50 border-brand-200 text-brand-800',
-            success: 'bg-green-50 border-green-200 text-green-800',
-            warning: 'bg-yellow-50 border-yellow-200 text-yellow-800',
-            info: 'bg-blue-50 border-blue-200 text-blue-800',
+            default: 'bg-brand-50 dark:bg-brand-950/50 border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-200',
+            success: 'bg-green-50 dark:bg-green-950/50 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200',
+            warning: 'bg-yellow-50 dark:bg-yellow-950/50 border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200',
+            info: 'bg-blue-50 dark:bg-blue-950/50 border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200',
         } as any;
 
         return (
@@ -288,7 +288,7 @@ const MdxComponents = {
                 )}
                 {...props}
             >
-                <div className="mr-3 mt-0.5 text-brand-500">{Icon}</div>
+                <div className="mr-3 mt-0.5 text-brand-500 dark:text-brand-400">{Icon}</div>
                 <div>{children}</div>
             </div>
         );

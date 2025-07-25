@@ -40,16 +40,15 @@ export default function ShareButtons({
 
     return (
         <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm font-medium text-gray-600 mr-1">
+            <span className="text-sm font-medium text-muted-foreground mr-1">
                 {dict.blog?.share || 'Share'} :
             </span>
 
             <Button
                 variant="outline"
                 size="icon"
-                className="w-9 h-9 rounded-full bg-[#1DA1F2]/10 hover:bg-[#1DA1F2]/20 border-transparent"
-                onClick={() => window.open(xShare, '_blank')}
-            >
+                className="w-9 h-9 rounded-full bg-[#1DA1F2]/10 hover:bg-[#1DA1F2]/20 dark:bg-[#1DA1F2]/20 dark:hover:bg-[#1DA1F2]/30 border-transparent"
+                onClick={() => window.open(xShare, '_blank')}>
                 <XTwitter className="h-5 w-5 text-[#1DA1F2]" />
                 <span className="sr-only">Share on X (Twitter)</span>
             </Button>
@@ -57,9 +56,8 @@ export default function ShareButtons({
             <Button
                 variant="outline"
                 size="icon"
-                className="w-9 h-9 rounded-full bg-[#4267B2]/10 hover:bg-[#4267B2]/20 border-transparent"
-                onClick={() => window.open(facebookShare, '_blank')}
-            >
+                className="w-9 h-9 rounded-full bg-[#4267B2]/10 hover:bg-[#4267B2]/20 dark:bg-[#4267B2]/20 dark:hover:bg-[#4267B2]/30 border-transparent"
+                onClick={() => window.open(facebookShare, '_blank')}>
                 <Facebook className="h-5 w-5 text-[#4267B2]" />
                 <span className="sr-only">Share on Facebook</span>
             </Button>
@@ -67,9 +65,8 @@ export default function ShareButtons({
             <Button
                 variant="outline"
                 size="icon"
-                className="w-9 h-9 rounded-full bg-[#E1306C]/10 hover:bg-[#E1306C]/20 border-transparent"
-                onClick={() => window.open(instagramShare, '_blank')}
-            >
+                className="w-9 h-9 rounded-full bg-[#E1306C]/10 hover:bg-[#E1306C]/20 dark:bg-[#E1306C]/20 dark:hover:bg-[#E1306C]/30 border-transparent"
+                onClick={() => window.open(instagramShare, '_blank')}>
                 <Instagram className="h-5 w-5 text-[#E1306C]" />
                 <span className="sr-only">Share on Instagram</span>
             </Button>
@@ -77,9 +74,8 @@ export default function ShareButtons({
             <Button
                 variant="outline"
                 size="icon"
-                className="w-9 h-9 rounded-full bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 border-transparent"
-                onClick={() => window.open(linkedinShare, '_blank')}
-            >
+                className="w-9 h-9 rounded-full bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 dark:bg-[#0A66C2]/20 dark:hover:bg-[#0A66C2]/30 border-transparent"
+                onClick={() => window.open(linkedinShare, '_blank')}>
                 <Linkedin className="h-5 w-5 text-[#0A66C2]" />
                 <span className="sr-only">Share on LinkedIn</span>
             </Button>
@@ -87,9 +83,8 @@ export default function ShareButtons({
             <Button
                 variant="outline"
                 size="icon"
-                className="w-9 h-9 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 border-transparent"
-                onClick={() => window.open(whatsappShare, '_blank')}
-            >
+                className="w-9 h-9 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 dark:bg-[#25D366]/20 dark:hover:bg-[#25D366]/30 border-transparent"
+                onClick={() => window.open(whatsappShare, '_blank')}>
                 <Whatsapp className="h-5 w-5 text-[#25D366]" />
                 <span className="sr-only">Share on WhatsApp</span>
             </Button>
@@ -97,11 +92,10 @@ export default function ShareButtons({
             <Button
                 variant="outline"
                 size="icon"
-                className="w-9 h-9 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent"
-                onClick={handleCopy}
-            >
+                className="w-9 h-9 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground border-transparent transition-colors"
+                onClick={handleCopy}>
                 {copied ? (
-                    <Check className="h-5 w-5 text-green-600" />
+                    <Check className="h-5 w-5 text-green-600 dark:text-green-400" />
                 ) : (
                     <Copy className="h-5 w-5" />
                 )}

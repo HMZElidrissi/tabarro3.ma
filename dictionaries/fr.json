@@ -252,6 +252,7 @@
     "profile": {
         "title": "Paramètres du profil",
         "description": "Gérez vos informations personnelles et vos demandes de don de sang",
+        "accountInformation": "Informations du compte",
         "tabs": {
             "bloodRequests": "Demandes de sang",
             "accountInfo": "Informations du compte"
@@ -260,6 +261,7 @@
     "bloodRequests": {
         "myRequests": "Mes demandes de sang",
         "newRequest": "Nouvelle demande",
+        "createRequestDescription": "Créer une nouvelle demande de sang avec vos exigences",
         "noRequests": "Aucune demande de sang trouvée. Cliquez sur \"Nouvelle demande\" pour en créer une.",
         "status": {
             "active": "Active",
@@ -462,5 +464,11 @@
             "findCampaigns": "Trouver des campagnes",
             "urgentRequests": "Demandes urgentes"
         }
+    },
+    "theme": {
+        "label": "Thème",
+        "light": "Clair",
+        "dark": "Sombre",
+        "system": "Système"
     }
 }

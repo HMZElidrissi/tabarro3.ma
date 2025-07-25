@@ -86,7 +86,7 @@ export function BloodRequestsGrid({
                     {dict.bloodRequests.myRequests}
                 </h2>
                 <Link href="/profile/requests/new">
-                    <Button>
+                    <Button variant="secondary">
                         <Plus className="mr-2 h-4 w-4" />
                         {dict.bloodRequests.newRequest}
                     </Button>

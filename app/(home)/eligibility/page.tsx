@@ -106,7 +106,7 @@ export default async function EligibilityPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <div className="bg-gradient-to-b from-white to-gray-50">
+            <div className="bg-background">
                 <EligibilityComponent dict={dict} isRTL={isRTL} />
             </div>
         </>

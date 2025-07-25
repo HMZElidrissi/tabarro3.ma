@@ -61,11 +61,11 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
     const handlePrev = isRTL ? nextSlide : prevSlide;
 
     return (
-        <div className="relative bg-gradient-to-b from-brand-700 to-brand-900 py-12 md:py-16">
+        <div className="relative bg-gradient-to-b from-brand-700 to-brand-900 dark:from-brand-900 dark:to-background py-12 md:py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid lg:grid-cols-2 gap-8 items-center">
                     {/* Left Content Section */}
-                    <div className="space-y-6 text-white z-10">
+                    <div className="space-y-6 text-white dark:text-foreground z-10">
                         <div className="inline-block">
                             <Image
                                 src="/hero.svg"
@@ -80,7 +80,7 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
                             {dict.hero_title}
                         </h1>
 
-                        <p className="text-lg text-white/90 leading-relaxed max-w-xl">
+                        <p className="text-lg text-white/90 dark:text-muted-foreground leading-relaxed max-w-xl">
                             {dict.hero_description}
                         </p>
 
@@ -97,7 +97,7 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
 
                         <Button
                             asChild
-                            className="bg-white text-brand-700 hover:bg-brand-50 hover:text-brand-800 shadow-xl transition-all duration-300 py-6 px-8 text-lg">
+                            className="bg-white text-brand-700 hover:bg-brand-50 hover:text-brand-800 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90 shadow-xl transition-all duration-300 py-6 px-8 text-lg">
                             <Link
                                 href="/requests"
                                 className="inline-flex items-center gap-2">
@@ -135,7 +135,7 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
                                         variant="outline"
                                         size="icon"
                                         onClick={handlePrev}
-                                        className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border-white/30 text-white rounded-full">
+                                        className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border-white/30 text-white dark:bg-black/20 dark:hover:bg-black/30 dark:border-white/20 dark:text-foreground rounded-full">
                                         {isRTL ? (
                                             <ChevronRight className="h-6 w-6" />
                                         ) : (
@@ -147,7 +147,7 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
                                         variant="outline"
                                         size="icon"
                                         onClick={handleNext}
-                                        className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border-white/30 text-white rounded-full">
+                                        className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border-white/30 text-white dark:bg-black/20 dark:hover:bg-black/30 dark:border-white/20 dark:text-foreground rounded-full">
                                         {isRTL ? (
                                             <ChevronLeft className="h-6 w-6" />
                                         ) : (
@@ -166,8 +166,8 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
                                             }
                                             className={`h-2 w-2 rounded-full transition-all duration-300 ${
                                                 index === currentSlide
-                                                    ? 'bg-white w-8'
-                                                    : 'bg-white/50 hover:bg-white/75'
+                                                    ? 'bg-white dark:bg-primary w-8'
+                                                    : 'bg-white/50 hover:bg-white/75 dark:bg-muted-foreground/50 dark:hover:bg-muted-foreground/75'
                                             }`}
                                         />
                                     ))}
@@ -180,8 +180,8 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
 
             {/* Decorative Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-radial from-brand-500/20 to-transparent opacity-50" />
-                <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-radial from-brand-500/20 to-transparent opacity-50" />
+                <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-radial from-brand-500/20 to-transparent opacity-50 dark:opacity-30" />
+                <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-radial from-brand-500/20 to-transparent opacity-50 dark:opacity-30" />
             </div>
         </div>
     );

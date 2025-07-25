@@ -18,6 +18,7 @@ import Image from 'next/image';
 import { ProgressLink as Link } from '@/components/custom/progress-link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { ModeToggle } from '@/components/custom/mode-toggle';
 
 interface DesktopNavProps {
     dict: any;
@@ -100,9 +101,9 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                         variant="ghost"
                         key={item.name}
                         className={cn(
-                            'text-gray-900 hover:text-brand-700 hover:bg-brand-50 transition-colors duration-200 px-3 py-2 text-sm font-medium',
+                            'text-foreground hover:text-brand-700 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/50 transition-colors duration-200 px-3 py-2 text-sm font-medium',
                             pathname === item.href &&
-                                'bg-brand-50 text-brand-700',
+                                'bg-brand-50 dark:bg-brand-900/50 text-brand-700 dark:text-brand-400',
                         )}>
                         <Link href={item.href}>{item.name}</Link>
                     </Button>
@@ -113,7 +114,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                     <DropdownMenuTrigger asChild>
                         <Button
                             variant="ghost"
-                            className="text-gray-900 hover:text-brand-700 hover:bg-brand-50 transition-colors duration-200 px-3 py-2 text-sm font-medium focus-visible:ring-0">
+                            className="text-foreground hover:text-brand-700 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/50 transition-colors duration-200 px-3 py-2 text-sm font-medium focus-visible:ring-0">
                             {dict.menu.more}
                             <ChevronDown className="ml-1 h-4 w-4" />
                         </Button>
@@ -123,10 +124,10 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                         {desktopMenu.slice(4).map(item => (
                             <DropdownMenuItem
                                 key={item.name}
-                                className="hover:bg-brand-50">
+                                className="hover:bg-brand-50 dark:hover:bg-brand-900/50">
                                 <Link
                                     href={item.href}
-                                    className="w-full text-gray-700">
+                                    className="w-full text-foreground">
                                     {item.name}
                                 </Link>
                             </DropdownMenuItem>
@@ -151,13 +152,16 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
 
             {/* Right Section - Language Switcher and User Actions */}
             <div className="flex items-center space-x-2 lg:space-x-3 rtl:space-x-reverse">
+                {/* Dark Mode Toggle */}
+                <ModeToggle dict={dict.theme} />
+
                 {/* Language Switcher */}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button
                             variant="outline"
                             size="sm"
-                            className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-200 focus-visible:ring-0">
+                            className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-muted-foreground dark:hover:text-foreground dark:hover:bg-muted/50 transition-colors duration-200 focus-visible:ring-0">
                             <Globe className="h-4 w-4 flex-shrink-0" />
                             <span className="font-medium leading-none">
                                 {currentLanguage?.name}
@@ -171,7 +175,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                                 onClick={() =>
                                     handleLanguageSwitch(language.code)
                                 }
-                                className="flex items-center justify-between hover:bg-brand-50 cursor-pointer">
+                                className="flex items-center justify-between hover:bg-brand-50 dark:hover:bg-brand-900/50 cursor-pointer">
                                 {language.name}
                                 {language.code === currentLocale && (
                                     <span className="h-2 w-2 rounded-full bg-brand-500" />
@@ -189,7 +193,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                                 <Button
                                     variant="brand"
                                     size="sm"
-                                    className="flex items-center space-x-2 rtl:space-x-reverse transition-colors duration-200 px-3 py-2 focus-visible:ring-0">
+                                    className="flex items-center gap-x-2 transition-colors duration-200 px-3 py-2 focus-visible:ring-0">
                                     <User className="h-4 w-4 flex-shrink-0" />
                                     <span className="text-sm font-medium hidden sm:inline leading-none">
                                         {user.name || dict.common.profile}
@@ -197,21 +201,21 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="w-48">
-                                <DropdownMenuItem className="hover:bg-brand-50">
+                                <DropdownMenuItem className="hover:bg-brand-50 dark:hover:bg-brand-900/50">
                                     <Link
                                         href={
                                             user.role === Role.PARTICIPANT
                                                 ? '/profile'
                                                 : '/dashboard'
                                         }
-                                        className="w-full text-brand-700 flex items-center space-x-2 rtl:space-x-reverse">
+                                        className="w-full text-brand-700 dark:text-brand-400 flex items-center gap-x-2">
                                         <User className="h-4 w-4" />
                                         <span>{dict.common.profile}</span>
                                     </Link>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem className="hover:bg-brand-50">
+                                <DropdownMenuItem className="hover:bg-brand-50 dark:hover:bg-brand-900/50">
                                     <div
-                                        className="w-full text-gray-700 flex items-center space-x-2 rtl:space-x-reverse cursor-pointer"
+                                        className="w-full text-gray-700 dark:text-foreground flex items-center gap-x-2 cursor-pointer"
                                         onClick={e => {
                                             e.preventDefault();
                                             handleLogout();
@@ -242,7 +246,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                             asChild
                             variant="ghost"
                             size="sm"
-                            className="text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-200 px-3 py-2 text-sm font-medium">
+                            className="text-gray-700 hover:text-gray-900 hover:bg-gray-100 dark:text-muted-foreground dark:hover:text-foreground dark:hover:bg-muted/50 transition-colors duration-200 px-3 py-2 text-sm font-medium">
                             <Link
                                 href="/sign-in"
                                 className="flex items-center space-x-1 rtl:space-x-reverse underline font-bold">

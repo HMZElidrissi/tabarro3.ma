@@ -251,6 +251,7 @@
     "profile": {
         "title": "إعدادات الملف الشخصي",
         "description": "إدارة معلوماتك الشخصية وطلبات التبرع بالدم",
+        "accountInformation": "معلومات الحساب",
         "tabs": {
             "bloodRequests": "طلبات الدم",
             "accountInfo": "معلومات الحساب"
@@ -259,11 +260,12 @@
     "bloodRequests": {
         "myRequests": "طلبات الدم الخاصة بي",
         "newRequest": "طلب جديد",
+        "createRequestDescription": "إنشاء طلب دم جديد مع متطلباتك",
         "noRequests": "لم يتم العثور على طلبات دم. انقر على \"طلب جديد\" لإنشاء طلب.",
         "status": {
             "active": "نشط",
             "fulfilled": "تمت التلبية",
-            "canceled": "تم الإلغاء"
+            "cancelled": "تم الإلغاء"
         },
         "deleteDialog": {
             "title": "هل أنت متأكد؟",
@@ -461,5 +463,11 @@
             "findCampaigns": "العثور على حملات",
             "urgentRequests": "طلبات عاجلة"
         }
+    },
+    "theme": {
+        "label": "المظهر",
+        "light": "فاتح",
+        "dark": "داكن",
+        "system": "النظام"
     }
 }

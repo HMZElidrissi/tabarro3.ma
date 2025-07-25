@@ -125,8 +125,8 @@ export default async function BlogPostPage({
             <div className="container mx-auto px-4 py-6">
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                     {/* Main content */}
-                    <article className="lg:col-span-3 bg-white rounded-lg shadow-sm border p-6">
-                        <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-brand-600">
+                    <article className="lg:col-span-3 bg-card rounded-lg shadow-sm border p-6">
+                        <div className="prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-brand-600 dark:prose-a:text-brand-400 prose-strong:text-foreground">
                             {typeof post.content === 'string' && (
                                 <MDXRemote
                                     source={post.content}
@@ -142,12 +142,12 @@ export default async function BlogPostPage({
                         </div>
 
                         {/* Compact Article footer */}
-                        <div className="mt-8 pt-4 border-t border-gray-100">
+                        <div className="mt-8 pt-4 border-t">
                             <div className="flex flex-wrap gap-1.5 mb-4">
                                 {post.tags.map(tag => (
                                     <span
                                         key={tag}
-                                        className="px-2.5 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium hover:bg-gray-200 transition-colors">
+                                        className="px-2.5 py-1 bg-muted text-muted-foreground rounded-full text-xs font-medium hover:bg-muted/80 transition-colors">
                                         #{tag}
                                     </span>
                                 ))}
@@ -167,13 +167,11 @@ export default async function BlogPostPage({
                         {/* Back to blog */}
                         <Link
                             href="/blog"
-                            className="inline-flex items-center text-brand-600 hover:text-brand-700 font-medium text-sm group">
+                            className="inline-flex items-center text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 font-medium text-sm group">
                             <ChevronLeft
                                 className={cn(
                                     'h-4 w-4 group-hover:-translate-x-0.5 transition-transform',
-                                    isRTL
-                                        ? 'ml-1 order-last'
-                                        : 'mr-1',
+                                    isRTL ? 'ml-1 order-last' : 'mr-1',
                                 )}
                             />
                             <span>
@@ -182,20 +180,20 @@ export default async function BlogPostPage({
                         </Link>
 
                         {/* Compact Author box */}
-                        <div className="bg-white rounded-lg shadow-sm border p-4">
-                            <h3 className="text-sm font-semibold mb-3 text-gray-900">
+                        <div className="bg-card rounded-lg shadow-sm border p-4">
+                            <h3 className="text-sm font-semibold mb-3 text-foreground">
                                 {dict.blog?.aboutAuthor || 'About the Author'}
                             </h3>
                             <div className="flex items-center">
                                 <div
                                     className={cn(
-                                        'w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center',
+                                        'w-10 h-10 rounded-full bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center',
                                         isRTL ? 'ml-3' : 'mr-3',
                                     )}>
-                                    <User className="w-5 h-5 text-brand-600" />
+                                    <User className="w-5 h-5 text-brand-600 dark:text-brand-400" />
                                 </div>
                                 <div>
-                                    <h4 className="font-medium text-gray-900 text-sm">
+                                    <h4 className="font-medium text-foreground text-sm">
                                         {post.author}
                                     </h4>
                                 </div>
@@ -203,7 +201,7 @@ export default async function BlogPostPage({
                         </div>
 
                         {/* Compact Call to action */}
-                        <div className="bg-gradient-to-br from-brand-500 to-brand-600 rounded-lg shadow-sm p-4 text-white">
+                        <div className="bg-gradient-to-br from-brand-500 to-brand-600 dark:from-brand-700 dark:to-brand-800 rounded-lg shadow-sm p-4 text-white">
                             <h3 className="text-sm font-semibold mb-2">
                                 {dict.blog?.donateNow || 'Donate Blood Today'}
                             </h3>
@@ -213,15 +211,15 @@ export default async function BlogPostPage({
                             </p>
                             <Link
                                 href="/campaigns"
-                                className="inline-block bg-white text-brand-600 font-medium px-3 py-1.5 rounded text-xs hover:bg-white/95 transition-colors">
+                                className="inline-block bg-white text-brand-600 font-medium px-3 py-1.5 rounded text-xs hover:bg-white/95 transition-colors dark:text-brand-100 dark:bg-brand-500 dark:hover:bg-brand-400">
                                 {dict.blog?.findCampaigns || 'Find Campaigns'}
                             </Link>
                         </div>
 
                         {/* Compact Related posts */}
                         {relatedPosts.length > 0 && (
-                            <div className="bg-white rounded-lg shadow-sm border p-4">
-                                <h3 className="text-sm font-semibold mb-3 text-gray-900">
+                            <div className="bg-card rounded-lg shadow-sm border p-4">
+                                <h3 className="text-sm font-semibold mb-3 text-foreground">
                                     {dict.blog?.relatedPosts || 'Related Posts'}
                                 </h3>
                                 <div className="space-y-3">
@@ -240,10 +238,10 @@ export default async function BlogPostPage({
                                                     />
                                                 </div>
                                                 <div className="min-w-0 flex-1">
-                                                    <h4 className="font-medium text-gray-900 group-hover:text-brand-600 transition-colors text-sm line-clamp-2 leading-tight">
+                                                    <h4 className="font-medium text-foreground group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors text-sm line-clamp-2 leading-tight">
                                                         {post.title}
                                                     </h4>
-                                                    <span className="text-gray-500 text-xs">
+                                                    <span className="text-muted-foreground text-xs">
                                                         {formatDate(
                                                             post.publishDate,
                                                             locale,
