@@ -50,15 +50,15 @@ export default function BloodRequestsList({
                             height="120"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="text-brand-600">
+                            className="text-brand-600 dark:text-brand-400">
                             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                         </svg>
                     </div>
 
-                    <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400">
+                    <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
                         {dict.Blood_Requests}
                     </h1>
-                    <p className="text-gray-600 max-w-2xl mx-auto text-base leading-relaxed">
+                    <p className="text-muted-foreground max-w-2xl mx-auto text-base leading-relaxed">
                         {dict.Blood_Requests_Description}
                     </p>
 

@@ -10,7 +10,7 @@ import { getDictionary } from '@/i18n/get-dictionary';
 export async function generateMetadata(): Promise<Metadata> {
     const dict = await getDictionary();
     return {
-        title: dict.common.profile,
+        title: dict.bloodRequests.editRequest,
     };
 }
 

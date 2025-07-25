@@ -122,14 +122,14 @@ export default function CampaignsList({
                         height="120"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className="text-brand-600">
+                        className="text-brand-600 dark:text-brand-400">
                         <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                     </svg>
                 </div>
-                <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400">
+                <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
                     {dict.New_Campaigns}
                 </h1>
-                <p className="text-gray-600 max-w-2xl mx-auto text-base leading-relaxed">
+                <p className="text-muted-foreground max-w-2xl mx-auto text-base leading-relaxed">
                     {dict.New_Campaigns_Description}
                 </p>
                 <div className="mt-4 w-16 h-1 bg-brand-500 mx-auto rounded-full"></div>
@@ -222,7 +222,7 @@ export default function CampaignsList({
                                     <Button
                                         variant="ghost"
                                         onClick={handleResetFilters}
-                                        className="text-red-500 hover:text-red-600 hover:bg-red-50 w-full">
+                                        className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-500 dark:hover:bg-red-900/20 w-full">
                                         <X className="w-4 h-4 mr-2" />
                                         {dict.Reset_Filters ||
                                             dict.Clear_Filters ||
@@ -260,7 +260,7 @@ export default function CampaignsList({
                         <>
                             {ongoingCampaigns.length > 0 && (
                                 <div className="space-y-6">
-                                    <h2 className="text-2xl font-semibold">
+                                    <h2 className="text-2xl font-semibold text-foreground">
                                         {dict.Ongoing_Campaigns}
                                     </h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -278,7 +278,7 @@ export default function CampaignsList({
                             )}
                             {upcomingCampaigns.length > 0 && (
                                 <div className="space-y-6">
-                                    <h2 className="text-2xl font-semibold">
+                                    <h2 className="text-2xl font-semibold text-foreground">
                                         {dict.Upcoming_Campaigns}
                                     </h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -296,7 +296,7 @@ export default function CampaignsList({
                             )}
                             {pastCampaigns.length > 0 && (
                                 <div className="space-y-6">
-                                    <h2 className="text-2xl font-semibold">
+                                    <h2 className="text-2xl font-semibold text-foreground">
                                         {dict.Past_Campaigns}
                                     </h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

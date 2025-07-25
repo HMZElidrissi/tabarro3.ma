@@ -20,10 +20,10 @@ export function ForgotPasswordForm({ dict }: ForgotPasswordFormProps) {
     return (
         <div className="mx-auto max-w-sm space-y-6">
             <div className="space-y-2 text-center">
-                <h1 className="text-2xl font-bold">
+                <h1 className="text-2xl font-bold text-foreground">
                     {dict.auth.forgotPassword.title}
                 </h1>
-                <p className="text-gray-500">
+                <p className="text-muted-foreground">
                     {dict.auth.forgotPassword.description}
                 </p>
             </div>
@@ -53,9 +53,8 @@ export function ForgotPasswordForm({ dict }: ForgotPasswordFormProps) {
 
                 <Button
                     type="submit"
-                    className="w-full bg-brand-600 hover:bg-brand-700"
-                    disabled={pending}
-                >
+                    className="w-full bg-brand-600 hover:bg-brand-700 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90"
+                    disabled={pending}>
                     {pending
                         ? dict.auth.forgotPassword.sending
                         : dict.auth.forgotPassword.sendInstructions}

@@ -28,16 +28,16 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
             icon: User,
             title: dict.eligibility?.basicRequirements?.age?.title,
             description: dict.eligibility?.basicRequirements?.age?.description,
-            color: 'text-blue-600',
-            bgColor: 'bg-blue-50',
+            color: 'text-blue-600 dark:text-blue-400',
+            bgColor: 'bg-blue-50 dark:bg-blue-950/50',
         },
         {
             icon: Scale,
             title: dict.eligibility?.basicRequirements?.weight?.title,
             description:
                 dict.eligibility?.basicRequirements?.weight?.description,
-            color: 'text-green-600',
-            bgColor: 'bg-green-50',
+            color: 'text-green-600 dark:text-green-400',
+            bgColor: 'bg-green-50 dark:bg-green-950/50',
         },
     ];
 
@@ -158,28 +158,28 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                         height="120"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className="text-brand-600">
+                        className="text-brand-600 dark:text-brand-400">
                         <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                     </svg>
                 </div>
 
-                <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400">
+                <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
                     {dict.eligibility?.title}
                 </h1>
-                <p className="text-gray-600 max-w-2xl mx-auto text-base leading-relaxed">
+                <p className="text-muted-foreground max-w-2xl mx-auto text-base leading-relaxed">
                     {dict.eligibility?.description}
                 </p>
 
-                <div className="mt-4 w-16 h-1 bg-brand-500 mx-auto rounded-full"></div>
+                <div className="mt-4 w-16 h-1 bg-brand-500 dark:bg-brand-400 mx-auto rounded-full"></div>
             </div>
 
             {/* Basic Requirements */}
             <div className="mb-10">
                 <div className="text-center mb-6">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                    <h2 className="text-2xl font-bold text-foreground mb-2">
                         {dict.eligibility?.basicRequirementsTitle}
                     </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto text-sm">
+                    <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
                         {dict.eligibility?.basicRequirementsSubtitle}
                     </p>
                 </div>
@@ -188,7 +188,7 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                     {basicRequirements.map((req, index) => (
                         <Card
                             key={index}
-                            className="border-none shadow-md hover:shadow-lg transition-shadow duration-300">
+                            className="border-none shadow-md hover:shadow-lg transition-shadow duration-300 bg-card">
                             <CardContent className="p-4">
                                 <div className="flex items-center mb-2">
                                     <div
@@ -202,13 +202,13 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                                     </div>
                                     <h3
                                         className={cn(
-                                            'text-lg font-semibold text-gray-900',
+                                            'text-lg font-semibold text-foreground',
                                             isRTL ? 'mr-3' : 'ml-3',
                                         )}>
                                         {req.title}
                                     </h3>
                                 </div>
-                                <p className="text-gray-600 text-sm">
+                                <p className="text-muted-foreground text-sm">
                                     {req.description}
                                 </p>
                             </CardContent>
@@ -220,41 +220,41 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
             {/* Temporary Deferrals */}
             <div className="mb-10">
                 <div className="text-center mb-6">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center justify-center">
+                    <h2 className="text-2xl font-bold text-foreground mb-2 flex items-center justify-center">
                         <Clock
                             className={cn(
-                                'w-6 h-6 text-yellow-600',
+                                'w-6 h-6 text-yellow-600 dark:text-yellow-400',
                                 isRTL ? 'ml-2' : 'mr-2',
                             )}
                         />
                         {dict.eligibility?.temporaryDeferralsTitle}
                     </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto text-sm">
+                    <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
                         {dict.eligibility?.temporaryDeferralsSubtitle}
                     </p>
                 </div>
 
-                <Card className="border-none shadow-md">
+                <Card className="border-none shadow-md bg-card">
                     <CardContent className="p-4">
                         <div className="grid gap-2">
                             {temporaryDeferrals.map((deferral, index) => (
                                 <div
                                     key={index}
-                                    className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg border border-yellow-200 hover:bg-yellow-100 transition-colors">
+                                    className="flex items-center justify-between p-3 bg-yellow-50 dark:bg-yellow-950/30 rounded-lg border border-yellow-200 dark:border-yellow-800 hover:bg-yellow-100 dark:hover:bg-yellow-950/50 transition-colors">
                                     <div className="flex items-center">
                                         <deferral.icon
                                             className={cn(
-                                                'w-4 h-4 text-yellow-600',
+                                                'w-4 h-4 text-yellow-600 dark:text-yellow-400',
                                                 isRTL ? 'ml-2' : 'mr-2',
                                             )}
                                         />
-                                        <span className="text-gray-800 font-medium text-sm">
+                                        <span className="text-foreground font-medium text-sm">
                                             {deferral.condition}
                                         </span>
                                     </div>
                                     <Badge
                                         variant="outline"
-                                        className="bg-yellow-100 text-yellow-800 border-yellow-300 text-xs">
+                                        className="bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 border-yellow-300 dark:border-yellow-700 text-xs">
                                         {deferral.period}
                                     </Badge>
                                 </div>
@@ -267,29 +267,29 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
             {/* Permanent Deferrals */}
             <div className="mb-10">
                 <div className="text-center mb-6">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center justify-center">
+                    <h2 className="text-2xl font-bold text-foreground mb-2 flex items-center justify-center">
                         <XCircle
                             className={cn(
-                                'w-6 h-6 text-red-600',
+                                'w-6 h-6 text-red-600 dark:text-red-400',
                                 isRTL ? 'ml-2' : 'mr-2',
                             )}
                         />
                         {dict.eligibility?.permanentDeferralsTitle}
                     </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto text-sm">
+                    <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
                         {dict.eligibility?.permanentDeferralsSubtitle}
                     </p>
                 </div>
 
-                <Alert className="border-red-200 bg-red-50 max-w-3xl mx-auto">
-                    <XCircle className="h-4 w-4 text-red-600" />
-                    <AlertDescription className="text-red-800">
+                <Alert className="border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/30 max-w-3xl mx-auto">
+                    <XCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
+                    <AlertDescription className="text-red-800 dark:text-red-200">
                         <div className="grid gap-2 mt-1">
                             {permanentDeferrals.map((deferral, index) => (
                                 <div key={index} className="flex items-center">
                                     <div
                                         className={cn(
-                                            'w-2 h-2 bg-red-500 rounded-full',
+                                            'w-2 h-2 bg-red-500 dark:bg-red-400 rounded-full',
                                             isRTL ? 'ml-2' : 'mr-2',
                                         )}></div>
                                     <span className="font-medium text-sm">
@@ -305,34 +305,34 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
             {/* Medical Decision Required */}
             <div className="mb-10">
                 <div className="text-center mb-6">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center justify-center">
+                    <h2 className="text-2xl font-bold text-foreground mb-2 flex items-center justify-center">
                         <Stethoscope
                             className={cn(
-                                'w-6 h-6 text-blue-600',
+                                'w-6 h-6 text-blue-600 dark:text-blue-400',
                                 isRTL ? 'ml-2' : 'mr-2',
                             )}
                         />
                         {dict.eligibility?.medicalDecisionTitle}
                     </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto text-sm">
+                    <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
                         {dict.eligibility?.medicalDecisionSubtitle}
                     </p>
                 </div>
 
-                <Card className="border-none shadow-md max-w-4xl mx-auto">
+                <Card className="border-none shadow-md max-w-4xl mx-auto bg-card">
                     <CardContent className="p-4">
                         <div className="grid md:grid-cols-2 gap-2">
                             {medicalDecisionRequired.map((condition, index) => (
                                 <div
                                     key={index}
-                                    className="flex items-center p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 transition-colors">
+                                    className="flex items-center p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-950/50 transition-colors">
                                     <Stethoscope
                                         className={cn(
-                                            'w-4 h-4 text-blue-600 flex-shrink-0',
+                                            'w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0',
                                             isRTL ? 'ml-2' : 'mr-2',
                                         )}
                                     />
-                                    <span className="text-gray-800 font-medium text-sm">
+                                    <span className="text-foreground font-medium text-sm">
                                         {condition}
                                     </span>
                                 </div>
@@ -344,7 +344,7 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
 
             {/* Call to Action */}
             <div className="text-center">
-                <Card className="border-none shadow-md bg-gradient-to-r from-brand-500 to-brand-600 text-white max-w-3xl mx-auto">
+                <Card className="border-none shadow-md bg-gradient-to-r from-brand-500 to-brand-600 dark:from-brand-700 dark:to-brand-800 text-white max-w-3xl mx-auto">
                     <CardContent className="p-6">
                         <CheckCircle className="w-12 h-12 mx-auto mb-4 text-white" />
                         <h3 className="text-xl font-bold mb-3">
@@ -356,12 +356,12 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                         <div className="flex flex-col sm:flex-row gap-3 justify-center">
                             <a
                                 href="/campaigns"
-                                className="bg-white text-brand-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-50 transition-colors text-sm">
+                                className="bg-white text-brand-600 dark:bg-card dark:text-foreground px-6 py-2 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-muted transition-colors text-sm">
                                 {dict.eligibility?.callToAction?.findCampaigns}
                             </a>
                             <a
                                 href="/requests"
-                                className="border-2 border-white text-white px-6 py-2 rounded-lg font-semibold hover:bg-white hover:text-brand-600 transition-colors text-sm">
+                                className="border-2 border-white text-white px-6 py-2 rounded-lg font-semibold hover:bg-white hover:text-brand-600 dark:hover:bg-card dark:hover:text-foreground transition-colors text-sm">
                                 {dict.eligibility?.callToAction?.urgentRequests}
                             </a>
                         </div>

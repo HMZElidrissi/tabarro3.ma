@@ -21,10 +21,10 @@ export default async function LatestBlogPosts({
     return (
         <div className="max-w-7xl py-16 mx-auto px-4">
             <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400">
+                <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
                     {dictionary.blog?.title || 'Blood Donation Blog'}
                 </h2>
-                <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                     {dictionary.blog?.description ||
                         'Stories and insights on blood donation, donor experiences, and saving lives.'}
                 </p>
@@ -32,7 +32,7 @@ export default async function LatestBlogPosts({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {posts.slice(0, 3).map(post => (
                     <div key={post.id} className="group">
-                        <div className="bg-white rounded-xl shadow-md overflow-hidden h-full flex flex-col transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div className="bg-card rounded-xl shadow-md overflow-hidden h-full flex flex-col transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border">
                             {/* Image with hover zoom effect */}
                             <div className="relative h-52 overflow-hidden">
                                 <Image
@@ -47,8 +47,7 @@ export default async function LatestBlogPosts({
                                     <div className="absolute top-4 right-4">
                                         <Badge
                                             variant="outline"
-                                            className="bg-white/80 backdrop-blur-sm text-brand-600 border-brand-200"
-                                        >
+                                            className="bg-card/80 backdrop-blur-sm text-brand-600 dark:text-brand-400 border-brand-200 dark:border-brand-800">
                                             <Droplets className="h-3 w-3 mr-1" />
                                             {post.tags[0]}
                                         </Badge>
@@ -58,7 +57,7 @@ export default async function LatestBlogPosts({
 
                             <div className="p-6 flex-grow flex flex-col">
                                 {/* Date and reading time */}
-                                <div className="flex items-center text-gray-500 text-sm mb-3">
+                                <div className="flex items-center text-muted-foreground text-sm mb-3">
                                     <Calendar
                                         className={cn(
                                             'h-4 w-4 pb-1',
@@ -70,18 +69,18 @@ export default async function LatestBlogPosts({
                                     </span>
                                 </div>
 
-                                <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-brand-600 transition-colors">
+                                <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
                                     <Link href={`/blog/${post.slug}`}>
                                         {post.title}
                                     </Link>
                                 </h3>
 
-                                <p className="text-gray-600 mb-4 text-sm line-clamp-3 flex-grow">
+                                <p className="text-muted-foreground mb-4 text-sm line-clamp-3 flex-grow">
                                     {post.excerpt}
                                 </p>
 
                                 <div className="flex items-center justify-between">
-                                    <div className="flex items-center text-gray-600 text-sm">
+                                    <div className="flex items-center text-muted-foreground text-sm">
                                         <User
                                             className={cn(
                                                 'h-4 w-4 pb-1',
@@ -92,8 +91,7 @@ export default async function LatestBlogPosts({
                                     </div>
                                     <Link
                                         href={`/blog/${post.slug}`}
-                                        className="text-sm text-brand-600 hover:text-brand-700 font-medium flex items-center"
-                                    >
+                                        className="text-sm text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 font-medium flex items-center">
                                         {dictionary.blog?.readMore ||
                                             'Read more'}
                                         <ChevronRight

@@ -8,6 +8,8 @@ import { getCurrentLanguage } from '@/actions/language';
 import { languages } from '@/config/home';
 import { switchLanguage } from '@/actions/language';
 import SignupInvitation from '@/components/home/signup-invitation';
+import { ThemeProvider } from 'next-themes';
+import { ModeToggle } from '@/components/custom/mode-toggle';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -21,42 +23,49 @@ export default async function Layout({ children }: LayoutProps) {
 
     return (
         <UserProvider userPromise={userPromise}>
-            <div
-                className="flex min-h-screen flex-col bg-gray-50"
-                dir={isRTL ? 'rtl' : 'ltr'}>
-                <header className="sticky top-0 z-50 w-full border-b bg-gray-100">
-                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-8xl">
-                        <div className="flex h-16 items-center justify-between">
-                            <div className="flex items-center">
-                                {/* Mobile Navigation */}
-                                <MobileNav
-                                    dict={dict}
-                                    initialLocale={currentLocale}
-                                    languages={languages}
-                                    onLanguageSwitch={switchLanguage}
-                                />
-                            </div>
+            <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                storageKey="theme">
+                <div
+                    className="flex min-h-screen flex-col bg-background"
+                    dir={isRTL ? 'rtl' : 'ltr'}>
+                    <header className="sticky top-0 z-50 w-full border-b bg-card">
+                        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-8xl">
+                            <div className="flex h-16 items-center justify-between">
+                                <div className="flex items-center">
+                                    {/* Mobile Navigation */}
+                                    <MobileNav
+                                        dict={dict}
+                                        initialLocale={currentLocale}
+                                        languages={languages}
+                                        onLanguageSwitch={switchLanguage}
+                                    />
+                                </div>
 
-                            {/* Desktop Navigation */}
-                            <div className="hidden lg:flex flex-1 justify-center">
-                                <DesktopNav
-                                    dict={dict}
-                                    initialLocale={currentLocale}
-                                />
-                            </div>
+                                {/* Desktop Navigation */}
+                                <div className="hidden lg:flex flex-1 justify-center">
+                                    <DesktopNav
+                                        dict={dict}
+                                        initialLocale={currentLocale}
+                                    />
+                                </div>
 
-                            {/* Empty div for flex spacing in mobile view */}
-                            <div className="w-10 lg:hidden"></div>
+                                {/* Dark mode toggle */}
+                                <div className="block lg:hidden">
+                                    <ModeToggle dict={dict.theme} />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </header>
+                    </header>
 
-                <SignupInvitation dict={dict.popup} isRTL={isRTL} />
+                    <SignupInvitation dict={dict.popup} isRTL={isRTL} />
 
-                <main className="flex-1">{children}</main>
+                    <main className="flex-1">{children}</main>
 
-                <Footer dict={dict} isRTL={isRTL} />
-            </div>
+                    <Footer dict={dict} isRTL={isRTL} />
+                </div>
+            </ThemeProvider>
         </UserProvider>
     );
 }

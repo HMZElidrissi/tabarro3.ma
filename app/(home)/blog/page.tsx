@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
                 'The latest blood donation news and articles',
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Blog - tabarro3")}&description=${encodeURIComponent("Découvrez les dernières actualités et articles sur le don de sang au Maroc")}`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent('Blog - tabarro3')}&description=${encodeURIComponent('Découvrez les dernières actualités et articles sur le don de sang au Maroc')}`,
                     width: 1200,
                     height: 630,
                     alt: 'Blog - tabarro3',
@@ -48,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
                 'The latest blood donation news and articles',
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Blog - tabarro3")}&description=${encodeURIComponent("Découvrez les dernières actualités et articles sur le don de sang au Maroc")}`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent('Blog - tabarro3')}&description=${encodeURIComponent('Découvrez les dernières actualités et articles sur le don de sang au Maroc')}`,
                     width: 1200,
                     height: 630,
                     alt: 'Blog - tabarro3',
@@ -71,7 +71,7 @@ export default async function BlogPage() {
     const regularPosts = posts.slice(1);
 
     return (
-        <div className="bg-gradient-to-b from-white to-gray-50">
+        <div className="bg-background">
             <div className="container mx-auto px-4 py-16">
                 {/* Page Header */}
                 <div className="text-center mb-10 relative">
@@ -81,16 +81,15 @@ export default async function BlogPage() {
                             height="120"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="text-brand-600"
-                        >
+                            className="text-brand-600 dark:text-brand-400">
                             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                         </svg>
                     </div>
 
-                    <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400">
+                    <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
                         {dict.blog?.title}
                     </h1>
-                    <p className="text-gray-600 max-w-2xl mx-auto text-base leading-relaxed">
+                    <p className="text-muted-foreground max-w-2xl mx-auto text-base leading-relaxed">
                         {dict.blog?.description}
                     </p>
 
@@ -100,7 +99,7 @@ export default async function BlogPage() {
                 {/* Featured Post */}
                 {featuredPost && (
                     <div className="mb-16">
-                        <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all hover:shadow-xl">
+                        <div className="bg-card rounded-xl shadow-lg overflow-hidden transform transition-all hover:shadow-xl border">
                             <div className="md:flex">
                                 <div className="md:w-1/2 relative h-64 md:h-auto">
                                     <Image
@@ -112,15 +111,14 @@ export default async function BlogPage() {
                                     <div className="absolute top-4 left-4">
                                         <Badge
                                             variant="secondary"
-                                            className="bg-brand-600 text-white hover:bg-brand-700 px-3 py-1 text-sm"
-                                        >
+                                            className="bg-brand-600 text-white hover:bg-brand-700 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90 px-3 py-1 text-sm">
                                             {dict.blog?.featured || 'Featured'}
                                         </Badge>
                                     </div>
                                 </div>
                                 <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-between">
                                     <div>
-                                        <div className="flex items-center text-gray-500 mb-4">
+                                        <div className="flex items-center text-muted-foreground mb-4">
                                             <Calendar
                                                 className={cn(
                                                     'h-5 w-5 pb-1',
@@ -146,21 +144,19 @@ export default async function BlogPage() {
                                                 {featuredPost.author}
                                             </span>
                                         </div>
-                                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 hover:text-brand-600 transition-colors">
+                                        <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 hover:text-brand-600 dark:hover:text-brand-400 transition-colors">
                                             <Link
-                                                href={`/blog/${featuredPost.slug}`}
-                                            >
+                                                href={`/blog/${featuredPost.slug}`}>
                                                 {featuredPost.title}
                                             </Link>
                                         </h2>
-                                        <p className="text-gray-600 mb-6 line-clamp-3">
+                                        <p className="text-muted-foreground mb-6 line-clamp-3">
                                             {featuredPost.excerpt}
                                         </p>
                                     </div>
                                     <Link
                                         href={`/blog/${featuredPost.slug}`}
-                                        className="inline-flex items-center text-brand-600 hover:text-brand-700 font-medium"
-                                    >
+                                        className="inline-flex items-center text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 font-medium">
                                         {dict.blog?.readMore || 'Read more'}
                                         <ChevronRight
                                             className={`h-4 w-4 ${isRTL ? 'mr-1 rotate-180' : 'ml-1'}`}

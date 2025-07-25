@@ -47,15 +47,15 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
     if (mode === 'accept-invitation' && !token) {
         return (
             <div className="text-center">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl font-bold text-foreground mb-4">
                     {dict.auth.invitation.invalid}
                 </h2>
-                <p className="text-gray-600 mb-6">
+                <p className="text-muted-foreground mb-6">
                     {dict.auth.invitation.invalidMessage}
                 </p>
                 <Link
                     href="/sign-in"
-                    className="text-gray-600 hover:text-gray-900 underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+                    className="text-muted-foreground hover:text-foreground underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
                     {dict.auth.invitation.returnToSignIn}
                 </Link>
             </div>
@@ -69,10 +69,10 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
         <>
             {mode === 'accept-invitation' && (
                 <>
-                    <h2 className="text-2xl font-medium text-center text-gray-900">
+                    <h2 className="text-2xl font-medium text-center text-foreground">
                         {dict.auth.invitation.completeRegistration}
                     </h2>
-                    <p className="mt-2 text-center text-sm text-gray-600">
+                    <p className="mt-2 text-center text-sm text-muted-foreground">
                         {dict.auth.invitation.setupMessage}
                     </p>
                 </>
@@ -156,14 +156,14 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                             className="absolute inset-y-0 right-0 flex items-center pr-3 rtl:right-auto rtl:left-0 rtl:pr-0 rtl:pl-3"
                             onClick={() => setShowPassword(!showPassword)}>
                             {showPassword ? (
-                                <EyeOff className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                                <EyeOff className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                             ) : (
-                                <Eye className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                                <Eye className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                             )}
                         </button>
                     </div>
                     {isRegistrationMode && (
-                        <p className="mt-1 text-sm text-gray-500">
+                        <p className="mt-1 text-sm text-muted-foreground">
                             {dict.forms.validation.passwordRequirements}
                         </p>
                     )}
@@ -195,9 +195,9 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                     setShowConfirmPassword(!showConfirmPassword)
                                 }>
                                 {showConfirmPassword ? (
-                                    <EyeOff className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                                    <EyeOff className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                                 ) : (
-                                    <Eye className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                                    <Eye className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                                 )}
                             </button>
                         </div>
@@ -319,7 +319,7 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                     <div className="text-right">
                         <Link
                             href="/forgot-password"
-                            className="text-sm text-gray-600 hover:text-gray-900 underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+                            className="text-sm text-muted-foreground hover:text-foreground underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
                             {dict.auth.signIn.forgotPassword}
                         </Link>
                     </div>
@@ -348,10 +348,10 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
             <div className="mt-6">
                 <div className="relative">
                     <div className="absolute inset-0 flex items-center">
-                        <div className="w-full border-t border-gray-300" />
+                        <div className="w-full border-t border-border" />
                     </div>
                     <div className="relative flex justify-center text-sm">
-                        <span className="px-2 bg-white text-gray-500">
+                        <span className="px-2 bg-card text-muted-foreground">
                             {mode === 'signin'
                                 ? dict.auth.signIn.needAccount
                                 : dict.auth.signUp.haveAccount}
@@ -364,14 +364,14 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                         <>
                             <Link
                                 href="/sign-up"
-                                className="text-sm text-gray-600 hover:text-gray-900 underline">
+                                className="text-sm text-muted-foreground hover:text-foreground underline">
                                 {dict.auth.signIn.signUpLink}
                             </Link>
                         </>
                     ) : (
                         <Link
                             href="/sign-in"
-                            className="text-sm text-gray-600 hover:text-gray-900 underline">
+                            className="text-sm text-muted-foreground hover:text-foreground underline">
                             {dict.auth.signUp.signInLink}
                         </Link>
                     )}

@@ -66,30 +66,30 @@ export default async function AboutPage() {
     const isRTL = locale === 'ar';
 
     return (
-        <div className="bg-gradient-to-b from-white to-gray-50">
+        <div className="bg-background">
             {/* Hero Section */}
-            <section className="relative overflow-hidden bg-gradient-to-br from-brand-600 via-brand-700 to-brand-800">
-                <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
+            <section className="relative overflow-hidden bg-gradient-to-br from-brand-600 via-brand-700 to-brand-800 dark:bg-card dark:none">
+                <div className="absolute inset-0 bg-grid-white/[0.05] dark:bg-grid-white/[0.02] bg-[size:60px_60px]" />
                 <div className="container mx-auto px-4 py-12 lg:py-16 relative">
                     <div className="text-center">
                         <h1
                             className={cn(
-                                'text-3xl md:text-5xl font-bold text-white mb-4',
+                                'text-3xl md:text-5xl font-bold text-white dark:text-primary-foreground mb-4',
                                 isRTL && 'font-medium',
                             )}>
                             {dict.about?.title}
                         </h1>
                         <p
                             className={cn(
-                                'text-lg md:text-xl text-brand-100 mb-6 max-w-4xl mx-auto',
+                                'text-lg md:text-xl text-brand-100 dark:text-muted-foreground mb-6 max-w-4xl mx-auto',
                                 isRTL && 'leading-relaxed',
                             )}>
                             {dict.about?.welcome}
                         </p>
                         <div className="flex items-center justify-center space-x-2 rtl:space-x-reverse">
-                            <Heart className="w-6 h-6 text-red-400 animate-pulse" />
-                            <div className="w-12 h-1 bg-red-400 rounded-full"></div>
-                            <Heart className="w-6 h-6 text-red-400 animate-pulse" />
+                            <Heart className="w-6 h-6 text-red-400 dark:text-red-500 animate-pulse" />
+                            <div className="w-12 h-1 bg-red-400 dark:bg-red-500 rounded-full"></div>
+                            <Heart className="w-6 h-6 text-red-400 dark:text-red-500 animate-pulse" />
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@ export default async function AboutPage() {
                                 isRTL ? 'lg:order-2' : 'lg:order-1',
                             )}>
                             <div className="relative">
-                                <Card className="border-0 shadow-lg">
+                                <Card className="border-0 shadow-lg bg-card">
                                     <CardContent
                                         className={cn(
                                             'p-6',
@@ -113,20 +113,20 @@ export default async function AboutPage() {
                                         )}>
                                         <Target
                                             className={cn(
-                                                'w-10 h-10 text-brand-600 mb-4',
+                                                'w-10 h-10 text-brand-600 dark:text-brand-400 mb-4',
                                                 isRTL && 'ml-auto',
                                             )}
                                         />
                                         <h2
                                             className={cn(
-                                                'text-2xl font-bold mb-3 text-gray-900',
+                                                'text-2xl font-bold mb-3 text-foreground',
                                                 isRTL && 'font-medium',
                                             )}>
                                             {dict.about?.mission?.title}
                                         </h2>
                                         <p
                                             className={cn(
-                                                'text-gray-600 leading-relaxed',
+                                                'text-muted-foreground leading-relaxed',
                                                 isRTL && 'text-right',
                                             )}>
                                             {dict.about?.mission?.description}
@@ -155,12 +155,12 @@ export default async function AboutPage() {
             </section>
 
             {/* What We Do Section */}
-            <section className="py-12 lg:py-16 bg-gray-50">
+            <section className="py-12 lg:py-16 bg-muted/50">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-10">
                         <h2
                             className={cn(
-                                'text-2xl md:text-3xl font-bold mb-3 text-gray-900',
+                                'text-2xl md:text-3xl font-bold mb-3 text-foreground',
                                 isRTL && 'font-medium',
                             )}>
                             {dict.about?.whatWeDo?.title}
@@ -173,19 +173,19 @@ export default async function AboutPage() {
                             {
                                 icon: Info,
                                 key: 'simplified',
-                                color: 'bg-blue-100 text-blue-600',
+                                color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400',
                                 data: dict.about?.whatWeDo?.simplified,
                             },
                             {
                                 icon: MapPin,
                                 key: 'locations',
-                                color: 'bg-green-100 text-green-600',
+                                color: 'bg-green-100 text-green-600 dark:bg-green-900/50 dark:text-green-400',
                                 data: dict.about?.whatWeDo?.locations,
                             },
                             {
                                 icon: Newspaper,
                                 key: 'news',
-                                color: 'bg-purple-100 text-purple-600',
+                                color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/50 dark:text-purple-400',
                                 data: dict.about?.whatWeDo?.news,
                             },
                         ].map((item, index) => {
@@ -194,7 +194,7 @@ export default async function AboutPage() {
                             return (
                                 <Card
                                     key={item.key}
-                                    className="border-0 shadow-md hover:shadow-lg transition-shadow duration-300 relative">
+                                    className="border-0 shadow-md hover:shadow-lg transition-shadow duration-300 relative bg-card">
                                     <CardContent
                                         className={cn(
                                             'p-6 text-center',
@@ -210,14 +210,14 @@ export default async function AboutPage() {
                                         </div>
                                         <h3
                                             className={cn(
-                                                'text-lg font-bold mb-2 text-gray-900 mt-2',
+                                                'text-lg font-bold mb-2 text-foreground mt-2',
                                                 isRTL && 'font-medium',
                                             )}>
                                             {item.data?.title}
                                         </h3>
                                         <p
                                             className={cn(
-                                                'text-gray-600 text-sm leading-relaxed',
+                                                'text-muted-foreground text-sm leading-relaxed',
                                                 isRTL && 'text-right',
                                             )}>
                                             {item.data?.description}
@@ -248,14 +248,14 @@ export default async function AboutPage() {
                             />
                             <h2
                                 className={cn(
-                                    'text-2xl md:text-3xl font-bold mb-4 text-gray-900',
+                                    'text-2xl md:text-3xl font-bold mb-4 text-foreground',
                                     isRTL && 'font-medium',
                                 )}>
                                 {dict.about?.why?.title}
                             </h2>
                             <p
                                 className={cn(
-                                    'text-gray-600 leading-relaxed',
+                                    'text-muted-foreground leading-relaxed',
                                     isRTL && 'text-right lg:text-right',
                                 )}>
                                 {dict.about?.why?.description}
@@ -270,27 +270,27 @@ export default async function AboutPage() {
                             )}>
                             <Users
                                 className={cn(
-                                    'w-12 h-12 text-brand-600 mx-auto mb-4',
+                                    'w-12 h-12 text-brand-600 dark:text-brand-400 mx-auto mb-4',
                                     isRTL ? 'lg:mr-0' : 'lg:mx-0',
                                 )}
                             />
                             <h2
                                 className={cn(
-                                    'text-2xl md:text-3xl font-bold mb-4 text-gray-900',
+                                    'text-2xl md:text-3xl font-bold mb-4 text-foreground',
                                     isRTL && 'font-medium',
                                 )}>
                                 {dict.about?.howToHelp?.title}
                             </h2>
                             <p
                                 className={cn(
-                                    'text-gray-600 leading-relaxed mb-6',
+                                    'text-muted-foreground leading-relaxed mb-6',
                                     isRTL && 'text-right lg:text-right',
                                 )}>
                                 {dict.about?.howToHelp?.description}
                             </p>
                             <Button
                                 asChild
-                                className="bg-brand-600 hover:bg-brand-700 text-white">
+                                className="bg-brand-600 hover:bg-brand-700 text-white dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90">
                                 <Link href="/sign-up">
                                     {dict.common?.signUp}
                                 </Link>
@@ -301,7 +301,7 @@ export default async function AboutPage() {
             </section>
 
             {/* Team & Contact Section */}
-            <section className="py-12 lg:py-16 bg-gradient-to-r from-brand-600 to-brand-800">
+            <section className="py-12 lg:py-16 bg-gradient-to-r from-brand-600 to-brand-800 dark:bg-card dark:bg-none">
                 <div className="container mx-auto px-4">
                     <div className="grid lg:grid-cols-2 gap-8 items-center">
                         {/* Team */}
@@ -312,7 +312,7 @@ export default async function AboutPage() {
                             )}>
                             <h2
                                 className={cn(
-                                    'text-2xl md:text-3xl font-bold mb-6 text-white',
+                                    'text-2xl md:text-3xl font-bold mb-6 text-white dark:text-foreground',
                                     isRTL && 'font-medium',
                                 )}>
                                 {dict.about?.team?.title}
@@ -325,11 +325,11 @@ export default async function AboutPage() {
                                             href={member.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex items-center space-x-3 rtl:space-x-reverse hover:bg-white/20 transition-colors duration-300 group">
-                                            <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors duration-300">
-                                                <User className="w-4 h-4 text-white" />
+                                            className="bg-white/10 dark:bg-muted/50 backdrop-blur-sm rounded-lg p-4 flex items-center gap-x-3 hover:bg-white/20 dark:hover:bg-muted/70 transition-colors duration-300 group">
+                                            <div className="w-8 h-8 bg-white/20 dark:bg-muted/70 rounded-full flex items-center justify-center group-hover:bg-white/30 dark:group-hover:bg-muted/80 transition-colors duration-300">
+                                                <User className="w-4 h-4 text-white dark:text-foreground" />
                                             </div>
-                                            <p className="text-white font-medium text-sm group-hover:text-brand-100 transition-colors duration-300">
+                                            <p className="text-white dark:text-foreground font-medium text-sm group-hover:text-brand-100 dark:group-hover:text-primary transition-colors duration-300">
                                                 {member.name}
                                             </p>
                                         </a>
@@ -346,33 +346,33 @@ export default async function AboutPage() {
                             )}>
                             <Mail
                                 className={cn(
-                                    'w-12 h-12 text-white mx-auto mb-4',
+                                    'w-12 h-12 text-white dark:text-foreground mx-auto mb-4',
                                     isRTL ? 'lg:mr-0' : 'lg:mx-0',
                                 )}
                             />
                             <h2
                                 className={cn(
-                                    'text-2xl md:text-3xl font-bold text-white mb-4',
+                                    'text-2xl md:text-3xl font-bold text-white dark:text-foreground mb-4',
                                     isRTL && 'font-medium',
                                 )}>
                                 {dict.about?.contact?.title}
                             </h2>
                             <p
                                 className={cn(
-                                    'text-brand-100 mb-4',
+                                    'text-brand-100 dark:text-muted-foreground mb-4',
                                     isRTL && 'text-right lg:text-right',
                                 )}>
                                 {dict.about?.contact?.description}
                             </p>
                             <a
                                 href={`mailto:${dict.about?.contact?.email}`}
-                                className="inline-block text-white text-lg font-semibold hover:text-brand-200 transition-colors underline mb-6">
+                                className="inline-block text-white dark:text-foreground text-lg font-semibold hover:text-brand-200 dark:hover:text-primary transition-colors underline mb-6">
                                 {dict.about?.contact?.email}
                             </a>
-                            <div className="border-t border-brand-500 pt-6">
+                            <div className="border-t border-brand-500 dark:border-border pt-6">
                                 <p
                                     className={cn(
-                                        'text-brand-100',
+                                        'text-brand-100 dark:text-muted-foreground',
                                         isRTL && 'text-right lg:text-right',
                                     )}>
                                     {dict.about?.thanks}

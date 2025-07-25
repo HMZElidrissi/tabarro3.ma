@@ -18,7 +18,7 @@ export default function AwardBadge({ dict, isRTL = false }: AwardBadgeProps) {
             className="flex flex-col items-center">
             {/* Award Image */}
             <div className="relative mb-4">
-                <div className="w-48 h-48 relative overflow-hidden rounded-2xl border-4 border-white/40 shadow-2xl">
+                <div className="w-48 h-48 relative overflow-hidden rounded-2xl border-4 border-white/40 dark:border-border/40 shadow-2xl dark:bg-card">
                     <Image
                         src="/award.jpeg"
                         alt="Best Innovation Project Award"
@@ -36,17 +36,17 @@ export default function AwardBadge({ dict, isRTL = false }: AwardBadgeProps) {
                         repeat: Infinity,
                         ease: 'easeInOut',
                     }}
-                    className="absolute -top-3 -right-3 w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center shadow-xl border-4 border-white">
-                    <Trophy className="w-6 h-6 text-yellow-900" />
+                    className="absolute -top-3 -right-3 w-12 h-12 bg-yellow-400 dark:bg-yellow-500 rounded-full flex items-center justify-center shadow-xl border-4 border-white dark:border-card">
+                    <Trophy className="w-6 h-6 text-yellow-900 dark:text-yellow-800" />
                 </motion.div>
             </div>
 
             {/* Simple Award Text */}
             <div className="text-center">
-                <p className="text-white font-semibold text-xl mb-1">
+                <p className="text-white/90 dark:text-foreground font-semibold text-xl mb-1">
                     {dict.award.title}
                 </p>
-                <p className="text-white/90 font-medium text-lg">
+                <p className="text-white/90 dark:text-muted-foreground font-medium text-lg">
                     {dict.award.year}
                 </p>
             </div>

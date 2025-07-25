@@ -89,8 +89,9 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                             asChild
                             variant="ghost"
                             className={cn(
-                                'w-full justify-start',
-                                pathname === item.href && 'text-brand-600',
+                                'w-full justify-start text-foreground hover:text-brand-700 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/50',
+                                pathname === item.href &&
+                                    'text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-900/50',
                             )}
                             onClick={() => setIsOpen(false)}>
                             <Link href={item.href}>{item.name}</Link>
@@ -108,7 +109,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                         <Button
                                             key={language.code}
                                             variant="ghost"
-                                            className="justify-start"
+                                            className="justify-start text-foreground"
                                             onClick={() => {
                                                 handleLanguageSwitch(
                                                     language.code,
@@ -132,7 +133,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                             <>
                                 <Button
                                     variant="default"
-                                    className="w-full bg-brand-600 text-white hover:bg-brand-700"
+                                    className="w-full bg-brand-600 text-white hover:bg-brand-700 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90"
                                     onClick={() => setIsOpen(false)}>
                                     <Link
                                         href={
@@ -145,7 +146,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                 </Button>
                                 <Button
                                     variant="outline"
-                                    className="mt-2 w-full"
+                                    className="mt-2 w-full text-foreground"
                                     onClick={handleLogout}
                                     disabled={isLoading}>
                                     {isLoading ? (
@@ -167,7 +168,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                             <>
                                 <Button
                                     variant="default"
-                                    className="w-full bg-brand-600 text-white hover:bg-brand-700"
+                                    className="w-full bg-brand-600 text-white hover:bg-brand-700 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90"
                                     onClick={() => {
                                         setIsOpen(false);
                                         router.push('/sign-in');
@@ -176,7 +177,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                 </Button>
                                 <Button
                                     variant="outline"
-                                    className="mt-2 w-full"
+                                    className="mt-2 w-full text-foreground"
                                     onClick={() => {
                                         setIsOpen(false);
                                         router.push('/sign-up');

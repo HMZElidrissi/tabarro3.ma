@@ -8,7 +8,7 @@ import { getDictionary } from '@/i18n/get-dictionary';
 export async function generateMetadata(): Promise<Metadata> {
     const dict = await getDictionary();
     return {
-        title: dict.common.profile,
+        title: dict.bloodRequests.newRequest,
     };
 }
 
@@ -29,10 +29,10 @@ export default async function NewRequestPage() {
             <div className="space-y-6">
                 <div>
                     <h1 className="text-2xl font-bold tracking-tight">
-                        New Blood Request
+                        {dict.bloodRequests.newRequest}
                     </h1>
                     <p className="text-muted-foreground">
-                        Create a new blood request
+                        {dict.bloodRequests.createRequestDescription}
                     </p>
                 </div>
                 <RequestForm userId={user.id} mode="add" dict={dict} />
