@@ -29,7 +29,7 @@ const Label2: React.FC<React.LabelHTMLAttributes<HTMLLabelElement>> = ({
     ...props
 }) => (
     <label
-        className={`${className} block font-medium text-sm text-gray-700`}
+        className={`${className} block font-medium text-sm text-foreground`}
         {...props}
     >
         {children}

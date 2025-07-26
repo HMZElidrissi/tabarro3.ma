@@ -22,7 +22,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
                         logo={
                             <Link href="/">
                                 <Image
-                                    src="/logo.svg"
+                                    src="/logo-header.svg"
                                     alt="tabarro3"
                                     width={200}
                                     height={200}

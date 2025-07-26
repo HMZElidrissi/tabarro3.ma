@@ -233,7 +233,21 @@
             "title": "Forgot Password",
             "description": "Enter your email address and we'll send you instructions to reset your password.",
             "sending": "Sending...",
-            "sendInstructions": "Send Reset Instructions"
+            "sendInstructions": "Send Reset Instructions",
+            "resetInstructionsSent": "If an account exists with this email, you will receive password reset instructions.",
+            "tooManyAttempts": "Too many password reset attempts. Please try again in {minutes} minutes.",
+            "invalidOrExpiredLink": "This password reset link is invalid or has expired. Please request a new one.",
+            "passwordResetSuccess": "Your password has been reset successfully. You can now sign in with your new password."
+        },
+        "updatePassword": {
+            "currentPasswordIncorrect": "Current password is incorrect.",
+            "newPasswordMustBeDifferent": "New password must be different from the current password.",
+            "passwordUpdatedSuccess": "Password updated successfully."
+        },
+        "validation": {
+            "passwordsDontMatch": "Passwords don't match",
+            "validEmailRequired": "Please enter a valid email address",
+            "passwordMinLength": "Password must be at least 8 characters"
         }
     },
     "forms": {
@@ -263,8 +277,18 @@
             "selectStatus": "Select status"
         },
         "validation": {
-            "passwordRequirements": "Password must be at least 8 characters long"
+            "passwordRequirements": "Password must be at least 8 characters long",
+            "passwordsDontMatch": "Passwords don't match",
+            "validEmailRequired": "Please enter a valid email address",
+            "passwordMinLength": "Password must be at least 8 characters"
         }
+    },
+    "signIn": {
+        "invalidCredentials": "Invalid email or password. Please try again."
+    },
+    "signUp": {
+        "passwordsDoNotMatch": "Passwords do not match.",
+        "userAlreadyExists": "User with this email already exists."
     },
     "profile": {
         "title": "Profile Settings",

@@ -8,6 +8,7 @@ import { getClientInfo } from '@/lib/ip';
 import { logActivity } from '@/lib/utils';
 import { ActivityType, Role } from '@/types/enums';
 import { redirect } from 'next/navigation';
+import { getDictionary } from '@/i18n/get-dictionary';
 
 const signInSchema = z.object({
     email: z.string().email().min(3).max(255),
@@ -16,19 +17,20 @@ const signInSchema = z.object({
 
 export const signIn = validatedAction(signInSchema, async data => {
     const { email, password } = data;
+    const dict = await getDictionary();
 
     const user = await prisma.user.findUnique({
         where: { email },
     });
 
     if (!user) {
-        return { error: 'Invalid email or password. Please try again.' };
+        return { error: dict.signIn.invalidCredentials };
     }
 
     const isPasswordValid = await comparePasswords(password, user.passwordHash);
 
     if (!isPasswordValid) {
-        return { error: 'Invalid email or password. Please try again.' };
+        return { error: dict.signIn.invalidCredentials };
     }
 
     const clientInfo = await getClientInfo();

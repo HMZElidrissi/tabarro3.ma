@@ -10,6 +10,7 @@ import { ActivityType } from '@/types/enums';
 import rateLimit from '@/lib/rate-limit';
 import { nanoid } from 'nanoid';
 import { sendPasswordChangedEmail, sendPasswordResetEmail } from '@/lib/mail';
+import { getDictionary } from '@/i18n/get-dictionary';
 
 const updatePasswordSchema = z
     .object({
@@ -46,6 +47,7 @@ export const updatePassword = validatedActionWithUser(
     updatePasswordSchema,
     async (data, _, user) => {
         const { currentPassword, newPassword } = data;
+        const dict = await getDictionary();
 
         const isPasswordValid = await comparePasswords(
             currentPassword,
@@ -53,12 +55,12 @@ export const updatePassword = validatedActionWithUser(
         );
 
         if (!isPasswordValid) {
-            return { error: 'Current password is incorrect.' };
+            return { error: dict.auth.updatePassword.currentPasswordIncorrect };
         }
 
         if (currentPassword === newPassword) {
             return {
-                error: 'New password must be different from the current password.',
+                error: dict.auth.updatePassword.newPasswordMustBeDifferent,
             };
         }
 
@@ -74,7 +76,7 @@ export const updatePassword = validatedActionWithUser(
             logActivity(user.id, ActivityType.UPDATE_PASSWORD, ipAddress),
         ]);
 
-        return { success: 'Password updated successfully.' };
+        return { success: dict.auth.updatePassword.passwordUpdatedSuccess };
     },
 );
 
@@ -83,13 +85,20 @@ export const forgotPassword = validatedAction(
     async data => {
         const { email } = data;
         const ipAddress = (await getClientInfo()).basic.ip;
+        const dict = await getDictionary();
 
         // Check rate limit (3 attempts per hour per IP)
         const rateLimitResult = passwordResetLimiter.check(ipAddress, 3);
 
         if (!rateLimitResult.success) {
+            const minutes = Math.ceil(
+                (rateLimitResult.retryAfter ?? 60000) / 1000 / 60,
+            );
             return {
-                error: `Too many password reset attempts. Please try again in ${Math.ceil((rateLimitResult.retryAfter ?? 60000) / 1000 / 60)} minutes.`,
+                error: dict.auth.forgotPassword.tooManyAttempts.replace(
+                    '{minutes}',
+                    minutes.toString(),
+                ),
             };
         }
 
@@ -104,8 +113,7 @@ export const forgotPassword = validatedAction(
         if (!user) {
             // Don't reveal if user exists or not for security
             return {
-                success:
-                    'If an account exists with this email, you will receive password reset instructions.',
+                success: dict.auth.forgotPassword.resetInstructionsSent,
             };
         }
 
@@ -141,8 +149,7 @@ export const forgotPassword = validatedAction(
         );
 
         return {
-            success:
-                'If an account exists with this email, you will receive password reset instructions.',
+            success: dict.auth.forgotPassword.resetInstructionsSent,
         };
     },
 );
@@ -151,6 +158,7 @@ export const resetPassword = validatedAction(
     resetPasswordSchema,
     async data => {
         const { token, password } = data;
+        const dict = await getDictionary();
 
         // Find valid reset token
         const resetRequest = await prisma.passwordReset.findFirst({
@@ -168,7 +176,7 @@ export const resetPassword = validatedAction(
 
         if (!resetRequest) {
             return {
-                error: 'This password reset link is invalid or has expired. Please request a new one.',
+                error: dict.auth.forgotPassword.invalidOrExpiredLink,
             };
         }
 
@@ -199,8 +207,7 @@ export const resetPassword = validatedAction(
         await sendPasswordChangedEmail(resetRequest.user.email);
 
         return {
-            success:
-                'Your password has been reset successfully. You can now sign in with your new password.',
+            success: dict.auth.forgotPassword.passwordResetSuccess,
         };
     },
 );
