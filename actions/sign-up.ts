@@ -8,6 +8,7 @@ import { getClientInfo } from '@/lib/ip';
 import { logActivity } from '@/lib/utils';
 import { ActivityType, BloodGroup } from '@/types/enums';
 import { redirect } from 'next/navigation';
+import { getDictionary } from '@/i18n/get-dictionary';
 
 const signUpSchema = z.object({
     email: z.string().email().min(3).max(255),
@@ -29,9 +30,10 @@ export const signUp = validatedAction(signUpSchema, async data => {
         bloodGroup,
         cityId,
     } = data;
+    const dict = await getDictionary();
 
     if (password !== confirmPassword) {
-        return { error: 'Passwords do not match.' };
+        return { error: dict.signUp.passwordsDoNotMatch };
     }
 
     const existingUser = await prisma.user.findUnique({
@@ -39,7 +41,7 @@ export const signUp = validatedAction(signUpSchema, async data => {
     });
 
     if (existingUser) {
-        return { error: 'User with this email already exists.' };
+        return { error: dict.signUp.userAlreadyExists };
     }
 
     const passwordHash = await hashPassword(password);
