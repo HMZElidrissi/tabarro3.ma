@@ -3,7 +3,7 @@
 import { SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import { ProgressLink as Link } from '@/components/custom/progress-link';
 import { NavigationItem } from '@/config/dashboard';
 
 interface NavItemProps {
