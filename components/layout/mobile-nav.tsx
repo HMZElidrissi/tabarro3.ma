@@ -14,7 +14,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from '@/components/ui/accordion';
-import Link from 'next/link';
+import { ProgressLink as Link } from '@/components/custom/progress-link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useUser } from '@/auth';
 import { useState } from 'react';
@@ -167,22 +167,25 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                         ) : (
                             <>
                                 <Button
+                                    asChild
                                     variant="default"
                                     className="w-full bg-brand-600 text-white hover:bg-brand-700 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90"
-                                    onClick={() => {
-                                        setIsOpen(false);
-                                        router.push('/sign-in');
-                                    }}>
-                                    {dict.common.signIn}
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    <Link href="/sign-in">
+                                        {dict.common.signIn}
+                                    </Link>
                                 </Button>
+
                                 <Button
+                                    asChild
                                     variant="outline"
                                     className="mt-2 w-full text-foreground"
-                                    onClick={() => {
-                                        setIsOpen(false);
-                                        router.push('/sign-up');
-                                    }}>
-                                    {dict.common.signUp}
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    <Link href="/sign-up">
+                                        {dict.common.signUp}
+                                    </Link>
                                 </Button>
                             </>
                         )}

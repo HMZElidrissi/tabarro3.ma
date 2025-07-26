@@ -30,7 +30,6 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
     const router = useRouter();
     const [currentLocale, setCurrentLocale] = useState(initialLocale);
     const [isLoading, setIsLoading] = useState(false);
-    const isRTL = currentLocale === 'ar';
     const pathname = usePathname();
 
     const handleLogout = async () => {
