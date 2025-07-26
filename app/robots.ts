@@ -15,8 +15,6 @@ export default function robots(): MetadataRoute.Robots {
                     '/blog/*',
                     '/eligibility',
                     '/about',
-                    '/campaigns/add',
-                    '/requests/add',
                 ],
                 disallow: [
                     '/api/jobs/*',
@@ -27,6 +25,7 @@ export default function robots(): MetadataRoute.Robots {
                     '/reset-password',
                     '/forgot-password',
                     '/profile',
+                    '/profile/requests/*',
                     '/_next/*',
                     '/static/*',
                     '/_vercel/*',
