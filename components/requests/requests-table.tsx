@@ -15,7 +15,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Loader2, MoreHorizontal } from 'lucide-react';
+import { CheckCircle, Loader2, MoreHorizontal } from 'lucide-react';
 import { BloodRequest } from '@/types/blood-request';
 import { Role } from '@/types/enums';
 import { getBloodGroupLabel } from '@/config/blood-group';
@@ -24,18 +24,22 @@ interface BloodRequestsTableProps {
     requests: BloodRequest[];
     onDeleteRequest: (id: number) => void;
     onEditRequest: (id: number) => void;
+    onMarkAsFulfilled?: (id: number) => void;
     userRole: Role;
     isLoading?: boolean;
     isDeleting?: boolean;
+    isFulfilling?: boolean;
 }
 
 export function BloodRequestsTable({
     requests,
     onDeleteRequest,
     onEditRequest,
+    onMarkAsFulfilled,
     userRole,
     isLoading = false,
     isDeleting = false,
+    isFulfilling = false,
 }: BloodRequestsTableProps) {
     const getStatusBadgeVariant = (status: string) => {
         switch (status.toLowerCase()) {
@@ -118,6 +122,26 @@ export function BloodRequestsTable({
                                             }>
                                             Edit details
                                         </DropdownMenuItem>
+                                        {request.status !== 'fulfilled' &&
+                                            onMarkAsFulfilled && (
+                                                <DropdownMenuItem
+                                                    onClick={() =>
+                                                        onMarkAsFulfilled(
+                                                            request.id,
+                                                        )
+                                                    }
+                                                    disabled={isFulfilling}>
+                                                    {isFulfilling ? (
+                                                        <>
+                                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                                            Marking as
+                                                            fulfilled...
+                                                        </>
+                                                    ) : (
+                                                            'Mark as fulfilled'
+                                                    )}
+                                                </DropdownMenuItem>
+                                            )}
                                         {(userRole === Role.ADMIN ||
                                             request.userId === null ||
                                             request.status === 'Pending') && (

@@ -1,6 +1,6 @@
 import { BlogPost } from '@/types/post';
-import { Calendar, Droplets, User, ChevronRight } from 'lucide-react';
-import Link from 'next/link';
+import { Calendar, Droplets, ChevronRight } from 'lucide-react';
+import { ProgressLink as Link } from '@/components/custom/progress-link';
 import Image from 'next/image';
 import { cn, formatDate } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';

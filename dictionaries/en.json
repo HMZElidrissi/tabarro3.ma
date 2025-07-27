@@ -318,7 +318,8 @@
         "createRequest": "Create Request",
         "updateRequest": "Update Request",
         "editRequest": "Edit Blood Request",
-        "editRequestDescription": "Update your blood request details"
+        "editRequestDescription": "Update your blood request details",
+        "markAsFulfilled": "Mark as Fulfilled"
     },
     "how_it_works_title": "How It Works",
     "how_it_works_description": "tabarro3 is a platform that connects blood donors with those in need. Here's how it works:",

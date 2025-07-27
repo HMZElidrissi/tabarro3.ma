@@ -300,7 +300,8 @@
         "createRequest": "إنشاء طلب",
         "updateRequest": "تحديث الطلب",
         "editRequest": "تعديل الطلب",
-        "editRequestDescription": "تعديل طلب الدم الخاص بك"
+        "editRequestDescription": "تعديل طلب الدم الخاص بك",
+        "markAsFulfilled": "تحديد كتمت التلبية"
     },
     "how_it_works_title": "كيفاش تبرع تتخدم؟",
     "how_it_works_description": "تبرع هي منصة كتربط المتبرعين بالدم مع لي محتاجين. هاكيفاش كتخدم",

@@ -10,6 +10,7 @@ import { switchLanguage } from '@/actions/language';
 import SignupInvitation from '@/components/home/signup-invitation';
 import { ThemeProvider } from 'next-themes';
 import { ModeToggle } from '@/components/custom/mode-toggle';
+import { Toaster } from '@/components/ui/toaster';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -65,6 +66,7 @@ export default async function Layout({ children }: LayoutProps) {
 
                     <Footer dict={dict} isRTL={isRTL} />
                 </div>
+                <Toaster />
             </ThemeProvider>
         </UserProvider>
     );

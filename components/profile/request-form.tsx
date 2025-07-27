@@ -27,9 +27,16 @@ interface RequestFormProps {
     userId: string;
     mode: 'add' | 'edit';
     dict: any;
+    isRTL?: boolean;
 }
 
-export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
+export function RequestForm({
+    request,
+    userId,
+    mode,
+    dict,
+    isRTL,
+}: RequestFormProps) {
     const router = useRouter();
     const { toast } = useToast();
     const [selectedRegion, setSelectedRegion] = useState<string>(
@@ -73,7 +80,7 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                     <Select
                         name="bloodGroup"
                         defaultValue={request?.bloodGroup || ''}
-                    >
+                        dir={isRTL ? 'rtl' : 'ltr'}>
                         <SelectTrigger>
                             <SelectValue
                                 placeholder={
@@ -85,8 +92,7 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                             {bloodGroups.map(group => (
                                 <SelectItem
                                     key={group.value}
-                                    value={group.value}
-                                >
+                                    value={group.value}>
                                     {getBloodGroupLabel(group.value, dict)}
                                 </SelectItem>
                             ))}
@@ -99,6 +105,7 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                     <Select
                         value={selectedRegion}
                         onValueChange={setSelectedRegion}
+                        dir={isRTL ? 'rtl' : 'ltr'}
                     >
                         <SelectTrigger>
                             <SelectValue
@@ -111,9 +118,8 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                             {REGIONS_AND_CITIES.map(region => (
                                 <SelectItem
                                     key={region.id}
-                                    value={region.id.toString()}
-                                >
-                                    {region.name}
+                                    value={region.id.toString()}>
+                                    {isRTL ? region.nameAr : region.name}
                                 </SelectItem>
                             ))}
                         </SelectContent>
@@ -125,6 +131,8 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                     <Select
                         name="cityId"
                         defaultValue={request?.cityId?.toString() || ''}
+                        dir={isRTL ? 'rtl' : 'ltr'}
+                        disabled={!selectedRegion}
                     >
                         <SelectTrigger>
                             <SelectValue
@@ -138,9 +146,8 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                                 )?.cities.map(city => (
                                     <SelectItem
                                         key={city.id}
-                                        value={city.id.toString()}
-                                    >
-                                        {city.name}
+                                        value={city.id.toString()}>
+                                        {isRTL ? city.nameAr : city.name}
                                     </SelectItem>
                                 ))}
                         </SelectContent>
@@ -157,6 +164,7 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                         defaultValue={request?.location || ''}
                         required
                         placeholder={dict.forms.placeholders.enterLocation}
+                        dir={isRTL ? 'rtl' : 'ltr'}
                     />
                 </div>
 
@@ -170,6 +178,7 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                         defaultValue={request?.phone || ''}
                         required
                         placeholder={dict.forms.placeholders.enterPhoneNumber}
+                        dir={isRTL ? 'rtl' : 'ltr'}
                     />
                 </div>
 
@@ -194,7 +203,7 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                         <Select
                             name="status"
                             defaultValue={request?.status || 'active'}
-                        >
+                            dir={isRTL ? 'rtl' : 'ltr'}>
                             <SelectTrigger>
                                 <SelectValue
                                     placeholder={
@@ -221,15 +230,10 @@ export function RequestForm({ request, userId, mode, dict }: RequestFormProps) {
                     <Button
                         type="button"
                         variant="outline"
-                        onClick={() => router.back()}
-                    >
+                        onClick={() => router.back()}>
                         {dict.common.cancel}
                     </Button>
-                    <Button
-                        variant="brand"
-                        type="submit"
-                        disabled={pending}
-                    >
+                    <Button variant="brand" type="submit" disabled={pending}>
                         {pending ? (
                             <>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

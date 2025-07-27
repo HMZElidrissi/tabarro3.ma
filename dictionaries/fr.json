@@ -301,7 +301,8 @@
         "createRequest": "Créer une demande",
         "updateRequest": "Mettre à jour la demande",
         "editRequest": "Modifier la demande",
-        "editRequestDescription": "Modifiez les détails de votre demande de sang"
+        "editRequestDescription": "Modifiez les détails de votre demande de sang",
+        "markAsFulfilled": "Marquer comme accomplie"
     },
     "how_it_works_title": "Comment ça marche",
     "how_it_works_description": "tabarro3 est une plateforme qui met en relation les donneurs de sang et les personnes ayant besoin de sang dans leur région. Voici comment ça marche :",

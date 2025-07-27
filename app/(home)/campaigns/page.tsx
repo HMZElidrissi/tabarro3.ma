@@ -4,7 +4,7 @@ import { getCampaigns } from '@/actions/home';
 import { Campaign } from '@/types/campaign';
 import { getUser } from '@/auth/session';
 import { CardsLoading } from '@/components/loading/cards-loading';
-import { getDictionary } from '@/i18n/get-dictionary';
+import { getDictionary, getLocale } from '@/i18n/get-dictionary';
 import { Metadata } from 'next';
 import { REGIONS_AND_CITIES } from '@/config/locations';
 
@@ -12,12 +12,12 @@ import { REGIONS_AND_CITIES } from '@/config/locations';
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  return [
-    { searchParams: { region: undefined, city: undefined } }, // all
-    ...REGIONS_AND_CITIES.map(region => ({
-      searchParams: { region: region.id.toString(), city: undefined }
-    })),
-  ];
+    return [
+        { searchParams: { region: undefined, city: undefined } }, // all
+        ...REGIONS_AND_CITIES.map(region => ({
+            searchParams: { region: region.id.toString(), city: undefined },
+        })),
+    ];
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
             description: dict.New_Campaigns,
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Nouvelles campagnes de don de sang")}&description=${encodeURIComponent("Découvrez les nouvelles campagnes de don de sang au Maroc")}`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent('Nouvelles campagnes de don de sang')}&description=${encodeURIComponent('Découvrez les nouvelles campagnes de don de sang au Maroc')}`,
                     width: 1200,
                     height: 630,
                     alt: 'Nouvelles campagnes de don de sang',
@@ -49,7 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
             description: dict.New_Campaigns,
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Nouvelles campagnes de don de sang")}&description=${encodeURIComponent("Découvrez les nouvelles campagnes de don de sang au Maroc")}`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent('Nouvelles campagnes de don de sang')}&description=${encodeURIComponent('Découvrez les nouvelles campagnes de don de sang au Maroc')}`,
                     width: 1200,
                     height: 630,
                     alt: 'Nouvelles campagnes de don de sang',
@@ -77,6 +77,8 @@ export default async function CampaignsPage({
     const campaignsData = await getCampaigns(page, 9, { regionId, cityId });
     const campaigns = campaignsData.campaigns as Campaign[];
     const dict = await getDictionary();
+    const lang = await getLocale();
+    const isRTL = lang === 'ar';
     const user = await getUser();
     const authenticated = !!user;
     const userId = user?.id || '';
@@ -89,6 +91,7 @@ export default async function CampaignsPage({
                     authenticated={authenticated}
                     userId={userId}
                     dict={dict}
+                    isRTL={isRTL}
                     totalPages={campaignsData.totalPages}
                     currentPage={campaignsData.currentPage}
                     total={campaignsData.total}

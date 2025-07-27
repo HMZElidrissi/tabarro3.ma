@@ -1,6 +1,6 @@
 'use client';
 
-import { Mailbox, MapPin, Navigation, Phone, User } from 'lucide-react';
+import { Mailbox, MapPin, Phone, User } from 'lucide-react';
 import { InboxIcon } from '@heroicons/react/24/outline';
 import { BloodRequest } from '@/types/blood-request';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
@@ -9,13 +9,15 @@ import { Badge } from '@/components/ui/badge';
 import { getBloodGroupLabel } from '@/config/blood-group';
 import { getStatusColor } from '@/lib/utils';
 import { BloodGroup } from '@/types/enums';
+import { getLocation } from '@/config/locations';
 
 interface BloodRequestCardProps {
     request: BloodRequest;
     dict: any;
+    isRTL?: boolean;
 }
 
-export function BloodRequestCard({ request, dict }: BloodRequestCardProps) {
+export function BloodRequestCard({ request, dict, isRTL }: BloodRequestCardProps) {
     return (
         <Card className="h-full flex flex-col shadow-sm hover:shadow-md transition-shadow duration-200 bg-card">
             <CardContent className="flex-1 p-4">
@@ -46,10 +48,10 @@ export function BloodRequestCard({ request, dict }: BloodRequestCardProps) {
                         <div className="flex items-center gap-1.5 text-sm text-foreground">
                             <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
                             <span className="font-medium">
-                                {request.city.region!.name}
+                                {getLocation(request.city.id, isRTL)?.regionName}
                             </span>
                             <span className="text-muted-foreground/50">•</span>
-                            <span>{request.city.name}</span>
+                            <span>{getLocation(request.city.id, isRTL)?.cityName}</span>
                         </div>
 
                         {request.location && (
@@ -80,16 +82,18 @@ export function BloodRequestCard({ request, dict }: BloodRequestCardProps) {
                         </div>
                     )}
 
-                    {/* Description with better typography */}
+                    {/* Description */}
                     {request.description && (
-                        <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-                            {request.description}
-                        </p>
+                        <div className="bg-muted/30 rounded-lg p-3 border-l-4 border-brand-500/20">
+                            <p className="text-sm text-foreground">
+                                {request.description}
+                            </p>
+                        </div>
                     )}
                 </div>
             </CardContent>
 
-            {/* Contact button with improved styling */}
+            {/* Contact button */}
             {request.phone && request.status.toLowerCase() === 'active' && (
                 <CardFooter className="p-4 pt-0">
                     <Button

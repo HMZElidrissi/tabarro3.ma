@@ -4,8 +4,14 @@ import React from 'react';
 import Image from 'next/image';
 import { ThemeProvider } from 'next-themes';
 import { ModeToggle } from '@/components/custom/mode-toggle';
+import { getDictionary } from '@/i18n/get-dictionary';
 
-const Layout = async ({ children }: { children: React.ReactNode }) => {
+interface LayoutProps {
+    children: React.ReactNode;
+}
+
+export default async function Layout({ children }: LayoutProps) {
+    const dict = await getDictionary();
     return (
         <ThemeProvider
             attribute="class"
@@ -15,7 +21,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
                 <div className="text-foreground antialiased">
                     {/* Dark mode toggle */}
                     <div className="absolute top-4 right-4 z-50">
-                        <ModeToggle />
+                        <ModeToggle dict={dict.theme} />
                     </div>
 
                     <AuthCard
@@ -37,5 +43,3 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
         </ThemeProvider>
     );
 };
-
-export default Layout;

@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 interface BloodRequestsListProps {
     requests: BloodRequest[];
     dict: any;
+    isRTL?: boolean;
     totalPages: number;
     currentPage: number;
     total: number;
@@ -17,9 +18,8 @@ interface BloodRequestsListProps {
 export default function BloodRequestsList({
     requests,
     dict,
+    isRTL,
     totalPages,
-    currentPage,
-    total,
 }: BloodRequestsListProps) {
     const router = useRouter();
     const pathname = usePathname();
@@ -71,6 +71,7 @@ export default function BloodRequestsList({
                             key={request.id}
                             request={request}
                             dict={dict}
+                            isRTL={isRTL}
                         />
                     ))}
                 </div>

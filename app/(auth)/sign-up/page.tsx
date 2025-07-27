@@ -1,7 +1,7 @@
 import { Login } from '@/components/auth/login';
 import { Suspense } from 'react';
 import { AuthCardSkeleton } from '@/components/loading/auth-card-skeleton';
-import { getDictionary } from '@/i18n/get-dictionary';
+import { getDictionary, getLocale } from '@/i18n/get-dictionary';
 import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,10 +13,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function SignUpPage() {
     const dict = await getDictionary();
+    const lang = await getLocale();
+    const isRTL = lang === 'ar';
 
     return (
         <Suspense fallback={<AuthCardSkeleton />}>
-            <Login mode="signup" dict={dict} />
+            <Login mode="signup" dict={dict} isRTL={isRTL} />
         </Suspense>
     );
 }

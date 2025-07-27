@@ -6,7 +6,7 @@ import { Role } from '@/types/enums';
 import { User } from '@/types/user';
 import { BloodRequest } from '@/types/blood-request';
 import { Metadata } from 'next';
-import { getDictionary } from '@/i18n/get-dictionary';
+import { getDictionary, getLocale } from '@/i18n/get-dictionary';
 
 export async function generateMetadata(): Promise<Metadata> {
     const dict = await getDictionary();
@@ -18,6 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ProfilePage() {
     const user = await getUser();
     const dict = await getDictionary();
+    const lang = await getLocale();
+    const isRTL = lang === 'ar';
 
     if (!user) {
         redirect('/signin');
@@ -38,6 +40,7 @@ export default async function ProfilePage() {
                         user={profile as User}
                         bloodRequests={bloodRequests as BloodRequest[]}
                         dict={dict}
+                        isRTL={isRTL}
                     />
                 </div>
             </div>
