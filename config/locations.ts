@@ -9,16 +9,18 @@ function processLocationData(rawData: any[]): Region[] {
 
         if (!regionMap.has(regionId)) {
             regionMap.set(regionId, {
-                id: regionId,
+                id: Number(regionId),
                 name: city.region.name,
+                nameAr: city.region.nameAr,
                 cities: [],
             });
         }
 
         regionMap.get(regionId)!.cities.push({
-            id: city.id,
+            id: Number(city.id),
             name: city.name,
-            regionId: regionId,
+            nameAr: city.nameAr,
+            regionId: Number(regionId),
         });
     });
 
@@ -27,4 +29,32 @@ function processLocationData(rawData: any[]): Region[] {
     );
 }
 
+function createCityLookupMap(
+    regions: Region[],
+): Map<number, { city: any; region: Region }> {
+    const cityMap = new Map();
+
+    regions.forEach(region => {
+        region.cities.forEach(city => {
+            cityMap.set(city.id, { city, region });
+        });
+    });
+
+    return cityMap;
+}
+
 export const REGIONS_AND_CITIES = processLocationData(rawLocationsData);
+const CITY_LOOKUP_MAP = createCityLookupMap(REGIONS_AND_CITIES);
+
+export function getLocation(cityId: number, isRTL: boolean = false) {
+    const location = CITY_LOOKUP_MAP.get(cityId);
+
+    if (!location) {
+        return null;
+    }
+
+    return {
+        cityName: isRTL ? location.city.nameAr : location.city.name,
+        regionName: isRTL ? location.region.nameAr : location.region.name,
+    };
+}
