@@ -368,6 +368,18 @@
             "news": {
                 "title": "Latest News:",
                 "description": "Stay informed about the latest news, events, and initiatives related to blood donation across the country."
+            },
+            "smartConnection": {
+                "title": "Smart Connection Platform:",
+                "description": "We connect people in need of blood with potential donors through an advanced matching system based on blood type and geographical location."
+            },
+            "instantNotification": {
+                "title": "Instant Notification System:",
+                "description": "When an urgent blood request is created, immediate notifications (SMS and email) are sent to compatible donors in the specified area."
+            },
+            "localEvents": {
+                "title": "Local Events & Campaigns:",
+                "description": "We keep users informed about the latest blood donation events and campaigns happening in their specific regions and cities."
             }
         },
         "why": {

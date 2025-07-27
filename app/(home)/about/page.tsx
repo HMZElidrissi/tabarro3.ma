@@ -11,6 +11,9 @@ import {
     Newspaper,
     Mail,
     User,
+    Link as LinkIcon,
+    Bell,
+    Calendar,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -168,8 +171,26 @@ export default async function AboutPage() {
                         <div className="w-16 h-1 bg-brand-500 mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-6">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {[
+                            {
+                                icon: LinkIcon,
+                                key: 'smartConnection',
+                                color: 'bg-orange-100 text-orange-600 dark:bg-orange-900/50 dark:text-orange-400',
+                                data: dict.about?.whatWeDo?.smartConnection,
+                            },
+                            {
+                                icon: Bell,
+                                key: 'instantNotification',
+                                color: 'bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-400',
+                                data: dict.about?.whatWeDo?.instantNotification,
+                            },
+                            {
+                                icon: Calendar,
+                                key: 'localEvents',
+                                color: 'bg-teal-100 text-teal-600 dark:bg-teal-900/50 dark:text-teal-400',
+                                data: dict.about?.whatWeDo?.localEvents,
+                            },
                             {
                                 icon: Info,
                                 key: 'simplified',

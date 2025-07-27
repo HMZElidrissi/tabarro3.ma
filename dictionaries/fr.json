@@ -351,6 +351,18 @@
             "news": {
                 "title": "Dernières actualités :",
                 "description": "Restez informé des dernières nouvelles, événements et initiatives liés au don de sang à travers le pays."
+            },
+            "smartConnection": {
+                "title": "Plateforme de connexion intelligente :",
+                "description": "Nous connectons les personnes ayant besoin de sang avec des donneurs potentiels grâce à un système de correspondance avancé basé sur le groupe sanguin et la localisation géographique."
+            },
+            "instantNotification": {
+                "title": "Système de notification instantanée :",
+                "description": "Lorsqu'une demande de sang urgente est créée, des notifications immédiates (SMS et email) sont envoyées aux donneurs compatibles dans la zone spécifiée."
+            },
+            "localEvents": {
+                "title": "Événements et campagnes locales :",
+                "description": "Nous tenons les utilisateurs informés des derniers événements et campagnes de don de sang qui se déroulent dans leurs régions et villes spécifiques."
             }
         },
         "why": {
