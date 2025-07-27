@@ -18,13 +18,8 @@ export async function getBloodRequests(page: number = 1, limit: number = 9) {
                     },
                     city: {
                         select: {
-                            name: true,
+                            id: true,
                             regionId: true,
-                            region: {
-                                select: {
-                                    name: true,
-                                },
-                            },
                         },
                     },
                 },

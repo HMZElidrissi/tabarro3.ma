@@ -102,8 +102,6 @@ export const getBloodRequests = async (userId: string) => {
             city: {
                 select: {
                     id: true,
-                    name: true,
-                    regionId: true,
                 },
             },
         },
@@ -242,6 +240,49 @@ export const deleteBloodRequest = validatedActionWithUser(
         } catch (error) {
             return {
                 error: 'Failed to delete blood request',
+            };
+        }
+    },
+);
+
+export const markAsFulfilled = validatedActionWithUser(
+    z.object({ id: z.coerce.number() }),
+    async (data, _, user) => {
+        try {
+            const request = await prisma.bloodRequest.findUnique({
+                where: { id: data.id },
+            });
+
+            if (!request) {
+                return { error: 'Blood request not found' };
+            }
+
+            if (request.userId !== user.id && user.role !== 'ADMIN') {
+                return { error: 'Not authorized to update this request' };
+            }
+
+            if (request.status === 'fulfilled') {
+                return { error: 'Blood request is already fulfilled' };
+            }
+
+            await prisma.bloodRequest.update({
+                where: { id: data.id },
+                data: {
+                    status: 'fulfilled',
+                    updatedAt: new Date(),
+                },
+            });
+
+            revalidatePath('/profile');
+            return {
+                success: 'Blood request marked as fulfilled successfully',
+            };
+        } catch (error) {
+            return {
+                error:
+                    error instanceof Error
+                        ? error.message
+                        : 'Failed to mark blood request as fulfilled',
             };
         }
     },

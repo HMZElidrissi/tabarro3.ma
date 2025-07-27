@@ -3,7 +3,7 @@ import BloodRequestsList from '@/components/blood-requests/blood-requests-list';
 import { CardsLoading } from '@/components/loading/cards-loading';
 import { getBloodRequests } from '@/actions/home';
 import { BloodRequest } from '@/types/blood-request';
-import { getDictionary } from '@/i18n/get-dictionary';
+import { getDictionary, getLocale } from '@/i18n/get-dictionary';
 import { Metadata } from 'next';
 
 interface RequestsPageProps {
@@ -63,6 +63,8 @@ export default async function BloodRequestsPage({
     const page = params.page ? parseInt(params.page) : 1;
     const requestsData = await getBloodRequests(page, 9);
     const dict = await getDictionary();
+    const lang = await getLocale();
+    const isRTL = lang === 'ar';
 
     return (
         <main>
@@ -70,6 +72,7 @@ export default async function BloodRequestsPage({
                 <BloodRequestsList
                     requests={requestsData.requests as BloodRequest[]}
                     dict={dict}
+                    isRTL={isRTL}
                     totalPages={requestsData.totalPages}
                     currentPage={requestsData.currentPage}
                     total={requestsData.total}

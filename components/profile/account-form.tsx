@@ -28,9 +28,10 @@ import { ActionState } from '@/auth/middleware';
 interface AccountFormProps {
     user: User;
     dict: any;
+    isRTL?: boolean;
 }
 
-export function AccountForm({ user, dict }: AccountFormProps) {
+export function AccountForm({ user, dict, isRTL }: AccountFormProps) {
     const { toast } = useToast();
     const formRef = useRef<HTMLFormElement>(null);
     const [selectedRegion, setSelectedRegion] = useState<string>(
@@ -72,6 +73,7 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                         name="name"
                         defaultValue={user.name || ''}
                         required
+                        dir={isRTL ? 'rtl' : 'ltr'}
                     />
                 </div>
 
@@ -83,6 +85,7 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                         type="email"
                         defaultValue={user.email}
                         disabled
+                        dir={isRTL ? 'rtl' : 'ltr'}
                     />
                 </div>
 
@@ -94,7 +97,9 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                         id="phone"
                         name="phone"
                         defaultValue={user.phone || ''}
-                        required
+                        type="tel"
+                        placeholder={dict.forms.placeholders.enterPhoneNumber}
+                        dir={isRTL ? 'rtl' : 'ltr'}
                     />
                 </div>
 
@@ -105,6 +110,7 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                     <Select
                         name="bloodGroup"
                         defaultValue={user.bloodGroup || ''}
+                        dir={isRTL ? 'rtl' : 'ltr'}
                     >
                         <SelectTrigger>
                             <SelectValue
@@ -117,8 +123,7 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                             {bloodGroups.map(group => (
                                 <SelectItem
                                     key={group.value}
-                                    value={group.value}
-                                >
+                                    value={group.value}>
                                     {getBloodGroupLabel(group.value, dict)}
                                 </SelectItem>
                             ))}
@@ -133,6 +138,7 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                         onValueChange={(value: string) => {
                             setSelectedRegion(value);
                         }}
+                        dir={isRTL ? 'rtl' : 'ltr'}
                     >
                         <SelectTrigger>
                             <SelectValue
@@ -145,9 +151,10 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                             {REGIONS_AND_CITIES.map(region => (
                                 <SelectItem
                                     key={region.id}
-                                    value={region.id.toString()}
-                                >
-                                    {region.name}
+                                    value={region.id.toString()}>
+                                    {isRTL
+                                        ? region.nameAr
+                                        : region.name}
                                 </SelectItem>
                             ))}
                         </SelectContent>
@@ -159,6 +166,7 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                     <Select
                         name="cityId"
                         defaultValue={user.cityId?.toString()}
+                        dir={isRTL ? 'rtl' : 'ltr'}
                     >
                         <SelectTrigger>
                             <SelectValue
@@ -172,9 +180,10 @@ export function AccountForm({ user, dict }: AccountFormProps) {
                                 )?.cities.map(city => (
                                     <SelectItem
                                         key={city.id}
-                                        value={city.id.toString()}
-                                    >
-                                        {city.name}
+                                        value={city.id.toString()}>
+                                        {isRTL
+                                            ? city.nameAr
+                                            : city.name}
                                     </SelectItem>
                                 ))}
                         </SelectContent>

@@ -25,9 +25,10 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 type LoginProps = {
     mode?: 'signin' | 'signup' | 'accept-invitation';
     dict: any;
+    isRTL?: boolean;
 };
 
-export function Login({ mode = 'signin', dict }: LoginProps) {
+export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
     const email = searchParams.get('email');
@@ -214,6 +215,7 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                 id="phone"
                                 name="phone"
                                 type="tel"
+                                dir={isRTL ? 'rtl' : 'ltr'}
                                 maxLength={20}
                                 className="block mt-1 w-full"
                                 placeholder={
@@ -227,7 +229,7 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                 <Label2 htmlFor="bloodGroup">
                                     {dict.forms.labels.bloodGroup}
                                 </Label2>
-                                <Select name="bloodGroup">
+                                <Select name="bloodGroup" dir={isRTL ? 'rtl' : 'ltr'}>
                                     <SelectTrigger>
                                         <SelectValue
                                             placeholder={
@@ -260,7 +262,8 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                 name="region"
                                 onValueChange={(value: string) => {
                                     setSelectedRegion(value);
-                                }}>
+                                }}
+                                dir={isRTL ? 'rtl' : 'ltr'}>
                                 <SelectTrigger>
                                     <SelectValue
                                         placeholder={
@@ -273,7 +276,9 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                         <SelectItem
                                             key={region.id}
                                             value={region.id.toString()}>
-                                            {region.name}
+                                            {isRTL
+                                                ? region.nameAr
+                                                : region.name}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>
@@ -284,7 +289,10 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                             <Label2 htmlFor="cityId">
                                 {dict.forms.labels.city}
                             </Label2>
-                            <Select name="cityId">
+                            <Select
+                                name="cityId"
+                                dir={isRTL ? 'rtl' : 'ltr'}
+                                disabled={!selectedRegion}>
                                 <SelectTrigger>
                                     <SelectValue
                                         placeholder={
@@ -302,7 +310,9 @@ export function Login({ mode = 'signin', dict }: LoginProps) {
                                             <SelectItem
                                                 key={city.id}
                                                 value={city.id.toString()}>
-                                                {city.name}
+                                                {isRTL
+                                                    ? city.nameAr
+                                                    : city.name}
                                             </SelectItem>
                                         ))}
                                 </SelectContent>

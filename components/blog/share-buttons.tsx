@@ -21,8 +21,7 @@ interface ShareButtonsProps {
 export default function ShareButtons({
     url,
     title,
-    description,
-    dict,
+                                         dict,
 }: ShareButtonsProps) {
     const [copied, setCopied] = useState(false);
 

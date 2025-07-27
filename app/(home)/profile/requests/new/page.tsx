@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import { Role } from '@/types/enums';
 import { RequestForm } from '@/components/profile/request-form';
 import { Metadata } from 'next';
-import { getDictionary } from '@/i18n/get-dictionary';
+import { getDictionary, getLocale } from '@/i18n/get-dictionary';
 
 export async function generateMetadata(): Promise<Metadata> {
     const dict = await getDictionary();
@@ -15,6 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function NewRequestPage() {
     const user = await getUser();
     const dict = await getDictionary();
+    const lang = await getLocale();
+    const isRTL = lang === 'ar';
 
     if (!user) {
         redirect('/sign-in');
@@ -35,7 +37,12 @@ export default async function NewRequestPage() {
                         {dict.bloodRequests.createRequestDescription}
                     </p>
                 </div>
-                <RequestForm userId={user.id} mode="add" dict={dict} />
+                <RequestForm
+                    userId={user.id}
+                    mode="add"
+                    dict={dict}
+                    isRTL={isRTL}
+                />
             </div>
         </div>
     );

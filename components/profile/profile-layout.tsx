@@ -16,12 +16,14 @@ interface ProfileLayoutProps {
     user: User;
     bloodRequests: BloodRequest[];
     dict: any;
+    isRTL?: boolean;
 }
 
 export function ProfileLayout({
     user,
     bloodRequests,
     dict,
+    isRTL,
 }: ProfileLayoutProps) {
     const searchParams = useSearchParams();
     const [activeTab, setActiveTab] = useState(
@@ -41,8 +43,7 @@ export function ProfileLayout({
                 shouldAnimate
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-4',
-            )}
-        >
+            )}>
             <div className="space-y-0.5">
                 <h2 className="text-2xl font-bold tracking-tight">
                     {dict.profile.title}
@@ -56,20 +57,17 @@ export function ProfileLayout({
             <Tabs
                 value={activeTab}
                 className="w-full"
-                onValueChange={setActiveTab}
-            >
+                onValueChange={setActiveTab}>
                 <TabsList className="w-full justify-start">
                     <TabsTrigger
                         value="requests"
-                        className="flex gap-2 items-center"
-                    >
+                        className="flex gap-2 items-center">
                         <Droplets className="h-6 w-6" />
                         {dict.profile.tabs.bloodRequests}
                     </TabsTrigger>
                     <TabsTrigger
                         value="account"
-                        className="flex gap-2 items-center"
-                    >
+                        className="flex gap-2 items-center">
                         <User2 className="h-6 w-6" />
                         {dict.profile.tabs.accountInfo}
                     </TabsTrigger>
@@ -83,12 +81,12 @@ export function ProfileLayout({
                             activeTab === 'requests'
                                 ? 'opacity-100 translate-y-0'
                                 : 'opacity-0 translate-y-4',
-                        )}
-                    >
+                        )}>
                         <Card className="p-6">
                             <BloodRequestsGrid
                                 initialRequests={bloodRequests}
                                 dict={dict}
+                                isRTL={isRTL}
                             />
                         </Card>
                     </TabsContent>
@@ -99,10 +97,9 @@ export function ProfileLayout({
                             activeTab === 'account'
                                 ? 'opacity-100 translate-y-0'
                                 : 'opacity-0 translate-y-4',
-                        )}
-                    >
+                        )}>
                         <Card>
-                            <AccountForm user={user} dict={dict} />
+                            <AccountForm user={user} dict={dict} isRTL={isRTL} />
                         </Card>
                     </TabsContent>
                 </div>

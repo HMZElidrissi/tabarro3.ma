@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { deleteBloodRequest, getBloodRequests } from '@/actions/request';
+import { markAsFulfilled } from '@/actions/profile';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { BloodRequestsTable } from '@/components/requests/requests-table';
 import { ActionState } from '@/auth/middleware';
@@ -49,6 +50,11 @@ export default function BloodRequestsClient({
         ActionState,
         FormData
     >(deleteBloodRequest, { error: '', success: '' });
+
+    const [fulfillState, fulfillAction, fulfillPending] = useActionState<
+        ActionState,
+        FormData
+    >(markAsFulfilled, { error: '', success: '' });
 
     const totalPages = Math.ceil(totalCount / PAGE_SIZE);
 
@@ -99,6 +105,22 @@ export default function BloodRequestsClient({
         }
     }, [deleteState, toast]);
 
+    useEffect(() => {
+        if (fulfillState.success) {
+            toast({
+                title: 'Success',
+                description: fulfillState.success,
+            });
+            loadRequests();
+        } else if (fulfillState.error) {
+            toast({
+                title: 'Error',
+                description: fulfillState.error,
+                variant: 'destructive',
+            });
+        }
+    }, [fulfillState, toast]);
+
     const loadRequests = async () => {
         setIsLoading(true);
         try {
@@ -134,6 +156,14 @@ export default function BloodRequestsClient({
         });
     };
 
+    const handleMarkAsFulfilled = async (requestId: number) => {
+        startTransition(async () => {
+            const formData = new FormData();
+            formData.append('id', requestId.toString());
+            await fulfillAction(formData);
+        });
+    };
+
     return (
         <Card>
             <CardHeader>
@@ -150,8 +180,10 @@ export default function BloodRequestsClient({
                         router.push(`/dashboard/requests/edit/${requestId}`);
                     }}
                     onDeleteRequest={handleDelete}
+                    onMarkAsFulfilled={handleMarkAsFulfilled}
                     isLoading={isLoading}
                     isDeleting={deletePending}
+                    isFulfilling={fulfillPending}
                 />
 
                 {totalPages > 1 && (

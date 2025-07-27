@@ -21,6 +21,7 @@ interface CampaignsListProps {
     authenticated: boolean;
     userId?: string;
     dict: any;
+    isRTL?: boolean;
     totalPages: number;
     currentPage: number;
     total: number;
@@ -31,9 +32,8 @@ export default function CampaignsList({
     authenticated,
     userId,
     dict,
+    isRTL,
     totalPages,
-    currentPage,
-    total,
 }: CampaignsListProps) {
     const router = useRouter();
     const pathname = usePathname();
@@ -149,7 +149,9 @@ export default function CampaignsList({
                                     </Label>
                                     <Select
                                         value={selectedRegion || 'all'}
-                                        onValueChange={handleRegionChange}>
+                                        onValueChange={handleRegionChange}
+                                        dir={ isRTL ? 'rtl' : 'ltr'}
+                                    >
                                         <SelectTrigger>
                                             <SelectValue
                                                 placeholder={
@@ -169,7 +171,9 @@ export default function CampaignsList({
                                                 <SelectItem
                                                     key={region.id}
                                                     value={region.id.toString()}>
-                                                    {region.name}
+                                                    {isRTL
+                                                        ? region.nameAr
+                                                        : region.name}
                                                 </SelectItem>
                                             ))}
                                         </SelectContent>
@@ -189,7 +193,9 @@ export default function CampaignsList({
                                         disabled={
                                             !selectedRegion ||
                                             selectedRegion === 'all'
-                                        }>
+                                        }
+                                        dir={ isRTL ? 'rtl' : 'ltr'}
+                                    >
                                         <SelectTrigger>
                                             <SelectValue
                                                 placeholder={
@@ -209,7 +215,9 @@ export default function CampaignsList({
                                                 <SelectItem
                                                     key={city.id}
                                                     value={city.id.toString()}>
-                                                    {city.name}
+                                                    {isRTL
+                                                        ? city.nameAr
+                                                        : city.name}
                                                 </SelectItem>
                                             ))}
                                         </SelectContent>

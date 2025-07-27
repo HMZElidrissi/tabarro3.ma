@@ -32,7 +32,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/auth';
 import { signOut } from '@/actions/sign-out';
-import Link from 'next/link';
+import { ProgressLink as Link } from '@/components/custom/progress-link';
 import { Role } from '@/types/enums';
 
 export function DashboardSidebar() {
