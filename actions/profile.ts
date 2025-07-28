@@ -6,10 +6,16 @@ import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { BloodGroup } from '@/types/enums';
 import { queueBloodRequestNotification } from '@/jobs/helpers';
+import { isValidMoroccanPhone, normalizeMoroccanPhone } from '@/lib/utils';
 
 const ProfileSchema = z.object({
     name: z.string().min(1, 'Name is required'),
-    phone: z.string().min(1, 'Phone number is required'),
+    phone: z
+        .string()
+        .min(1, 'Phone number is required')
+        .refine(phone => isValidMoroccanPhone(phone), {
+            message: 'Invalid Moroccan phone number',
+        }),
     bloodGroup: z.nativeEnum(BloodGroup).nullable(),
     cityId: z.coerce.number().nullable(),
 });
@@ -33,7 +39,7 @@ export const updateProfile = validatedActionWithUser(
                 where: { id: user.id },
                 data: {
                     name: data.name,
-                    phone: data.phone,
+                    phone: normalizeMoroccanPhone(data.phone),
                     bloodGroup: data.bloodGroup,
                     cityId: data.cityId,
                     updatedAt: new Date(),
