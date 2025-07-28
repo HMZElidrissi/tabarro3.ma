@@ -6,11 +6,18 @@ import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { BloodGroup, Role } from '@/types/enums';
 import { hashPassword } from '@/auth/session';
+import { isValidMoroccanPhone, normalizeMoroccanPhone } from '@/lib/utils';
 
 const ParticipantSchema = z.object({
     name: z.string().min(1),
     email: z.string().email(),
-    phone: z.string().optional().nullable(),
+    phone: z
+        .string()
+        .optional()
+        .nullable()
+        .refine(phone => !phone || isValidMoroccanPhone(phone), {
+            message: 'Invalid Moroccan phone number',
+        }),
     bloodGroup: z
         .enum([
             'A_POSITIVE',
@@ -133,6 +140,9 @@ export const createParticipant = validatedActionWithUser(
             await prisma.user.create({
                 data: {
                     ...data,
+                    phone: data.phone
+                        ? normalizeMoroccanPhone(data.phone)
+                        : data.phone,
                     role: 'PARTICIPANT',
                     passwordHash: await hashPassword(data.email),
                 },
@@ -161,7 +171,12 @@ export const updateParticipant = validatedActionWithUser(
             const { id, ...updateData } = data;
             await prisma.user.update({
                 where: { id },
-                data: updateData,
+                data: {
+                    ...updateData,
+                    phone: updateData.phone
+                        ? normalizeMoroccanPhone(updateData.phone)
+                        : updateData.phone,
+                },
             });
             revalidatePath('/dashboard/participants');
             return { success: 'Participant updated successfully' };

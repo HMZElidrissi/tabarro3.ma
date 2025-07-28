@@ -229,7 +229,8 @@
         "validation": {
             "passwordsDontMatch": "كلمات المرور غير متطابقة",
             "validEmailRequired": "يرجى إدخال عنوان بريد إلكتروني صحيح",
-            "passwordMinLength": "كلمة المرور يجب أن تكون 8 أحرف على الأقل"
+            "passwordMinLength": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+            "invalidPhoneNumber": "يرجى إدخال رقم هاتف مغربي صحيح (مثال: 0612345678، +212612345678)"
         }
     },
     "forms": {

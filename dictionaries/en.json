@@ -280,7 +280,8 @@
             "passwordRequirements": "Password must be at least 8 characters long",
             "passwordsDontMatch": "Passwords don't match",
             "validEmailRequired": "Please enter a valid email address",
-            "passwordMinLength": "Password must be at least 8 characters"
+            "passwordMinLength": "Password must be at least 8 characters",
+            "invalidPhoneNumber": "Please enter a valid Moroccan phone number (e.g., 0612345678, +212612345678)"
         }
     },
     "signIn": {

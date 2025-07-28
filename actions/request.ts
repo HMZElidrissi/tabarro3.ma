@@ -6,13 +6,20 @@ import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { Role, BloodGroup } from '@/types/enums';
 import { queueBloodRequestNotification } from '@/jobs/helpers';
+import { isValidMoroccanPhone, normalizeMoroccanPhone } from '@/lib/utils';
 
 const BloodRequestSchema = z.object({
     description: z.string().min(1),
     bloodGroup: z.nativeEnum(BloodGroup),
     cityId: z.coerce.number(),
     location: z.string(),
-    phone: z.string().optional().nullable(),
+    phone: z
+        .string()
+        .optional()
+        .nullable()
+        .refine(phone => !phone || isValidMoroccanPhone(phone), {
+            message: 'Invalid Moroccan phone number',
+        }),
     status: z.string().default('active'),
 });
 
@@ -137,6 +144,9 @@ export const createBloodRequest = validatedActionWithUser(
             const newRequest = await prisma.bloodRequest.create({
                 data: {
                     ...createData,
+                    phone: createData.phone
+                        ? normalizeMoroccanPhone(createData.phone)
+                        : createData.phone,
                     cityId,
                     userId: null,
                 },
@@ -181,6 +191,9 @@ export const updateBloodRequest = validatedActionWithUser(
                 where: { id },
                 data: {
                     ...updateData,
+                    phone: updateData.phone
+                        ? normalizeMoroccanPhone(updateData.phone)
+                        : updateData.phone,
                     cityId,
                 },
             });

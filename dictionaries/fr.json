@@ -263,7 +263,8 @@
             "passwordRequirements": "Le mot de passe doit contenir au moins 8 caractères",
             "passwordsDontMatch": "Les mots de passe ne correspondent pas",
             "validEmailRequired": "Veuillez entrer une adresse e-mail valide",
-            "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères"
+            "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
+            "invalidPhoneNumber": "Veuillez entrer un numéro de téléphone marocain valide (ex: 0612345678, +212612345678)"
         }
     },
     "signIn": {

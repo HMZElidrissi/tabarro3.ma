@@ -5,7 +5,11 @@ import { validatedAction, validatedActionWithUser } from '@/auth/middleware';
 import { prisma } from '@/lib/prisma';
 import { hashPassword, setSession } from '@/auth/session';
 import { getClientInfo } from '@/lib/ip';
-import { logActivity } from '@/lib/utils';
+import {
+    logActivity,
+    isValidMoroccanPhone,
+    normalizeMoroccanPhone,
+} from '@/lib/utils';
 import { ActivityType, Role } from '@/types/enums';
 import { redirect } from 'next/navigation';
 import { nanoid } from 'nanoid';
@@ -16,7 +20,13 @@ const acceptInvitationSchema = z.object({
     token: z.string(),
     password: z.string().min(8),
     confirmPassword: z.string().min(8),
-    phone: z.string().max(20).optional(),
+    phone: z
+        .string()
+        .max(20)
+        .optional()
+        .refine(phone => !phone || isValidMoroccanPhone(phone), {
+            message: 'Invalid Moroccan phone number',
+        }),
     cityId: z.coerce.number().int().positive().optional(),
 });
 
@@ -69,7 +79,7 @@ export const acceptInvitation = validatedAction(
                     name,
                     email: invitation.email,
                     passwordHash,
-                    phone,
+                    phone: phone ? normalizeMoroccanPhone(phone) : phone,
                     cityId,
                     role: invitation.role,
                 },

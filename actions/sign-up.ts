@@ -5,7 +5,11 @@ import { validatedAction } from '@/auth/middleware';
 import { prisma } from '@/lib/prisma';
 import { hashPassword, setSession } from '@/auth/session';
 import { getClientInfo } from '@/lib/ip';
-import { logActivity } from '@/lib/utils';
+import {
+    logActivity,
+    isValidMoroccanPhone,
+    normalizeMoroccanPhone,
+} from '@/lib/utils';
 import { ActivityType, BloodGroup } from '@/types/enums';
 import { redirect } from 'next/navigation';
 import { getDictionary } from '@/i18n/get-dictionary';
@@ -15,7 +19,13 @@ const signUpSchema = z.object({
     password: z.string().min(8).max(100),
     confirmPassword: z.string().min(8).max(100),
     name: z.string().max(100),
-    phone: z.string().max(20).optional(),
+    phone: z
+        .string()
+        .max(20)
+        .optional()
+        .refine(phone => !phone || isValidMoroccanPhone(phone), {
+            message: 'Invalid Moroccan phone number',
+        }),
     bloodGroup: z.nativeEnum(BloodGroup).optional(),
     cityId: z.coerce.number().int().positive().optional(),
 });
@@ -54,7 +64,7 @@ export const signUp = validatedAction(signUpSchema, async data => {
             email,
             passwordHash,
             name,
-            phone,
+            phone: phone ? normalizeMoroccanPhone(phone) : phone,
             bloodGroup,
             cityId,
         },
