@@ -508,5 +508,8 @@
         "light": "Clair",
         "dark": "Sombre",
         "system": "Système"
+    },
+    "testimonials": {
+        "title": "Ce qu'ils disent de nous"
     }
 }

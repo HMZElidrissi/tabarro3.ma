@@ -78,6 +78,7 @@
         "react-markdown": "^9.0.1",
         "react-spring": "^9.7.5",
         "react-top-loading-bar": "^3.0.2",
+        "react-tweet": "^3.2.2",
         "recharts": "^2.13.3",
         "rehype-raw": "^7.0.0",
         "remark-gfm": "^4.0.0",
