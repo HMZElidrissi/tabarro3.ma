@@ -326,10 +326,11 @@ export const deleteCampaign = validatedActionWithUser(
                 return { error: 'Not authorized to delete this campaign' };
             }
 
-            // Check if campaign has started
+            // Check if campaign has started (only for non-owners)
             if (
                 new Date(campaign.startTime) <= new Date() &&
-                user.role !== Role.ADMIN
+                user.role !== Role.ADMIN &&
+                campaign.organizationId !== user.id
             ) {
                 return {
                     error: 'Cannot delete a campaign that has already started',

@@ -50,7 +50,6 @@ export async function getCampaigns(
     filters?: { regionId?: string; cityId?: string },
 ) {
     try {
-        const skip = (page - 1) * limit;
         const where: any = {};
 
         if (filters?.regionId) {
@@ -60,43 +59,69 @@ export async function getCampaigns(
             where.cityId = Number(filters.cityId);
         }
 
-        const [campaigns, total] = await Promise.all([
-            prisma.campaign.findMany({
-                where,
-                include: {
-                    city: {
-                        include: {
-                            region: true,
-                        },
+        // Get all campaigns first to sort them properly
+        const allCampaigns = await prisma.campaign.findMany({
+            where,
+            include: {
+                city: {
+                    include: {
+                        region: true,
                     },
-                    organization: {
-                        select: {
-                            name: true,
-                            email: true,
-                            phone: true,
-                        },
+                },
+                organization: {
+                    select: {
+                        name: true,
+                        email: true,
+                        phone: true,
                     },
-                    participants: {
-                        include: {
-                            user: {
-                                select: {
-                                    id: true,
-                                    name: true,
-                                },
+                },
+                participants: {
+                    include: {
+                        user: {
+                            select: {
+                                id: true,
+                                name: true,
                             },
                         },
                     },
                 },
-                orderBy: {
-                    startTime: 'desc',
-                },
-                skip,
-                take: limit,
-            }),
-            prisma.campaign.count({ where }),
-        ]);
+            },
+            orderBy: {
+                startTime: 'asc',
+            },
+        });
 
+        const now = new Date();
+
+        // Sort campaigns by priority: ongoing first, then upcoming, then past
+        const sortedCampaigns = allCampaigns.sort((a, b) => {
+            const aStart = new Date(a.startTime);
+            const aEnd = new Date(a.endTime);
+            const bStart = new Date(b.startTime);
+            const bEnd = new Date(b.endTime);
+
+            const aIsOngoing = aStart <= now && aEnd >= now;
+            const bIsOngoing = bStart <= now && bEnd >= now;
+            const aIsUpcoming = aStart > now;
+            const bIsUpcoming = bStart > now;
+
+            // Ongoing campaigns first
+            if (aIsOngoing && !bIsOngoing) return -1;
+            if (!aIsOngoing && bIsOngoing) return 1;
+
+            // Then upcoming campaigns
+            if (aIsUpcoming && !bIsUpcoming) return -1;
+            if (!aIsUpcoming && bIsUpcoming) return 1;
+
+            // Within each category, sort by start time
+            return aStart.getTime() - bStart.getTime();
+        });
+
+        const total = sortedCampaigns.length;
         const totalPages = Math.ceil(total / limit);
+        const startIndex = (page - 1) * limit;
+        const endIndex = startIndex + limit;
+        const campaigns = sortedCampaigns.slice(startIndex, endIndex);
 
         return {
             campaigns,
