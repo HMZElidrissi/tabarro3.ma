@@ -507,5 +507,8 @@
         "light": "فاتح",
         "dark": "داكن",
         "system": "النظام"
+    },
+    "testimonials": {
+        "title": "قالوا عنا"
     }
 }

@@ -525,5 +525,8 @@
         "light": "Light",
         "dark": "Dark",
         "system": "System"
+    },
+    "testimonials": {
+        "title": "What they say about us"
     }
 }

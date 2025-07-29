@@ -11,6 +11,7 @@ import { Metadata } from 'next';
 import { WithContext } from 'schema-dts';
 import Script from 'next/script';
 import { SEOOptimizer } from '@/components/custom/seo-optimizer';
+import TweetMarquee from '@/components/home/tweet-marquee';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
 
@@ -129,6 +130,7 @@ export default async function Page() {
             <div className="-mt-8">
                 <HeroComponent dict={dict} isRTL={isRTL} />
                 <HowItWorksComponent dict={dict} />
+                <TweetMarquee dict={dict} />
                 <LatestBlogPosts locale={lang} dictionary={dict} />
                 {/* <Partners dict={dict} /> */}
                 <BenefitsComponent dict={dict} />
