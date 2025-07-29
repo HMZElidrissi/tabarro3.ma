@@ -59,7 +59,7 @@ export const mainNavigation: NavigationItem[] = [
         icon: Mail,
         href: '/dashboard/emails',
         pattern: '^/dashboard/emails',
-        roles: [Role.ADMIN, Role.ORGANIZATION],
+        roles: [Role.ADMIN],
     },
 ];
 

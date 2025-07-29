@@ -159,6 +159,7 @@ export default function CampaignsClient({
                     onDeleteCampaign={handleDelete}
                     isLoading={isLoading}
                     isDeleting={deletePending}
+                    organizationId={organizationId}
                 />
 
                 {totalPages > 1 && (

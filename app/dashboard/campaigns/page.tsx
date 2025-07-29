@@ -23,6 +23,10 @@ export default async function CampaignsPage({
     const currentSearch = search ?? '';
     const currentUser = await getUser();
 
+    // For organization users, pass their organization ID to filter campaigns
+    const organizationId =
+        currentUser?.role === Role.ORGANIZATION ? currentUser.id : undefined;
+
     return (
         <DashboardShell
             header="Campaigns"
@@ -41,6 +45,7 @@ export default async function CampaignsPage({
                 currentSearch={currentSearch}
                 currentStatus={status}
                 userRole={currentUser!.role as Role}
+                organizationId={organizationId}
                 currentRegion={region}
                 currentCityId={cityId}
             />

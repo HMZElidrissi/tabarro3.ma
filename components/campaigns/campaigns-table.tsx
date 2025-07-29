@@ -27,6 +27,7 @@ interface CampaignsTableProps {
     userRole: Role;
     isLoading?: boolean;
     isDeleting?: boolean;
+    organizationId?: string;
 }
 
 export function CampaignsTable({
@@ -36,6 +37,7 @@ export function CampaignsTable({
     userRole,
     isLoading = false,
     isDeleting = false,
+    organizationId,
 }: CampaignsTableProps) {
     const getCampaignStatus = (startTime: Date, endTime: Date) => {
         const now = new Date();
@@ -108,8 +110,7 @@ export function CampaignsTable({
                                 </TableCell>
                                 <TableCell>
                                     <Badge
-                                        variant={getStatusBadgeVariant(status)}
-                                    >
+                                        variant={getStatusBadgeVariant(status)}>
                                         {status}
                                     </Badge>
                                 </TableCell>
@@ -123,8 +124,7 @@ export function CampaignsTable({
                                         <DropdownMenuTrigger asChild>
                                             <Button
                                                 variant="ghost"
-                                                className="h-8 w-8 p-0"
-                                            >
+                                                className="h-8 w-8 p-0">
                                                 <MoreHorizontal className="h-4 w-4" />
                                             </Button>
                                         </DropdownMenuTrigger>
@@ -132,11 +132,14 @@ export function CampaignsTable({
                                             <DropdownMenuItem
                                                 onClick={() =>
                                                     onEditCampaign(campaign.id)
-                                                }
-                                            >
+                                                }>
                                                 Edit details
                                             </DropdownMenuItem>
                                             {(userRole === Role.ADMIN ||
+                                                (userRole ===
+                                                    Role.ORGANIZATION &&
+                                                    organizationId ===
+                                                        campaign.organizationId) ||
                                                 status === 'Upcoming') && (
                                                 <DropdownMenuItem
                                                     className="text-destructive hover:text-destructive-dark"
@@ -145,8 +148,7 @@ export function CampaignsTable({
                                                             campaign.id,
                                                         )
                                                     }
-                                                    disabled={isDeleting}
-                                                >
+                                                    disabled={isDeleting}>
                                                     {isDeleting ? (
                                                         <>
                                                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
