@@ -1,23 +1,30 @@
 'use client';
 
-import { Mailbox, MapPin, Phone, User } from 'lucide-react';
-import { InboxIcon } from '@heroicons/react/24/outline';
-import { BloodRequest } from '@/types/blood-request';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { getBloodGroupLabel } from '@/config/blood-group';
-import { getStatusColor } from '@/lib/utils';
-import { BloodGroup } from '@/types/enums';
 import { getLocation } from '@/config/locations';
+import { getStatusColor } from '@/lib/utils';
+import { BloodRequest } from '@/types/blood-request';
+import { BloodGroup } from '@/types/enums';
+import { InboxIcon } from '@heroicons/react/24/outline';
+import { formatDate } from '@/lib/utils';
+import { Calendar, Mailbox, MapPin, Phone, User } from 'lucide-react';
 
 interface BloodRequestCardProps {
     request: BloodRequest;
     dict: any;
+    lang: string;
     isRTL?: boolean;
 }
 
-export function BloodRequestCard({ request, dict, isRTL }: BloodRequestCardProps) {
+export function BloodRequestCard({
+    request,
+    dict,
+    lang,
+    isRTL,
+}: BloodRequestCardProps) {
     return (
         <Card className="h-full flex flex-col shadow-sm hover:shadow-md transition-shadow duration-200 bg-card">
             <CardContent className="flex-1 p-4">
@@ -48,10 +55,15 @@ export function BloodRequestCard({ request, dict, isRTL }: BloodRequestCardProps
                         <div className="flex items-center gap-1.5 text-sm text-foreground">
                             <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
                             <span className="font-medium">
-                                {getLocation(request.city.id, isRTL)?.regionName}
+                                {
+                                    getLocation(request.city.id, isRTL)
+                                        ?.regionName
+                                }
                             </span>
                             <span className="text-muted-foreground/50">•</span>
-                            <span>{getLocation(request.city.id, isRTL)?.cityName}</span>
+                            <span>
+                                {getLocation(request.city.id, isRTL)?.cityName}
+                            </span>
                         </div>
 
                         {request.location && (
@@ -62,6 +74,16 @@ export function BloodRequestCard({ request, dict, isRTL }: BloodRequestCardProps
                                 </span>
                             </div>
                         )}
+
+                        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                            <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
+                            <span className="truncate">
+                                {formatDate(
+                                    request.createdAt.toISOString(),
+                                    lang,
+                                )}
+                            </span>
+                        </div>
                     </div>
 
                     {/* User info in compact format */}
