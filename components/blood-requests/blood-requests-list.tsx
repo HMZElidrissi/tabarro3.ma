@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 interface BloodRequestsListProps {
     requests: BloodRequest[];
     dict: any;
-    isRTL?: boolean;
+    lang: string;
     totalPages: number;
     currentPage: number;
     total: number;
@@ -18,13 +18,14 @@ interface BloodRequestsListProps {
 export default function BloodRequestsList({
     requests,
     dict,
-    isRTL,
+    lang,
     totalPages,
 }: BloodRequestsListProps) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const [isClient, setIsClient] = useState(false);
+    const isRTL = lang === 'ar';
 
     useEffect(() => {
         setIsClient(true);
@@ -72,6 +73,7 @@ export default function BloodRequestsList({
                             request={request}
                             dict={dict}
                             isRTL={isRTL}
+                            lang={lang}
                         />
                     ))}
                 </div>

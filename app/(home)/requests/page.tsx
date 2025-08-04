@@ -64,7 +64,6 @@ export default async function BloodRequestsPage({
     const requestsData = await getBloodRequests(page, 9);
     const dict = await getDictionary();
     const lang = await getLocale();
-    const isRTL = lang === 'ar';
 
     return (
         <main>
@@ -72,7 +71,7 @@ export default async function BloodRequestsPage({
                 <BloodRequestsList
                     requests={requestsData.requests as BloodRequest[]}
                     dict={dict}
-                    isRTL={isRTL}
+                    lang={lang}
                     totalPages={requestsData.totalPages}
                     currentPage={requestsData.currentPage}
                     total={requestsData.total}

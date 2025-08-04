@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { ActivityType } from '@/types/enums';
 import { prisma } from '@/lib/prisma';
 import { format, parseISO } from 'date-fns';
-import { fr, enUS, ar } from 'date-fns/locale';
+import { fr, enUS, ar, arMA } from 'date-fns/locale';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -42,12 +42,12 @@ export function formatDate(dateString: string, localeCode: string = 'fr') {
     const locales = {
         fr: fr,
         en: enUS,
-        ar: ar,
+        ar: arMA,
     };
 
     const locale = locales[localeCode as keyof typeof locales] || fr;
 
-    return format(date, 'PPP', { locale });
+    return format(date, 'dd MMMM yyyy', { locale });
 }
 
 /**
