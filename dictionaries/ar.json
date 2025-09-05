@@ -271,7 +271,8 @@
     },
     "signUp": {
         "passwordsDoNotMatch": "كلمات المرور غير متطابقة.",
-        "userAlreadyExists": "المستخدم بهذا البريد الإلكتروني موجود بالفعل."
+        "userAlreadyExists": "المستخدم بهذا البريد الإلكتروني موجود بالفعل.",
+        "invalidPhoneNumber": "رقم هاتف مغربي غير صحيح"
     },
     "profile": {
         "title": "إعدادات الملف الشخصي",

@@ -19,18 +19,19 @@ const signUpSchema = z.object({
     password: z.string().min(8).max(100),
     confirmPassword: z.string().min(8).max(100),
     name: z.string().max(100),
-    phone: z
-        .string()
-        .max(20)
-        .optional()
-        .refine(phone => !phone || isValidMoroccanPhone(phone), {
-            message: 'Invalid Moroccan phone number',
-        }),
+    phone: z.string().max(20).optional(),
     bloodGroup: z.nativeEnum(BloodGroup).optional(),
     cityId: z.coerce.number().int().positive().optional(),
 });
 
-export const signUp = validatedAction(signUpSchema, async data => {
+export const signUp = validatedAction(signUpSchema, async (data, formData) => {
+    const dict = await getDictionary();
+
+    // Re-validate phone with internationalized message
+    if (data.phone && !isValidMoroccanPhone(data.phone)) {
+        return { error: dict.signUp.invalidPhoneNumber };
+    }
+
     const {
         email,
         password,
@@ -40,7 +41,6 @@ export const signUp = validatedAction(signUpSchema, async data => {
         bloodGroup,
         cityId,
     } = data;
-    const dict = await getDictionary();
 
     if (password !== confirmPassword) {
         return { error: dict.signUp.passwordsDoNotMatch };

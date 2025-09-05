@@ -289,7 +289,8 @@
     },
     "signUp": {
         "passwordsDoNotMatch": "Passwords do not match.",
-        "userAlreadyExists": "User with this email already exists."
+        "userAlreadyExists": "User with this email already exists.",
+        "invalidPhoneNumber": "Invalid Moroccan phone number"
     },
     "profile": {
         "title": "Profile Settings",

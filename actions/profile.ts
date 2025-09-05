@@ -7,15 +7,11 @@ import { z } from 'zod';
 import { BloodGroup } from '@/types/enums';
 import { queueBloodRequestNotification } from '@/jobs/helpers';
 import { isValidMoroccanPhone, normalizeMoroccanPhone } from '@/lib/utils';
+import { getDictionary } from '@/i18n/get-dictionary';
 
 const ProfileSchema = z.object({
     name: z.string().min(1, 'Name is required'),
-    phone: z
-        .string()
-        .min(1, 'Phone number is required')
-        .refine(phone => isValidMoroccanPhone(phone), {
-            message: 'Invalid Moroccan phone number',
-        }),
+    phone: z.string().min(1, 'Phone number is required'),
     bloodGroup: z.nativeEnum(BloodGroup).nullable(),
     cityId: z.coerce.number().nullable(),
 });
@@ -24,6 +20,13 @@ export const updateProfile = validatedActionWithUser(
     ProfileSchema,
     async (data, _, user) => {
         try {
+            const dict = await getDictionary();
+
+            // Validate phone with internationalized message
+            if (!isValidMoroccanPhone(data.phone)) {
+                return { error: dict.signUp.invalidPhoneNumber };
+            }
+
             // Check if the user exists
             const existingUser = await prisma.user.findUnique({
                 where: { id: user.id },

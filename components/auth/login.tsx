@@ -229,7 +229,7 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                 <Label2 htmlFor="bloodGroup">
                                     {dict.forms.labels.bloodGroup}
                                 </Label2>
-                                <Select name="bloodGroup" dir={isRTL ? 'rtl' : 'ltr'}>
+                                <Select name="bloodGroup" dir={isRTL ? 'rtl' : 'ltr'} required>
                                     <SelectTrigger>
                                         <SelectValue
                                             placeholder={
@@ -263,7 +263,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                 onValueChange={(value: string) => {
                                     setSelectedRegion(value);
                                 }}
-                                dir={isRTL ? 'rtl' : 'ltr'}>
+                                dir={isRTL ? 'rtl' : 'ltr'}
+                                required>
                                 <SelectTrigger>
                                     <SelectValue
                                         placeholder={
@@ -292,7 +293,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                             <Select
                                 name="cityId"
                                 dir={isRTL ? 'rtl' : 'ltr'}
-                                disabled={!selectedRegion}>
+                                disabled={!selectedRegion}
+                                required>
                                 <SelectTrigger>
                                     <SelectValue
                                         placeholder={

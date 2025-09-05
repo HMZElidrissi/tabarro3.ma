@@ -272,7 +272,8 @@
     },
     "signUp": {
         "passwordsDoNotMatch": "Les mots de passe ne correspondent pas.",
-        "userAlreadyExists": "Un utilisateur avec cet e-mail existe déjà."
+        "userAlreadyExists": "Un utilisateur avec cet e-mail existe déjà.",
+        "invalidPhoneNumber": "Numéro de téléphone marocain invalide"
     },
     "profile": {
         "title": "Paramètres du profil",

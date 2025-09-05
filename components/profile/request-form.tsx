@@ -80,7 +80,8 @@ export function RequestForm({
                     <Select
                         name="bloodGroup"
                         defaultValue={request?.bloodGroup || ''}
-                        dir={isRTL ? 'rtl' : 'ltr'}>
+                        dir={isRTL ? 'rtl' : 'ltr'}
+                        required>
                         <SelectTrigger>
                             <SelectValue
                                 placeholder={
@@ -106,7 +107,7 @@ export function RequestForm({
                         value={selectedRegion}
                         onValueChange={setSelectedRegion}
                         dir={isRTL ? 'rtl' : 'ltr'}
-                    >
+                        required>
                         <SelectTrigger>
                             <SelectValue
                                 placeholder={

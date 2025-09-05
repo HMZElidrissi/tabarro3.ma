@@ -66,7 +66,7 @@ export async function generateMetadata(): Promise<Metadata> {
                     alt: dictionary.metadata.ogImageAlt,
                 },
             ],
-            locale: locale === 'ar' ? 'ar_MA' : 'en_US',
+            locale: locale === 'ar' ? 'ar_MA' : locale === 'fr' ? 'fr_MA' : 'en_US',
             type: 'website',
         },
         twitter: {
@@ -109,7 +109,7 @@ const getJsonLd = async (): Promise<WithContext<Organization>> => {
         contactPoint: {
             '@type': 'ContactPoint',
             contactType: 'customer service',
-            availableLanguage: ['English', 'Arabic'],
+            availableLanguage: ['English', 'Arabic', 'French'],
         },
         sameAs: [
             'https://www.facebook.com/tabarro3maroc/',
