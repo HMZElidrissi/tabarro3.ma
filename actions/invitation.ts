@@ -14,19 +14,14 @@ import { ActivityType, Role } from '@/types/enums';
 import { redirect } from 'next/navigation';
 import { nanoid } from 'nanoid';
 import { sendInvitationEmail } from '@/lib/mail';
+import { getDictionary } from '@/i18n/get-dictionary';
 
 const acceptInvitationSchema = z.object({
     name: z.string().max(100),
     token: z.string(),
     password: z.string().min(8),
     confirmPassword: z.string().min(8),
-    phone: z
-        .string()
-        .max(20)
-        .optional()
-        .refine(phone => !phone || isValidMoroccanPhone(phone), {
-            message: 'Invalid Moroccan phone number',
-        }),
+    phone: z.string().max(20).optional(),
     cityId: z.coerce.number().int().positive().optional(),
 });
 
@@ -38,7 +33,13 @@ const inviteUserSchema = z.object({
 export const acceptInvitation = validatedAction(
     acceptInvitationSchema,
     async data => {
+        const dict = await getDictionary();
         const { name, token, password, confirmPassword, phone, cityId } = data;
+
+        // Validate phone with internationalized message
+        if (phone && !isValidMoroccanPhone(phone)) {
+            return { error: dict.signUp.invalidPhoneNumber };
+        }
 
         if (password !== confirmPassword) {
             return { error: 'Passwords do not match.' };
