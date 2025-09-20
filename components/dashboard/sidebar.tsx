@@ -34,12 +34,14 @@ import { useUser } from '@/auth';
 import { signOut } from '@/actions/sign-out';
 import { ProgressLink as Link } from '@/components/custom/progress-link';
 import { Role } from '@/types/enums';
+import { useTheme } from 'next-themes';
 
 export function DashboardSidebar() {
     const router = useRouter();
     const { user } = useUser();
     const [isLoading, setIsLoading] = useState(false);
     const role = user?.role;
+    const { theme } = useTheme();
 
     const handleLogout = async () => {
         try {
@@ -78,13 +80,13 @@ export function DashboardSidebar() {
 
     return (
         <Sidebar className="border-r border-gray-200 dark:border-gray-800">
-            <SidebarHeader className="px-4 py-12 flex items-center justify-center">
+            <SidebarHeader className="px-4 py-6 flex items-center justify-center">
                 <Link href="/">
                     <Image
-                        src="/logo.svg"
+                        src={theme === 'dark' ? '/logo-white.svg' : '/logo.svg'}
                         alt="Logo"
-                        width={120}
-                        height={120}
+                        width={100}
+                        height={100}
                     />
                 </Link>
             </SidebarHeader>

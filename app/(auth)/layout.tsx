@@ -28,11 +28,11 @@ export default async function Layout({ children }: LayoutProps) {
                         logo={
                             <Link href="/">
                                 <Image
-                                    src="/logo-header.svg"
+                                    src="/logo.svg"
                                     alt="tabarro3"
-                                    width={200}
-                                    height={200}
-                                    className="my-5"
+                                    width={150}
+                                    height={150}
+                                    className="my-2"
                                 />
                             </Link>
                         }>
