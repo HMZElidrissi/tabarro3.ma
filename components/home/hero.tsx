@@ -66,12 +66,12 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
                 <div className="grid lg:grid-cols-2 gap-8 items-center">
                     {/* Left Content Section */}
                     <div className="space-y-6 text-white dark:text-foreground z-10">
-                        <div className="inline-block">
+                        <div className="inline-block py-4">
                             <Image
                                 src="/hero.svg"
                                 alt="tabarro3"
-                                width={500}
-                                height={500}
+                                width={300}
+                                height={300}
                                 className="filter drop-shadow-lg hover:drop-shadow-2xl transition-all duration-300"
                             />
                         </div>

@@ -143,7 +143,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                         alt="tabarro3"
                         width={500}
                         height={500}
-                        className="h-auto w-24"
+                        className="h-auto w-12"
                         priority
                     />
                 </Link>
