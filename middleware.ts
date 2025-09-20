@@ -14,6 +14,7 @@ const guestRoutes = [
 export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     const isDashboard = pathname.startsWith('/dashboard');
+    const isHandbook = pathname.startsWith('/handbook');
 
     // Handle authentication
     const sessionCookie = request.cookies.get('session')?.value;
@@ -32,7 +33,7 @@ export async function middleware(request: NextRequest) {
     const response = NextResponse.next();
 
     // If accessing dashboard, force set locale to 'fr'
-    if (isDashboard) {
+    if (isDashboard || isHandbook) {
         response.cookies.set('NEXT_LOCALE', 'fr', {
             path: '/',
             sameSite: 'strict',
