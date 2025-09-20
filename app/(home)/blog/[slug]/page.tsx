@@ -1,5 +1,5 @@
 import { getDictionary, getLocale } from '@/i18n/get-dictionary';
-import { getBlogPost, getRelatedPosts } from '@/lib/notion';
+import { getBlogPost, getRelatedPosts } from '@/lib/blog';
 import { Metadata } from 'next';
 import { ProgressLink as Link } from '@/components/custom/progress-link';
 import Image from 'next/image';

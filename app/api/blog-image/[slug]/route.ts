@@ -1,4 +1,4 @@
-import { getBlogPost } from '@/lib/notion';
+import { getBlogPost } from '@/lib/blog';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
