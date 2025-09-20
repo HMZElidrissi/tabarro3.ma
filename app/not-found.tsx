@@ -31,7 +31,7 @@ export default async function NotFound() {
                                     <span aria-hidden="true"> &rarr;</span>
                                 )}
                             </Link>
-                            <div className="flex-shrink-0 flex justify-center">
+                            <div className="flex-shrink-0 flex justify-center mt-2">
                                 <Link href="/" className="inline-flex">
                                     <span className="sr-only">tabarro3</span>
                                     <Image
