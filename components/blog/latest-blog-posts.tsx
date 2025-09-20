@@ -3,7 +3,7 @@ import { ProgressLink as Link } from '@/components/custom/progress-link';
 import Image from 'next/image';
 import { cn, formatDate } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import { getBlogPosts } from '@/lib/notion';
+import { getBlogPosts } from '@/lib/blog';
 
 interface BlogPostGridProps {
     locale: string;

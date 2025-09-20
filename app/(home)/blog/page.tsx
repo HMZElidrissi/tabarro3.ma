@@ -1,5 +1,5 @@
 import { getDictionary, getLocale } from '@/i18n/get-dictionary';
-import { getBlogPosts } from '@/lib/notion';
+import { getBlogPosts } from '@/lib/blog';
 import { Metadata } from 'next';
 import { Calendar, ChevronRight, User } from 'lucide-react';
 import { ProgressLink as Link } from '@/components/custom/progress-link';

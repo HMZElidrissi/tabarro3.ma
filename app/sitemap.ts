@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getBlogPosts } from '@/lib/notion';
+import { getBlogPosts } from '@/lib/blog';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
