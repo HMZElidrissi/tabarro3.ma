@@ -11,6 +11,7 @@ tabarro3 is a platform aimed at raising awareness about blood donation in Morocc
 -   Tailwind CSS + shadcn/ui
 -   Supabase (PostgreSQL)
 -   Prisma
+-   Discord Integration (Webhooks)
 
 ## Getting Started
 
@@ -27,4 +28,3 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
