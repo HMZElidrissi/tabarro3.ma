@@ -4,6 +4,7 @@ import {
     Droplets,
     Home,
     Mail,
+    MessageSquare,
     Settings,
     UsersIcon,
 } from 'lucide-react';
@@ -59,6 +60,13 @@ export const mainNavigation: NavigationItem[] = [
         icon: Mail,
         href: '/dashboard/emails',
         pattern: '^/dashboard/emails',
+        roles: [Role.ADMIN],
+    },
+    {
+        title: 'Discord Settings',
+        icon: MessageSquare,
+        href: '/dashboard/discord',
+        pattern: '^/dashboard/discord',
         roles: [Role.ADMIN],
     },
 ];
