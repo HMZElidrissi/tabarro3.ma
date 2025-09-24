@@ -1,28 +1,18 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { discordService } from '@/lib/discord';
 import { sendWeeklyStatistics } from '@/jobs/helpers';
+import { withAuth } from '@/auth/session';
+import { Role } from '@/types/enums';
 
-// Admin-only access check
-function isAdminAuthorized(request: NextRequest): boolean {
-    const adminSecret = process.env.ADMIN_SECRET;
-    if (!adminSecret) return false;
+// GET /api/discord/webhook - Check webhook configuration (Admin only)
+export const GET = withAuth(async (request: Request, user: any) => {
+    if (user.role !== Role.ADMIN) {
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
 
-    const authHeader = request.headers.get('authorization');
-    if (!authHeader) return false;
-
-    const token = authHeader.replace('Bearer ', '');
-    return token === adminSecret;
-}
-
-// GET /api/discord/webhook - Test webhook configuration
-export async function GET(request: NextRequest) {
     try {
-        if (!isAdminAuthorized(request)) {
-            return NextResponse.json(
-                { error: 'Unauthorized' },
-                { status: 401 },
-            );
-        }
+        const { searchParams } = new URL(request.url);
+        const shouldTest = searchParams.get('test') === 'true';
 
         const isConfigured = discordService.isConfigured();
 
@@ -36,14 +26,21 @@ export async function GET(request: NextRequest) {
             });
         }
 
-        // Just check if webhook URL is valid, don't actually test it
-        const isValidUrl = discordService.isConfigured();
+        if (shouldTest) {
+            const testResult = await discordService.testWebhook();
+            return NextResponse.json({
+                status: testResult ? 'success' : 'failed',
+                message: testResult
+                    ? 'Discord webhook is configured and working'
+                    : 'Discord webhook is configured but test failed',
+                webhook_url: 'Set',
+                test_result: testResult,
+            });
+        }
 
         return NextResponse.json({
-            status: isValidUrl ? 'success' : 'failed',
-            message: isValidUrl
-                ? 'Discord webhook is configured'
-                : 'Discord webhook URL is invalid',
+            status: 'success',
+            message: 'Discord webhook is configured',
             webhook_url: 'Set',
         });
     } catch (error) {
@@ -58,18 +55,15 @@ export async function GET(request: NextRequest) {
             { status: 500 },
         );
     }
-}
+});
 
-// POST /api/discord/webhook - Send manual notifications
-export async function POST(request: NextRequest) {
+// POST /api/discord/webhook - Send manual notifications (Admin only)
+export const POST = withAuth(async (request: Request, user: any) => {
+    if (user.role !== Role.ADMIN) {
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
     try {
-        if (!isAdminAuthorized(request)) {
-            return NextResponse.json(
-                { error: 'Unauthorized' },
-                { status: 401 },
-            );
-        }
-
         const body = await request.json();
         const { type, data } = body;
 
@@ -132,14 +126,12 @@ export async function POST(request: NextRequest) {
                     );
                 }
 
-                // Send custom webhook payload
                 const customPayload = {
                     content,
                     embeds,
                     username: 'Tabarro3.ma - Custom',
                 };
 
-                // Use the internal webhook method
                 result = await (discordService as any).sendWebhook(
                     customPayload,
                 );
@@ -173,4 +165,4 @@ export async function POST(request: NextRequest) {
             { status: 500 },
         );
     }
-}
+});

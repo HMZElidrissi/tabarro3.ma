@@ -31,11 +31,14 @@ interface DiscordWebhookPayload {
 export class DiscordService {
     private webhookUrl: string;
     private baseUrl: string;
+    private defaultUsername?: string;
+    private defaultAvatarUrl?: string;
 
     constructor() {
         this.webhookUrl = process.env.DISCORD_WEBHOOK_URL || '';
-        this.baseUrl =
-            process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
+        this.baseUrl = 'https://tabarro3.ma';
+        this.defaultUsername = 'tabarro3.ma';
+        this.defaultAvatarUrl = `${this.baseUrl}/logo.png`;
     }
 
     private async sendWebhook(
@@ -52,7 +55,12 @@ export class DiscordService {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(payload),
+                body: JSON.stringify({
+                    username: payload.username ?? this.defaultUsername,
+                    avatar_url: this.defaultAvatarUrl,
+                    content: payload.content,
+                    embeds: payload.embeds,
+                }),
             });
 
             if (!response.ok) {
@@ -137,7 +145,7 @@ export class DiscordService {
         const payload: DiscordWebhookPayload = {
             content: `🚨 **DEMANDE DE SANG URGENTE** - ${request.city.name}`,
             embeds: [embed],
-            username: 'Tabarro3.ma - Urgences',
+            username: 'tabarro3.ma - Urgences',
         };
 
         return this.sendWebhook(payload);
@@ -192,7 +200,7 @@ export class DiscordService {
         const payload: DiscordWebhookPayload = {
             content: `🎯 **NOUVELLE CAMPAGNE** - ${campaign.city?.name || 'Maroc'}`,
             embeds: [embed],
-            username: 'Tabarro3.ma - Campagnes',
+            username: 'tabarro3.ma - Campagnes',
         };
 
         return this.sendWebhook(payload);
@@ -244,7 +252,7 @@ export class DiscordService {
         const payload: DiscordWebhookPayload = {
             content: `👤 **NOUVEL UTILISATEUR** - ${user.name}`,
             embeds: [embed],
-            username: 'Tabarro3.ma - Utilisateurs',
+            username: 'tabarro3.ma - Utilisateurs',
         };
 
         return this.sendWebhook(payload);
@@ -283,7 +291,7 @@ export class DiscordService {
         const payload: DiscordWebhookPayload = {
             content: `${emojiMap[type]} **${title.toUpperCase()}**`,
             embeds: [embed],
-            username: 'Tabarro3.ma - Système',
+            username: 'tabarro3.ma - Système',
         };
 
         return this.sendWebhook(payload);
@@ -345,7 +353,7 @@ export class DiscordService {
         const payload: DiscordWebhookPayload = {
             content: '📊 **STATISTIQUES HEBDOMADAIRES**',
             embeds: [embed],
-            username: 'Tabarro3.ma - Statistiques',
+            username: 'tabarro3.ma - Statistiques',
         };
 
         return this.sendWebhook(payload);
@@ -381,7 +389,7 @@ export class DiscordService {
         const payload: DiscordWebhookPayload = {
             content: '🧪 **TEST DE WEBHOOK DISCORD**',
             embeds: [embed],
-            username: 'Tabarro3.ma - Test',
+            username: 'tabarro3.ma - Test',
         };
 
         return this.sendWebhook(payload);

@@ -54,9 +54,6 @@ export function DiscordSettings() {
     const [customMessage, setCustomMessage] = useState('');
     const [customTitle, setCustomTitle] = useState('');
 
-    const adminSecret =
-        process.env.NEXT_PUBLIC_ADMIN_SECRET || 'your-admin-secret';
-
     useEffect(() => {
         checkDiscordStatus();
     }, []);
@@ -66,9 +63,7 @@ export function DiscordSettings() {
         try {
             const response = await fetch('/api/discord/webhook', {
                 method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${adminSecret}`,
-                },
+                // Session cookie is sent automatically
             });
 
             const data = await response.json();
@@ -92,7 +87,6 @@ export function DiscordSettings() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${adminSecret}`,
                 },
                 body: JSON.stringify({ type: 'test' }),
             });
@@ -121,7 +115,6 @@ export function DiscordSettings() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${adminSecret}`,
                 },
                 body: JSON.stringify({ type: 'weekly_stats' }),
             });
@@ -148,7 +141,6 @@ export function DiscordSettings() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${adminSecret}`,
                 },
                 body: JSON.stringify({
                     type: 'system',
@@ -187,36 +179,6 @@ export function DiscordSettings() {
         }
     };
 
-    const getStatusIcon = () => {
-        switch (status?.status) {
-            case 'success':
-                return <CheckCircle className="h-5 w-5 text-green-500" />;
-            case 'failed':
-                return <XCircle className="h-5 w-5 text-red-500" />;
-            case 'not_configured':
-                return <AlertCircle className="h-5 w-5 text-yellow-500" />;
-            default:
-                return <AlertCircle className="h-5 w-5 text-gray-500" />;
-        }
-    };
-
-    const getStatusBadge = () => {
-        switch (status?.status) {
-            case 'success':
-                return (
-                    <Badge variant="default" className="bg-green-500">
-                        Configured
-                    </Badge>
-                );
-            case 'failed':
-                return <Badge variant="destructive">Not Configured</Badge>;
-            case 'not_configured':
-                return <Badge variant="secondary">Not Configured</Badge>;
-            default:
-                return <Badge variant="outline">Unknown</Badge>;
-        }
-    };
-
     return (
         <div className="space-y-6">
             {/* Status Card */}
@@ -233,12 +195,7 @@ export function DiscordSettings() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                     {status && (
-                        <Alert
-                            variant={
-                                status.status === 'success'
-                                    ? 'default'
-                                    : 'destructive'
-                            }>
+                        <Alert>
                             <CheckCircle2Icon className="h-4 w-4" />
                             <AlertTitle>
                                 {status.status === 'success'
@@ -246,7 +203,7 @@ export function DiscordSettings() {
                                     : 'Configuration Issue'}
                             </AlertTitle>
                             <AlertDescription>
-                                {status.message}
+                                {status.message || 'Unknown status'}
                             </AlertDescription>
                         </Alert>
                     )}
