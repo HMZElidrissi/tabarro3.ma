@@ -2,6 +2,8 @@ import { BloodRequest } from '@/types/blood-request';
 import { Campaign } from '@/types/campaign';
 import { User } from '@/types/user';
 import { BloodGroup } from '@/types/enums';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
 interface DiscordEmbed {
     title?: string;
@@ -99,6 +101,10 @@ export class DiscordService {
         return bloodGroup.replace('_', '+').replace('_', '-');
     }
 
+    private formatDateFrench(date: Date): string {
+        return format(date, 'dd MMMM yyyy à HH:mm', { locale: fr });
+    }
+
     async sendUrgentBloodRequestNotification(
         request: BloodRequest,
     ): Promise<boolean> {
@@ -129,7 +135,7 @@ export class DiscordService {
                 },
                 {
                     name: '⏰ Date de demande',
-                    value: `<t:${Math.floor(request.createdAt.getTime() / 1000)}:F>`,
+                    value: this.formatDateFrench(request.createdAt),
                     inline: true,
                 },
             ],
@@ -174,12 +180,12 @@ export class DiscordService {
                 },
                 {
                     name: '⏰ Début',
-                    value: `<t:${Math.floor(campaign.startTime.getTime() / 1000)}:F>`,
+                    value: this.formatDateFrench(campaign.startTime),
                     inline: true,
                 },
                 {
                     name: '⏰ Fin',
-                    value: `<t:${Math.floor(campaign.endTime.getTime() / 1000)}:F>`,
+                    value: this.formatDateFrench(campaign.endTime),
                     inline: true,
                 },
                 {
@@ -236,7 +242,7 @@ export class DiscordService {
                 },
                 {
                     name: '⏰ Date d inscription',
-                    value: `<t:${Math.floor(user.createdAt.getTime() / 1000)}:F>`,
+                    value: this.formatDateFrench(user.createdAt),
                     inline: true,
                 },
             ],
@@ -373,7 +379,7 @@ export class DiscordService {
                 },
                 {
                     name: '⏰ Test effectué le',
-                    value: `<t:${Math.floor(Date.now() / 1000)}:F>`,
+                    value: this.formatDateFrench(new Date()),
                     inline: true,
                 },
             ],
