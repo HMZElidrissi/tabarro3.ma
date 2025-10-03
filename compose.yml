@@ -1,6 +1,7 @@
 services:
     web:
         build: .
+        image: localhost/tabarro3ma_web
         ports:
             - "3000:3000"
         env_file:
