@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Nunito, Tajawal } from 'next/font/google';
 import './globals.css';
 import { Organization, WithContext } from 'schema-dts';
-import Script from 'next/script';
 import { cookies, headers } from 'next/headers';
 import { getDictionary } from '@/i18n/get-dictionary';
 import { i18n } from '@/i18n/i18n-config';
@@ -147,7 +146,7 @@ export default async function RootLayout({
             )}>
             <head>
                 <link rel="canonical" href={baseUrl} />
-                <Script
+                <script
                     id="json-ld"
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
