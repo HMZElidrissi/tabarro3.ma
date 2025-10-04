@@ -87,7 +87,7 @@ export async function getCampaigns(
                 },
             },
             orderBy: {
-                startTime: 'asc',
+                createdAt: 'desc',
             },
         });
 
@@ -113,8 +113,8 @@ export async function getCampaigns(
             if (aIsUpcoming && !bIsUpcoming) return -1;
             if (!aIsUpcoming && bIsUpcoming) return 1;
 
-            // Within each category, sort by start time
-            return aStart.getTime() - bStart.getTime();
+            // Within each category, sort by start time (latest first)
+            return bStart.getTime() - aStart.getTime();
         });
 
         const total = sortedCampaigns.length;
