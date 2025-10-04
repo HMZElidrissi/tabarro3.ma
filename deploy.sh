@@ -6,17 +6,19 @@ POSTGRES_PASSWORD=$(openssl rand -base64 12)  # Generate a random 12-character p
 POSTGRES_DB="tabarro3_db"
 AUTH_SECRET=$(openssl rand -base64 32)  # Generate a random auth secret
 CRON_SECRET=$(openssl rand -base64 32)  # Generate a random cron secret
-DOMAIN_NAME="beta.tabarro3.ma"
+DOMAIN_NAME="tabarro3.ma"
 EMAIL="dondesang.ma@gmail.com"
 
-# SMTP Configuration (configure these for your email provider)
-SMTP_HOST="smtp.gmail.com"
+# SMTP Configuration (fill the values without the quotes)
+SMTP_HOST=smtp.gmail.com
 SMTP_PORT="587"
 SMTP_SECURE="false"
-SMTP_USER="dondesang.ma@gmail.com"
-SMTP_PASSWORD="your-app-password"
-FROM_EMAIL="noreply@tabarro3.ma"
-DISCORD_WEBHOOK_URL=""
+SMTP_USER=
+SMTP_PASSWORD=
+FROM_EMAIL=
+
+# Discord Configuration
+DISCORD_WEBHOOK_URL=
 
 # Script Vars
 REPO_URL="https://github.com/HMZElidrissi/tabarro3.ma"
@@ -27,14 +29,17 @@ SWAP_SIZE="2G"
 sudo apt update && sudo apt upgrade -y
 
 # Add Swap Space
-echo "Adding swap space..."
-sudo fallocate -l $SWAP_SIZE /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-
-# Make swap permanent
-echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+if ! swapon --show | grep -q '^/swapfile'; then
+  echo "Adding swap space..."
+  sudo fallocate -l $SWAP_SIZE /swapfile
+  sudo chmod 600 /swapfile
+  sudo mkswap /swapfile
+  sudo swapon /swapfile
+  # Make swap permanent
+  echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+else
+  echo "Swapfile already active, skipping creation."
+fi
 
 # Install Podman and podman-compose
 sudo apt install -y podman podman-compose
@@ -66,6 +71,9 @@ fi
 # For container internal communication ("db" is the name of Postgres container)
 DATABASE_URL="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@db:5432/$POSTGRES_DB"
 
+# Direct URL for Prisma (same as DATABASE_URL for single instance)
+DIRECT_URL="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@db:5432/$POSTGRES_DB"
+
 # For external tools (like Drizzle Studio)
 DATABASE_URL_EXTERNAL="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@localhost:5432/$POSTGRES_DB"
 
@@ -75,6 +83,7 @@ echo "POSTGRES_USER=$POSTGRES_USER" >> "$APP_DIR/.env"
 echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> "$APP_DIR/.env"
 echo "POSTGRES_DB=$POSTGRES_DB" >> "$APP_DIR/.env"
 echo "DATABASE_URL=$DATABASE_URL" >> "$APP_DIR/.env"
+echo "DIRECT_URL=$DIRECT_URL" >> "$APP_DIR/.env"
 echo "DATABASE_URL_EXTERNAL=$DATABASE_URL_EXTERNAL" >> "$APP_DIR/.env"
 
 echo "" >> "$APP_DIR/.env"
@@ -179,19 +188,30 @@ sudo systemctl restart nginx
 # Build and run the containers from the app directory (~/tabarro3.ma)
 cd $APP_DIR
 
+# Clean up any existing containers to avoid conflicts
+echo "Cleaning up existing containers..."
+podman-compose down --remove-orphans 2>/dev/null || true
+
 # Build images
-podman-compose build web
+echo "Building Docker image..."
+if ! podman build -f ./Dockerfile -t localhost/tabarro3ma_web .; then
+  echo "Docker build failed. Exiting."
+  exit 1
+fi
 
 # Run database migrations
 echo "Running database migrations..."
-podman-compose run --rm web npx prisma migrate deploy
-
-# Seed the database with initial data
-echo "Seeding database..."
-podman-compose run --rm web npx prisma db seed
+if ! podman-compose run --rm web npx prisma migrate deploy; then
+  echo "Database migration failed. Exiting."
+  exit 1
+fi
 
 # Start all services
-podman-compose up -d
+echo "Starting services..."
+if ! podman-compose up -d; then
+  echo "Failed to start services. Exiting."
+  exit 1
+fi
 
 # Check if services started correctly
 if ! podman-compose ps | grep "Up"; then
