@@ -11,8 +11,8 @@ EMAIL="dondesang.ma@gmail.com"
 
 # SMTP Configuration (fill the values without the quotes)
 SMTP_HOST=smtp.gmail.com
-SMTP_PORT="587"
-SMTP_SECURE="false"
+SMTP_PORT=587
+SMTP_SECURE=false
 SMTP_USER=
 SMTP_PASSWORD=
 FROM_EMAIL=
@@ -100,12 +100,12 @@ echo "NEXT_PUBLIC_BASE_URL=https://$DOMAIN_NAME" >> "$APP_DIR/.env"
 
 echo "" >> "$APP_DIR/.env"
 echo "# SMTP Configuration" >> "$APP_DIR/.env"
-echo "SMTP_HOST=\"$SMTP_HOST\"" >> "$APP_DIR/.env"
+echo "SMTP_HOST=$SMTP_HOST" >> "$APP_DIR/.env"
 echo "SMTP_PORT=$SMTP_PORT" >> "$APP_DIR/.env"
 echo "SMTP_SECURE=$SMTP_SECURE" >> "$APP_DIR/.env"
-echo "SMTP_USER=\"$SMTP_USER\"" >> "$APP_DIR/.env"
-echo "SMTP_PASSWORD=\"$SMTP_PASSWORD\"" >> "$APP_DIR/.env"
-echo "FROM_EMAIL=\"$FROM_EMAIL\"" >> "$APP_DIR/.env"
+echo "SMTP_USER=$SMTP_USER">> "$APP_DIR/.env"
+echo "SMTP_PASSWORD=$SMTP_PASSWORD">> "$APP_DIR/.env"
+echo "FROM_EMAIL=$FROM_EMAIL">> "$APP_DIR/.env"
 
 echo "" >> "$APP_DIR/.env"
 echo "# Discord Integration (Optional)" >> "$APP_DIR/.env"
