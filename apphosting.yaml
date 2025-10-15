@@ -1,0 +1,61 @@
+# Settings for Backend (on Cloud Run).
+# See https://firebase.google.com/docs/app-hosting/configure#cloud-run
+runConfig:
+    minInstances: 0
+    maxInstances: 10
+    concurrency: 80
+    cpu: 1
+    memoryMiB: 512
+
+env:
+    # Public variables (available client-side)
+    - variable: NEXT_PUBLIC_BASE_URL
+      value: https://beta.tabarro3.ma
+      availability:
+          - BUILD
+          - RUNTIME
+
+    # Server-only config
+    - variable: NODE_ENV
+      value: production
+      availability:
+          - RUNTIME
+
+    - variable: SMTP_HOST
+      value: smtp.gmail.com
+      availability:
+          - RUNTIME
+
+    - variable: SMTP_PORT
+      value: '587'
+      availability:
+          - RUNTIME
+
+    - variable: SMTP_SECURE
+      value: 'false'
+      availability:
+          - RUNTIME
+
+    - variable: AUTH_SECRET
+      secret: auth-secret
+
+    - variable: DATABASE_URL
+      secret: database-url
+
+    - variable: DIRECT_URL
+      secret: direct-url
+
+    - variable: SMTP_USER
+      secret: smtp-user
+
+    - variable: SMTP_PASSWORD
+      secret: smtp-password
+
+    - variable: FROM_EMAIL
+      secret: from-email
+
+    - variable: CRON_SECRET
+      secret: cron-secret
+
+    - variable: DISCORD_WEBHOOK_URL
+      secret: discord-webhook-url
