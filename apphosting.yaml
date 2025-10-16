@@ -21,6 +21,42 @@ env:
           - BUILD
           - RUNTIME
 
+    - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+      value: REMOVED_API_KEY
+      availability:
+          - BUILD
+          - RUNTIME
+
+    - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+      value: tabarro3-35175.firebaseapp.com
+      availability:
+          - BUILD
+          - RUNTIME
+
+    - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+      value: tabarro3-35175
+      availability:
+          - BUILD
+          - RUNTIME
+
+    - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+      value: tabarro3-35175.firebasestorage.app
+      availability:
+          - BUILD
+          - RUNTIME
+
+    - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+      value: '461925811457'
+      availability:
+          - BUILD
+          - RUNTIME
+
+    - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+      value: 1:461925811457:web:cae28b7a65b8b531350700
+      availability:
+          - BUILD
+          - RUNTIME
+
     # Server-only config
     - variable: NODE_ENV
       value: production

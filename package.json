@@ -51,6 +51,7 @@
         "date-fns": "^4.1.0",
         "framer-motion": "^11.15.0",
         "gray-matter": "^4.0.3",
+        "firebase": "^10.14.1",
         "jose": "^5.9.6",
         "jspdf": "^2.5.2",
         "jspdf-autotable": "^3.8.4",

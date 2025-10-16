@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { NavigationProgress } from '@/components/custom/navigation-progress';
 import { NavigationProvider } from '@/components/custom/navigation-events';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { FirebaseAnalytics } from '@/components/custom/firebase-analytics';
 
 const nunitoFont = Nunito({
     subsets: ['latin'],
@@ -156,6 +157,7 @@ export default async function RootLayout({
                 />
             </head>
             {isProduction && gaId ? <GoogleAnalytics gaId={gaId} /> : null}
+            {isProduction ? <FirebaseAnalytics /> : null}
             <body className="antialiased bg-gray-50">
                 <NavigationProvider>
                     <NavigationProgress />
