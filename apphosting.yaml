@@ -22,7 +22,7 @@ env:
           - RUNTIME
 
     - variable: NEXT_PUBLIC_FIREBASE_API_KEY
-      value: REMOVED_API_KEY
+      secret: firebase-api-key
       availability:
           - BUILD
           - RUNTIME
@@ -94,7 +94,7 @@ env:
       secret: smtp-password
 
     - variable: FROM_EMAIL
-      secret: from-email
+      value: noreply@tabarro3.ma
 
     - variable: CRON_SECRET
       secret: cron-secret
