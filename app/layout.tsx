@@ -6,9 +6,9 @@ import { cookies, headers } from 'next/headers';
 import { getDictionary } from '@/i18n/get-dictionary';
 import { i18n } from '@/i18n/i18n-config';
 import { cn } from '@/lib/utils';
-import { Analytics } from '@vercel/analytics/react';
 import { NavigationProgress } from '@/components/custom/navigation-progress';
 import { NavigationProvider } from '@/components/custom/navigation-events';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const nunitoFont = Nunito({
     subsets: ['latin'],
@@ -24,6 +24,8 @@ const tajawal = Tajawal({
 });
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
+const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+const isProduction = process.env.NODE_ENV === 'production';
 
 export async function generateMetadata(): Promise<Metadata> {
     const cookieStore = await cookies();
@@ -65,7 +67,8 @@ export async function generateMetadata(): Promise<Metadata> {
                     alt: dictionary.metadata.ogImageAlt,
                 },
             ],
-            locale: locale === 'ar' ? 'ar_MA' : locale === 'fr' ? 'fr_MA' : 'en_US',
+            locale:
+                locale === 'ar' ? 'ar_MA' : locale === 'fr' ? 'fr_MA' : 'en_US',
             type: 'website',
         },
         twitter: {
@@ -152,7 +155,7 @@ export default async function RootLayout({
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
             </head>
-            <Analytics />
+            {isProduction && gaId ? <GoogleAnalytics gaId={gaId} /> : null}
             <body className="antialiased bg-gray-50">
                 <NavigationProvider>
                     <NavigationProgress />

@@ -10,7 +10,13 @@ runConfig:
 env:
     # Public variables (available client-side)
     - variable: NEXT_PUBLIC_BASE_URL
-      value: https://beta.tabarro3.ma
+      value: https://tabarro3.ma
+      availability:
+          - BUILD
+          - RUNTIME
+
+    - variable: NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
+      value: G-BZB0TMX04J
       availability:
           - BUILD
           - RUNTIME
