@@ -71,7 +71,8 @@ export async function GET(request: NextRequest) {
                     width: '120px',
                     height: '120px',
                     marginBottom: '40px',
-                }}>
+                }}
+            >
                 <svg
                     aria-label="Logo"
                     xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +80,8 @@ export async function GET(request: NextRequest) {
                     preserveAspectRatio="xMidYMid meet"
                     version="1.0"
                     viewBox="52.88 117.9 269.25 146.4"
-                    zoomAndPan="magnify">
+                    zoomAndPan="magnify"
+                >
                     <defs>
                         <clipPath id="8777a53df8">
                             <path
@@ -196,7 +198,8 @@ export async function GET(request: NextRequest) {
                         background: templateConfig.background,
                         position: 'relative',
                         padding: '80px 60px',
-                    }}>
+                    }}
+                >
                     {/* Background Pattern */}
                     <div
                         style={{
@@ -224,7 +227,8 @@ export async function GET(request: NextRequest) {
                             maxWidth: '1000px',
                             width: '100%',
                             position: 'relative',
-                        }}>
+                        }}
+                    >
                         {/* Logo */}
                         <LogoComponent />
 
@@ -241,7 +245,8 @@ export async function GET(request: NextRequest) {
                                 textAlign: 'center',
                                 margin: '0 0 24px 0',
                                 letterSpacing: '-0.02em',
-                            }}>
+                            }}
+                        >
                             {title}
                         </h1>
 
@@ -258,7 +263,8 @@ export async function GET(request: NextRequest) {
                                 textAlign: 'center',
                                 margin: '0 0 40px 0',
                                 fontWeight: '400',
-                            }}>
+                            }}
+                        >
                             {description}
                         </p>
 
@@ -271,7 +277,8 @@ export async function GET(request: NextRequest) {
                                 fontSize: '20px',
                                 color: brandConfig.primary,
                                 fontWeight: '600',
-                            }}>
+                            }}
+                        >
                             <div
                                 style={{
                                     width: '8px',

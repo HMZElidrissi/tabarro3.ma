@@ -273,9 +273,12 @@ const MdxComponents = {
             });
 
         const styles = {
-            default: 'bg-brand-50 dark:bg-brand-950/50 border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-200',
-            success: 'bg-green-50 dark:bg-green-950/50 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200',
-            warning: 'bg-yellow-50 dark:bg-yellow-950/50 border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200',
+            default:
+                'bg-brand-50 dark:bg-brand-950/50 border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-200',
+            success:
+                'bg-green-50 dark:bg-green-950/50 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200',
+            warning:
+                'bg-yellow-50 dark:bg-yellow-950/50 border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200',
             info: 'bg-blue-50 dark:bg-blue-950/50 border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200',
         } as any;
 
@@ -288,7 +291,9 @@ const MdxComponents = {
                 )}
                 {...props}
             >
-                <div className="mr-3 mt-0.5 text-brand-500 dark:text-brand-400">{Icon}</div>
+                <div className="mr-3 mt-0.5 text-brand-500 dark:text-brand-400">
+                    {Icon}
+                </div>
                 <div>{children}</div>
             </div>
         );

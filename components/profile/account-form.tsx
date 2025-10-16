@@ -123,7 +123,8 @@ export function AccountForm({ user, dict, isRTL }: AccountFormProps) {
                             {bloodGroups.map(group => (
                                 <SelectItem
                                     key={group.value}
-                                    value={group.value}>
+                                    value={group.value}
+                                >
                                     {getBloodGroupLabel(group.value, dict)}
                                 </SelectItem>
                             ))}
@@ -151,10 +152,9 @@ export function AccountForm({ user, dict, isRTL }: AccountFormProps) {
                             {REGIONS_AND_CITIES.map(region => (
                                 <SelectItem
                                     key={region.id}
-                                    value={region.id.toString()}>
-                                    {isRTL
-                                        ? region.nameAr
-                                        : region.name}
+                                    value={region.id.toString()}
+                                >
+                                    {isRTL ? region.nameAr : region.name}
                                 </SelectItem>
                             ))}
                         </SelectContent>
@@ -180,10 +180,9 @@ export function AccountForm({ user, dict, isRTL }: AccountFormProps) {
                                 )?.cities.map(city => (
                                     <SelectItem
                                         key={city.id}
-                                        value={city.id.toString()}>
-                                        {isRTL
-                                            ? city.nameAr
-                                            : city.name}
+                                        value={city.id.toString()}
+                                    >
+                                        {isRTL ? city.nameAr : city.name}
                                     </SelectItem>
                                 ))}
                         </SelectContent>

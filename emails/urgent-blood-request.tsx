@@ -70,7 +70,8 @@ export const UrgentBloodRequestEmail = ({
 
                     <Text className="text-gray-600 text-base mb-4">
                         Un donneur de sang du groupe {bloodGroup} est urgemment
-                        recherché. Votre sang est compatible et peut sauver une vie !
+                        recherché. Votre sang est compatible et peut sauver une
+                        vie !
                     </Text>
 
                     <Section className="bg-gray-50 p-4 rounded-lg mb-6">

@@ -16,7 +16,8 @@ export default async function Layout({ children }: LayoutProps) {
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
-            storageKey="theme">
+            storageKey="theme"
+        >
             <div>
                 <div className="text-foreground antialiased">
                     {/* Dark mode toggle */}
@@ -35,11 +36,12 @@ export default async function Layout({ children }: LayoutProps) {
                                     className="my-2"
                                 />
                             </Link>
-                        }>
+                        }
+                    >
                         {children}
                     </AuthCard>
                 </div>
             </div>
         </ThemeProvider>
     );
-};
+}

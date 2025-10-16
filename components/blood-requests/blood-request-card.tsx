@@ -35,13 +35,15 @@ export function BloodRequestCard({
                             <Badge
                                 variant="secondary"
                                 className="bg-red-50 text-red-700 hover:bg-red-100 dark:bg-red-900/50 dark:text-red-400 dark:hover:bg-red-900/60 font-semibold text-sm px-2 py-1"
-                                dir="ltr">
+                                dir="ltr"
+                            >
                                 {getBloodGroupLabel(request.bloodGroup, dict)}
                             </Badge>
                         )}
                         <Badge
                             variant="outline"
-                            className={`${getStatusColor(request.status)} text-xs px-2 py-1`}>
+                            className={`${getStatusColor(request.status)} text-xs px-2 py-1`}
+                        >
                             {
                                 dict.bloodRequests.status[
                                     request.status.toLowerCase()
@@ -122,10 +124,12 @@ export function BloodRequestCard({
                         variant="default"
                         size="sm"
                         className="w-full bg-green-600 hover:bg-green-700 text-white dark:bg-green-700 dark:hover:bg-green-800"
-                        asChild>
+                        asChild
+                    >
                         <a
                             href={`tel:${request.phone}`}
-                            className="flex items-center justify-center gap-2">
+                            className="flex items-center justify-center gap-2"
+                        >
                             <Phone className="h-4 w-4" />
                             {dict.common.contact}
                         </a>

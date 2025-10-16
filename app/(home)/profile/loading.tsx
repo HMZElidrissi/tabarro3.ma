@@ -33,7 +33,8 @@ export default function ProfileLoading() {
                                                 (_, i) => (
                                                     <div
                                                         key={i}
-                                                        className="space-y-3">
+                                                        className="space-y-3"
+                                                    >
                                                         <Skeleton className="h-4 w-3/4" />
                                                         <Skeleton className="h-4 w-1/2" />
                                                         <Skeleton className="h-4 w-2/3" />

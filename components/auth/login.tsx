@@ -56,7 +56,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                 </p>
                 <Link
                     href="/sign-in"
-                    className="text-muted-foreground hover:text-foreground underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+                    className="text-muted-foreground hover:text-foreground underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
+                >
                     {dict.auth.invitation.returnToSignIn}
                 </Link>
             </div>
@@ -155,7 +156,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                         <button
                             type="button"
                             className="absolute inset-y-0 right-0 flex items-center pr-3 rtl:right-auto rtl:left-0 rtl:pr-0 rtl:pl-3"
-                            onClick={() => setShowPassword(!showPassword)}>
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
                             {showPassword ? (
                                 <EyeOff className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                             ) : (
@@ -194,7 +196,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                 className="absolute inset-y-0 right-0 flex items-center pr-3 rtl:right-auto rtl:left-0 rtl:pr-0 rtl:pl-3"
                                 onClick={() =>
                                     setShowConfirmPassword(!showConfirmPassword)
-                                }>
+                                }
+                            >
                                 {showConfirmPassword ? (
                                     <EyeOff className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                                 ) : (
@@ -229,7 +232,11 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                 <Label2 htmlFor="bloodGroup">
                                     {dict.forms.labels.bloodGroup}
                                 </Label2>
-                                <Select name="bloodGroup" dir={isRTL ? 'rtl' : 'ltr'} required>
+                                <Select
+                                    name="bloodGroup"
+                                    dir={isRTL ? 'rtl' : 'ltr'}
+                                    required
+                                >
                                     <SelectTrigger>
                                         <SelectValue
                                             placeholder={
@@ -242,7 +249,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                         {bloodGroups.map(group => (
                                             <SelectItem
                                                 key={group.value}
-                                                value={group.value}>
+                                                value={group.value}
+                                            >
                                                 {getBloodGroupLabel(
                                                     group.value,
                                                     dict,
@@ -264,7 +272,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                     setSelectedRegion(value);
                                 }}
                                 dir={isRTL ? 'rtl' : 'ltr'}
-                                required>
+                                required
+                            >
                                 <SelectTrigger>
                                     <SelectValue
                                         placeholder={
@@ -276,7 +285,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                     {REGIONS_AND_CITIES.map(region => (
                                         <SelectItem
                                             key={region.id}
-                                            value={region.id.toString()}>
+                                            value={region.id.toString()}
+                                        >
                                             {isRTL
                                                 ? region.nameAr
                                                 : region.name}
@@ -294,7 +304,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                 name="cityId"
                                 dir={isRTL ? 'rtl' : 'ltr'}
                                 disabled={!selectedRegion}
-                                required>
+                                required
+                            >
                                 <SelectTrigger>
                                     <SelectValue
                                         placeholder={
@@ -311,7 +322,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                         )?.cities.map(city => (
                                             <SelectItem
                                                 key={city.id}
-                                                value={city.id.toString()}>
+                                                value={city.id.toString()}
+                                            >
                                                 {isRTL
                                                     ? city.nameAr
                                                     : city.name}
@@ -331,7 +343,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                     <div className="text-right">
                         <Link
                             href="/forgot-password"
-                            className="text-sm text-muted-foreground hover:text-foreground underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+                            className="text-sm text-muted-foreground hover:text-foreground underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500"
+                        >
                             {dict.auth.signIn.forgotPassword}
                         </Link>
                     </div>
@@ -340,7 +353,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                 <div className="flex items-center justify-end">
                     <Button2
                         className="w-full justify-center"
-                        disabled={pending}>
+                        disabled={pending}
+                    >
                         {pending ? (
                             <>
                                 <Loader2 className="animate-spin mr-2 h-4 w-4" />
@@ -376,14 +390,16 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                         <>
                             <Link
                                 href="/sign-up"
-                                className="text-sm text-muted-foreground hover:text-foreground underline">
+                                className="text-sm text-muted-foreground hover:text-foreground underline"
+                            >
                                 {dict.auth.signIn.signUpLink}
                             </Link>
                         </>
                     ) : (
                         <Link
                             href="/sign-in"
-                            className="text-sm text-muted-foreground hover:text-foreground underline">
+                            className="text-sm text-muted-foreground hover:text-foreground underline"
+                        >
                             {dict.auth.signUp.signInLink}
                         </Link>
                     )}

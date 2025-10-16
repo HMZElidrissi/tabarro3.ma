@@ -73,7 +73,8 @@ export function OrganizationsTable({
                                         organization.role === 'ADMIN'
                                             ? 'default'
                                             : 'secondary'
-                                    }>
+                                    }
+                                >
                                     {organization.role}
                                 </Badge>
                             </TableCell>
@@ -89,7 +90,8 @@ export function OrganizationsTable({
                                         <Button
                                             variant="ghost"
                                             size="sm"
-                                            disabled={isLoading}>
+                                            disabled={isLoading}
+                                        >
                                             <MoreHorizontal className="h-4 w-4" />
                                         </Button>
                                     </DropdownMenuTrigger>
@@ -103,7 +105,8 @@ export function OrganizationsTable({
                                                         ? Role.ORGANIZATION
                                                         : Role.ADMIN,
                                                 )
-                                            }>
+                                            }
+                                        >
                                             Change Role
                                         </DropdownMenuItem>
                                         <DropdownMenuItem
@@ -112,7 +115,8 @@ export function OrganizationsTable({
                                                     organization.id,
                                                 )
                                             }
-                                            className="text-red-600">
+                                            className="text-red-600"
+                                        >
                                             Remove
                                         </DropdownMenuItem>
                                     </DropdownMenuContent>

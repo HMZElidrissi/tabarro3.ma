@@ -213,7 +213,8 @@ export function DiscordSettings() {
                             onClick={checkDiscordStatus}
                             disabled={loading}
                             variant="outline"
-                            size="sm">
+                            size="sm"
+                        >
                             <RefreshCw
                                 className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`}
                             />
@@ -227,7 +228,8 @@ export function DiscordSettings() {
                                 status?.status === 'not_configured'
                             }
                             variant="default"
-                            size="sm">
+                            size="sm"
+                        >
                             <Zap className="h-4 w-4 mr-2" />
                             {testLoading ? 'Testing...' : 'Test Webhook'}
                         </Button>
@@ -256,7 +258,8 @@ export function DiscordSettings() {
                         <Button
                             onClick={copyWebhookUrl}
                             variant="outline"
-                            size="sm">
+                            size="sm"
+                        >
                             {copied ? (
                                 <Check className="h-4 w-4" />
                             ) : (
@@ -298,7 +301,8 @@ export function DiscordSettings() {
                                 status?.status === 'not_configured'
                             }
                             variant="outline"
-                            className="h-auto p-4 flex flex-col items-center gap-2">
+                            className="h-auto p-4 flex flex-col items-center gap-2"
+                        >
                             <BarChart3 className="h-6 w-6" />
                             <div className="text-center">
                                 <div className="font-medium">
@@ -319,7 +323,8 @@ export function DiscordSettings() {
                                 status?.status === 'not_configured'
                             }
                             variant="outline"
-                            className="h-auto p-4 flex flex-col items-center gap-2">
+                            className="h-auto p-4 flex flex-col items-center gap-2"
+                        >
                             <MessageSquare className="h-6 w-6" />
                             <div className="text-center">
                                 <div className="font-medium">
@@ -381,7 +386,8 @@ export function DiscordSettings() {
                         disabled={
                             customLoading || status?.status === 'not_configured'
                         }
-                        className="w-full">
+                        className="w-full"
+                    >
                         <Bell className="h-4 w-4 mr-2" />
                         {customLoading
                             ? 'Sending...'

@@ -132,7 +132,8 @@ export function ParticipantFilters() {
                     <Label>Blood Group</Label>
                     <Select
                         value={currentBloodGroup}
-                        onValueChange={handleBloodGroupChange}>
+                        onValueChange={handleBloodGroupChange}
+                    >
                         <SelectTrigger>
                             <SelectValue placeholder="Filter by blood group" />
                         </SelectTrigger>
@@ -143,7 +144,8 @@ export function ParticipantFilters() {
                             {bloodGroups.map(group => (
                                 <SelectItem
                                     key={group.value}
-                                    value={group.value}>
+                                    value={group.value}
+                                >
                                     {group.label}
                                 </SelectItem>
                             ))}
@@ -155,7 +157,8 @@ export function ParticipantFilters() {
                     <Label>Region</Label>
                     <Select
                         value={selectedRegion || 'all'}
-                        onValueChange={handleRegionChange}>
+                        onValueChange={handleRegionChange}
+                    >
                         <SelectTrigger>
                             <SelectValue placeholder="Filter by region" />
                         </SelectTrigger>
@@ -164,7 +167,8 @@ export function ParticipantFilters() {
                             {REGIONS_AND_CITIES.map(region => (
                                 <SelectItem
                                     key={region.id}
-                                    value={region.id.toString()}>
+                                    value={region.id.toString()}
+                                >
                                     {region.name}
                                 </SelectItem>
                             ))}
@@ -177,7 +181,8 @@ export function ParticipantFilters() {
                     <Select
                         value={selectedCity || 'all'}
                         onValueChange={handleCityChange}
-                        disabled={!selectedRegion || selectedRegion === 'all'}>
+                        disabled={!selectedRegion || selectedRegion === 'all'}
+                    >
                         <SelectTrigger>
                             <SelectValue placeholder="Filter by city" />
                         </SelectTrigger>
@@ -190,7 +195,8 @@ export function ParticipantFilters() {
                                 )?.cities.map(city => (
                                     <SelectItem
                                         key={city.id}
-                                        value={city.id.toString()}>
+                                        value={city.id.toString()}
+                                    >
                                         {city.name}
                                     </SelectItem>
                                 ))}
@@ -206,7 +212,8 @@ export function ParticipantFilters() {
                         <Button
                             variant="ghost"
                             onClick={() => router.push(pathname)}
-                            className="text-red-500 hover:text-red-600 hover:bg-red-50">
+                            className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                        >
                             <X className="w-4 h-4 mr-2" />
                             Clear Filters
                         </Button>

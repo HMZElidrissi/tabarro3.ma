@@ -36,7 +36,8 @@ export default async function RequestsPage({
                         Add Request
                     </Button>
                 </Link>
-            }>
+            }
+        >
             <BloodRequestFilters />
             <BloodRequestsClient
                 currentPage={currentPage}

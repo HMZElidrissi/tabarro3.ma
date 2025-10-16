@@ -48,7 +48,8 @@ export function PaginationControls({
                             currentPage === 1
                                 ? 'bg-brand-600 text-white hover:bg-brand-700'
                                 : 'hover:bg-brand-50 hover:text-brand-700'
-                        }>
+                        }
+                    >
                         1
                     </PaginationLink>
                 </PaginationItem>,
@@ -72,7 +73,8 @@ export function PaginationControls({
                             currentPage === i
                                 ? 'bg-brand-600 text-white hover:bg-brand-700'
                                 : 'hover:bg-brand-50 hover:text-brand-700'
-                        }>
+                        }
+                    >
                         {i}
                     </PaginationLink>
                 </PaginationItem>,
@@ -96,7 +98,8 @@ export function PaginationControls({
                             currentPage === totalPages
                                 ? 'bg-brand-600 text-white hover:bg-brand-700'
                                 : 'hover:bg-brand-50 hover:text-brand-700'
-                        }>
+                        }
+                    >
                         {totalPages}
                     </PaginationLink>
                 </PaginationItem>,
@@ -117,7 +120,8 @@ export function PaginationControls({
                             currentPage <= 1
                                 ? 'pointer-events-none opacity-50'
                                 : 'cursor-pointer hover:bg-brand-50 hover:text-brand-700'
-                        }>
+                        }
+                    >
                         {dict?.pagination?.previous || 'Previous'}
                     </PaginationPrevious>
                 </PaginationItem>
@@ -131,7 +135,8 @@ export function PaginationControls({
                             currentPage >= totalPages
                                 ? 'pointer-events-none opacity-50'
                                 : 'cursor-pointer hover:bg-brand-50 hover:text-brand-700'
-                        }>
+                        }
+                    >
                         {dict?.pagination?.next || 'Next'}
                     </PaginationNext>
                 </PaginationItem>
@@ -146,7 +151,8 @@ export function PaginationControls({
                             currentPage <= 1
                                 ? 'pointer-events-none opacity-50'
                                 : 'cursor-pointer hover:bg-brand-50 hover:text-brand-700'
-                        }>
+                        }
+                    >
                         {dict?.pagination?.previous || 'Previous'}
                     </PaginationPrevious>
                 </PaginationItem>
@@ -162,7 +168,8 @@ export function PaginationControls({
                             currentPage >= totalPages
                                 ? 'pointer-events-none opacity-50'
                                 : 'cursor-pointer hover:bg-brand-50 hover:text-brand-700'
-                        }>
+                        }
+                    >
                         {dict?.pagination?.next || 'Next'}
                     </PaginationNext>
                 </PaginationItem>

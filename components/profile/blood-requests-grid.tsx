@@ -137,7 +137,8 @@ export function BloodRequestsGrid({
                             <div className="flex justify-between items-start">
                                 <Badge
                                     variant="outline"
-                                    className={`${getStatusColor(request.status)}`}>
+                                    className={`${getStatusColor(request.status)}`}
+                                >
                                     {
                                         dict.bloodRequests.status[
                                             request.status.toLowerCase()
@@ -156,12 +157,14 @@ export function BloodRequestsGrid({
                                             title={
                                                 dict.bloodRequests
                                                     .markAsFulfilled
-                                            }>
+                                            }
+                                        >
                                             <CheckCircle className="h-4 w-4 text-green-600" />
                                         </Button>
                                     )}
                                     <Link
-                                        href={`/profile/requests/${request.id}`}>
+                                        href={`/profile/requests/${request.id}`}
+                                    >
                                         <Button variant="ghost" size="sm">
                                             <Pencil className="h-4 w-4" />
                                         </Button>
@@ -172,7 +175,8 @@ export function BloodRequestsGrid({
                                         onClick={() => {
                                             setSelectedRequest(request);
                                             setDeleteDialogOpen(true);
-                                        }}>
+                                        }}
+                                    >
                                         <Trash2 className="h-4 w-4 text-destructive" />
                                     </Button>
                                 </div>
@@ -187,15 +191,19 @@ export function BloodRequestsGrid({
                                 <div className="flex items-center gap-2">
                                     <MapPin className="h-4 w-4" />
                                     <span className="font-medium">
-                                        {getLocation(request.city.id, isRTL)
-                                            ?.regionName}
+                                        {
+                                            getLocation(request.city.id, isRTL)
+                                                ?.regionName
+                                        }
                                     </span>
                                     <span className="text-muted-foreground/50">
                                         •
                                     </span>
                                     <span>
-                                        {getLocation(request.city.id, isRTL)
-                                            ?.cityName}
+                                        {
+                                            getLocation(request.city.id, isRTL)
+                                                ?.cityName
+                                        }
                                     </span>
                                 </div>
                                 {request.location && (
@@ -236,7 +244,8 @@ export function BloodRequestsGrid({
 
             <AlertDialog
                 open={deleteDialogOpen}
-                onOpenChange={setDeleteDialogOpen}>
+                onOpenChange={setDeleteDialogOpen}
+            >
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
@@ -255,7 +264,8 @@ export function BloodRequestsGrid({
                                 selectedRequest && handleDelete(selectedRequest)
                             }
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                            disabled={pending}>
+                            disabled={pending}
+                        >
                             {pending
                                 ? dict.common.deleting
                                 : dict.common.delete}

@@ -46,7 +46,8 @@ export default async function LatestBlogPosts({
                                     <div className="absolute top-4 right-4">
                                         <Badge
                                             variant="outline"
-                                            className="bg-card/80 backdrop-blur-sm text-brand-600 dark:text-brand-400 border-brand-200 dark:border-brand-800">
+                                            className="bg-card/80 backdrop-blur-sm text-brand-600 dark:text-brand-400 border-brand-200 dark:border-brand-800"
+                                        >
                                             <Droplets className="h-3 w-3 mr-1" />
                                             {post.tags[0]}
                                         </Badge>
@@ -90,7 +91,8 @@ export default async function LatestBlogPosts({
                                     </div>
                                     <Link
                                         href={`/blog/${post.slug}`}
-                                        className="text-sm text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 font-medium flex items-center">
+                                        className="text-sm text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 font-medium flex items-center"
+                                    >
                                         {dictionary.blog?.readMore ||
                                             'Read more'}
                                         <ChevronRight

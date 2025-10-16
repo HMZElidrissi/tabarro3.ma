@@ -21,7 +21,8 @@ const Twitter = ({ className, ...props }: TwitterIconProps) => (
         className={`fill-black dark:fill-white ${className}`}
         height="1em"
         width="1em"
-        {...props}>
+        {...props}
+    >
         <path d="M75.916 54.2 122.542 0h-11.05L71.008 47.06 38.672 0H1.376l48.898 71.164L1.376 128h11.05L55.18 78.303 89.328 128h37.296L75.913 54.2ZM60.782 71.79l-4.955-7.086-39.42-56.386h16.972L65.19 53.824l4.954 7.086 41.353 59.15h-16.97L60.782 71.793Z"></path>
     </svg>
 );
@@ -31,7 +32,8 @@ const Verified = ({ className, ...props }: TwitterIconProps) => (
         aria-label="Verified Account"
         viewBox="0 0 24 24"
         className={className}
-        {...props}>
+        {...props}
+    >
         <g fill="currentColor">
             <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z" />
         </g>
@@ -64,7 +66,8 @@ export const TweetSkeleton = ({
             'flex size-full max-h-max min-w-72 flex-col gap-2 rounded-lg border p-4',
             className,
         )}
-        {...props}>
+        {...props}
+    >
         <div className="flex flex-row gap-2">
             <Skeleton className="size-10 shrink-0 rounded-full" />
             <Skeleton className="h-10 w-full" />
@@ -85,7 +88,8 @@ export const TweetNotFound = ({
             'flex size-full flex-col items-center justify-center gap-2 rounded-lg border p-4',
             className,
         )}
-        {...props}>
+        {...props}
+    >
         <h3 className="text-sm text-muted-foreground">Tweet not found</h3>
     </div>
 );
@@ -110,7 +114,8 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
                     href={tweet.user.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center whitespace-nowrap font-semibold">
+                    className="flex items-center whitespace-nowrap font-semibold"
+                >
                     {truncate(tweet.user.name, 20)}
                     {tweet.user.verified ||
                         (tweet.user.is_blue_verified && (
@@ -122,7 +127,8 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
                         href={tweet.user.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-sm text-gray-500 transition-all duration-75">
+                        className="text-sm text-gray-500 transition-all duration-75"
+                    >
                         @{truncate(tweet.user.screen_name, 16)}
                     </a>
                 </div>
@@ -149,7 +155,8 @@ export const TweetBody = ({ tweet }: { tweet: EnrichedTweet }) => (
                             href={entity.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm font-normal text-blue-500 hover:underline">
+                            className="text-sm font-normal text-blue-500 hover:underline"
+                        >
                             <span>{entity.text}</span>
                         </a>
                     );
@@ -177,7 +184,8 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
                     loop
                     muted
                     playsInline
-                    className="h-48 rounded-xl border shadow-sm">
+                    className="h-48 rounded-xl border shadow-sm"
+                >
                     <source
                         src={tweet.video.variants[0].src}
                         type="video/mp4"
@@ -246,7 +254,8 @@ export const MagicTweet = ({
                     : 'h-auto min-h-[200px]',
                 className,
             )}
-            {...props}>
+            {...props}
+        >
             <TweetHeader tweet={enrichedTweet} />
             <TweetBody tweet={enrichedTweet} />
             <TweetMedia tweet={enrichedTweet} />

@@ -217,7 +217,8 @@ export default function OrganizationsClient({
                 <InviteOrganizationDialog
                     onInviteSuccess={handleInviteSuccess}
                 />
-            }>
+            }
+        >
             <Tabs defaultValue="organizations" className="space-y-4">
                 <TabsList>
                     <TabsTrigger value="organizations">

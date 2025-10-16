@@ -27,7 +27,8 @@ export default function CriteriasComponent({ dict }: { dict: any }) {
                         {criterias.map(criteria => (
                             <div
                                 key={criteria.name}
-                                className="criteria-card bg-muted/50 rounded-lg p-6 border hover:border-brand-200 transition-colors duration-300">
+                                className="criteria-card bg-muted/50 rounded-lg p-6 border hover:border-brand-200 transition-colors duration-300"
+                            >
                                 <h3 className="text-lg font-medium text-foreground mb-2">
                                     {criteria.name}
                                 </h3>

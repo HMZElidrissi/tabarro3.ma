@@ -158,7 +158,8 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                         height="120"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className="text-brand-600 dark:text-brand-400">
+                        className="text-brand-600 dark:text-brand-400"
+                    >
                         <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                     </svg>
                 </div>
@@ -188,14 +189,16 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                     {basicRequirements.map((req, index) => (
                         <Card
                             key={index}
-                            className="border-none shadow-md hover:shadow-lg transition-shadow duration-300 bg-card">
+                            className="border-none shadow-md hover:shadow-lg transition-shadow duration-300 bg-card"
+                        >
                             <CardContent className="p-4">
                                 <div className="flex items-center mb-2">
                                     <div
                                         className={cn(
                                             'p-2 rounded-full',
                                             req.bgColor,
-                                        )}>
+                                        )}
+                                    >
                                         <req.icon
                                             className={cn('w-4 h-4', req.color)}
                                         />
@@ -204,7 +207,8 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                                         className={cn(
                                             'text-lg font-semibold text-foreground',
                                             isRTL ? 'mr-3' : 'ml-3',
-                                        )}>
+                                        )}
+                                    >
                                         {req.title}
                                     </h3>
                                 </div>
@@ -240,7 +244,8 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                             {temporaryDeferrals.map((deferral, index) => (
                                 <div
                                     key={index}
-                                    className="flex items-center justify-between p-3 bg-yellow-50 dark:bg-yellow-950/30 rounded-lg border border-yellow-200 dark:border-yellow-800 hover:bg-yellow-100 dark:hover:bg-yellow-950/50 transition-colors">
+                                    className="flex items-center justify-between p-3 bg-yellow-50 dark:bg-yellow-950/30 rounded-lg border border-yellow-200 dark:border-yellow-800 hover:bg-yellow-100 dark:hover:bg-yellow-950/50 transition-colors"
+                                >
                                     <div className="flex items-center">
                                         <deferral.icon
                                             className={cn(
@@ -254,7 +259,8 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                                     </div>
                                     <Badge
                                         variant="outline"
-                                        className="bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 border-yellow-300 dark:border-yellow-700 text-xs">
+                                        className="bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 border-yellow-300 dark:border-yellow-700 text-xs"
+                                    >
                                         {deferral.period}
                                     </Badge>
                                 </div>
@@ -291,7 +297,8 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                                         className={cn(
                                             'w-2 h-2 bg-red-500 dark:bg-red-400 rounded-full',
                                             isRTL ? 'ml-2' : 'mr-2',
-                                        )}></div>
+                                        )}
+                                    ></div>
                                     <span className="font-medium text-sm">
                                         {deferral}
                                     </span>
@@ -325,7 +332,8 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                             {medicalDecisionRequired.map((condition, index) => (
                                 <div
                                     key={index}
-                                    className="flex items-center p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-950/50 transition-colors">
+                                    className="flex items-center p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-950/50 transition-colors"
+                                >
                                     <Stethoscope
                                         className={cn(
                                             'w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0',
@@ -356,12 +364,14 @@ export function EligibilityComponent({ dict, isRTL }: EligibilityProps) {
                         <div className="flex flex-col sm:flex-row gap-3 justify-center">
                             <a
                                 href="/campaigns"
-                                className="bg-white text-brand-600 dark:bg-card dark:text-foreground px-6 py-2 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-muted transition-colors text-sm">
+                                className="bg-white text-brand-600 dark:bg-card dark:text-foreground px-6 py-2 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-muted transition-colors text-sm"
+                            >
                                 {dict.eligibility?.callToAction?.findCampaigns}
                             </a>
                             <a
                                 href="/requests"
-                                className="border-2 border-white text-white px-6 py-2 rounded-lg font-semibold hover:bg-white hover:text-brand-600 dark:hover:bg-card dark:hover:text-foreground transition-colors text-sm">
+                                className="border-2 border-white text-white px-6 py-2 rounded-lg font-semibold hover:bg-white hover:text-brand-600 dark:hover:bg-card dark:hover:text-foreground transition-colors text-sm"
+                            >
                                 {dict.eligibility?.callToAction?.urgentRequests}
                             </a>
                         </div>

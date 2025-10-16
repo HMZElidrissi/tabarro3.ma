@@ -55,25 +55,30 @@ export default function AwardSection({ dict, isRTL = false }: AwardProps) {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.3 }}
-                    className="max-w-6xl mx-auto">
+                    className="max-w-6xl mx-auto"
+                >
                     {/* Award Badge */}
                     <motion.div
                         variants={itemVariants}
-                        className="text-center mb-8">
+                        className="text-center mb-8"
+                    >
                         <motion.div
                             animate={floatingAnimation}
-                            className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 px-6 py-3 rounded-full font-semibold text-sm shadow-lg">
+                            className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 px-6 py-3 rounded-full font-semibold text-sm shadow-lg"
+                        >
                             <Trophy className="w-5 h-5" />
                             <span>{dict.award.badge}</span>
                         </motion.div>
                     </motion.div>
 
                     <div
-                        className={`grid lg:grid-cols-2 gap-12 items-center ${isRTL ? 'lg:grid-flow-col-dense' : ''}`}>
+                        className={`grid lg:grid-cols-2 gap-12 items-center ${isRTL ? 'lg:grid-flow-col-dense' : ''}`}
+                    >
                         {/* Award Image */}
                         <motion.div
                             variants={itemVariants}
-                            className={`relative ${isRTL ? 'lg:order-2' : ''}`}>
+                            className={`relative ${isRTL ? 'lg:order-2' : ''}`}
+                        >
                             <div className="relative group">
                                 {/* Glow effect */}
                                 <div className="absolute -inset-4 bg-gradient-to-r from-brand-500/20 to-brand-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
@@ -104,7 +109,8 @@ export default function AwardSection({ dict, isRTL = false }: AwardProps) {
                                         repeat: Infinity,
                                         ease: 'linear',
                                     }}
-                                    className="absolute -top-6 -left-6 w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg">
+                                    className="absolute -top-6 -left-6 w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg"
+                                >
                                     <Star
                                         className="w-6 h-6 text-yellow-900"
                                         fill="currentColor"
@@ -118,7 +124,8 @@ export default function AwardSection({ dict, isRTL = false }: AwardProps) {
                                         repeat: Infinity,
                                         ease: 'easeInOut',
                                     }}
-                                    className="absolute -bottom-6 -right-6 w-12 h-12 bg-brand-500 rounded-full flex items-center justify-center shadow-lg">
+                                    className="absolute -bottom-6 -right-6 w-12 h-12 bg-brand-500 rounded-full flex items-center justify-center shadow-lg"
+                                >
                                     <Award className="w-6 h-6 text-white" />
                                 </motion.div>
                             </div>
@@ -127,10 +134,12 @@ export default function AwardSection({ dict, isRTL = false }: AwardProps) {
                         {/* Award Content */}
                         <motion.div
                             variants={itemVariants}
-                            className={`${isRTL ? 'lg:order-1 text-right' : 'text-left'}`}>
+                            className={`${isRTL ? 'lg:order-1 text-right' : 'text-left'}`}
+                        >
                             <motion.h2
                                 variants={itemVariants}
-                                className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+                                className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight"
+                            >
                                 <span className="bg-gradient-to-r from-brand-600 to-brand-700 bg-clip-text text-transparent">
                                     {dict.award.title}
                                 </span>
@@ -138,13 +147,15 @@ export default function AwardSection({ dict, isRTL = false }: AwardProps) {
 
                             <motion.p
                                 variants={itemVariants}
-                                className="text-xl text-brand-600 font-semibold mb-6">
+                                className="text-xl text-brand-600 font-semibold mb-6"
+                            >
                                 {dict.award.subtitle}
                             </motion.p>
 
                             <motion.p
                                 variants={itemVariants}
-                                className="text-gray-600 text-lg leading-relaxed">
+                                className="text-gray-600 text-lg leading-relaxed"
+                            >
                                 {dict.award.description}
                             </motion.p>
                         </motion.div>

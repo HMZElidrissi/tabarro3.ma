@@ -46,7 +46,7 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
     const handleLanguageSwitch = async (newLocale: string) => {
         await switchLanguage(newLocale);
         setCurrentLocale(newLocale);
-        router.refresh();
+        window.location.reload();
     };
 
     const currentLanguage = languages.find(lang => lang.code === currentLocale);
@@ -103,7 +103,8 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                             'text-foreground hover:text-brand-700 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/50 transition-colors duration-200 px-3 py-2 text-sm font-medium',
                             pathname === item.href &&
                                 'bg-brand-50 dark:bg-brand-900/50 text-brand-700 dark:text-brand-400',
-                        )}>
+                        )}
+                    >
                         <Link href={item.href}>{item.name}</Link>
                     </Button>
                 ))}
@@ -113,7 +114,8 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                     <DropdownMenuTrigger asChild>
                         <Button
                             variant="ghost"
-                            className="text-foreground hover:text-brand-700 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/50 transition-colors duration-200 px-3 py-2 text-sm font-medium focus-visible:ring-0">
+                            className="text-foreground hover:text-brand-700 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/50 transition-colors duration-200 px-3 py-2 text-sm font-medium focus-visible:ring-0"
+                        >
                             {dict.menu.more}
                             <ChevronDown className="ml-1 h-4 w-4" />
                         </Button>
@@ -123,10 +125,12 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                         {desktopMenu.slice(4).map(item => (
                             <DropdownMenuItem
                                 key={item.name}
-                                className="hover:bg-brand-50 dark:hover:bg-brand-900/50">
+                                className="hover:bg-brand-50 dark:hover:bg-brand-900/50"
+                            >
                                 <Link
                                     href={item.href}
-                                    className="w-full text-foreground">
+                                    className="w-full text-foreground"
+                                >
                                     {item.name}
                                 </Link>
                             </DropdownMenuItem>
@@ -160,7 +164,8 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                         <Button
                             variant="outline"
                             size="sm"
-                            className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-muted-foreground dark:hover:text-foreground dark:hover:bg-muted/50 transition-colors duration-200 focus-visible:ring-0">
+                            className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-muted-foreground dark:hover:text-foreground dark:hover:bg-muted/50 transition-colors duration-200 focus-visible:ring-0"
+                        >
                             <Globe className="h-4 w-4 flex-shrink-0" />
                             <span className="font-medium leading-none">
                                 {currentLanguage?.name}
@@ -174,7 +179,8 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                                 onClick={() =>
                                     handleLanguageSwitch(language.code)
                                 }
-                                className="flex items-center justify-between hover:bg-brand-50 dark:hover:bg-brand-900/50 cursor-pointer">
+                                className="flex items-center justify-between hover:bg-brand-50 dark:hover:bg-brand-900/50 cursor-pointer"
+                            >
                                 {language.name}
                                 {language.code === currentLocale && (
                                     <span className="h-2 w-2 rounded-full bg-brand-500" />
@@ -192,7 +198,8 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                                 <Button
                                     variant="brand"
                                     size="sm"
-                                    className="flex items-center gap-x-2 transition-colors duration-200 px-3 py-2 focus-visible:ring-0">
+                                    className="flex items-center gap-x-2 transition-colors duration-200 px-3 py-2 focus-visible:ring-0"
+                                >
                                     <User className="h-4 w-4 flex-shrink-0" />
                                     <span className="text-sm font-medium hidden sm:inline leading-none">
                                         {user.name || dict.common.profile}
@@ -207,7 +214,8 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                                                 ? '/profile'
                                                 : '/dashboard'
                                         }
-                                        className="w-full text-brand-700 dark:text-brand-400 flex items-center gap-x-2">
+                                        className="w-full text-brand-700 dark:text-brand-400 flex items-center gap-x-2"
+                                    >
                                         <User className="h-4 w-4" />
                                         <span>{dict.common.profile}</span>
                                     </Link>
@@ -218,7 +226,8 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                                         onClick={e => {
                                             e.preventDefault();
                                             handleLogout();
-                                        }}>
+                                        }}
+                                    >
                                         {isLoading ? (
                                             <>
                                                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -245,10 +254,12 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                             asChild
                             variant="ghost"
                             size="sm"
-                            className="text-gray-700 hover:text-gray-900 hover:bg-gray-100 dark:text-muted-foreground dark:hover:text-foreground dark:hover:bg-muted/50 transition-colors duration-200 px-3 py-2 text-sm font-medium">
+                            className="text-gray-700 hover:text-gray-900 hover:bg-gray-100 dark:text-muted-foreground dark:hover:text-foreground dark:hover:bg-muted/50 transition-colors duration-200 px-3 py-2 text-sm font-medium"
+                        >
                             <Link
                                 href="/sign-in"
-                                className="flex items-center space-x-1 rtl:space-x-reverse underline font-bold">
+                                className="flex items-center space-x-1 rtl:space-x-reverse underline font-bold"
+                            >
                                 <span>{dict.common.signIn}</span>
                             </Link>
                         </Button>
@@ -257,10 +268,12 @@ export function DesktopNav({ dict, initialLocale }: DesktopNavProps) {
                             asChild
                             variant="brand"
                             size="sm"
-                            className="transition-colors duration-200 rounded-md px-4 py-2 text-sm font-medium focus-visible:ring-0">
+                            className="transition-colors duration-200 rounded-md px-4 py-2 text-sm font-medium focus-visible:ring-0"
+                        >
                             <Link
                                 href="/sign-up"
-                                className="flex items-center space-x-1 rtl:space-x-reverse">
+                                className="flex items-center space-x-1 rtl:space-x-reverse"
+                            >
                                 <span>{dict.common.signUp}</span>
                             </Link>
                         </Button>

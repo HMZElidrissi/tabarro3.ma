@@ -17,12 +17,12 @@ export async function generateMetadata(): Promise<Metadata> {
             dict.eligibility?.description ||
             'Learn about the eligibility criteria and requirements for blood donation in Morocco.',
         keywords: [
-            'Critères d\'éligibilité du don de sang',
+            "Critères d'éligibilité du don de sang",
             'Eligibilité du don de sang',
             'Don de sang',
             'Morocco blood donation',
             'Don de sang au Maroc',
-            'Critères d\'éligibilité',
+            "Critères d'éligibilité",
             'Exigences pour le don de sang',
         ],
         openGraph: {

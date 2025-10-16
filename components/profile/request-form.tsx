@@ -81,7 +81,8 @@ export function RequestForm({
                         name="bloodGroup"
                         defaultValue={request?.bloodGroup || ''}
                         dir={isRTL ? 'rtl' : 'ltr'}
-                        required>
+                        required
+                    >
                         <SelectTrigger>
                             <SelectValue
                                 placeholder={
@@ -93,7 +94,8 @@ export function RequestForm({
                             {bloodGroups.map(group => (
                                 <SelectItem
                                     key={group.value}
-                                    value={group.value}>
+                                    value={group.value}
+                                >
                                     {getBloodGroupLabel(group.value, dict)}
                                 </SelectItem>
                             ))}
@@ -107,7 +109,8 @@ export function RequestForm({
                         value={selectedRegion}
                         onValueChange={setSelectedRegion}
                         dir={isRTL ? 'rtl' : 'ltr'}
-                        required>
+                        required
+                    >
                         <SelectTrigger>
                             <SelectValue
                                 placeholder={
@@ -119,7 +122,8 @@ export function RequestForm({
                             {REGIONS_AND_CITIES.map(region => (
                                 <SelectItem
                                     key={region.id}
-                                    value={region.id.toString()}>
+                                    value={region.id.toString()}
+                                >
                                     {isRTL ? region.nameAr : region.name}
                                 </SelectItem>
                             ))}
@@ -147,7 +151,8 @@ export function RequestForm({
                                 )?.cities.map(city => (
                                     <SelectItem
                                         key={city.id}
-                                        value={city.id.toString()}>
+                                        value={city.id.toString()}
+                                    >
                                         {isRTL ? city.nameAr : city.name}
                                     </SelectItem>
                                 ))}
@@ -204,7 +209,8 @@ export function RequestForm({
                         <Select
                             name="status"
                             defaultValue={request?.status || 'active'}
-                            dir={isRTL ? 'rtl' : 'ltr'}>
+                            dir={isRTL ? 'rtl' : 'ltr'}
+                        >
                             <SelectTrigger>
                                 <SelectValue
                                     placeholder={
@@ -231,7 +237,8 @@ export function RequestForm({
                     <Button
                         type="button"
                         variant="outline"
-                        onClick={() => router.back()}>
+                        onClick={() => router.back()}
+                    >
                         {dict.common.cancel}
                     </Button>
                     <Button variant="brand" type="submit" disabled={pending}>

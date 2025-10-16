@@ -134,13 +134,15 @@ export default function CampaignForm({
                                 </Label>
                                 <Popover
                                     open={orgOpen}
-                                    onOpenChange={setOrgOpen}>
+                                    onOpenChange={setOrgOpen}
+                                >
                                     <PopoverTrigger asChild>
                                         <Button
                                             variant="outline"
                                             role="combobox"
                                             aria-expanded={orgOpen}
-                                            className="w-full justify-between">
+                                            className="w-full justify-between"
+                                        >
                                             {selectedOrg
                                                 ? organizations.find(
                                                       org =>
@@ -176,7 +178,8 @@ export default function CampaignForm({
                                                                 setOrgOpen(
                                                                     false,
                                                                 );
-                                                            }}>
+                                                            }}
+                                                        >
                                                             {org.name}
                                                             <Check
                                                                 className={cn(
@@ -211,7 +214,8 @@ export default function CampaignForm({
                             }
                             onValueChange={(value: string) => {
                                 setSelectedRegion(value);
-                            }}>
+                            }}
+                        >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select region" />
                             </SelectTrigger>
@@ -219,7 +223,8 @@ export default function CampaignForm({
                                 {REGIONS_AND_CITIES.map(region => (
                                     <SelectItem
                                         key={region.id}
-                                        value={region.id.toString()}>
+                                        value={region.id.toString()}
+                                    >
                                         {region.name}
                                     </SelectItem>
                                 ))}
@@ -231,7 +236,8 @@ export default function CampaignForm({
                         <Label htmlFor="cityId">City</Label>
                         <Select
                             name="cityId"
-                            defaultValue={campaign?.cityId?.toString() || ''}>
+                            defaultValue={campaign?.cityId?.toString() || ''}
+                        >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select city" />
                             </SelectTrigger>
@@ -242,7 +248,8 @@ export default function CampaignForm({
                                     )?.cities.map(city => (
                                         <SelectItem
                                             key={city.id}
-                                            value={city.id.toString()}>
+                                            value={city.id.toString()}
+                                        >
                                             {city.name}
                                         </SelectItem>
                                     ))}
@@ -299,7 +306,8 @@ export default function CampaignForm({
                         <Button
                             type="button"
                             variant="outline"
-                            onClick={() => router.push('/dashboard/campaigns')}>
+                            onClick={() => router.push('/dashboard/campaigns')}
+                        >
                             Cancel
                         </Button>
                         <Button type="submit" disabled={pending}>

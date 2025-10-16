@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
             description: dict.Blood_Requests,
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Demandes de don de sang")}&description=${encodeURIComponent("Découvrez les demandes de don de sang au Maroc")}`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent('Demandes de don de sang')}&description=${encodeURIComponent('Découvrez les demandes de don de sang au Maroc')}`,
                     width: 1200,
                     height: 630,
                     alt: 'Demandes de don de sang',
@@ -43,7 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
             description: dict.Blood_Requests,
             images: [
                 {
-                    url: `${baseUrl}/api/og?title=${encodeURIComponent("Demandes de don de sang")}&description=${encodeURIComponent("Découvrez les demandes de don de sang au Maroc")}`,
+                    url: `${baseUrl}/api/og?title=${encodeURIComponent('Demandes de don de sang')}&description=${encodeURIComponent('Découvrez les demandes de don de sang au Maroc')}`,
                     width: 1200,
                     height: 630,
                     alt: 'Demandes de don de sang',

@@ -37,7 +37,8 @@ export default function BlogPostGrid({
                                 <div className="absolute top-3 right-3">
                                     <Badge
                                         variant="outline"
-                                        className="bg-card/80 backdrop-blur-sm text-brand-600 dark:text-brand-400 border-brand-200 dark:border-brand-800">
+                                        className="bg-card/80 backdrop-blur-sm text-brand-600 dark:text-brand-400 border-brand-200 dark:border-brand-800"
+                                    >
                                         <Droplets className="h-3 w-3 mr-1" />
                                         {post.tags[0]}
                                     </Badge>
@@ -74,7 +75,8 @@ export default function BlogPostGrid({
                                 {post.tags.slice(0, 2).map(tag => (
                                     <span
                                         key={tag}
-                                        className="px-2 py-0.5 bg-muted text-muted-foreground rounded text-xs hover:bg-muted/80 transition-colors">
+                                        className="px-2 py-0.5 bg-muted text-muted-foreground rounded text-xs hover:bg-muted/80 transition-colors"
+                                    >
                                         {tag}
                                     </span>
                                 ))}
@@ -88,7 +90,8 @@ export default function BlogPostGrid({
                             <div className="flex items-center justify-end">
                                 <Link
                                     href={`/blog/${post.slug}`}
-                                    className="text-xs text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 font-medium flex items-center group/link px-2 py-1 rounded hover:bg-muted/30 transition-colors">
+                                    className="text-xs text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 font-medium flex items-center group/link px-2 py-1 rounded hover:bg-muted/30 transition-colors"
+                                >
                                     {dictionary.blog?.readMore || 'Read more'}
                                     <ChevronRight
                                         className={cn(

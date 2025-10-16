@@ -55,6 +55,7 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
         await switchLanguage(newLocale);
         setCurrentLocale(newLocale);
         router.refresh();
+        window.location.reload();
     };
 
     const mobileMenu = [
@@ -93,7 +94,8 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                 pathname === item.href &&
                                     'text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-900/50',
                             )}
-                            onClick={() => setIsOpen(false)}>
+                            onClick={() => setIsOpen(false)}
+                        >
                             <Link href={item.href}>{item.name}</Link>
                         </Button>
                     ))}
@@ -115,7 +117,8 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                                     language.code,
                                                 );
                                                 setIsOpen(false);
-                                            }}>
+                                            }}
+                                        >
                                             {language.name}
                                             {language.code ===
                                                 currentLocale && (
@@ -134,13 +137,15 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                 <Button
                                     variant="default"
                                     className="w-full bg-brand-600 text-white hover:bg-brand-700 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90"
-                                    onClick={() => setIsOpen(false)}>
+                                    onClick={() => setIsOpen(false)}
+                                >
                                     <Link
                                         href={
                                             user.role === Role.PARTICIPANT
                                                 ? '/profile'
                                                 : '/dashboard'
-                                        }>
+                                        }
+                                    >
                                         {user.name || dict.common.profile}
                                     </Link>
                                 </Button>
@@ -148,7 +153,8 @@ export function MobileNav({ dict, initialLocale }: MobileNavProps) {
                                     variant="outline"
                                     className="mt-2 w-full text-foreground"
                                     onClick={handleLogout}
-                                    disabled={isLoading}>
+                                    disabled={isLoading}
+                                >
                                     {isLoading ? (
                                         <>
                                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />

@@ -61,7 +61,8 @@ export default function EmailPreviewPanel({
                                         onClick={() =>
                                             setPreviewDeviceAction('mobile')
                                         }
-                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black">
+                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black"
+                                    >
                                         <Smartphone className="w-3 h-3" />
                                     </Button>
                                     <Button
@@ -74,7 +75,8 @@ export default function EmailPreviewPanel({
                                         onClick={() =>
                                             setPreviewDeviceAction('tablet')
                                         }
-                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black">
+                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black"
+                                    >
                                         <Tablet className="w-3 h-3" />
                                     </Button>
                                     <Button
@@ -87,7 +89,8 @@ export default function EmailPreviewPanel({
                                         onClick={() =>
                                             setPreviewDeviceAction('desktop')
                                         }
-                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black">
+                                        className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black"
+                                    >
                                         <Monitor className="w-3 h-3" />
                                     </Button>
                                 </div>
@@ -98,7 +101,8 @@ export default function EmailPreviewPanel({
                         <div className="border-t border-gray-200 dark:border-gray-700">
                             <div className="bg-gray-50 dark:bg-black p-4 h-[calc(100vh-300px)] overflow-auto">
                                 <div
-                                    className={`mx-auto bg-white dark:bg-background rounded-lg shadow-sm transition-all duration-300 ${getPreviewWidth(previewDevice)}`}>
+                                    className={`mx-auto bg-white dark:bg-background rounded-lg shadow-sm transition-all duration-300 ${getPreviewWidth(previewDevice)}`}
+                                >
                                     {/* Email Client Header */}
                                     <div className="border-b border-gray-200 dark:border-gray-800 p-3 bg-gray-50 dark:bg-black rounded-t-lg">
                                         <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">

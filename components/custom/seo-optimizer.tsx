@@ -231,8 +231,7 @@ export function SEOOptimizer({
                             '@type': 'DonateAction',
                             target: {
                                 '@type': 'EntryPoint',
-                                urlTemplate:
-                                    'https://tabarro3.ma/requests',
+                                urlTemplate: 'https://tabarro3.ma/requests',
                             },
                         },
                         inLanguage: locale === 'ar' ? 'ar' : 'fr',
