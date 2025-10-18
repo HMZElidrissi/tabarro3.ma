@@ -12,7 +12,7 @@ import EmailPreviewPanel from './email-preview-panel';
 export default function EmailPreview() {
     const [emailData, setEmailData] = useState<EmailData>({
         showLogo: true,
-        logoUrl: 'https://www.tabarro3.ma/logo.png',
+        logoUrl: 'https://tabarro3.ma/logo.png',
         logoWidth: 140,
         title: 'Bienvenue sur tabarro3!',
         greeting: 'Cher nouveau membre,',
