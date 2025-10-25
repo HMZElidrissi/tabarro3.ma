@@ -11,7 +11,8 @@
         "format": "prettier --write .",
         "db:setup": "tsx scripts/setup.ts",
         "db:migrate": "tsx scripts/migrate.ts",
-        "db:seed": "tsx scripts/seed.ts"
+        "db:seed": "tsx scripts/seed.ts",
+        "db:studio": "prisma studio"
     },
     "dependencies": {
         "@headlessui/react": "^2.2.0",

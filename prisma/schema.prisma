@@ -30,6 +30,7 @@ model Region {
   id     Int    @id
   name   String
   cities City[]
+  campaignDigests CampaignDigest[]
 
   @@map("regions")
 }
@@ -134,6 +135,7 @@ model Campaign {
 
   organization User                  @relation("OrganizedCampaigns", fields: [organizationId], references: [id], onDelete: Cascade)
   participants CampaignParticipant[]
+  digestCampaigns CampaignDigestCampaign[]
 
   @@map("campaigns")
 }
@@ -178,8 +180,8 @@ enum JobStatus {
 }
 
 enum JobType {
-  CAMPAIGN_NOTIFICATION
   BLOOD_REQUEST_NOTIFICATION
+  CAMPAIGN_DIGEST
 }
 
 model Job {
@@ -197,4 +199,31 @@ model Job {
   @@index([status, type])
   @@index([createdAt])
   @@map("jobs")
+}
+
+model CampaignDigest {
+  id          String   @id @default(uuid())
+  date        DateTime @db.Date
+  regionId    Int      @map("region_id")
+  region      Region   @relation(fields: [regionId], references: [id], onDelete: Cascade)
+  campaigns   CampaignDigestCampaign[]
+  sent        Boolean  @default(false)
+  sentAt      DateTime? @map("sent_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@unique([date, regionId])
+  @@map("campaign_digests")
+}
+
+model CampaignDigestCampaign {
+  id              Int            @id @default(autoincrement())
+  digestId        String         @map("digest_id")
+  campaignId      Int            @map("campaign_id")
+  digest          CampaignDigest @relation(fields: [digestId], references: [id], onDelete: Cascade)
+  campaign        Campaign       @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  createdAt       DateTime       @default(now()) @map("created_at")
+
+  @@unique([digestId, campaignId])
+  @@map("campaign_digest_campaigns")
 }

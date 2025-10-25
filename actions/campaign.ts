@@ -5,7 +5,7 @@ import { validatedActionWithUser } from '@/auth/middleware';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { Role } from '@/types/enums';
-import { queueCampaignNotification } from '@/jobs/helpers';
+import { addCampaignToDigest } from '@/jobs/digest-helpers';
 import { REGIONS_AND_CITIES } from '@/config/locations';
 
 function getRegionFromCityId(cityId: number): string | null {
@@ -205,7 +205,8 @@ export const createCampaign = validatedActionWithUser(
                 },
             });
 
-            await queueCampaignNotification(newCampaign.id);
+            // Add to daily digest instead of immediate notification
+            await addCampaignToDigest(newCampaign.id);
 
             // Revalidate campaign pages for ISR
             revalidatePath('/campaigns');

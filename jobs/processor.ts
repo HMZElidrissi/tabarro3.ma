@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import { Job, JobType, JobStatus } from '@/types/job';
 import { render } from '@react-email/components';
 import { UrgentBloodRequestEmail } from '@/emails/urgent-blood-request';
-import { NearbyCampaignEmail } from '@/emails/nearby-campaign';
+import { CampaignDigestEmail } from '@/emails/campaign-digest';
 import {
     getBloodGroupLabel,
     getCompatibleDonorBloodGroups,
@@ -23,62 +23,6 @@ const transporter = nodemailer.createTransport({
 const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@tabarro3.ma';
 
 const jobHandlers = {
-    [JobType.CAMPAIGN_NOTIFICATION]: async (payload: any) => {
-        const { campaignId } = payload;
-
-        const campaign = await prisma.campaign.findUnique({
-            where: { id: campaignId },
-            include: {
-                organization: true,
-                city: true,
-            },
-        });
-
-        if (!campaign) throw new Error('Campaign not found');
-
-        const recipients = await prisma.user.findMany({
-            where: {
-                role: 'PARTICIPANT',
-                city: {
-                    regionId: campaign.city.regionId,
-                },
-            },
-            select: {
-                email: true,
-                name: true, // Include name for personalization if needed
-            },
-        });
-
-        const startDate = new Date(campaign.startTime);
-        const endDate = new Date(campaign.endTime);
-
-        // Send individual emails to each recipient
-        for (const recipient of recipients) {
-            const emailHtml = await render(
-                NearbyCampaignEmail({
-                    campaignName: campaign.name,
-                    organizationName: campaign.organization.name || undefined,
-                    date: startDate.toLocaleDateString('fr-FR'),
-                    time: `${startDate.toLocaleTimeString('fr-FR')} - ${endDate.toLocaleTimeString('fr-FR')}`,
-                    location: campaign.location,
-                    city: campaign.city.name,
-                    description: campaign.description,
-                }),
-                { pretty: true },
-            );
-
-            await transporter.sendMail({
-                from: FROM_EMAIL,
-                to: recipient.email, // Send to individual recipient
-                subject: `Nouvelle campagne de don de sang à ${campaign.city.name}`,
-                html: emailHtml,
-            });
-
-            // Small delay between emails to prevent overwhelming the SMTP server
-            await new Promise(resolve => setTimeout(resolve, 200));
-        }
-    },
-
     [JobType.BLOOD_REQUEST_NOTIFICATION]: async (payload: any) => {
         const { requestId } = payload;
 
@@ -146,6 +90,57 @@ const jobHandlers = {
             // Small delay between emails to prevent overwhelming the SMTP server
             await new Promise(resolve => setTimeout(resolve, 200));
         }
+    },
+
+    [JobType.CAMPAIGN_DIGEST]: async (payload: any) => {
+        const { digestId, regionName, campaigns, recipients } = payload;
+
+        if (!campaigns || campaigns.length === 0) {
+            console.log('No campaigns in digest, skipping email');
+            return;
+        }
+
+        const today = new Date().toLocaleDateString('fr-FR', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+
+        // Send individual digest emails to each recipient
+        for (const recipient of recipients) {
+            const emailHtml = await render(
+                CampaignDigestEmail({
+                    regionName,
+                    campaigns,
+                    date: today,
+                }),
+                { pretty: true },
+            );
+
+            await transporter.sendMail({
+                from: FROM_EMAIL,
+                to: recipient.email,
+                subject: `📅 Résumé des campagnes de don de sang - ${regionName} - ${today}`,
+                html: emailHtml,
+            });
+
+            // Small delay between emails
+            await new Promise(resolve => setTimeout(resolve, 200));
+        }
+
+        // Mark digest as sent
+        await prisma.campaignDigest.update({
+            where: { id: digestId },
+            data: {
+                sent: true,
+                sentAt: new Date(),
+            },
+        });
+
+        console.log(
+            `Sent digest for region ${regionName} with ${campaigns.length} campaigns to ${recipients.length} recipients`,
+        );
     },
 };
 

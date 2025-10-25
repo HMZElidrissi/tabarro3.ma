@@ -2,37 +2,6 @@ import { prisma } from '@/lib/prisma';
 import { JobType, Role } from '@prisma/client';
 import { discordService } from '@/lib/discord';
 
-export async function queueCampaignNotification(campaignId: number) {
-    const job = await prisma.job.create({
-        data: {
-            type: JobType.CAMPAIGN_NOTIFICATION,
-            payload: {
-                campaignId,
-            },
-        },
-    });
-
-    // Send Discord notification immediately
-    try {
-        const campaign = await prisma.campaign.findUnique({
-            where: { id: campaignId },
-            include: {
-                city: true,
-                organization: true,
-                participants: true,
-            },
-        });
-
-        if (campaign) {
-            await discordService.sendNewCampaignNotification(campaign as any);
-        }
-    } catch (error) {
-        console.error('Failed to send Discord campaign notification:', error);
-    }
-
-    return job;
-}
-
 export async function queueBloodRequestNotification(requestId: number) {
     const job = await prisma.job.create({
         data: {
