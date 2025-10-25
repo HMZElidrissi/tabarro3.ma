@@ -42,7 +42,6 @@ export const CampaignDigestEmail = ({
     date,
 }: CampaignDigestEmailProps) => (
     <Html>
-        <Head />
         <Tailwind
             config={{
                 theme: {
@@ -65,6 +64,7 @@ export const CampaignDigestEmail = ({
                     },
                 },
             }}>
+            <Head />
             <Body className="bg-gray-50 py-10">
                 <Container className="bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[600px]">
                     <Section className="text-center mb-8">
@@ -82,7 +82,8 @@ export const CampaignDigestEmail = ({
                     </Text>
 
                     <Text className="text-lg text-gray-600 text-center mb-6">
-                        {format(date, 'dd MMMM yyyy', { locale: fr })} - {regionName}
+                        {format(date, 'dd MMMM yyyy', { locale: fr })} -{' '}
+                        {regionName}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-6">

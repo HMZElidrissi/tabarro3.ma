@@ -186,7 +186,7 @@ enum JobType {
 
 model Job {
   id          String    @id @default(uuid())
-  type        JobType
+  type        JobType?
   payload     Json
   status      JobStatus @default(PENDING)
   attempts    Int       @default(0)
