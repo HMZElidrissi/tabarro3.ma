@@ -11,6 +11,8 @@ import {
     Text,
     Link,
 } from '@react-email/components';
+import { fr } from 'date-fns/locale';
+import { format } from 'date-fns';
 import * as React from 'react';
 
 interface Campaign {
@@ -80,7 +82,7 @@ export const CampaignDigestEmail = ({
                     </Text>
 
                     <Text className="text-lg text-gray-600 text-center mb-6">
-                        {date} - {regionName}
+                        {format(date, 'dd MMMM yyyy', { locale: fr })} - {regionName}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-6">

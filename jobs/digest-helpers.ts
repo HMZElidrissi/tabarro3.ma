@@ -119,6 +119,13 @@ export async function processCampaignDigests() {
                             },
                         },
                     },
+                    where: {
+                        campaign: {
+                            createdAt: {
+                                gte: today, // Only campaigns created today
+                            },
+                        },
+                    },
                 },
             },
         });
@@ -231,4 +238,3 @@ export async function getDigestStats() {
         pendingDigests,
     };
 }
-
