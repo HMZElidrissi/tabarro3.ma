@@ -7,6 +7,7 @@ import {
     MessageSquare,
     Settings,
     UsersIcon,
+    UserCheck,
 } from 'lucide-react';
 import { Role } from '@/types/enums';
 
@@ -53,6 +54,13 @@ export const mainNavigation: NavigationItem[] = [
         icon: Calendar1Icon,
         href: '/dashboard/campaigns',
         pattern: '^/dashboard/campaigns',
+        roles: [Role.ADMIN, Role.ORGANIZATION],
+    },
+    {
+        title: 'Campaign Participants',
+        icon: UserCheck,
+        href: '/dashboard/campaign-participants',
+        pattern: '^/dashboard/campaign-participants',
         roles: [Role.ADMIN, Role.ORGANIZATION],
     },
     {

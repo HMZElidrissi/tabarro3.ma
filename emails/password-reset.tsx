@@ -41,7 +41,8 @@ export const PasswordResetEmail = ({ resetLink }: PasswordResetEmailProps) => (
                         },
                     },
                 },
-            }}>
+            }}
+        >
             <Body className="bg-gray-50 py-10">
                 <Container className="bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[580px]">
                     <Section className="text-center mb-8">
@@ -71,7 +72,8 @@ export const PasswordResetEmail = ({ resetLink }: PasswordResetEmailProps) => (
                     <Section className="text-center my-8">
                         <Button
                             href={resetLink}
-                            className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors">
+                            className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors"
+                        >
                             Réinitialiser le mot de passe
                         </Button>
                     </Section>
@@ -93,7 +95,8 @@ export const PasswordResetEmail = ({ resetLink }: PasswordResetEmailProps) => (
                     </Text>
                     <Link
                         href={resetLink}
-                        className="text-brand-600 text-sm break-all no-underline hover:underline">
+                        className="text-brand-600 text-sm break-all no-underline hover:underline"
+                    >
                         {resetLink}
                     </Link>
 

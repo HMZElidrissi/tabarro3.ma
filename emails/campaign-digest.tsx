@@ -63,7 +63,8 @@ export const CampaignDigestEmail = ({
                         },
                     },
                 },
-            }}>
+            }}
+        >
             <Head />
             <Body className="bg-gray-50 py-10">
                 <Container className="bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[600px]">
@@ -98,7 +99,8 @@ export const CampaignDigestEmail = ({
                         return (
                             <Section
                                 key={campaign.id}
-                                className="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-brand-500">
+                                className="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-brand-500"
+                            >
                                 <Text className="text-xl font-bold text-gray-900 mb-3">
                                     {campaign.name}
                                 </Text>
@@ -141,7 +143,8 @@ export const CampaignDigestEmail = ({
                                 <Section className="text-center">
                                     <Button
                                         href={`https://tabarro3.ma/campaigns`}
-                                        className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-4 py-2 rounded-md font-semibold text-sm inline-block transition-colors">
+                                        className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-4 py-2 rounded-md font-semibold text-sm inline-block transition-colors"
+                                    >
                                         Je participe
                                     </Button>
                                 </Section>
@@ -172,7 +175,8 @@ export const CampaignDigestEmail = ({
                     <Section className="text-center my-8">
                         <Button
                             href="https://tabarro3.ma/campaigns"
-                            className="bg-gray-800 hover:bg-gray-900 active:bg-gray-950 focus:outline-none focus:border-gray-950 focus:ring ring-gray-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors">
+                            className="bg-gray-800 hover:bg-gray-900 active:bg-gray-950 focus:outline-none focus:border-gray-950 focus:ring ring-gray-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors"
+                        >
                             Voir toutes les campagnes
                         </Button>
                     </Section>
@@ -187,7 +191,8 @@ export const CampaignDigestEmail = ({
                     <Text className="text-gray-500 text-sm text-center">
                         <Link
                             href="https://tabarro3.ma/profile"
-                            className="text-brand-600 hover:text-brand-700">
+                            className="text-brand-600 hover:text-brand-700"
+                        >
                             Gérer mes préférences de notification
                         </Link>
                     </Text>

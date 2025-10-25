@@ -112,10 +112,11 @@ export async function getDashboardStats(userId: string, userRole: Role) {
                     organizationId: userId,
                 },
             }),
-            prisma.user.count({
+            prisma.campaignParticipant.count({
                 where: {
-                    role: Role.PARTICIPANT,
-                    deletedAt: null,
+                    campaign: {
+                        organizationId: userId,
+                    },
                 },
             }),
         ]);
@@ -337,5 +338,147 @@ export async function getParticipantsPerRegion(userId: string, userRole: Role) {
     return {
         labels: sortedRegions.map(([name]) => name),
         data: sortedRegions.map(([, count]) => count),
+    };
+}
+
+export async function getLatestCampaignParticipants(
+    userId: string,
+    userRole: Role,
+    limit: number = 10,
+) {
+    const participants = await prisma.campaignParticipant.findMany({
+        where:
+            userRole === Role.ORGANIZATION
+                ? {
+                      campaign: {
+                          organizationId: userId,
+                      },
+                  }
+                : {},
+        include: {
+            user: {
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    phone: true,
+                    bloodGroup: true,
+                    city: {
+                        select: {
+                            id: true,
+                            name: true,
+                            regionId: true,
+                        },
+                    },
+                },
+            },
+            campaign: {
+                select: {
+                    id: true,
+                    name: true,
+                    location: true,
+                    startTime: true,
+                    organization: {
+                        select: {
+                            name: true,
+                        },
+                    },
+                },
+            },
+        },
+        orderBy: {
+            createdAt: 'desc',
+        },
+        take: limit,
+    });
+
+    return participants;
+}
+
+export async function getParticipantAnalytics(userId: string, userRole: Role) {
+    const participants = await prisma.campaignParticipant.findMany({
+        where:
+            userRole === Role.ORGANIZATION
+                ? {
+                      campaign: {
+                          organizationId: userId,
+                      },
+                  }
+                : {},
+        include: {
+            user: {
+                select: {
+                    bloodGroup: true,
+                    city: {
+                        select: {
+                            name: true,
+                        },
+                    },
+                },
+            },
+            campaign: {
+                select: {
+                    createdAt: true,
+                },
+            },
+        },
+    });
+
+    // Process blood group data
+    const bloodGroupCounts = new Map<string, number>();
+    participants.forEach(p => {
+        const bg = p.user.bloodGroup;
+        if (bg) {
+            bloodGroupCounts.set(bg, (bloodGroupCounts.get(bg) || 0) + 1);
+        }
+    });
+
+    // Process city data (top 10)
+    const cityCounts = new Map<string, number>();
+    participants.forEach(p => {
+        const cityName = p.user.city?.name || 'Unknown';
+        cityCounts.set(cityName, (cityCounts.get(cityName) || 0) + 1);
+    });
+
+    // Process participation trend (last 7 days)
+    const now = new Date();
+    const sevenDaysAgo = new Date(now);
+    sevenDaysAgo.setDate(now.getDate() - 7);
+
+    const trendData = new Map<string, number>();
+    for (let i = 6; i >= 0; i--) {
+        const date = new Date(now);
+        date.setDate(now.getDate() - i);
+        const dateKey = format(date, 'MMM dd');
+        trendData.set(dateKey, 0);
+    }
+
+    participants.forEach(p => {
+        const createdAt = new Date(p.createdAt);
+        if (createdAt >= sevenDaysAgo) {
+            const dateKey = format(createdAt, 'MMM dd');
+            trendData.set(dateKey, (trendData.get(dateKey) || 0) + 1);
+        }
+    });
+
+    return {
+        bloodGroups: {
+            labels: Array.from(bloodGroupCounts.keys()),
+            counts: Array.from(bloodGroupCounts.values()),
+        },
+        cities: {
+            labels: Array.from(cityCounts.entries())
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10)
+                .map(([name]) => name),
+            counts: Array.from(cityCounts.entries())
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10)
+                .map(([, count]) => count),
+        },
+        participationTrend: {
+            labels: Array.from(trendData.keys()),
+            counts: Array.from(trendData.values()),
+        },
     };
 }

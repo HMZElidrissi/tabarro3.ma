@@ -105,10 +105,10 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
                 'bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-950/50 dark:to-yellow-950/50 border-amber-100 dark:border-amber-900',
         },
         {
-            title: 'Platform Participants',
+            title: 'Campaign Participants',
             value: stats.totalParticipants?.toLocaleString(),
             icon: Users,
-            description: 'Available donors',
+            description: 'Total in your campaigns',
             className:
                 'bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/50 dark:to-pink-950/50 border-purple-100 dark:border-purple-900',
         },
@@ -125,8 +125,7 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
                     className={cn(
                         'border transition-all hover:shadow-md',
                         stat.className,
-                    )}
-                >
+                    )}>
                     <CardContent className="p-6">
                         <div className="flex items-center justify-between space-x-4">
                             <div className="flex flex-col gap-1">
@@ -146,8 +145,7 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
                                             stat.trend.isPositive
                                                 ? 'text-green-600'
                                                 : 'text-red-600',
-                                        )}
-                                    >
+                                        )}>
                                         {stat.trend.isPositive ? '↑' : '↓'}{' '}
                                         {Math.abs(stat.trend.value)}% from last
                                         month
@@ -170,8 +168,7 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
                                                   )
                                                 ? 'ring-emerald-500'
                                                 : 'ring-gray-500',
-                                )}
-                            >
+                                )}>
                                 <stat.icon
                                     className={cn(
                                         'h-5 w-5',
