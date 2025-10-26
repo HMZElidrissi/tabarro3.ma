@@ -31,15 +31,17 @@ export function BloodRequestCard({
                 <div className="space-y-3">
                     {/* Header with badges */}
                     <div className="flex items-center justify-between">
-                        {request.bloodGroup !== BloodGroup.UNKNOWN && (
-                            <Badge
-                                variant="secondary"
-                                className="bg-red-50 text-red-700 hover:bg-red-100 dark:bg-red-900/50 dark:text-red-400 dark:hover:bg-red-900/60 font-semibold text-sm px-2 py-1"
-                                dir="ltr"
-                            >
-                                {getBloodGroupLabel(request.bloodGroup, dict)}
-                            </Badge>
-                        )}
+                        <Badge
+                            variant="secondary"
+                            className="bg-red-50 text-red-700 hover:bg-red-100 dark:bg-red-900/50 dark:text-red-400 dark:hover:bg-red-900/60 font-semibold text-sm px-2 py-1"
+                            dir="ltr"
+                        >
+                            {getBloodGroupLabel(
+                                request.bloodGroup,
+                                dict,
+                                'request',
+                            )}
+                        </Badge>
                         <Badge
                             variant="outline"
                             className={`${getStatusColor(request.status)} text-xs px-2 py-1`}

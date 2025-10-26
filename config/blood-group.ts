@@ -12,18 +12,6 @@ export const bloodGroups = [
     { value: BloodGroup.UNKNOWN, label: 'Unknown' },
 ];
 
-export const bloodGroupsWithDict = (dict?: any) => [
-    { value: BloodGroup.A_POSITIVE, label: 'A+' },
-    { value: BloodGroup.A_NEGATIVE, label: 'A-' },
-    { value: BloodGroup.B_POSITIVE, label: 'B+' },
-    { value: BloodGroup.B_NEGATIVE, label: 'B-' },
-    { value: BloodGroup.O_POSITIVE, label: 'O+' },
-    { value: BloodGroup.O_NEGATIVE, label: 'O-' },
-    { value: BloodGroup.AB_POSITIVE, label: 'AB+' },
-    { value: BloodGroup.AB_NEGATIVE, label: 'AB-' },
-    { value: BloodGroup.UNKNOWN, label: dict.common.unknown },
-];
-
 /**
  * Blood donation compatibility mapping
  * Key: recipient blood group
@@ -143,11 +131,13 @@ export const getBloodCompatibilitySummary = () => {
 export const getBloodGroupLabel = (
     bloodGroup: BloodGroup | null,
     dict: any = null,
+    context: 'request' | 'user' = 'user',
 ) => {
-    if (dict === null) {
-        return bloodGroups.find(group => group.value === bloodGroup)?.label;
+    if (dict !== null && bloodGroup === BloodGroup.UNKNOWN) {
+        return context === 'request'
+            ? dict.common.anyBloodGroup
+            : dict.common.unknown;
     }
 
-    return bloodGroupsWithDict(dict).find(group => group.value === bloodGroup)
-        ?.label;
+    return bloodGroups.find(group => group.value === bloodGroup)?.label;
 };

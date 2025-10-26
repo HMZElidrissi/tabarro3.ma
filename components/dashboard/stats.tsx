@@ -125,7 +125,8 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
                     className={cn(
                         'border transition-all hover:shadow-md',
                         stat.className,
-                    )}>
+                    )}
+                >
                     <CardContent className="p-6">
                         <div className="flex items-center justify-between space-x-4">
                             <div className="flex flex-col gap-1">
@@ -145,7 +146,8 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
                                             stat.trend.isPositive
                                                 ? 'text-green-600'
                                                 : 'text-red-600',
-                                        )}>
+                                        )}
+                                    >
                                         {stat.trend.isPositive ? '↑' : '↓'}{' '}
                                         {Math.abs(stat.trend.value)}% from last
                                         month
@@ -168,7 +170,8 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
                                                   )
                                                 ? 'ring-emerald-500'
                                                 : 'ring-gray-500',
-                                )}>
+                                )}
+                            >
                                 <stat.icon
                                     className={cn(
                                         'h-5 w-5',

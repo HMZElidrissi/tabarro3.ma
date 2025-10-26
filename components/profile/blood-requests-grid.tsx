@@ -185,7 +185,11 @@ export function BloodRequestsGrid({
                         <CardContent className="space-y-3">
                             <div className="flex items-center gap-2 text-xl font-semibold text-primary">
                                 <Droplets className="h-5 w-5" />
-                                {getBloodGroupLabel(request.bloodGroup, dict)}
+                                {getBloodGroupLabel(
+                                    request.bloodGroup,
+                                    dict,
+                                    'request',
+                                )}
                             </div>
                             <div className="space-y-2 text-sm text-muted-foreground">
                                 <div className="flex items-center gap-2">

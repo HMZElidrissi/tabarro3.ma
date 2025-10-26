@@ -97,7 +97,11 @@ export default function BloodRequestForm({
                             <SelectContent>
                                 {Object.values(BloodGroup).map(group => (
                                     <SelectItem key={group} value={group}>
-                                        {getBloodGroupLabel(group)}
+                                        {getBloodGroupLabel(
+                                            group,
+                                            null,
+                                            'request',
+                                        )}
                                     </SelectItem>
                                 ))}
                             </SelectContent>

@@ -113,7 +113,8 @@ export function OrganizationRecentParticipants({
                                     </p>
                                     <Badge
                                         variant="outline"
-                                        className="text-xs">
+                                        className="text-xs"
+                                    >
                                         {participant.campaign.location}
                                     </Badge>
                                 </div>
@@ -121,7 +122,8 @@ export function OrganizationRecentParticipants({
                             <div className="ml-auto flex items-center">
                                 {participant.user.bloodGroup && (
                                     <div
-                                        className={`flex items-center font-medium ${bloodGroupColors[participant.user.bloodGroup]}`}>
+                                        className={`flex items-center font-medium ${bloodGroupColors[participant.user.bloodGroup]}`}
+                                    >
                                         <Droplets className="h-4 w-4 mr-1" />
                                         {getBloodGroupLabel(
                                             participant.user.bloodGroup,

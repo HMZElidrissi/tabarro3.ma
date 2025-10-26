@@ -83,7 +83,7 @@ const jobHandlers = {
             await transporter.sendMail({
                 from: FROM_EMAIL,
                 to: recipient.email, // Send to individual recipient
-                subject: `Besoin urgent de sang ${getBloodGroupLabel(request.bloodGroup as BloodGroup)} à ${request.city.name} - Votre sang est compatible`,
+                subject: `Besoin urgent de sang ${getBloodGroupLabel(request.bloodGroup as BloodGroup, null, 'request')} à ${request.city.name} - Votre sang est compatible`,
                 html: emailHtml,
             });
 

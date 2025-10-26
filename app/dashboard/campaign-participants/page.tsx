@@ -24,7 +24,8 @@ export default async function CampaignParticipantsPage({
     return (
         <DashboardShell
             header="Campaign Participants"
-            description="View and analyze campaign participants.">
+            description="View and analyze campaign participants."
+        >
             <ParticipantFilters />
             <ParticipantsClient
                 currentPage={currentPage}

@@ -1,3 +1,11 @@
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import {
     Table,
     TableBody,
@@ -6,19 +14,11 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { format } from 'date-fns';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { CheckCircle, Loader2, MoreHorizontal } from 'lucide-react';
-import { BloodRequest } from '@/types/blood-request';
-import { Role } from '@/types/enums';
 import { getBloodGroupLabel } from '@/config/blood-group';
+import { BloodRequest } from '@/types/blood-request';
+import { BloodGroup, Role } from '@/types/enums';
+import { format } from 'date-fns';
+import { Loader2, MoreHorizontal } from 'lucide-react';
 
 interface BloodRequestsTableProps {
     requests: BloodRequest[];
@@ -82,7 +82,11 @@ export function BloodRequestsTable({
                             </TableCell>
                             <TableCell>
                                 <Badge variant="outline">
-                                    {getBloodGroupLabel(request.bloodGroup)}
+                                    {request.bloodGroup === BloodGroup.UNKNOWN
+                                        ? 'Any blood group'
+                                        : getBloodGroupLabel(
+                                              request.bloodGroup,
+                                          )}
                                 </Badge>
                             </TableCell>
                             <TableCell className="break-words max-w-xs">

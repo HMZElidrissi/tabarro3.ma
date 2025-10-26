@@ -130,7 +130,8 @@ export function LatestCampaignParticipants({
                         <TableRow>
                             <TableCell
                                 colSpan={showOrganizationColumn ? 7 : 6}
-                                className="text-center py-8 text-muted-foreground">
+                                className="text-center py-8 text-muted-foreground"
+                            >
                                 No campaign participants yet
                             </TableCell>
                         </TableRow>

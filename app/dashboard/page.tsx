@@ -61,7 +61,8 @@ export default async function DashboardPage() {
     return (
         <DashboardShell
             header="Dashboard"
-            toolbar={<DashboardExport userRole={role} />}>
+            toolbar={<DashboardExport userRole={role} />}
+        >
             <DashboardStats userRole={role} stats={stats as any} />
 
             {role === Role.ADMIN ? (

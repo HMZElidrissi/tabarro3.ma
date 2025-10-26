@@ -96,7 +96,11 @@ export function RequestForm({
                                     key={group.value}
                                     value={group.value}
                                 >
-                                    {getBloodGroupLabel(group.value, dict)}
+                                    {getBloodGroupLabel(
+                                        group.value,
+                                        dict,
+                                        'request',
+                                    )}
                                 </SelectItem>
                             ))}
                         </SelectContent>

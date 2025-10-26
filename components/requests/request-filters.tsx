@@ -168,7 +168,9 @@ export function BloodRequestFilters() {
                             <SelectItem value="all">All Requests</SelectItem>
                             {Object.values(BloodGroup).map(group => (
                                 <SelectItem key={group} value={group}>
-                                    {getBloodGroupLabel(group)}
+                                    {group === BloodGroup.UNKNOWN
+                                        ? 'Any blood group'
+                                        : getBloodGroupLabel(group)}
                                 </SelectItem>
                             ))}
                         </SelectContent>
