@@ -1,12 +1,17 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
-import { validatedActionWithUser } from '@/auth/middleware';
+import {
+    validatedActionWithUser,
+    validatedAction,
+    ActionState,
+} from '@/auth/middleware';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { Role } from '@/types/enums';
 import { addCampaignToDigest } from '@/jobs/digest-helpers';
 import { REGIONS_AND_CITIES } from '@/config/locations';
+import { hashPassword } from '@/auth/session';
 
 function getRegionFromCityId(cityId: number): string | null {
     for (const region of REGIONS_AND_CITIES) {
@@ -360,6 +365,81 @@ export const deleteCampaign = validatedActionWithUser(
         } catch (error) {
             return {
                 error: 'Failed to delete campaign',
+            };
+        }
+    },
+);
+
+const quickParticipateSchema = z.object({
+    campaignId: z.coerce.number(),
+    name: z.string().min(1),
+    email: z.string().email(),
+    phone: z.string(),
+    bloodGroup: z.string(),
+    cityId: z.coerce.number(),
+});
+
+export const quickParticipate = validatedAction(
+    quickParticipateSchema,
+    async (data, _): Promise<ActionState> => {
+        const { campaignId, name, email, phone, bloodGroup, cityId } = data;
+
+        try {
+            // Check if user already exists with this email
+            let user = await prisma.user.findUnique({
+                where: { email },
+            });
+
+            if (!user) {
+                // Create user with email as password
+                const passwordHash = hashPassword(email);
+                user = await prisma.user.create({
+                    data: {
+                        email,
+                        name,
+                        passwordHash: await hashPassword(email),
+                        phone,
+                        bloodGroup: bloodGroup as any,
+                        cityId,
+                        role: 'PARTICIPANT',
+                    },
+                });
+            }
+
+            // Check if user is already participating
+            const existingParticipation =
+                await prisma.campaignParticipant.findUnique({
+                    where: {
+                        campaignId_userId: {
+                            campaignId,
+                            userId: user.id,
+                        },
+                    },
+                });
+
+            if (existingParticipation) {
+                return {
+                    error: 'You are already participating in this campaign',
+                };
+            }
+
+            // Add user to campaign
+            await prisma.campaignParticipant.create({
+                data: {
+                    campaignId,
+                    userId: user.id,
+                },
+            });
+
+            revalidatePath('/campaigns');
+            return { success: 'Successfully participated in campaign!' };
+        } catch (error) {
+            console.error('Error in quick participate:', error);
+            return {
+                error:
+                    error instanceof Error
+                        ? error.message
+                        : 'Failed to participate in campaign',
             };
         }
     },

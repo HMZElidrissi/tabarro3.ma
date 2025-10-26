@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const dict = await getDictionary();
     return {
         title: dict.New_Campaigns,
-        description: dict.New_Campaigns,
+        description: dict.New_Campaigns_Description,
         keywords: [
             'Nouvelles campagnes de don de sang',
             'Campagnes de don de sang au Maroc',

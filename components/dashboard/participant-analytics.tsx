@@ -8,7 +8,6 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useEffect, useRef } from 'react';
 import {
     Chart as ChartJS,
     ArcElement,
@@ -19,6 +18,8 @@ import {
     BarElement,
 } from 'chart.js';
 import { Doughnut, Bar } from 'react-chartjs-2';
+import { getBloodGroupLabel } from '@/config/blood-group';
+import { BloodGroup } from '@/types/enums';
 
 ChartJS.register(
     ArcElement,
@@ -79,7 +80,9 @@ export function ParticipantAnalytics({ data }: ParticipantAnalyticsProps) {
     };
 
     const bloodGroupData = {
-        labels: data.bloodGroups.labels,
+        labels: data.bloodGroups.labels.map(label =>
+            getBloodGroupLabel(label as BloodGroup),
+        ),
         datasets: [
             {
                 label: 'Blood Groups',

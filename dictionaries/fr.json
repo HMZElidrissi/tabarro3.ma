@@ -513,5 +513,14 @@
     },
     "testimonials": {
         "title": "Ce qu'ils disent de nous"
+    },
+    "participate": {
+        "title": "Rejoindre la Campagne",
+        "description": "Remplissez vos coordonnées pour participer",
+        "participating": "Participation...",
+        "participateButton": "Participer à la campagne",
+        "consentMessage": "En cliquant sur participer, vous acceptez de partager vos informations avec l'organisation organisatrice de la campagne.",
+        "successTitle": "Inscription réussie !",
+        "successMessage": "Vous vous êtes inscrit avec succès à cette campagne. Vous allez être redirigé dans un instant."
     }
 }

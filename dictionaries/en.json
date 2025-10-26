@@ -530,5 +530,14 @@
     },
     "testimonials": {
         "title": "What they say about us"
+    },
+    "participate": {
+        "title": "Join the Campaign",
+        "description": "Fill in your details to participate",
+        "participating": "Participating...",
+        "participateButton": "Participate in Campaign",
+        "consentMessage": "By clicking participate, you agree to share your information with the campaign organizer.",
+        "successTitle": "Successfully Registered!",
+        "successMessage": "You have successfully registered for this campaign. You will be redirected shortly."
     }
 }
