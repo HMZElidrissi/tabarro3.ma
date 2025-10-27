@@ -1,3 +1,5 @@
+'use client';
+
 import {
     Table,
     TableBody,
@@ -15,10 +17,11 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Loader2, MoreHorizontal } from 'lucide-react';
+import { Loader2, MoreHorizontal, Copy } from 'lucide-react';
 import { Campaign } from '@/types/campaign';
 import { Role } from '@/types/enums';
 import { CampaignParticipantsTable } from '@/components/campaigns/campaign-participants-table';
+import { useToast } from '@/hooks/use-toast';
 
 interface CampaignsTableProps {
     campaigns: Campaign[];
@@ -39,6 +42,18 @@ export function CampaignsTable({
     isDeleting = false,
     organizationId,
 }: CampaignsTableProps) {
+    const { toast } = useToast();
+
+    const handleCopyLink = (campaignId: number) => {
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+        const participateUrl = `${baseUrl}/participate?campaignId=${campaignId}`;
+        navigator.clipboard.writeText(participateUrl);
+        toast({
+            title: 'Link copied',
+            description: 'Participation link has been copied to clipboard',
+        });
+    };
+
     const getCampaignStatus = (startTime: Date, endTime: Date) => {
         const now = new Date();
         if (now < new Date(startTime)) return 'Upcoming';
@@ -110,8 +125,7 @@ export function CampaignsTable({
                                 </TableCell>
                                 <TableCell>
                                     <Badge
-                                        variant={getStatusBadgeVariant(status)}
-                                    >
+                                        variant={getStatusBadgeVariant(status)}>
                                         {status}
                                     </Badge>
                                 </TableCell>
@@ -125,17 +139,22 @@ export function CampaignsTable({
                                         <DropdownMenuTrigger asChild>
                                             <Button
                                                 variant="ghost"
-                                                className="h-8 w-8 p-0"
-                                            >
+                                                className="h-8 w-8 p-0">
                                                 <MoreHorizontal className="h-4 w-4" />
                                             </Button>
                                         </DropdownMenuTrigger>
                                         <DropdownMenuContent align="end">
                                             <DropdownMenuItem
                                                 onClick={() =>
+                                                    handleCopyLink(campaign.id)
+                                                }>
+                                                <Copy className="mr-2 h-4 w-4" />
+                                                Copy participation link
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem
+                                                onClick={() =>
                                                     onEditCampaign(campaign.id)
-                                                }
-                                            >
+                                                }>
                                                 Edit details
                                             </DropdownMenuItem>
                                             {(userRole === Role.ADMIN ||
@@ -151,8 +170,7 @@ export function CampaignsTable({
                                                             campaign.id,
                                                         )
                                                     }
-                                                    disabled={isDeleting}
-                                                >
+                                                    disabled={isDeleting}>
                                                     {isDeleting ? (
                                                         <>
                                                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
