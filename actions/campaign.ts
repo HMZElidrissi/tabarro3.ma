@@ -132,6 +132,8 @@ export async function getCampaigns({
                                 id: true,
                                 name: true,
                                 email: true,
+                                phone: true,
+                                bloodGroup: true,
                             },
                         },
                     },

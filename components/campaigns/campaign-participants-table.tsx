@@ -32,8 +32,7 @@ export function CampaignParticipantsTable({
             <DialogTrigger asChild>
                 <Button
                     variant="outline"
-                    className="text-primary flex items-center"
-                >
+                    className="text-primary flex items-center">
                     <UserCheck2 className="h-4 w-4" />
                     {campaign.participants.length}
                 </Button>
@@ -45,45 +44,49 @@ export function CampaignParticipantsTable({
                         Participants for campaign: {campaign.name}
                     </DialogDescription>
                 </DialogHeader>
-                <div className="mt-4">
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Name</TableHead>
-                                <TableHead>Email</TableHead>
-                                <TableHead>Phone</TableHead>
-                                <TableHead>Blood Group</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {campaign.participants.map(participant => (
-                                <TableRow key={participant.id}>
-                                    <TableCell className="font-medium">
-                                        {participant.user.name}
-                                    </TableCell>
-                                    <TableCell>
-                                        {participant.user.email}
-                                    </TableCell>
-                                    <TableCell>
-                                        {participant.user.phone}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Badge variant="secondary">
-                                            {getBloodGroupLabel(
-                                                participant.user.bloodGroup,
-                                            )}
-                                        </Badge>
-                                    </TableCell>
+                {campaign.participants.length === 0 ? (
+                    <div className="text-center py-8 text-muted-foreground">
+                        No participants yet
+                    </div>
+                ) : (
+                    <div className="mt-4 max-h-[500px] overflow-y-auto">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Name</TableHead>
+                                    <TableHead>Email</TableHead>
+                                    <TableHead>Phone</TableHead>
+                                    <TableHead>Blood Group</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                    {campaign.participants.length === 0 && (
-                        <div className="text-center py-4 text-muted-foreground">
-                            No participants yet
-                        </div>
-                    )}
-                </div>
+                            </TableHeader>
+                            <TableBody>
+                                {campaign.participants.map(participant => (
+                                    <TableRow key={participant.id}>
+                                        <TableCell className="font-medium">
+                                            {participant.user.name}
+                                        </TableCell>
+                                        <TableCell>
+                                            {participant.user.email}
+                                        </TableCell>
+                                        <TableCell>
+                                            {participant.user.phone}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Badge variant="secondary">
+                                                {participant.user.bloodGroup
+                                                    ? getBloodGroupLabel(
+                                                          participant.user
+                                                              .bloodGroup,
+                                                      )
+                                                    : 'N/A'}
+                                            </Badge>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                )}
             </DialogContent>
         </Dialog>
     );
