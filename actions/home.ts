@@ -93,7 +93,7 @@ export async function getCampaigns(
 
         const now = new Date();
 
-        // Sort campaigns by priority: ongoing first, then upcoming, then past
+        // Sort campaigns by priority and explicit order within each group
         const sortedCampaigns = allCampaigns.sort((a, b) => {
             const aStart = new Date(a.startTime);
             const aEnd = new Date(a.endTime);
@@ -105,16 +105,30 @@ export async function getCampaigns(
             const aIsUpcoming = aStart > now;
             const bIsUpcoming = bStart > now;
 
-            // Ongoing campaigns first
-            if (aIsOngoing && !bIsOngoing) return -1;
-            if (!aIsOngoing && bIsOngoing) return 1;
+            const aCategory = aIsOngoing ? 0 : aIsUpcoming ? 1 : 2; // 0 ongoing, 1 upcoming, 2 past
+            const bCategory = bIsOngoing ? 0 : bIsUpcoming ? 1 : 2;
 
-            // Then upcoming campaigns
-            if (aIsUpcoming && !bIsUpcoming) return -1;
-            if (!aIsUpcoming && bIsUpcoming) return 1;
+            if (aCategory !== bCategory) return aCategory - bCategory;
 
-            // Within each category, sort by start time (latest first)
-            return bStart.getTime() - aStart.getTime();
+            // Within same category, apply specific ordering
+            switch (aCategory) {
+                case 0: {
+                    // Ongoing: ending soonest first; tie by earliest start
+                    const endDiff = aEnd.getTime() - bEnd.getTime();
+                    if (endDiff !== 0) return endDiff;
+                    return aStart.getTime() - bStart.getTime();
+                }
+                case 1: {
+                    // Upcoming: starting soonest first
+                    return aStart.getTime() - bStart.getTime();
+                }
+                case 2: {
+                    // Past: most recently ended first
+                    return bEnd.getTime() - aEnd.getTime();
+                }
+                default:
+                    return 0;
+            }
         });
 
         const total = sortedCampaigns.length;

@@ -1,66 +1,59 @@
-import Marquee from 'react-fast-marquee';
+// import Marquee from 'react-fast-marquee';
 import Image from 'next/image';
 
 export default function Partners({ dict }: { dict: any }) {
     const partners = [
         {
-            name: 'Ibn Sina',
-            logo: '/partners/ibnsina-green.png',
-            width: 400,
-            height: 250,
-            className: 'w-24 h-auto object-contain',
-        },
-        {
-            name: 'Rotaract Tanger Doyen',
-            logo: '/partners/rotaract-tanger-doyen.png',
-            width: 600,
-            height: 200,
-            className: 'w-40 h-auto object-contain',
-        },
-        {
             name: 'dir iddik',
             logo: '/partners/dir-iddik-518x137.png',
             width: 518,
             height: 137,
-            className: 'w-40 h-auto object-contain',
+            className: 'w-60 h-auto object-contain',
         },
         {
-            name: 'Rotaract ENSAF',
-            logo: '/partners/rotaract-ensaf.png',
+            name: 'JLM ENCG Agadir',
+            logo: '/partners/jlm.png',
+            width: 100,
+            height: 100,
+            className: 'w-32 h-auto object-contain dark:hidden',
+        },
+        {
+            name: 'JLM ENCG Agadir',
+            logo: '/partners/jlm_white.png',
+            width: 100,
+            height: 100,
+            className: 'w-32 h-auto object-contain hidden dark:block',
+        },
+        {
+            name: 'Rotaract Agadir Atlantique',
+            logo: '/partners/rotaract-agadir-atlantique.png',
             width: 600,
             height: 200,
-            className: 'w-40 h-auto object-contain',
+            className: 'w-60 h-auto object-contain',
         },
         {
-            name: 'SPARK EST ESSAOUIRA',
-            logo: '/partners/spark.png',
-            width: 500,
-            height: 500,
-            className: 'w-24 h-auto object-contain',
-        },
-        {
-            name: 'Rotaract Ryad Ennakhil',
-            logo: '/partners/rotaract-ryad-ennakhil.png',
+            name: 'Association Nakhil des donneurs de sang',
+            logo: '/partners/ands-kech.png',
             width: 600,
             height: 200,
-            className: 'w-40 h-auto object-contain',
+            className: 'w-60 h-auto object-contain',
         },
     ];
 
     return (
-        <section className="py-8 bg-background">
+        <section className="py-4 bg-background">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 className="text-3xl font-bold text-foreground sm:text-4xl bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
                     {dict.partners}
                 </h2>
 
-                <div className="py-8">
-                    <Marquee gradient={false} speed={50}>
-                        <div className="flex items-center gap-8">
+                <div className="py-4">
+                    {/* <Marquee gradient={false} speed={50}> */}
+                        <div className="flex items-center justify-center gap-4">
                             {partners.map(partner => (
                                 <div
                                     key={partner.name}
-                                    className="flex items-center justify-center h-24 overflow-hidden"
+                                    className="flex items-center justify-center overflow-hidden"
                                 >
                                     <Image
                                         src={partner.logo}
@@ -72,7 +65,7 @@ export default function Partners({ dict }: { dict: any }) {
                                 </div>
                             ))}
                         </div>
-                    </Marquee>
+                    {/* </Marquee> */}
                 </div>
             </div>
         </section>

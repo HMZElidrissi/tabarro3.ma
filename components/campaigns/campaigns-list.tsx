@@ -122,8 +122,7 @@ export default function CampaignsList({
                         height="120"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className="text-brand-600 dark:text-brand-400"
-                    >
+                        className="text-brand-600 dark:text-brand-400">
                         <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                     </svg>
                 </div>
@@ -151,8 +150,7 @@ export default function CampaignsList({
                                     <Select
                                         value={selectedRegion || 'all'}
                                         onValueChange={handleRegionChange}
-                                        dir={isRTL ? 'rtl' : 'ltr'}
-                                    >
+                                        dir={isRTL ? 'rtl' : 'ltr'}>
                                         <SelectTrigger>
                                             <SelectValue
                                                 placeholder={
@@ -171,8 +169,7 @@ export default function CampaignsList({
                                             {REGIONS_AND_CITIES.map(region => (
                                                 <SelectItem
                                                     key={region.id}
-                                                    value={region.id.toString()}
-                                                >
+                                                    value={region.id.toString()}>
                                                     {isRTL
                                                         ? region.nameAr
                                                         : region.name}
@@ -196,8 +193,7 @@ export default function CampaignsList({
                                             !selectedRegion ||
                                             selectedRegion === 'all'
                                         }
-                                        dir={isRTL ? 'rtl' : 'ltr'}
-                                    >
+                                        dir={isRTL ? 'rtl' : 'ltr'}>
                                         <SelectTrigger>
                                             <SelectValue
                                                 placeholder={
@@ -216,8 +212,7 @@ export default function CampaignsList({
                                             {cities.map(city => (
                                                 <SelectItem
                                                     key={city.id}
-                                                    value={city.id.toString()}
-                                                >
+                                                    value={city.id.toString()}>
                                                     {isRTL
                                                         ? city.nameAr
                                                         : city.name}
@@ -233,8 +228,7 @@ export default function CampaignsList({
                                     <Button
                                         variant="ghost"
                                         onClick={handleResetFilters}
-                                        className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-500 dark:hover:bg-red-900/20 w-full"
-                                    >
+                                        className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-500 dark:hover:bg-red-900/20 w-full">
                                         <X className="w-4 h-4 mr-2" />
                                         {dict.Reset_Filters ||
                                             dict.Clear_Filters ||
