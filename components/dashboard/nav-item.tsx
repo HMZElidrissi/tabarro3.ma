@@ -1,6 +1,10 @@
 'use client';
 
-import { SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import {
+    SidebarMenuButton,
+    SidebarMenuItem,
+    useSidebar,
+} from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import { ProgressLink as Link } from '@/components/custom/progress-link';
@@ -12,6 +16,7 @@ interface NavItemProps {
 
 export default function NavItem({ item }: NavItemProps) {
     const pathname = usePathname();
+    const { isMobile, setOpenMobile } = useSidebar();
 
     // Check if the current path matches either the exact href or the pattern
     const isActive = item.pattern
@@ -25,9 +30,13 @@ export default function NavItem({ item }: NavItemProps) {
                 className={cn(
                     'p-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors relative',
                     isActive && 'bg-gray-100 dark:bg-gray-800 text-primary',
-                )}
-            >
-                <Link href={item.href} className="flex items-center gap-3">
+                )}>
+                <Link
+                    href={item.href}
+                    className="flex items-center gap-3"
+                    onClick={() => {
+                        if (isMobile) setOpenMobile(false);
+                    }}>
                     <item.icon
                         className={cn(
                             'h-4 w-4',
@@ -42,8 +51,7 @@ export default function NavItem({ item }: NavItemProps) {
                             isActive
                                 ? 'text-primary'
                                 : 'text-gray-700 dark:text-gray-300',
-                        )}
-                    >
+                        )}>
                         {item.title}
                     </span>
                     {item.badge && (
