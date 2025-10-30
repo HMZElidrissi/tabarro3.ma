@@ -13,16 +13,10 @@ export default function Partners({ dict }: { dict: any }) {
         {
             name: 'JLM ENCG Agadir',
             logo: '/partners/jlm.png',
+            darkLogo: '/partners/jlm_white.png',
             width: 100,
             height: 100,
-            className: 'w-32 h-auto object-contain dark:hidden',
-        },
-        {
-            name: 'JLM ENCG Agadir',
-            logo: '/partners/jlm_white.png',
-            width: 100,
-            height: 100,
-            className: 'w-32 h-auto object-contain hidden dark:block',
+            className: 'w-32 h-auto object-contain',
         },
         {
             name: 'Rotaract Agadir Atlantique',
@@ -49,12 +43,29 @@ export default function Partners({ dict }: { dict: any }) {
 
                 <div className="py-4">
                     {/* <Marquee gradient={false} speed={50}> */}
-                        <div className="flex items-center justify-center gap-4">
-                            {partners.map(partner => (
-                                <div
-                                    key={partner.name}
-                                    className="flex items-center justify-center overflow-hidden"
-                                >
+                    <div className="flex items-center justify-center gap-4">
+                        {partners.map(partner => (
+                            <div
+                                key={partner.name}
+                                className="flex items-center justify-center overflow-hidden">
+                                {partner.darkLogo ? (
+                                    <>
+                                        <Image
+                                            src={partner.logo}
+                                            alt={partner.name}
+                                            width={partner.width}
+                                            height={partner.height}
+                                            className={`${partner.className} mx-4 dark:hidden`}
+                                        />
+                                        <Image
+                                            src={partner.darkLogo}
+                                            alt={partner.name}
+                                            width={partner.width}
+                                            height={partner.height}
+                                            className={`${partner.className} mx-4 hidden dark:block`}
+                                        />
+                                    </>
+                                ) : (
                                     <Image
                                         src={partner.logo}
                                         alt={partner.name}
@@ -62,9 +73,10 @@ export default function Partners({ dict }: { dict: any }) {
                                         height={partner.height}
                                         className={`${partner.className} mx-4`}
                                     />
-                                </div>
-                            ))}
-                        </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
                     {/* </Marquee> */}
                 </div>
             </div>

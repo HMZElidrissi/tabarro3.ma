@@ -32,7 +32,7 @@ export default async function DashboardLayout({
                 storageKey="theme"
             >
                 <SidebarProvider>
-                    <div className="w-full flex h-screen overflow-x-auto">
+                    <div className="w-full flex overflow-x-auto">
                         <DashboardSidebar />
                         <SidebarInset className="flex flex-col w-full">
                             <DashboardHeader />
