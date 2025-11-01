@@ -10,6 +10,7 @@ import { NavigationProgress } from '@/components/custom/navigation-progress';
 import { NavigationProvider } from '@/components/custom/navigation-events';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { FirebaseAnalytics } from '@/components/custom/firebase-analytics';
+import Script from 'next/script';
 
 const nunitoFont = Nunito({
     subsets: ['latin'],
@@ -147,8 +148,7 @@ export default async function RootLayout({
                           // '[&_*]:text-right',
                       ]
                     : [nunitoFont.className, 'text-left'],
-            )}
-        >
+            )}>
             <head>
                 <link rel="canonical" href={baseUrl} />
                 <script
@@ -159,6 +159,11 @@ export default async function RootLayout({
             </head>
             {isProduction && gaId ? <GoogleAnalytics gaId={gaId} /> : null}
             {isProduction ? <FirebaseAnalytics /> : null}
+            <Script
+                defer
+                src="https://umami-stats.vercel.app/script.js"
+                data-website-id="f5c55ad9-cc4d-4f5f-a444-402a384c6902"
+            />
             <body className="antialiased bg-gray-50">
                 <NavigationProvider>
                     <NavigationProgress />
