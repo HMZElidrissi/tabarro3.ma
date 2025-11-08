@@ -13,6 +13,7 @@ import {
     Mail,
     Phone,
     CheckCircle,
+    Info,
 } from 'lucide-react';
 import { quickParticipate } from '@/actions/campaign';
 import { Campaign } from '@/types/campaign';
@@ -83,6 +84,13 @@ export function ParticipateForm({
         <form action={action} className="space-y-4">
             <input type="hidden" name="campaignId" value={campaign.id} />
             <input type="hidden" name="cityId" value={campaign.cityId} />
+
+            <Alert variant="information">
+                <Info className="h-4 w-4" />
+                <AlertDescription>
+                    {dict.participate.signUpAlert}
+                </AlertDescription>
+            </Alert>
 
             {!!state.success && (
                 <Alert className="border-green-600/50 bg-green-50 dark:bg-green-950/20">

@@ -521,6 +521,7 @@
         "participateButton": "Participer à la campagne",
         "consentMessage": "En cliquant sur participer, vous acceptez de partager vos informations avec l'organisation organisatrice de la campagne.",
         "successTitle": "Inscription réussie !",
-        "successMessage": "Vous vous êtes inscrit avec succès à cette campagne. Vous allez être redirigé dans un instant."
+        "successMessage": "Vous vous êtes inscrit avec succès à cette campagne. Vous allez être redirigé dans un instant.",
+        "signUpAlert": "En soumettant ce formulaire, vous acceptez d'être inscrit sur la plateforme avec l'adresse e-mail que vous fournissez."
     }
 }
