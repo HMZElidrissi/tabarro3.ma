@@ -19,7 +19,7 @@ importers:
                 version: 2.2.0(react@19.1.0)
             '@next/third-parties':
                 specifier: 15.3.5
-                version: 15.3.5(next@15.3.5(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
+                version: 15.3.5(next@15.3.8(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
             '@prisma/client':
                 specifier: ^6.2.1
                 version: 6.2.1(prisma@6.1.0)
@@ -94,7 +94,7 @@ importers:
                 version: 2.4.6
             '@vercel/analytics':
                 specifier: ^1.4.1
-                version: 1.4.1(next@15.3.5(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
+                version: 1.4.1(next@15.3.8(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
             '@vercel/og':
                 specifier: ^0.7.2
                 version: 0.7.2
@@ -129,11 +129,11 @@ importers:
                 specifier: ^5.9.6
                 version: 5.9.6
             jspdf:
-                specifier: ^2.5.2
-                version: 2.5.2
+                specifier: ^3.0.4
+                version: 3.0.4
             jspdf-autotable:
                 specifier: ^3.8.4
-                version: 3.8.4(jspdf@2.5.2)
+                version: 3.8.4(jspdf@3.0.4)
             leaflet:
                 specifier: ^1.9.4
                 version: 1.9.4
@@ -150,8 +150,8 @@ importers:
                 specifier: ^5.0.9
                 version: 5.1.5
             next:
-                specifier: 15.3.5
-                version: 15.3.5(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+                specifier: 15.3.8
+                version: 15.3.8(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
             next-mdx-remote:
                 specifier: ^5.0.0
                 version: 5.0.0(@types/react@19.1.8)(acorn@8.14.0)(react@19.1.0)
@@ -485,6 +485,13 @@ packages:
         resolution:
             {
                 integrity: sha512-FDSOghenHTiToteC/QRlv2q3DhPZ/oOXTBoirfWNx1Cx3TMVcGWQtMMmQcSvb/JjpNeGzx8Pq/b4fKEJuWm1sw==,
+            }
+        engines: { node: '>=6.9.0' }
+
+    '@babel/runtime@7.28.4':
+        resolution:
+            {
+                integrity: sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==,
             }
         engines: { node: '>=6.9.0' }
 
@@ -1694,10 +1701,10 @@ packages:
                 integrity: sha512-dZIu93Bf5LUtluBXIv4woQw2cZVZ2DJTjax5/5DOs3lzEOeKLy7GxRSr4caK9/SCPdaW6bCgpye6+n4Dh9oJPw==,
             }
 
-    '@next/env@15.3.5':
+    '@next/env@15.3.8':
         resolution:
             {
-                integrity: sha512-7g06v8BUVtN2njAX/r8gheoVffhiKFVt4nx74Tt6G4Hqw9HCLYQVx/GkH2qHvPtAHZaUNZ0VXAa0pQP6v1wk7g==,
+                integrity: sha512-SAfHg0g91MQVMPioeFeDjE+8UPF3j3BvHjs8ZKJAUz1BG7eMPvfCKOAgNWJ6s1MLNeP6O2InKQRTNblxPWuq+Q==,
             }
 
     '@next/eslint-plugin-next@15.3.5':
@@ -3620,6 +3627,12 @@ packages:
                 integrity: sha512-I9CCaIp6DTldEg7vyUTZi8+9Vo0hi1/T8gv3C89yk1rSAAzoKQ8H8ki/jBYJSFoH/BisgLP8tkZMlQ91CIquww==,
             }
 
+    '@types/pako@2.0.4':
+        resolution:
+            {
+                integrity: sha512-VWDCbrLeVXJM9fihYodcLiIv0ku+AlOa/TQ1SvYOaBuyrSKgEcro95LJyIsJ4vSo6BXIxOKxiJAat04CmST9Fw==,
+            }
+
     '@types/raf@3.4.3':
         resolution:
             {
@@ -3644,6 +3657,12 @@ packages:
         resolution:
             {
                 integrity: sha512-AwAfQ2Wa5bCx9WP8nZL2uMZWod7J7/JSplxbTmBQ5ms6QpqNYm672H0Vu9ZVKVngQ+ii4R/byguVEUZQyeg44g==,
+            }
+
+    '@types/trusted-types@2.0.7':
+        resolution:
+            {
+                integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==,
             }
 
     '@types/unist@2.0.11':
@@ -3976,14 +3995,6 @@ packages:
             }
         hasBin: true
 
-    atob@2.1.2:
-        resolution:
-            {
-                integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==,
-            }
-        engines: { node: '>= 4.5.0' }
-        hasBin: true
-
     available-typed-arrays@1.0.7:
         resolution:
             {
@@ -4090,14 +4101,6 @@ packages:
         engines: { node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7 }
         hasBin: true
 
-    btoa@1.2.1:
-        resolution:
-            {
-                integrity: sha512-SB4/MIGlsiVkMcHmT+pSmIPoNDoHg+7cMzmt3Uxt628MTz2487DKSqK/fuhFBrkuqrYv5UCEnACpF4dTFNKc/g==,
-            }
-        engines: { node: '>= 0.4.0' }
-        hasBin: true
-
     buffer@5.7.1:
         resolution:
             {
@@ -4165,10 +4168,10 @@ packages:
                 integrity: sha512-rPQy70G6AGUMnbwS1z6Xg+RkHYPAi18ihs47GH0jcxIG7wArmPgY3XbS2sRdBbxJljp3thdT8BIqv9ccCypiPA==,
             }
 
-    canvg@3.0.10:
+    canvg@3.0.11:
         resolution:
             {
-                integrity: sha512-qwR2FRNO9NlzTeKIPIKpnTY6fqwuYSequ8Ru8c0YkYU7U0oW+hLUvWadLvAu1Rl72OMNiFhoLu4f8eUjQ7l/+Q==,
+                integrity: sha512-5ON+q7jCTgMp9cjpu4Jo6XbvfYwSB2Ow3kzHKfIyJfaCAOHLbdKPQqGKgfED/R5B+3TFFfe8pegYA+b423SRyA==,
             }
         engines: { node: '>=10.0.0' }
 
@@ -4769,10 +4772,10 @@ packages:
             }
         engines: { node: '>= 4' }
 
-    dompurify@2.5.8:
+    dompurify@3.3.1:
         resolution:
             {
-                integrity: sha512-o1vSNgrmYMQObbSSvF/1brBYEQPHhV1+gsmrusO7/GXtp1T9rCS8cXFqVxK/9crT1jA6Ccv+5MTSjBNqr7Sovw==,
+                integrity: sha512-qkdCKzLNtrgPFP1Vo+98FRzJnBRGe4ffyCea9IwHB1fyxPOeNTHpLKYGd4Uk9xvNoH0ZoOjwZxNptyMwqrId1Q==,
             }
 
     domutils@3.1.0:
@@ -5320,6 +5323,12 @@ packages:
                 integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==,
             }
 
+    fast-png@6.4.0:
+        resolution:
+            {
+                integrity: sha512-kAqZq1TlgBjZcLr5mcN6NP5Rv4V2f22z00c3g8vRrwkcqjerx7BEhPbOnWCPqaHUl2XWQBJQvOT/FQhdMT7X/Q==,
+            }
+
     fastq@1.17.1:
         resolution:
             {
@@ -5849,6 +5858,12 @@ packages:
                 integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==,
             }
 
+    iobuffer@5.4.0:
+        resolution:
+            {
+                integrity: sha512-DRebOWuqDvxunfkNJAlc3IzWIPD5xVxwUNbHr7xKB8E6aLJxIPfNX3CoMJghcFjpv6RWQsrcJbghtEwSPoJqMA==,
+            }
+
     is-alphabetical@1.0.4:
         resolution:
             {
@@ -6343,10 +6358,10 @@ packages:
         peerDependencies:
             jspdf: ^2.5.1
 
-    jspdf@2.5.2:
+    jspdf@3.0.4:
         resolution:
             {
-                integrity: sha512-myeX9c+p7znDWPk0eTrujCzNjT+CXdXyk7YmJq5nD5V7uLLKmSXnlQ/Jn/kuo3X09Op70Apm0rQSnFWyGK8uEQ==,
+                integrity: sha512-dc6oQ8y37rRcHn316s4ngz/nOjayLF/FFxBF4V9zamQKRqXxyiH1zagkCdktdWhtoQId5K20xt1lB90XzkB+hQ==,
             }
 
     jsx-ast-utils@3.3.5:
@@ -7012,6 +7027,7 @@ packages:
                 integrity: sha512-sDDExXnh33cY3RkS9JuFEKaS4HmlWmDKP1VJioucCG6z5KuA008DPsDZOzi8UfqEk3Ii+2NCQSJrfbEWtZZfww==,
             }
         engines: { node: '>=18.17.0' }
+        deprecated: This version has a security vulnerability. Please upgrade to a patched version. See https://nextjs.org/blog/security-update-2025-12-11 for more details.
         hasBin: true
         peerDependencies:
             '@opentelemetry/api': ^1.1.0
@@ -7027,10 +7043,10 @@ packages:
             sass:
                 optional: true
 
-    next@15.3.5:
+    next@15.3.8:
         resolution:
             {
-                integrity: sha512-RkazLBMMDJSJ4XZQ81kolSpwiCt907l0xcgcpF4xC2Vml6QVcPNXW0NQRwQ80FFtSn7UM52XN0anaw8TEJXaiw==,
+                integrity: sha512-L+4c5Hlr84fuaNADZbB9+ceRX9/CzwxJ+obXIGHupboB/Q1OLbSUapFs4bO8hnS/E6zV/JDX7sG1QpKVR2bguA==,
             }
         engines: { node: ^18.18.0 || ^19.8.0 || >= 20.0.0 }
         hasBin: true
@@ -7201,6 +7217,12 @@ packages:
         resolution:
             {
                 integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==,
+            }
+
+    pako@2.1.0:
+        resolution:
+            {
+                integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==,
             }
 
     parent-module@1.0.1:
@@ -9171,6 +9193,8 @@ snapshots:
         dependencies:
             regenerator-runtime: 0.14.1
 
+    '@babel/runtime@7.28.4': {}
+
     '@babel/template@7.25.9':
         dependencies:
             '@babel/code-frame': 7.26.2
@@ -9927,7 +9951,7 @@ snapshots:
 
     '@next/env@14.2.10': {}
 
-    '@next/env@15.3.5': {}
+    '@next/env@15.3.8': {}
 
     '@next/eslint-plugin-next@15.3.5':
         dependencies:
@@ -9984,9 +10008,9 @@ snapshots:
     '@next/swc-win32-x64-msvc@15.3.5':
         optional: true
 
-    '@next/third-parties@15.3.5(next@15.3.5(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)':
+    '@next/third-parties@15.3.5(next@15.3.8(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)':
         dependencies:
-            next: 15.3.5(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+            next: 15.3.8(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
             react: 19.1.0
             third-party-capital: 1.0.20
 
@@ -11168,6 +11192,8 @@ snapshots:
         dependencies:
             '@types/node': 20.17.6
 
+    '@types/pako@2.0.4': {}
+
     '@types/raf@3.4.3':
         optional: true
 
@@ -11182,6 +11208,9 @@ snapshots:
     '@types/react@19.1.8':
         dependencies:
             csstype: 3.1.3
+
+    '@types/trusted-types@2.0.7':
+        optional: true
 
     '@types/unist@2.0.11': {}
 
@@ -11266,9 +11295,9 @@ snapshots:
 
     '@ungap/structured-clone@1.2.1': {}
 
-    '@vercel/analytics@1.4.1(next@15.3.5(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)':
+    '@vercel/analytics@1.4.1(next@15.3.8(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)':
         optionalDependencies:
-            next: 15.3.5(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+            next: 15.3.8(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
             react: 19.1.0
 
     '@vercel/og@0.7.2':
@@ -11418,8 +11447,6 @@ snapshots:
 
     astring@1.9.0: {}
 
-    atob@2.1.2: {}
-
     available-typed-arrays@1.0.7:
         dependencies:
             possible-typed-array-names: 1.0.0
@@ -11471,8 +11498,6 @@ snapshots:
             node-releases: 2.0.18
             update-browserslist-db: 1.1.1(browserslist@4.24.2)
 
-    btoa@1.2.1: {}
-
     buffer@5.7.1:
         dependencies:
             base64-js: 1.5.1
@@ -11515,9 +11540,9 @@ snapshots:
 
     caniuse-lite@1.0.30001680: {}
 
-    canvg@3.0.10:
+    canvg@3.0.11:
         dependencies:
-            '@babel/runtime': 7.26.0
+            '@babel/runtime': 7.28.4
             '@types/raf': 3.4.3
             core-js: 3.40.0
             raf: 3.4.1
@@ -11842,7 +11867,9 @@ snapshots:
         dependencies:
             domelementtype: 2.3.0
 
-    dompurify@2.5.8:
+    dompurify@3.3.1:
+        optionalDependencies:
+            '@types/trusted-types': 2.0.7
         optional: true
 
     domutils@3.1.0:
@@ -12422,6 +12449,12 @@ snapshots:
 
     fast-levenshtein@2.0.6: {}
 
+    fast-png@6.4.0:
+        dependencies:
+            '@types/pako': 2.0.4
+            iobuffer: 5.4.0
+            pako: 2.1.0
+
     fastq@1.17.1:
         dependencies:
             reusify: 1.0.4
@@ -12826,6 +12859,8 @@ snapshots:
         dependencies:
             loose-envify: 1.4.0
 
+    iobuffer@5.4.0: {}
+
     is-alphabetical@1.0.4: {}
 
     is-alphabetical@2.0.1: {}
@@ -13088,20 +13123,19 @@ snapshots:
 
     json5@2.2.3: {}
 
-    jspdf-autotable@3.8.4(jspdf@2.5.2):
+    jspdf-autotable@3.8.4(jspdf@3.0.4):
         dependencies:
-            jspdf: 2.5.2
+            jspdf: 3.0.4
 
-    jspdf@2.5.2:
+    jspdf@3.0.4:
         dependencies:
-            '@babel/runtime': 7.26.0
-            atob: 2.1.2
-            btoa: 1.2.1
+            '@babel/runtime': 7.28.4
+            fast-png: 6.4.0
             fflate: 0.8.2
         optionalDependencies:
-            canvg: 3.0.10
+            canvg: 3.0.11
             core-js: 3.40.0
-            dompurify: 2.5.8
+            dompurify: 3.3.1
             html2canvas: 1.4.1
 
     jsx-ast-utils@3.3.5:
@@ -13726,9 +13760,9 @@ snapshots:
             - '@babel/core'
             - babel-plugin-macros
 
-    next@15.3.5(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    next@15.3.8(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
         dependencies:
-            '@next/env': 15.3.5
+            '@next/env': 15.3.8
             '@swc/counter': 0.1.3
             '@swc/helpers': 0.5.15
             busboy: 1.6.0
@@ -13853,6 +13887,8 @@ snapshots:
     package-json-from-dist@1.0.1: {}
 
     pako@0.2.9: {}
+
+    pako@2.1.0: {}
 
     parent-module@1.0.1:
         dependencies:

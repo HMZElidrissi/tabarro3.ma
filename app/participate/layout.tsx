@@ -15,7 +15,8 @@ export default async function ParticipateLayout({ children }: LayoutProps) {
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
-            storageKey="theme">
+            storageKey="theme"
+        >
             <div>
                 <div className="text-foreground antialiased">
                     {/* Dark mode toggle */}

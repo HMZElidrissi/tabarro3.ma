@@ -47,7 +47,8 @@ export default function Partners({ dict }: { dict: any }) {
                         {partners.map(partner => (
                             <div
                                 key={partner.name}
-                                className="flex items-center justify-center overflow-hidden">
+                                className="flex items-center justify-center overflow-hidden"
+                            >
                                 {partner.darkLogo ? (
                                     <>
                                         <Image

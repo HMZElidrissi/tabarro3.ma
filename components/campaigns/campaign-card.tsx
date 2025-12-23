@@ -106,14 +106,16 @@ export function CampaignCard({
                             className={cn(
                                 'text-xs font-medium px-2 py-1 shrink-0',
                                 statusBadge.className,
-                            )}>
+                            )}
+                        >
                             <Clock className="w-3 h-3 me-1" />
                             {statusBadge.text}
                         </Badge>
                         {isParticipating && (
                             <Badge
                                 variant="outline"
-                                className="bg-brand-50 text-brand-700 border-brand-200 dark:bg-brand-900/50 dark:text-brand-400 dark:border-brand-800 text-xs shrink-0">
+                                className="bg-brand-50 text-brand-700 border-brand-200 dark:bg-brand-900/50 dark:text-brand-400 dark:border-brand-800 text-xs shrink-0"
+                            >
                                 {dict.Participating}
                             </Badge>
                         )}
@@ -177,7 +179,8 @@ export function CampaignCard({
                                     'bg-brand-600 hover:bg-brand-700 text-white dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90 shadow-sm',
                             )}
                             onClick={handleParticipate}
-                            disabled={isParticipating || isLoading}>
+                            disabled={isParticipating || isLoading}
+                        >
                             {isParticipating
                                 ? dict.Participating
                                 : dict.Participate}
@@ -204,7 +207,8 @@ export function CampaignCard({
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
                         <AlertDialogAction
                             onClick={confirmParticipation}
-                            disabled={isLoading}>
+                            disabled={isLoading}
+                        >
                             {isLoading ? dict.Confirming : dict.Confirm}
                         </AlertDialogAction>
                     </AlertDialogFooter>

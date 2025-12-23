@@ -30,13 +30,15 @@ export default function NavItem({ item }: NavItemProps) {
                 className={cn(
                     'p-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors relative',
                     isActive && 'bg-gray-100 dark:bg-gray-800 text-primary',
-                )}>
+                )}
+            >
                 <Link
                     href={item.href}
                     className="flex items-center gap-3"
                     onClick={() => {
                         if (isMobile) setOpenMobile(false);
-                    }}>
+                    }}
+                >
                     <item.icon
                         className={cn(
                             'h-4 w-4',
@@ -51,7 +53,8 @@ export default function NavItem({ item }: NavItemProps) {
                             isActive
                                 ? 'text-primary'
                                 : 'text-gray-700 dark:text-gray-300',
-                        )}>
+                        )}
+                    >
                         {item.title}
                     </span>
                     {item.badge && (

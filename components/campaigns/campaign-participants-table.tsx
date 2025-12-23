@@ -32,7 +32,8 @@ export function CampaignParticipantsTable({
             <DialogTrigger asChild>
                 <Button
                     variant="outline"
-                    className="text-primary flex items-center">
+                    className="text-primary flex items-center"
+                >
                     <UserCheck2 className="h-4 w-4" />
                     {campaign.participants.length}
                 </Button>

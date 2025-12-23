@@ -191,7 +191,8 @@ export function ParticipateForm({
                     onValueChange={handleSelectChange}
                     disabled={!!state.success}
                     dir={isRTL ? 'rtl' : 'ltr'}
-                    required>
+                    required
+                >
                     <SelectTrigger>
                         <SelectValue
                             placeholder={
@@ -213,7 +214,8 @@ export function ParticipateForm({
                 <Button2
                     type="submit"
                     className="w-full justify-center"
-                    disabled={isPending || !!state.success}>
+                    disabled={isPending || !!state.success}
+                >
                     {isPending ? (
                         <>
                             <Loader2
