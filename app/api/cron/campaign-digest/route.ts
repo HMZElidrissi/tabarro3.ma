@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { processCampaignDigests } from '@/jobs/digest-helpers';
 
+export const maxDuration = 300; // 5 minutes
+
 /**
  * Process daily campaign digests
  * This endpoint should be called by a cron job at 6-7 PM daily
@@ -38,6 +40,3 @@ export async function GET(request: NextRequest) {
     }
 }
 
-export const config = {
-    maxDuration: 300, // 5 minutes
-};

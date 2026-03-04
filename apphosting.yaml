@@ -64,3 +64,4 @@ env:
       secret: resend-api-key
       availability:
           - RUNTIME
+          - BUILD

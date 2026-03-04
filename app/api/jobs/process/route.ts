@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { processPendingJobs } from '@/jobs/processor';
 
+export const maxDuration = 300; // 5 minutes in seconds
+
 export async function GET(request: NextRequest) {
     try {
         const authHeader = request.headers.get('authorization');
@@ -25,7 +27,3 @@ export async function GET(request: NextRequest) {
         );
     }
 }
-
-export const config = {
-    maxDuration: 300, // 5 minutes in seconds
-};
