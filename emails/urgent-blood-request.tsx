@@ -4,13 +4,13 @@ import {
     Container,
     Head,
     Html,
+    Preview,
     Section,
     Text,
     Img,
     Hr,
     Tailwind,
 } from '@react-email/components';
-import * as React from 'react';
 
 interface UrgentBloodRequestEmailProps {
     bloodGroup: string;
@@ -27,8 +27,12 @@ export const UrgentBloodRequestEmail = ({
     phone,
     description,
 }: UrgentBloodRequestEmailProps) => (
-    <Html>
+    <Html lang="fr" dir="ltr">
         <Head />
+        <Preview>
+            🩸 Besoin urgent de sang {bloodGroup} à {city} — vous pouvez sauver
+            une vie
+        </Preview>
         <Tailwind
             config={{
                 theme: {

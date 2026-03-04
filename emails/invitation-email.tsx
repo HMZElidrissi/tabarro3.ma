@@ -4,6 +4,7 @@ import {
     Container,
     Head,
     Html,
+    Preview,
     Section,
     Text,
     Link,
@@ -11,15 +12,18 @@ import {
     Hr,
     Tailwind,
 } from '@react-email/components';
-import * as React from 'react';
 
 interface InvitationEmailProps {
     inviteLink: string;
 }
 
 export const InvitationEmail = ({ inviteLink }: InvitationEmailProps) => (
-    <Html>
+    <Html lang="fr" dir="ltr">
         <Head />
+        <Preview>
+            Vous avez été invité à rejoindre tabarro3 — acceptez votre
+            invitation
+        </Preview>
         <Tailwind
             config={{
                 theme: {

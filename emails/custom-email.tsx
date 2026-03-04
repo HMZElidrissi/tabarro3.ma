@@ -4,6 +4,7 @@ import {
     Container,
     Head,
     Html,
+    Preview,
     Section,
     Text,
     Link,
@@ -54,7 +55,7 @@ interface CustomEmailProps {
     customFooterLinks?: Array<{ text: string; url: string }>;
 }
 
-export default function CustomEmail({
+export function CustomEmail({
     showLogo = true,
     logoUrl = 'https://tabarro3.ma/logo.png',
     logoWidth = 140,
@@ -92,8 +93,9 @@ export default function CustomEmail({
         'bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[580px]';
 
     return (
-        <Html>
+        <Html lang="fr" dir="ltr">
             <Head />
+            <Preview>{title}</Preview>
             <Tailwind
                 config={{
                     theme: {

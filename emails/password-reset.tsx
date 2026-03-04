@@ -4,6 +4,7 @@ import {
     Container,
     Head,
     Html,
+    Preview,
     Section,
     Text,
     Link,
@@ -11,15 +12,18 @@ import {
     Hr,
     Tailwind,
 } from '@react-email/components';
-import * as React from 'react';
 
 interface PasswordResetEmailProps {
     resetLink: string;
 }
 
 export const PasswordResetEmail = ({ resetLink }: PasswordResetEmailProps) => (
-    <Html>
+    <Html lang="fr" dir="ltr">
         <Head />
+        <Preview>
+            Réinitialisez votre mot de passe tabarro3 — ce lien expire dans 60
+            minutes
+        </Preview>
         <Tailwind
             config={{
                 theme: {

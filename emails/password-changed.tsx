@@ -6,15 +6,19 @@ import {
     Hr,
     Html,
     Img,
+    Preview,
     Section,
     Tailwind,
     Text,
 } from '@react-email/components';
-import * as React from 'react';
 
 export const PasswordChangedEmail = () => (
-    <Html>
+    <Html lang="fr" dir="ltr">
         <Head />
+        <Preview>
+            Votre mot de passe a été modifié — ce n'était pas vous ?
+            Contactez-nous immédiatement
+        </Preview>
         <Tailwind
             config={{
                 theme: {

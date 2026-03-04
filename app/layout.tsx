@@ -8,8 +8,8 @@ import { i18n } from '@/i18n/i18n-config';
 import { cn } from '@/lib/utils';
 import { NavigationProgress } from '@/components/custom/navigation-progress';
 import { NavigationProvider } from '@/components/custom/navigation-events';
-import { GoogleAnalytics } from '@next/third-parties/google';
-import { FirebaseAnalytics } from '@/components/custom/firebase-analytics';
+// import { GoogleAnalytics } from '@next/third-parties/google';
+// import { FirebaseAnalytics } from '@/components/custom/firebase-analytics';
 import Script from 'next/script';
 
 const nunitoFont = Nunito({
@@ -148,7 +148,8 @@ export default async function RootLayout({
                           // '[&_*]:text-right',
                       ]
                     : [nunitoFont.className, 'text-left'],
-            )}>
+            )}
+        >
             <head>
                 <link rel="canonical" href={baseUrl} />
                 <script
@@ -157,8 +158,8 @@ export default async function RootLayout({
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
             </head>
-            {isProduction && gaId ? <GoogleAnalytics gaId={gaId} /> : null}
-            {isProduction ? <FirebaseAnalytics /> : null}
+            {/* {isProduction && gaId ? <GoogleAnalytics gaId={gaId} /> : null} */}
+            {/* {isProduction ? <FirebaseAnalytics /> : null} */}
             <Script
                 defer
                 src="https://umami-stats.vercel.app/script.js"

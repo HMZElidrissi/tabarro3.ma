@@ -6,6 +6,7 @@ import {
     Hr,
     Html,
     Img,
+    Preview,
     Section,
     Tailwind,
     Text,
@@ -41,7 +42,15 @@ export const CampaignDigestEmail = ({
     campaigns,
     date,
 }: CampaignDigestEmailProps) => (
-    <Html>
+    <Html lang="fr" dir="ltr">
+        <Preview>
+            {`📅 ${campaigns.length} nouvelle${
+                campaigns.length > 1 ? 's' : ''
+            } campagne${
+                campaigns.length > 1 ? 's' : ''
+            } de don de sang aujourd'hui dans votre région`}
+        </Preview>
+        <Head />
         <Tailwind
             config={{
                 theme: {
@@ -65,7 +74,6 @@ export const CampaignDigestEmail = ({
                 },
             }}
         >
-            <Head />
             <Body className="bg-gray-50 py-10">
                 <Container className="bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[600px]">
                     <Section className="text-center mb-8">
@@ -109,16 +117,16 @@ export const CampaignDigestEmail = ({
                                     {campaign.description}
                                 </Text>
 
-                                <Section className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-                                    <Text className="text-gray-600">
+                                <Section className="mb-4">
+                                    <Text className="text-gray-600 mb-2">
                                         🏥 <strong>Organisé par :</strong>{' '}
                                         {campaign.organization.name}
                                     </Text>
-                                    <Text className="text-gray-600">
+                                    <Text className="text-gray-600 mb-2">
                                         📅 <strong>Date :</strong>{' '}
                                         {startDate.toLocaleDateString('fr-FR')}
                                     </Text>
-                                    <Text className="text-gray-600">
+                                    <Text className="text-gray-600 mb-2">
                                         🕒 <strong>Horaire :</strong>{' '}
                                         {startDate.toLocaleTimeString('fr-FR', {
                                             hour: '2-digit',
@@ -130,7 +138,7 @@ export const CampaignDigestEmail = ({
                                             minute: '2-digit',
                                         })}
                                     </Text>
-                                    <Text className="text-gray-600">
+                                    <Text className="text-gray-600 mb-2">
                                         📍 <strong>Lieu :</strong>{' '}
                                         {campaign.location}
                                     </Text>
