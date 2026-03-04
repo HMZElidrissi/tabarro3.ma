@@ -2,8 +2,8 @@
 
 import { getUser } from '@/auth/session';
 import { render } from '@react-email/components';
-import CustomEmail from '@/emails/custom-email';
-import { transporter } from '@/lib/mail';
+import { CustomEmail } from '@/emails/custom-email';
+import { sendEmail } from '@/lib/mail';
 
 interface EmailData {
     showLogo: boolean;
@@ -59,49 +59,50 @@ export async function sendCustomEmail(emailData: EmailData) {
         }
 
         // Render the email template
-        const emailHtml = render(
-            CustomEmail({
-                showLogo: emailData.showLogo,
-                logoUrl: emailData.logoUrl,
-                logoWidth: emailData.logoWidth,
-                title: emailData.title,
-                greeting: emailData.greeting,
-                message: emailData.message,
-                showHighlight: emailData.showHighlight,
-                highlightTitle: emailData.highlightTitle,
-                highlightContent: emailData.highlightContent,
-                highlightIcon: emailData.highlightIcon,
-                primaryButton: emailData.primaryButton.enabled
-                    ? {
-                          text: emailData.primaryButton.text,
-                          url: emailData.primaryButton.url,
-                          style: emailData.primaryButton.style,
-                      }
-                    : undefined,
-                secondaryButton: emailData.secondaryButton.enabled
-                    ? {
-                          text: emailData.secondaryButton.text,
-                          url: emailData.secondaryButton.url,
-                          style: emailData.secondaryButton.style,
-                      }
-                    : undefined,
-                additionalContent: emailData.additionalContent,
-                showSignature: emailData.showSignature,
-                signature: emailData.signature,
-                showFooter: emailData.showFooter,
-                footerText: emailData.footerText,
-                showCopyright: emailData.showCopyright,
-                customFooterLinks: emailData.customFooterLinks,
-            }),
-        );
-
-        // Send the email
-        await transporter.sendMail({
-            from: process.env.FROM_EMAIL,
-            to: emailData.recipientEmail,
-            subject: emailData.subject,
-            html: await emailHtml,
+        const template = CustomEmail({
+            showLogo: emailData.showLogo,
+            logoUrl: emailData.logoUrl,
+            logoWidth: emailData.logoWidth,
+            title: emailData.title,
+            greeting: emailData.greeting,
+            message: emailData.message,
+            showHighlight: emailData.showHighlight,
+            highlightTitle: emailData.highlightTitle,
+            highlightContent: emailData.highlightContent,
+            highlightIcon: emailData.highlightIcon,
+            primaryButton: emailData.primaryButton.enabled
+                ? {
+                      text: emailData.primaryButton.text,
+                      url: emailData.primaryButton.url,
+                      style: emailData.primaryButton.style,
+                  }
+                : undefined,
+            secondaryButton: emailData.secondaryButton.enabled
+                ? {
+                      text: emailData.secondaryButton.text,
+                      url: emailData.secondaryButton.url,
+                      style: emailData.secondaryButton.style,
+                  }
+                : undefined,
+            additionalContent: emailData.additionalContent,
+            showSignature: emailData.showSignature,
+            signature: emailData.signature,
+            showFooter: emailData.showFooter,
+            footerText: emailData.footerText,
+            showCopyright: emailData.showCopyright,
+            customFooterLinks: emailData.customFooterLinks,
         });
+
+        const emailHtml = await render(template, { pretty: true });
+        const emailText = await render(template, { plainText: true });
+
+        // Send the email via the shared sendEmail helper (Resend → nodemailer fallback)
+        await sendEmail(
+            emailData.recipientEmail,
+            emailData.subject,
+            emailHtml,
+            emailText,
+        );
 
         return {
             success: true,

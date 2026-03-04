@@ -21,7 +21,7 @@ const FROM = '"tabarro3" <notify@tabarro3.ma>';
 
 // ─── Core send helper ─────────────────────────────────────────────────────────
 
-async function sendEmail(
+export async function sendEmail(
     email: string,
     subject: string,
     html: string,

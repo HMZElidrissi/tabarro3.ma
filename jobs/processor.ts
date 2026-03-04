@@ -1,5 +1,4 @@
 import { prisma } from '@/lib/prisma';
-import nodemailer from 'nodemailer';
 import { Job, JobType, JobStatus } from '@/types/job';
 import { render } from '@react-email/components';
 import { UrgentBloodRequestEmail } from '@/emails/urgent-blood-request';
@@ -9,18 +8,7 @@ import {
     getCompatibleDonorBloodGroups,
 } from '@/config/blood-group';
 import { BloodGroup } from '@/types/enums';
-
-const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASSWORD,
-    },
-});
-
-const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@tabarro3.ma';
+import { sendEmail } from '@/lib/mail';
 
 const jobHandlers = {
     [JobType.BLOOD_REQUEST_NOTIFICATION]: async (payload: any) => {
@@ -67,25 +55,25 @@ const jobHandlers = {
 
         // Send individual emails to each recipient
         for (const recipient of recipients) {
-            const emailHtml = await render(
-                UrgentBloodRequestEmail({
-                    bloodGroup: getBloodGroupLabel(
-                        request.bloodGroup as BloodGroup,
-                    ),
-                    location: request.location,
-                    city: request.city.name,
-                    phone: request.phone || undefined,
-                    description: request.description,
-                }),
-                { pretty: true },
-            );
-
-            await transporter.sendMail({
-                from: FROM_EMAIL,
-                to: recipient.email, // Send to individual recipient
-                subject: `Besoin urgent de sang ${getBloodGroupLabel(request.bloodGroup as BloodGroup, null, 'request')} à ${request.city.name} - Votre sang est compatible`,
-                html: emailHtml,
+            const template = UrgentBloodRequestEmail({
+                bloodGroup: getBloodGroupLabel(
+                    request.bloodGroup as BloodGroup,
+                ),
+                location: request.location,
+                city: request.city.name,
+                phone: request.phone || undefined,
+                description: request.description,
             });
+
+            const emailHtml = await render(template, { pretty: true });
+            const emailText = await render(template, { plainText: true });
+
+            await sendEmail(
+                recipient.email,
+                `Besoin urgent de sang ${getBloodGroupLabel(request.bloodGroup as BloodGroup, null, 'request')} à ${request.city.name} - Votre sang est compatible`,
+                emailHtml,
+                emailText,
+            );
 
             // Small delay between emails to prevent overwhelming the SMTP server
             await new Promise(resolve => setTimeout(resolve, 200));
@@ -109,21 +97,21 @@ const jobHandlers = {
 
         // Send individual digest emails to each recipient
         for (const recipient of recipients) {
-            const emailHtml = await render(
-                CampaignDigestEmail({
-                    regionName,
-                    campaigns,
-                    date: today,
-                }),
-                { pretty: true },
-            );
-
-            await transporter.sendMail({
-                from: FROM_EMAIL,
-                to: recipient.email,
-                subject: `📅 Résumé des campagnes de don de sang - ${regionName} - ${today}`,
-                html: emailHtml,
+            const template = CampaignDigestEmail({
+                regionName,
+                campaigns,
+                date: today,
             });
+
+            const emailHtml = await render(template, { pretty: true });
+            const emailText = await render(template, { plainText: true });
+
+            await sendEmail(
+                recipient.email,
+                `📅 Résumé des campagnes de don de sang - ${regionName} - ${today}`,
+                emailHtml,
+                emailText,
+            );
 
             // Small delay between emails
             await new Promise(resolve => setTimeout(resolve, 200));
