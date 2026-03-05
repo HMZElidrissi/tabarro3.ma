@@ -162,7 +162,21 @@ export async function GET(request: NextRequest) {
     try {
         const { searchParams } = new URL(request.url);
 
-        const title = searchParams.get('title') || 'Tabarro3';
+        const rawTitle = searchParams.get('title') || '';
+        const hasTitle = rawTitle.trim().length > 0;
+
+        // If no title is provided, fall back to the static OG image
+        if (!hasTitle) {
+            return new Response(null, {
+                status: 302,
+                headers: {
+                    Location: '/og-image.png',
+                    'Cache-Control': 'public, max-age=31536000, immutable',
+                },
+            });
+        }
+
+        const title = rawTitle;
         const description =
             searchParams.get('description') || 'Plateforme de don de sang';
 

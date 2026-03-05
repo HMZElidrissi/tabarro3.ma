@@ -12,6 +12,8 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import ReadingProgressBar from '@/components/blog/reading-progress-bar';
 import ShareButtons from '@/components/blog/share-buttons';
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
+
 export async function generateMetadata({
     params,
 }: {
@@ -22,13 +24,13 @@ export async function generateMetadata({
         const locale = await getLocale();
         const post = await getBlogPost(slug, locale);
 
-        const ogImageUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/blog-image/${slug}`;
-
         if (!post) {
             return {
                 title: 'Blog Post Not Found | tabarro3',
             };
         }
+
+        const ogImageUrl = `${baseUrl}/api/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.excerpt)}`;
 
         return {
             title: post.title,
@@ -36,12 +38,26 @@ export async function generateMetadata({
             openGraph: {
                 title: post.title,
                 description: post.excerpt,
-                images: [ogImageUrl],
+                images: [
+                    {
+                        url: ogImageUrl,
+                        width: 1200,
+                        height: 630,
+                        alt: post.title,
+                    },
+                ],
             },
             twitter: {
                 title: post.title,
                 description: post.excerpt,
-                images: [ogImageUrl],
+                images: [
+                    {
+                        url: ogImageUrl,
+                        width: 1200,
+                        height: 630,
+                        alt: post.title,
+                    },
+                ],
             },
         };
     } catch (error) {
