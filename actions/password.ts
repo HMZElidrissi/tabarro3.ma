@@ -11,6 +11,7 @@ import rateLimit from '@/lib/rate-limit';
 import { nanoid } from 'nanoid';
 import { sendPasswordChangedEmail, sendPasswordResetEmail } from '@/lib/mail';
 import { getDictionary } from '@/i18n/get-dictionary';
+import { redirect } from 'next/navigation';
 
 const updatePasswordSchema = z
     .object({
@@ -206,8 +207,6 @@ export const resetPassword = validatedAction(
 
         await sendPasswordChangedEmail(resetRequest.user.email);
 
-        return {
-            success: dict.auth.forgotPassword.passwordResetSuccess,
-        };
+        redirect('/sign-in?reset=success');
     },
 );

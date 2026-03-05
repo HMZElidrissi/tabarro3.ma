@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useActionState, useState } from 'react';
+import { useActionState, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button2 } from '@/components/ui/button';
 import { Input, InputError } from '@/components/ui/input';
@@ -32,9 +32,19 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
     const email = searchParams.get('email');
+    const verificationStatus = searchParams.get('verification');
+    const resetStatus = searchParams.get('reset');
     const [selectedRegion, setSelectedRegion] = useState<string>();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [signupFormData, setSignupFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        bloodGroup: '',
+        region: '',
+        cityId: '',
+    });
     const [state, formAction, pending] = useActionState<ActionState, FormData>(
         mode === 'signin'
             ? signIn
@@ -43,6 +53,22 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
               : acceptInvitation,
         { error: '' },
     );
+
+    // Restore sign-up form from action state when an error is returned
+    useEffect(() => {
+        if (mode !== 'signup' || !state?.error) return;
+        const s = state as ActionState & Record<string, string | undefined>;
+        if (s.email === undefined && s.name === undefined) return;
+        setSignupFormData(prev => ({
+            name: s.name ?? prev.name,
+            email: s.email ?? prev.email,
+            phone: s.phone ?? prev.phone,
+            bloodGroup: s.bloodGroup ?? prev.bloodGroup,
+            region: s.region ?? prev.region,
+            cityId: s.cityId ?? prev.cityId,
+        }));
+        if (s.region) setSelectedRegion(s.region);
+    }, [mode, state]);
 
     // Redirect to sign-in if trying to accept invitation without token
     if (mode === 'accept-invitation' && !token) {
@@ -89,6 +115,22 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                 </Alert>
             )}
 
+            {mode === 'signin' && verificationStatus === 'sent' && (
+                <Alert className="mt-4">
+                    <AlertDescription>
+                        {dict.auth.verifyEmail.checkInbox}
+                    </AlertDescription>
+                </Alert>
+            )}
+
+            {mode === 'signin' && resetStatus === 'success' && (
+                <Alert className="mt-4 border-green-600/50 bg-green-50 dark:bg-green-950/20">
+                    <AlertDescription className="text-green-800 dark:text-green-400">
+                        {dict.auth.forgotPassword.passwordResetSuccess}
+                    </AlertDescription>
+                </Alert>
+            )}
+
             <form className="mt-6 space-y-4" action={formAction}>
                 {mode === 'accept-invitation' && (
                     <input type="hidden" name="token" value={token || ''} />
@@ -107,6 +149,20 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                             maxLength={100}
                             className="block mt-1 w-full"
                             placeholder={dict.forms.placeholders.enterFullName}
+                            value={
+                                mode === 'signup'
+                                    ? signupFormData.name
+                                    : undefined
+                            }
+                            onChange={
+                                mode === 'signup'
+                                    ? e =>
+                                          setSignupFormData(prev => ({
+                                              ...prev,
+                                              name: e.target.value,
+                                          }))
+                                    : undefined
+                            }
                         />
                     </div>
                 )}
@@ -120,10 +176,26 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                         autoComplete="email"
                         required
                         maxLength={255}
-                        defaultValue={email || ''}
+                        value={
+                            mode === 'signup'
+                                ? signupFormData.email
+                                : undefined
+                        }
+                        defaultValue={
+                            mode === 'accept-invitation' ? email || '' : undefined
+                        }
                         readOnly={mode === 'accept-invitation' && !!email}
                         className="block mt-1 w-full"
                         placeholder={dict.forms.placeholders.enterEmail}
+                        onChange={
+                            mode === 'signup'
+                                ? e =>
+                                      setSignupFormData(prev => ({
+                                          ...prev,
+                                          email: e.target.value,
+                                      }))
+                                : undefined
+                        }
                     />
                 </div>
 
@@ -224,6 +296,20 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                 placeholder={
                                     dict.forms.placeholders.enterPhoneNumber
                                 }
+                                value={
+                                    mode === 'signup'
+                                        ? signupFormData.phone
+                                        : undefined
+                                }
+                                onChange={
+                                    mode === 'signup'
+                                        ? e =>
+                                              setSignupFormData(prev => ({
+                                                  ...prev,
+                                                  phone: e.target.value,
+                                              }))
+                                        : undefined
+                                }
                             />
                         </div>
 
@@ -236,6 +322,15 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                     name="bloodGroup"
                                     dir={isRTL ? 'rtl' : 'ltr'}
                                     required
+                                    value={
+                                        signupFormData.bloodGroup || undefined
+                                    }
+                                    onValueChange={value =>
+                                        setSignupFormData(prev => ({
+                                            ...prev,
+                                            bloodGroup: value ?? '',
+                                        }))
+                                    }
                                 >
                                     <SelectTrigger>
                                         <SelectValue
@@ -268,8 +363,20 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                             </Label2>
                             <Select
                                 name="region"
+                                value={
+                                    (mode === 'signup'
+                                        ? signupFormData.region
+                                        : selectedRegion) || undefined
+                                }
                                 onValueChange={(value: string) => {
                                     setSelectedRegion(value);
+                                    if (mode === 'signup') {
+                                        setSignupFormData(prev => ({
+                                            ...prev,
+                                            region: value ?? '',
+                                            cityId: '',
+                                        }));
+                                    }
                                 }}
                                 dir={isRTL ? 'rtl' : 'ltr'}
                                 required
@@ -303,8 +410,26 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                             <Select
                                 name="cityId"
                                 dir={isRTL ? 'rtl' : 'ltr'}
-                                disabled={!selectedRegion}
+                                disabled={
+                                    !(
+                                        mode === 'signup'
+                                            ? signupFormData.region
+                                            : selectedRegion
+                                    )
+                                }
                                 required
+                                value={
+                                    (mode === 'signup'
+                                        ? signupFormData.cityId
+                                        : undefined) || undefined
+                                }
+                                onValueChange={value =>
+                                    mode === 'signup' &&
+                                    setSignupFormData(prev => ({
+                                        ...prev,
+                                        cityId: value ?? '',
+                                    }))
+                                }
                             >
                                 <SelectTrigger>
                                     <SelectValue

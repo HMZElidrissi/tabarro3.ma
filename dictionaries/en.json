@@ -237,6 +237,7 @@
             "sendInstructions": "Send Reset Instructions",
             "resetInstructionsSent": "If an account exists with this email, you will receive password reset instructions.",
             "tooManyAttempts": "Too many password reset attempts. Please try again in {minutes} minutes.",
+            "invalidLinkTitle": "Invalid or expired link",
             "invalidOrExpiredLink": "This password reset link is invalid or has expired. Please request a new one.",
             "passwordResetSuccess": "Your password has been reset successfully. You can now sign in with your new password."
         },
@@ -244,6 +245,14 @@
             "currentPasswordIncorrect": "Current password is incorrect.",
             "newPasswordMustBeDifferent": "New password must be different from the current password.",
             "passwordUpdatedSuccess": "Password updated successfully."
+        },
+        "verifyEmail": {
+            "checkInbox": "We have sent you a confirmation email. Please click the link in the email to verify your address before signing in.",
+            "successTitle": "Email verified",
+            "successMessage": "Your email has been successfully verified. You can now sign in to your account.",
+            "invalidTitle": "Invalid or expired link",
+            "invalidMessage": "This verification link is invalid or has expired. Please request a new verification email by signing up again or contacting support.",
+            "goToSignIn": "Go to sign in"
         },
         "validation": {
             "passwordsDontMatch": "Passwords don't match",
@@ -286,12 +295,14 @@
         }
     },
     "signIn": {
-        "invalidCredentials": "Invalid email or password. Please try again."
+        "invalidCredentials": "Invalid email or password. Please try again.",
+        "emailNotVerified": "Please verify your email address before signing in. Check your inbox for the confirmation link."
     },
     "signUp": {
         "passwordsDoNotMatch": "Passwords do not match.",
         "userAlreadyExists": "User with this email already exists.",
-        "invalidPhoneNumber": "Invalid Moroccan phone number"
+        "invalidPhoneNumber": "Invalid Moroccan phone number",
+        "verificationEmailFailed": "We were unable to send the verification email. Please try again later."
     },
     "profile": {
         "title": "Profile Settings",

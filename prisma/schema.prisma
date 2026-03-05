@@ -64,6 +64,7 @@ model User {
   name            String?         @db.VarChar(100)
   email           String          @unique @db.VarChar(255)
   passwordHash    String          @map("password_hash")
+  emailVerifiedAt DateTime?       @map("email_verified_at")
   role            Role            @default(PARTICIPANT)
   phone           String?         @db.VarChar(20)
   bloodGroup      BloodGroup?     @map("blood_group")
@@ -75,6 +76,7 @@ model User {
   activities      ActivityLog[]
   invitationsSent Invitation[]    @relation("InvitedBy")
   PasswordReset   PasswordReset[]
+  emailVerifications EmailVerification[]
 
   campaigns             Campaign[]            @relation("OrganizedCampaigns")
   participatedCampaigns CampaignParticipant[]
@@ -118,6 +120,18 @@ model PasswordReset {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("password_resets")
+}
+
+model EmailVerification {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  used      Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("email_verifications")
 }
 
 model Campaign {

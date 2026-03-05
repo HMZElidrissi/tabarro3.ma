@@ -20,6 +20,18 @@ type ValidatedActionWithUserFunction<S extends z.ZodType<any, any>, T> = (
     user: User,
 ) => Promise<T>;
 
+function getSafeFormData(formData: FormData) {
+    const raw = Object.fromEntries(formData);
+    return {
+        email: (raw.email as string) ?? '',
+        name: (raw.name as string) ?? '',
+        phone: (raw.phone as string) ?? '',
+        bloodGroup: (raw.bloodGroup as string) ?? '',
+        region: (raw.region as string) ?? '',
+        cityId: (raw.cityId as string) ?? '',
+    };
+}
+
 export function validatedAction<S extends z.ZodType<any, any>, T>(
     schema: S,
     action: ValidatedActionFunction<S, T>,
@@ -28,7 +40,10 @@ export function validatedAction<S extends z.ZodType<any, any>, T>(
         const result = schema.safeParse(Object.fromEntries(formData));
 
         if (!result.success) {
-            return { error: result.error.errors[0].message } as T;
+            return {
+                error: result.error.errors[0].message,
+                ...getSafeFormData(formData),
+            } as T;
         }
 
         return action(result.data, formData);

@@ -33,6 +33,14 @@ export const signIn = validatedAction(signInSchema, async data => {
         return { error: dict.signIn.invalidCredentials };
     }
 
+    const hasVerificationFlow = await prisma.emailVerification.count({
+        where: { userId: user.id },
+    });
+
+    if (hasVerificationFlow > 0 && !user.emailVerifiedAt) {
+        return { error: dict.signIn.emailNotVerified };
+    }
+
     const clientInfo = await getClientInfo();
     const ipAddress = clientInfo?.basic?.ip || 'Unknown';
 

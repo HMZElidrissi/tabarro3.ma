@@ -220,6 +220,7 @@
             "sendInstructions": "Envoyer les instructions",
             "resetInstructionsSent": "Si un compte existe avec cet e-mail, vous recevrez les instructions de réinitialisation du mot de passe.",
             "tooManyAttempts": "Trop de tentatives de réinitialisation de mot de passe. Veuillez réessayer dans {minutes} minutes.",
+            "invalidLinkTitle": "Lien invalide ou expiré",
             "invalidOrExpiredLink": "Ce lien de réinitialisation de mot de passe est invalide ou a expiré. Veuillez en demander un nouveau.",
             "passwordResetSuccess": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
         },

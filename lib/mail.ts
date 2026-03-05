@@ -1,6 +1,7 @@
 import { PasswordResetEmail } from '@/emails/password-reset';
 import { PasswordChangedEmail } from '@/emails/password-changed';
 import { InvitationEmail } from '@/emails/invitation-email';
+import { EmailVerificationEmail } from '@/emails/email-verification';
 import nodemailer from 'nodemailer';
 import { render } from '@react-email/components';
 import { Resend } from 'resend';
@@ -117,6 +118,29 @@ export async function sendInvitationEmail(email: string, token: string) {
         );
     } catch (error) {
         console.error('Error sending invitation email:', error);
+        throw error;
+    }
+}
+
+export async function sendVerificationEmail(email: string, token: string) {
+    try {
+        const verifyLink = `${process.env.NEXT_PUBLIC_BASE_URL}/verify-email/${token}`;
+
+        const emailHtml = await render(EmailVerificationEmail({ verifyLink }), {
+            pretty: true,
+        });
+        const emailText = await render(EmailVerificationEmail({ verifyLink }), {
+            plainText: true,
+        });
+
+        await sendEmail(
+            email,
+            'Confirmez votre adresse e-mail',
+            emailHtml,
+            emailText,
+        );
+    } catch (error) {
+        console.error('Error sending verification email:', error);
         throw error;
     }
 }
