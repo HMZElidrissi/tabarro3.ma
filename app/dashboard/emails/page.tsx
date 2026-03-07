@@ -5,7 +5,8 @@ import EmailPreview from '@/components/emails/email-preview';
 
 export const metadata: Metadata = {
     title: 'Test des emails - Dashboard',
-    description: 'Prévisualiser et envoyer des emails de test (digest ou personnalisé)',
+    description:
+        'Prévisualiser et envoyer des emails de test (digest ou personnalisé)',
 };
 
 export default async function EmailsPage() {

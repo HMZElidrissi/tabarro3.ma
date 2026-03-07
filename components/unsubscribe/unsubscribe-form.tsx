@@ -35,11 +35,16 @@ export function UnsubscribeForm({ token, dict }: UnsubscribeFormProps) {
     const u = dict.unsubscribe;
     const disabled = pending || !!state.success;
     const title = u?.title ?? 'Se désabonner des notifications';
-    const description = u?.description ?? 'Vous pouvez nous indiquer pourquoi vous ne souhaitez plus recevoir ces emails (optionnel).';
+    const description =
+        u?.description ??
+        'Vous pouvez nous indiquer pourquoi vous ne souhaitez plus recevoir ces emails (optionnel).';
     const reasonLabel = u?.reasonLabel ?? 'Pourquoi vous désabonnez-vous ?';
-    const reasonPlaceholder = u?.reasonPlaceholder ?? 'Exemples : je reçois trop d\'emails, je n\'habite plus dans cette région, autre...';
+    const reasonPlaceholder =
+        u?.reasonPlaceholder ??
+        "Exemples : je reçois trop d'emails, je n'habite plus dans cette région, autre...";
     const submitButton = u?.submitButton ?? 'Confirmer le désabonnement';
-    const submitButtonLoading = u?.submitButtonLoading ?? 'Traitement en cours...';
+    const submitButtonLoading =
+        u?.submitButtonLoading ?? 'Traitement en cours...';
 
     return (
         <div className="flex min-h-[60vh] items-center justify-center px-4 py-8">
@@ -53,7 +58,9 @@ export function UnsubscribeForm({ token, dict }: UnsubscribeFormProps) {
                     </CardHeader>
                     <CardContent className="space-y-4">
                         {state.error && (
-                            <p className="text-sm text-red-600">{state.error}</p>
+                            <p className="text-sm text-red-600">
+                                {state.error}
+                            </p>
                         )}
                         {state.success && (
                             <p className="text-sm text-green-600">
@@ -104,4 +111,3 @@ export function UnsubscribeForm({ token, dict }: UnsubscribeFormProps) {
         </div>
     );
 }
-

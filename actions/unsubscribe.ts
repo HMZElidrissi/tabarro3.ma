@@ -27,7 +27,9 @@ export const submitUnsubscribe = validatedAction(
 
         if (!payload) {
             return {
-                error: t?.errorInvalidLink ?? 'Lien de désabonnement invalide ou expiré.',
+                error:
+                    t?.errorInvalidLink ??
+                    'Lien de désabonnement invalide ou expiré.',
             };
         }
 
@@ -63,8 +65,10 @@ export const submitUnsubscribe = validatedAction(
 
         const successMessage =
             type === 'CAMPAIGN_DIGEST'
-                ? (t?.successDigest ?? 'Vous ne recevrez plus les résumés de campagnes.')
-                : (t?.successBloodRequest ?? "Vous ne recevrez plus les demandes urgentes de sang.");
+                ? (t?.successDigest ??
+                  'Vous ne recevrez plus les résumés de campagnes.')
+                : (t?.successBloodRequest ??
+                  'Vous ne recevrez plus les demandes urgentes de sang.');
 
         return { success: successMessage };
     },
@@ -106,4 +110,3 @@ export async function getUnsubscribeFeedbackList(
         totalCount,
     };
 }
-

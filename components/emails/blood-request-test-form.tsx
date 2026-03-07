@@ -50,7 +50,14 @@ export default function BloodRequestTestForm({
 }: BloodRequestTestFormProps) {
     const { toast } = useToast();
     const [requests, setRequests] = useState<
-        { id: number; bloodGroup: BloodGroup; location: string; city: string; phone: string | null; description: string }[]
+        {
+            id: number;
+            bloodGroup: BloodGroup;
+            location: string;
+            city: string;
+            phone: string | null;
+            description: string;
+        }[]
     >([]);
     const [previewLoading, setPreviewLoading] = useState(false);
     const initialLoad = useRef(true);
@@ -69,14 +76,20 @@ export default function BloodRequestTestForm({
                 if (cancelled) return;
                 if (result.html) onPreviewHtml(result.html);
                 else if (result.error && !initialLoad.current) {
-                    toast({ title: 'Aperçu', description: result.error, variant: 'destructive' });
+                    toast({
+                        title: 'Aperçu',
+                        description: result.error,
+                        variant: 'destructive',
+                    });
                 }
             })
             .finally(() => {
                 if (!cancelled) setPreviewLoading(false);
                 initialLoad.current = false;
             });
-        return () => { cancelled = true; };
+        return () => {
+            cancelled = true;
+        };
     }, [requestId]);
 
     const handleRefreshPreview = async () => {
@@ -84,7 +97,12 @@ export default function BloodRequestTestForm({
         try {
             const result = await getBloodRequestPreviewHtml(requestId);
             if (result.html) onPreviewHtml(result.html);
-            if (result.error) toast({ title: 'Erreur', description: result.error, variant: 'destructive' });
+            if (result.error)
+                toast({
+                    title: 'Erreur',
+                    description: result.error,
+                    variant: 'destructive',
+                });
         } finally {
             setPreviewLoading(false);
         }
@@ -92,14 +110,27 @@ export default function BloodRequestTestForm({
 
     const handleSend = async () => {
         if (!recipientEmail?.trim()) {
-            toast({ title: 'Email requis', description: 'Entrez l\'adresse du destinataire.', variant: 'destructive' });
+            toast({
+                title: 'Email requis',
+                description: "Entrez l'adresse du destinataire.",
+                variant: 'destructive',
+            });
             return;
         }
         onSendingChange(true);
         try {
-            const result = await sendTestBloodRequestEmail(recipientEmail.trim(), requestId);
-            if (result.success) toast({ title: 'Envoyé', description: result.message });
-            else toast({ title: 'Erreur', description: result.error, variant: 'destructive' });
+            const result = await sendTestBloodRequestEmail(
+                recipientEmail.trim(),
+                requestId,
+            );
+            if (result.success)
+                toast({ title: 'Envoyé', description: result.message });
+            else
+                toast({
+                    title: 'Erreur',
+                    description: result.error,
+                    variant: 'destructive',
+                });
         } finally {
             onSendingChange(false);
         }
@@ -115,26 +146,44 @@ export default function BloodRequestTestForm({
                             Demande urgente de sang
                         </CardTitle>
                         <CardDescription>
-                            Envoyer un email de test avec le template réel envoyé aux donneurs compatibles (demande réelle ou exemple).
+                            Envoyer un email de test avec le template réel
+                            envoyé aux donneurs compatibles (demande réelle ou
+                            exemple).
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
                             <Label>Demande (ou exemple)</Label>
                             <Select
-                                value={requestId === null ? 'sample' : String(requestId)}
+                                value={
+                                    requestId === null
+                                        ? 'sample'
+                                        : String(requestId)
+                                }
                                 onValueChange={v =>
-                                    onRequestIdChange(v === 'sample' ? null : Number(v))
+                                    onRequestIdChange(
+                                        v === 'sample' ? null : Number(v),
+                                    )
                                 }
                             >
                                 <SelectTrigger>
                                     <SelectValue placeholder="Choisir une demande" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="sample">Exemple (données de démo)</SelectItem>
+                                    <SelectItem value="sample">
+                                        Exemple (données de démo)
+                                    </SelectItem>
                                     {requests.map(r => (
-                                        <SelectItem key={r.id} value={String(r.id)}>
-                                            {getBloodGroupLabel(r.bloodGroup, null, 'request')} – {r.city}
+                                        <SelectItem
+                                            key={r.id}
+                                            value={String(r.id)}
+                                        >
+                                            {getBloodGroupLabel(
+                                                r.bloodGroup,
+                                                null,
+                                                'request',
+                                            )}{' '}
+                                            – {r.city}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>
@@ -146,7 +195,9 @@ export default function BloodRequestTestForm({
                             <Input
                                 type="email"
                                 value={recipientEmail}
-                                onChange={e => onRecipientEmailChange(e.target.value)}
+                                onChange={e =>
+                                    onRecipientEmailChange(e.target.value)
+                                }
                                 placeholder="email@exemple.com"
                                 className="h-9"
                             />

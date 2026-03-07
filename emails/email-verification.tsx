@@ -93,4 +93,3 @@ export const EmailVerificationEmail = ({
 );
 
 export default EmailVerificationEmail;
-

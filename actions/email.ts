@@ -162,7 +162,10 @@ export async function getRegionsForDigest() {
     };
 }
 
-export async function getDigestTestData(regionId: number, useRealData: boolean) {
+export async function getDigestTestData(
+    regionId: number,
+    useRealData: boolean,
+) {
     const user = await getUser();
     if (!user || (user.role !== 'ADMIN' && user.role !== 'ORGANIZATION')) {
         return { error: 'Non autorisé', regionName: null, campaigns: [] };
@@ -216,7 +219,10 @@ export async function getDigestTestData(regionId: number, useRealData: boolean) 
     };
 }
 
-export async function getDigestPreviewHtml(regionId: number, useRealData: boolean) {
+export async function getDigestPreviewHtml(
+    regionId: number,
+    useRealData: boolean,
+) {
     const user = await getUser();
     if (!user || (user.role !== 'ADMIN' && user.role !== 'ORGANIZATION')) {
         return { error: 'Non autorisé', html: null };
@@ -249,8 +255,7 @@ export async function sendTestDigestEmail(
         if (!user || (user.role !== 'ADMIN' && user.role !== 'ORGANIZATION')) {
             return {
                 success: false,
-                error:
-                    'Non autorisé. Seuls les administrateurs et organisations peuvent envoyer des emails de test.',
+                error: 'Non autorisé. Seuls les administrateurs et organisations peuvent envoyer des emails de test.',
             };
         }
 
@@ -273,10 +278,14 @@ export async function sendTestDigestEmail(
             };
         }
 
-        const dateForSubject = new Date((date ?? '') + 'T12:00:00').toLocaleDateString(
-            'fr-FR',
-            { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' },
-        );
+        const dateForSubject = new Date(
+            (date ?? '') + 'T12:00:00',
+        ).toLocaleDateString('fr-FR', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
 
         const token = await createUnsubscribeToken(
             recipientEmail.trim(),
@@ -375,7 +384,11 @@ export async function getBloodRequestPreviewHtml(requestId: number | null) {
     if (!request) return { error: 'Demande introuvable', html: null };
 
     const template = UrgentBloodRequestEmail({
-        bloodGroup: getBloodGroupLabel(request.bloodGroup as BloodGroup, null, 'request'),
+        bloodGroup: getBloodGroupLabel(
+            request.bloodGroup as BloodGroup,
+            null,
+            'request',
+        ),
         location: request.location,
         city: request.city.name,
         phone: request.phone ?? undefined,
@@ -402,7 +415,8 @@ export async function sendTestBloodRequestEmail(
             return { success: false, error: 'Email du destinataire requis.' };
         }
 
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
+        const baseUrl =
+            process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
         let bloodGroup: string;
         let location: string;
         let city: string;
@@ -414,17 +428,26 @@ export async function sendTestBloodRequestEmail(
                 where: { id: requestId },
                 include: { city: { select: { name: true } } },
             });
-            if (!request) return { success: false, error: 'Demande introuvable.' };
-            bloodGroup = getBloodGroupLabel(request.bloodGroup as BloodGroup, null, 'request');
+            if (!request)
+                return { success: false, error: 'Demande introuvable.' };
+            bloodGroup = getBloodGroupLabel(
+                request.bloodGroup as BloodGroup,
+                null,
+                'request',
+            );
             location = request.location;
             city = request.city.name;
             phone = request.phone ?? undefined;
             description = request.description;
         } else {
-            ({ bloodGroup, location, city, phone, description } = SAMPLE_BLOOD_REQUEST);
+            ({ bloodGroup, location, city, phone, description } =
+                SAMPLE_BLOOD_REQUEST);
         }
 
-        const token = await createUnsubscribeToken(recipientEmail.trim(), 'BLOOD_REQUEST');
+        const token = await createUnsubscribeToken(
+            recipientEmail.trim(),
+            'BLOOD_REQUEST',
+        );
         const unsubscribeUrl = getUnsubscribeUrl(token);
 
         const template = UrgentBloodRequestEmail({
@@ -453,7 +476,10 @@ export async function sendTestBloodRequestEmail(
         console.error('Error sending test blood request email:', error);
         return {
             success: false,
-            error: error instanceof Error ? error.message : "Erreur lors de l'envoi de l'email de test.",
+            error:
+                error instanceof Error
+                    ? error.message
+                    : "Erreur lors de l'envoi de l'email de test.",
         };
     }
 }

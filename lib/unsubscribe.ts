@@ -55,8 +55,6 @@ export async function verifyUnsubscribeToken(
 }
 
 export function getUnsubscribeUrl(token: string): string {
-    const baseUrl =
-        process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
     return `${baseUrl}/unsubscribe?token=${encodeURIComponent(token)}`;
 }
-

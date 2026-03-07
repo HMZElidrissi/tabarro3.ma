@@ -22,4 +22,3 @@ export default async function UnsubscribePage({
 
     return <UnsubscribeForm token={token} dict={dict} />;
 }
-

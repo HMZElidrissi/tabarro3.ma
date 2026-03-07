@@ -30,9 +30,7 @@ const signUpSchema = z.object({
 function getSafeSignUpPayload(data: z.infer<typeof signUpSchema>) {
     const { email, name, phone, bloodGroup, cityId } = data;
     const regionId = cityId
-        ? REGIONS_AND_CITIES.find(r =>
-              r.cities.some(c => c.id === cityId),
-          )?.id
+        ? REGIONS_AND_CITIES.find(r => r.cities.some(c => c.id === cityId))?.id
         : undefined;
     return {
         email,

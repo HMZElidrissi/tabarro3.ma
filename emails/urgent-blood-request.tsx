@@ -122,8 +122,8 @@ export const UrgentBloodRequestEmail = ({
 
                     {unsubscribeUrl && (
                         <Text className="text-gray-500 text-xs text-center mb-3">
-                            Vous ne souhaitez plus recevoir de notifications pour
-                            les demandes urgentes de sang ?{' '}
+                            Vous ne souhaitez plus recevoir de notifications
+                            pour les demandes urgentes de sang ?{' '}
                             <a
                                 href={unsubscribeUrl}
                                 className="text-brand-600 hover:text-brand-700"

@@ -10,23 +10,19 @@ import { usePathname } from 'next/navigation';
 
 export function BreadcrumbNav() {
     const pathname = usePathname();
-    const segments = pathname
-        .split('/')
-        .filter(segment => Boolean(segment));
+    const segments = pathname.split('/').filter(segment => Boolean(segment));
 
     const dashboardIndex = segments.indexOf('dashboard');
 
     const paths =
         dashboardIndex === -1
             ? []
-            : segments
-                  .slice(dashboardIndex + 1)
-                  .filter(segment => {
-                      if (!segment) return false;
-                      if (/^\[.*\]$/.test(segment)) return false;
-                      if (/^\d+$/.test(segment)) return false;
-                      return true;
-                  });
+            : segments.slice(dashboardIndex + 1).filter(segment => {
+                  if (!segment) return false;
+                  if (/^\[.*\]$/.test(segment)) return false;
+                  if (/^\d+$/.test(segment)) return false;
+                  return true;
+              });
 
     const formatLabel = (segment: string) =>
         segment

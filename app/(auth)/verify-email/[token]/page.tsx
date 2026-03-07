@@ -83,4 +83,3 @@ export default async function VerifyEmailPage({
         </Suspense>
     );
 }
-

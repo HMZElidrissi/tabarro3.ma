@@ -97,7 +97,9 @@ export default function UnsubscribeFeedbackClient({
         getUnsubscribeFeedbackList(
             currentPage,
             PAGE_SIZE,
-            currentType === 'all' ? undefined : (currentType as 'CAMPAIGN_DIGEST' | 'BLOOD_REQUEST'),
+            currentType === 'all'
+                ? undefined
+                : (currentType as 'CAMPAIGN_DIGEST' | 'BLOOD_REQUEST'),
         )
             .then(result => {
                 if (cancelled) return;
@@ -115,7 +117,9 @@ export default function UnsubscribeFeedbackClient({
             .finally(() => {
                 if (!cancelled) setIsLoading(false);
             });
-        return () => { cancelled = true; };
+        return () => {
+            cancelled = true;
+        };
     }, [currentPage, currentType, toast]);
 
     const typeLabel = (type: string) =>
@@ -128,23 +132,33 @@ export default function UnsubscribeFeedbackClient({
                     <div>
                         <CardTitle>Unsubscribe feedback</CardTitle>
                         <CardDescription>
-                            {totalCount} feedback {totalCount === 1 ? 'entry' : 'entries'} found
+                            {totalCount} feedback{' '}
+                            {totalCount === 1 ? 'entry' : 'entries'} found
                         </CardDescription>
                     </div>
                     <div className="flex items-center gap-2">
-                        <Label htmlFor="type-filter" className="text-sm whitespace-nowrap">
+                        <Label
+                            htmlFor="type-filter"
+                            className="text-sm whitespace-nowrap"
+                        >
                             Type
                         </Label>
                         <Select
                             value={currentType}
                             onValueChange={handleTypeChange}
                         >
-                            <SelectTrigger id="type-filter" className="w-[180px]">
+                            <SelectTrigger
+                                id="type-filter"
+                                className="w-[180px]"
+                            >
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
                                 {TYPE_OPTIONS.map(opt => (
-                                    <SelectItem key={opt.value} value={opt.value}>
+                                    <SelectItem
+                                        key={opt.value}
+                                        value={opt.value}
+                                    >
                                         {opt.label}
                                     </SelectItem>
                                 ))}

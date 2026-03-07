@@ -177,12 +177,12 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                         required
                         maxLength={255}
                         value={
-                            mode === 'signup'
-                                ? signupFormData.email
-                                : undefined
+                            mode === 'signup' ? signupFormData.email : undefined
                         }
                         defaultValue={
-                            mode === 'accept-invitation' ? email || '' : undefined
+                            mode === 'accept-invitation'
+                                ? email || ''
+                                : undefined
                         }
                         readOnly={mode === 'accept-invitation' && !!email}
                         className="block mt-1 w-full"
@@ -411,11 +411,9 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                 name="cityId"
                                 dir={isRTL ? 'rtl' : 'ltr'}
                                 disabled={
-                                    !(
-                                        mode === 'signup'
-                                            ? signupFormData.region
-                                            : selectedRegion
-                                    )
+                                    !(mode === 'signup'
+                                        ? signupFormData.region
+                                        : selectedRegion)
                                 }
                                 required
                                 value={

@@ -64,7 +64,8 @@ export default function EmailPreviewPanel({
         ) : templateType === 'digest' ? (
             <div className="bg-gray-50 dark:bg-black p-4 h-[calc(100vh-300px)] overflow-auto flex items-center justify-center">
                 <p className="text-sm text-muted-foreground text-center max-w-xs">
-                    Sélectionnez une région à gauche pour afficher l&apos;aperçu.
+                    Sélectionnez une région à gauche pour afficher
+                    l&apos;aperçu.
                 </p>
             </div>
         ) : templateType === 'blood_request' && bloodRequestPreviewHtml ? (
@@ -88,7 +89,8 @@ export default function EmailPreviewPanel({
         ) : templateType === 'blood_request' ? (
             <div className="bg-gray-50 dark:bg-black p-4 h-[calc(100vh-300px)] overflow-auto flex items-center justify-center">
                 <p className="text-sm text-muted-foreground text-center max-w-xs">
-                    Choisissez une demande ou l&apos;exemple à gauche pour afficher l&apos;aperçu.
+                    Choisissez une demande ou l&apos;exemple à gauche pour
+                    afficher l&apos;aperçu.
                 </p>
             </div>
         ) : (
@@ -178,7 +180,9 @@ export default function EmailPreviewPanel({
                                             }
                                             size="sm"
                                             onClick={() =>
-                                                setPreviewDeviceAction('desktop')
+                                                setPreviewDeviceAction(
+                                                    'desktop',
+                                                )
                                             }
                                             className="h-7 w-7 p-0 dark:text-gray-400 dark:hover:bg-gray-800 dark:data-[state=active]:bg-white dark:data-[state=active]:text-black"
                                         >

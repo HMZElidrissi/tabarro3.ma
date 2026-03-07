@@ -1,7 +1,13 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -70,23 +76,37 @@ export default function DigestTestForm({
                 if (cancelled) return;
                 if (result.html) onPreviewHtml(result.html);
                 else if (result.error && !initialLoad.current) {
-                    toast({ title: 'Aperçu', description: result.error, variant: 'destructive' });
+                    toast({
+                        title: 'Aperçu',
+                        description: result.error,
+                        variant: 'destructive',
+                    });
                 }
             })
             .finally(() => {
                 if (!cancelled) setPreviewLoading(false);
                 initialLoad.current = false;
             });
-        return () => { cancelled = true; };
+        return () => {
+            cancelled = true;
+        };
     }, [regionId, useRealCampaigns, regions.length]);
 
     const handleRefreshPreview = async () => {
         if (!regionId) return;
         setPreviewLoading(true);
         try {
-            const result = await getDigestPreviewHtml(regionId, useRealCampaigns);
+            const result = await getDigestPreviewHtml(
+                regionId,
+                useRealCampaigns,
+            );
             if (result.html) onPreviewHtml(result.html);
-            if (result.error) toast({ title: 'Erreur', description: result.error, variant: 'destructive' });
+            if (result.error)
+                toast({
+                    title: 'Erreur',
+                    description: result.error,
+                    variant: 'destructive',
+                });
         } finally {
             setPreviewLoading(false);
         }
@@ -94,18 +114,36 @@ export default function DigestTestForm({
 
     const handleSend = async () => {
         if (!recipientEmail?.trim()) {
-            toast({ title: 'Email requis', description: 'Entrez l\'adresse du destinataire.', variant: 'destructive' });
+            toast({
+                title: 'Email requis',
+                description: "Entrez l'adresse du destinataire.",
+                variant: 'destructive',
+            });
             return;
         }
         if (!regionId) {
-            toast({ title: 'Région requise', description: 'Choisissez une région.', variant: 'destructive' });
+            toast({
+                title: 'Région requise',
+                description: 'Choisissez une région.',
+                variant: 'destructive',
+            });
             return;
         }
         onSendingChange(true);
         try {
-            const result = await sendTestDigestEmail(recipientEmail.trim(), regionId, useRealCampaigns);
-            if (result.success) toast({ title: 'Envoyé', description: result.message });
-            else toast({ title: 'Erreur', description: result.error, variant: 'destructive' });
+            const result = await sendTestDigestEmail(
+                recipientEmail.trim(),
+                regionId,
+                useRealCampaigns,
+            );
+            if (result.success)
+                toast({ title: 'Envoyé', description: result.message });
+            else
+                toast({
+                    title: 'Erreur',
+                    description: result.error,
+                    variant: 'destructive',
+                });
         } finally {
             onSendingChange(false);
         }
@@ -116,9 +154,13 @@ export default function DigestTestForm({
             <div className="pr-4">
                 <Card>
                     <CardHeader>
-                        <CardTitle className="text-base">Résumé des campagnes</CardTitle>
+                        <CardTitle className="text-base">
+                            Résumé des campagnes
+                        </CardTitle>
                         <CardDescription>
-                            Envoyer un email de test avec le template réel reçu par les participants (région + campagnes du jour ou exemple).
+                            Envoyer un email de test avec le template réel reçu
+                            par les participants (région + campagnes du jour ou
+                            exemple).
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -133,7 +175,12 @@ export default function DigestTestForm({
                                 </SelectTrigger>
                                 <SelectContent>
                                     {regions.map(r => (
-                                        <SelectItem key={r.id} value={String(r.id)}>{r.name}</SelectItem>
+                                        <SelectItem
+                                            key={r.id}
+                                            value={String(r.id)}
+                                        >
+                                            {r.name}
+                                        </SelectItem>
                                     ))}
                                 </SelectContent>
                             </Select>
@@ -143,10 +190,14 @@ export default function DigestTestForm({
                             <input
                                 type="checkbox"
                                 checked={useRealCampaigns}
-                                onChange={e => onUseRealCampaignsChange(e.target.checked)}
+                                onChange={e =>
+                                    onUseRealCampaignsChange(e.target.checked)
+                                }
                                 className="h-4 w-4 rounded border-input"
                             />
-                            <span>Utiliser les campagnes du jour pour cette région</span>
+                            <span>
+                                Utiliser les campagnes du jour pour cette région
+                            </span>
                         </label>
 
                         <div className="space-y-2">
@@ -154,7 +205,9 @@ export default function DigestTestForm({
                             <Input
                                 type="email"
                                 value={recipientEmail}
-                                onChange={e => onRecipientEmailChange(e.target.value)}
+                                onChange={e =>
+                                    onRecipientEmailChange(e.target.value)
+                                }
                                 placeholder="email@exemple.com"
                                 className="h-9"
                             />

@@ -13,16 +13,22 @@ import BloodRequestTestForm from './blood-request-test-form';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function EmailPreview() {
-    const [templateType, setTemplateType] = useState<DigestTestTemplate>('custom');
+    const [templateType, setTemplateType] =
+        useState<DigestTestTemplate>('custom');
     const [digestRegionId, setDigestRegionId] = useState(0);
     const [digestUseRealCampaigns, setDigestUseRealCampaigns] = useState(false);
     const [digestRecipientEmail, setDigestRecipientEmail] = useState('');
-    const [digestPreviewHtml, setDigestPreviewHtml] = useState<string | null>(null);
+    const [digestPreviewHtml, setDigestPreviewHtml] = useState<string | null>(
+        null,
+    );
     const [digestSending, setDigestSending] = useState(false);
 
     const [bloodRequestId, setBloodRequestId] = useState<number | null>(null);
-    const [bloodRequestRecipientEmail, setBloodRequestRecipientEmail] = useState('');
-    const [bloodRequestPreviewHtml, setBloodRequestPreviewHtml] = useState<string | null>(null);
+    const [bloodRequestRecipientEmail, setBloodRequestRecipientEmail] =
+        useState('');
+    const [bloodRequestPreviewHtml, setBloodRequestPreviewHtml] = useState<
+        string | null
+    >(null);
     const [bloodRequestSending, setBloodRequestSending] = useState(false);
 
     const [emailData, setEmailData] = useState<EmailData>({
@@ -205,7 +211,9 @@ export default function EmailPreview() {
             <div className="container mx-auto p-6">
                 <Tabs
                     value={templateType}
-                    onValueChange={v => setTemplateType(v as DigestTestTemplate)}
+                    onValueChange={v =>
+                        setTemplateType(v as DigestTestTemplate)
+                    }
                     className="space-y-4"
                 >
                     <TabsList className="grid w-full max-w-2xl grid-cols-3">
@@ -275,7 +283,9 @@ export default function EmailPreview() {
                                 previewDevice={previewDevice}
                                 setPreviewDeviceAction={setPreviewDeviceAction}
                                 digestPreviewHtml={digestPreviewHtml}
-                                bloodRequestPreviewHtml={bloodRequestPreviewHtml}
+                                bloodRequestPreviewHtml={
+                                    bloodRequestPreviewHtml
+                                }
                             />
                         </div>
                     </div>

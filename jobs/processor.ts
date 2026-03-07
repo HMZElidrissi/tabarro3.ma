@@ -9,10 +9,7 @@ import {
 } from '@/config/blood-group';
 import { BloodGroup } from '@/types/enums';
 import { sendEmail } from '@/lib/mail';
-import {
-    createUnsubscribeToken,
-    getUnsubscribeUrl,
-} from '@/lib/unsubscribe';
+import { createUnsubscribeToken, getUnsubscribeUrl } from '@/lib/unsubscribe';
 
 const jobHandlers = {
     [JobType.BLOOD_REQUEST_NOTIFICATION]: async (payload: any) => {

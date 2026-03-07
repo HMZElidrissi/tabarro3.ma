@@ -109,12 +109,12 @@ export function LatestCampaignParticipants({
                                     </span>
                                 </div>
                             </TableCell>
-                                {showOrganizationColumn && (
-                                    <TableCell className="text-muted-foreground">
-                                        {participant.campaign.organization
-                                            .name || '—'}
-                                    </TableCell>
-                                )}
+                            {showOrganizationColumn && (
+                                <TableCell className="text-muted-foreground">
+                                    {participant.campaign.organization.name ||
+                                        '—'}
+                                </TableCell>
+                            )}
                             <TableCell className="text-muted-foreground">
                                 {participant.campaign.location}
                             </TableCell>
