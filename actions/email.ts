@@ -234,9 +234,17 @@ export async function getDigestPreviewHtml(
     }
 
     const { regionName, campaigns, date } = data;
+    const normalizedCampaigns = (campaigns ?? []).map(c => ({
+        ...c,
+        organization: {
+            ...c.organization,
+            name: c.organization?.name ?? 'Organisateur inconnu',
+        },
+    }));
+
     const template = CampaignDigestEmail({
         regionName: regionName ?? 'Région',
-        campaigns: campaigns ?? [],
+        campaigns: normalizedCampaigns,
         date: date ?? new Date().toISOString().split('T')[0],
         unsubscribeUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma'}/unsubscribe?token=preview`,
     });
@@ -278,6 +286,14 @@ export async function sendTestDigestEmail(
             };
         }
 
+        const normalizedCampaigns = campaigns.map(c => ({
+            ...c,
+            organization: {
+                ...c.organization,
+                name: c.organization?.name ?? 'Organisateur inconnu',
+            },
+        }));
+
         const dateForSubject = new Date(
             (date ?? '') + 'T12:00:00',
         ).toLocaleDateString('fr-FR', {
@@ -295,7 +311,7 @@ export async function sendTestDigestEmail(
 
         const template = CampaignDigestEmail({
             regionName: regionName ?? 'Région',
-            campaigns,
+            campaigns: normalizedCampaigns,
             date: date ?? new Date().toISOString().split('T')[0],
             unsubscribeUrl,
         });
