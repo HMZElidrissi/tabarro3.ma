@@ -1,0 +1,58 @@
+name: Auto bump version and tag
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  bump-and-tag:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Bump patch version
+        run: pnpm version patch --no-git-tag-version
+
+      - name: Read new version
+        id: vars
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> "$GITHUB_OUTPUT"
+
+      - name: Configure git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit version bump
+        run: |
+          git add package.json pnpm-lock.yaml
+          git commit -m "chore: bump version to ${{ steps.vars.outputs.version }}" || echo "No changes to commit"
+
+      - name: Push changes
+        run: git push origin HEAD:${{ github.event.pull_request.base.ref }}
+
+      - name: Create and push tag
+        run: |
+          git tag ${{ steps.vars.outputs.version }}
+          git push origin ${{ steps.vars.outputs.version }}
+
