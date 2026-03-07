@@ -1,7 +1,0 @@
-# Allow Prisma packages to run install scripts (required for query engine generation).
-# pnpm v10+ blocks lifecycle scripts by default; without this, prisma generate fails
-# with "Cannot find module ... query_engine_bg.postgresql.wasm-base64.js"
-onlyBuiltDependencies:
-    - prisma
-    - '@prisma/client'
-    - '@prisma/engines'
