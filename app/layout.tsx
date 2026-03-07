@@ -8,6 +8,7 @@ import { i18n } from '@/i18n/i18n-config';
 import { cn } from '@/lib/utils';
 import { NavigationProgress } from '@/components/custom/navigation-progress';
 import { NavigationProvider } from '@/components/custom/navigation-events';
+import { DirectionProviderWrapper } from '@/components/providers/direction-provider';
 // import { GoogleAnalytics } from '@next/third-parties/google';
 // import { FirebaseAnalytics } from '@/components/custom/firebase-analytics';
 import Script from 'next/script';
@@ -166,10 +167,12 @@ export default async function RootLayout({
                 data-website-id="f5c55ad9-cc4d-4f5f-a444-402a384c6902"
             />
             <body className="antialiased bg-gray-50">
-                <NavigationProvider>
-                    <NavigationProgress />
-                    {children}
-                </NavigationProvider>
+                <DirectionProviderWrapper dir={isRTL ? 'rtl' : 'ltr'}>
+                    <NavigationProvider>
+                        <NavigationProgress />
+                        {children}
+                    </NavigationProvider>
+                </DirectionProviderWrapper>
             </body>
         </html>
     );
