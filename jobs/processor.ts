@@ -9,6 +9,10 @@ import {
 } from '@/config/blood-group';
 import { BloodGroup } from '@/types/enums';
 import { sendEmail } from '@/lib/mail';
+import {
+    createUnsubscribeToken,
+    getUnsubscribeUrl,
+} from '@/lib/unsubscribe';
 
 const jobHandlers = {
     [JobType.BLOOD_REQUEST_NOTIFICATION]: async (payload: any) => {
@@ -35,6 +39,7 @@ const jobHandlers = {
         const recipients = await prisma.user.findMany({
             where: {
                 role: 'PARTICIPANT',
+                receiveBloodRequestEmails: true,
                 bloodGroup: {
                     in: compatibleBloodGroups,
                 },
@@ -55,6 +60,12 @@ const jobHandlers = {
 
         // Send individual emails to each recipient
         for (const recipient of recipients) {
+            const token = await createUnsubscribeToken(
+                recipient.email,
+                'BLOOD_REQUEST',
+            );
+            const unsubscribeUrl = getUnsubscribeUrl(token);
+
             const template = UrgentBloodRequestEmail({
                 bloodGroup: getBloodGroupLabel(
                     request.bloodGroup as BloodGroup,
@@ -63,6 +74,7 @@ const jobHandlers = {
                 city: request.city.name,
                 phone: request.phone || undefined,
                 description: request.description,
+                unsubscribeUrl,
             });
 
             const emailHtml = await render(template, { pretty: true });
@@ -97,10 +109,17 @@ const jobHandlers = {
 
         // Send individual digest emails to each recipient
         for (const recipient of recipients) {
+            const token = await createUnsubscribeToken(
+                recipient.email,
+                'CAMPAIGN_DIGEST',
+            );
+            const unsubscribeUrl = getUnsubscribeUrl(token);
+
             const template = CampaignDigestEmail({
                 regionName,
                 campaigns,
                 date: today,
+                unsubscribeUrl,
             });
 
             const emailHtml = await render(template, { pretty: true });

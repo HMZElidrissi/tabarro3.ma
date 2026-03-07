@@ -18,7 +18,7 @@ const ProfileSchema = z.object({
 
 export const updateProfile = validatedActionWithUser(
     ProfileSchema,
-    async (data, _, user) => {
+    async (data, formData, user) => {
         try {
             const dict = await getDictionary();
 
@@ -37,6 +37,11 @@ export const updateProfile = validatedActionWithUser(
                 return { error: 'User not found' };
             }
 
+            const receiveCampaignDigests =
+                formData.get('receiveCampaignDigests') === 'on';
+            const receiveBloodRequestEmails =
+                formData.get('receiveBloodRequestEmails') === 'on';
+
             // Update user profile
             await prisma.user.update({
                 where: { id: user.id },
@@ -45,6 +50,8 @@ export const updateProfile = validatedActionWithUser(
                     phone: normalizeMoroccanPhone(data.phone),
                     bloodGroup: data.bloodGroup,
                     cityId: data.cityId,
+                    receiveCampaignDigests,
+                    receiveBloodRequestEmails,
                     updatedAt: new Date(),
                 },
             });
@@ -88,6 +95,8 @@ export const getProfile = async (userId: string) => {
             role: true,
             createdAt: true,
             updatedAt: true,
+            receiveCampaignDigests: true,
+            receiveBloodRequestEmails: true,
         },
     });
 };

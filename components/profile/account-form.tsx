@@ -21,9 +21,11 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
 import { bloodGroups, getBloodGroupLabel } from '@/config/blood-group';
 import { REGIONS_AND_CITIES } from '@/config/locations';
 import { ActionState } from '@/auth/middleware';
+import { cn } from '@/lib/utils';
 
 interface AccountFormProps {
     user: User;
@@ -187,6 +189,50 @@ export function AccountForm({ user, dict, isRTL }: AccountFormProps) {
                                 ))}
                         </SelectContent>
                     </Select>
+                </div>
+
+                <Separator className="my-4" />
+                <div className="space-y-3">
+                    <Label className="text-sm font-medium leading-none">
+                        {dict.profile?.notificationPreferences ??
+                            'Préférences de notification par email'}
+                    </Label>
+                    <div className="space-y-3">
+                        <label
+                            className={cn(
+                                'flex items-center gap-3 cursor-pointer text-sm text-foreground',
+                                isRTL && 'flex-row-reverse',
+                            )}
+                        >
+                            <input
+                                type="checkbox"
+                                name="receiveCampaignDigests"
+                                defaultChecked={user.receiveCampaignDigests}
+                                className="h-4 w-4 rounded border border-input bg-background accent-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                            />
+                            <span>
+                                {dict.profile?.receiveCampaignDigests ??
+                                    'Recevoir le récapitulatif quotidien des campagnes dans ma région'}
+                            </span>
+                        </label>
+                        <label
+                            className={cn(
+                                'flex items-center gap-3 cursor-pointer text-sm text-foreground',
+                                isRTL && 'flex-row-reverse',
+                            )}
+                        >
+                            <input
+                                type="checkbox"
+                                name="receiveBloodRequestEmails"
+                                defaultChecked={user.receiveBloodRequestEmails}
+                                className="h-4 w-4 rounded border border-input bg-background accent-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                            />
+                            <span>
+                                {dict.profile?.receiveBloodRequestEmails ??
+                                    'Recevoir les emails pour les demandes urgentes de sang compatibles'}
+                            </span>
+                        </label>
+                    </div>
                 </div>
             </CardContent>
             <CardFooter>

@@ -18,6 +18,7 @@ interface UrgentBloodRequestEmailProps {
     city: string;
     phone?: string;
     description: string;
+    unsubscribeUrl?: string;
 }
 
 export const UrgentBloodRequestEmail = ({
@@ -26,6 +27,7 @@ export const UrgentBloodRequestEmail = ({
     city,
     phone,
     description,
+    unsubscribeUrl,
 }: UrgentBloodRequestEmailProps) => (
     <Html lang="fr" dir="ltr">
         <Head />
@@ -117,6 +119,20 @@ export const UrgentBloodRequestEmail = ({
                     </Text>
 
                     <Hr className="border-gray-200 my-8" />
+
+                    {unsubscribeUrl && (
+                        <Text className="text-gray-500 text-xs text-center mb-3">
+                            Vous ne souhaitez plus recevoir de notifications pour
+                            les demandes urgentes de sang ?{' '}
+                            <a
+                                href={unsubscribeUrl}
+                                className="text-brand-600 hover:text-brand-700"
+                            >
+                                Se désabonner
+                            </a>
+                            .
+                        </Text>
+                    )}
 
                     <Text className="text-gray-400 text-xs text-center mb-2">
                         Cet email est envoyé automatiquement. Veuillez ne pas y

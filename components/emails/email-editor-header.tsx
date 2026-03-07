@@ -3,9 +3,13 @@ import { Copy, Mail } from 'lucide-react';
 
 interface EmailEditorHeaderProps {
     onCopy: () => void;
+    showCopyButton?: boolean;
 }
 
-export default function EmailEditorHeader({ onCopy }: EmailEditorHeaderProps) {
+export default function EmailEditorHeader({
+    onCopy,
+    showCopyButton = true,
+}: EmailEditorHeaderProps) {
     return (
         <div className="bg-white dark:bg-background border-b border-gray-200 dark:border-gray-800 sticky top-0 z-10">
             <div className="container mx-auto px-6 py-4">
@@ -16,15 +20,15 @@ export default function EmailEditorHeader({ onCopy }: EmailEditorHeaderProps) {
                         </div>
                         <div>
                             <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
-                                Créateur d'Email
+                                Test des emails
                             </h1>
                             <p className="text-sm text-gray-500 dark:text-gray-400">
-                                Créez des emails personnalisés avec aperçu en
-                                temps réel
+                                Prévisualiser et envoyer des emails de test
+                                (digest ou personnalisé)
                             </p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3">
+                    {showCopyButton && (
                         <Button
                             variant="outline"
                             size="sm"
@@ -34,7 +38,7 @@ export default function EmailEditorHeader({ onCopy }: EmailEditorHeaderProps) {
                             <Copy className="w-4 h-4 mr-2" />
                             Copier HTML
                         </Button>
-                    </div>
+                    )}
                 </div>
             </div>
         </div>

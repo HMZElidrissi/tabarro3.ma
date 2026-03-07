@@ -19,8 +19,14 @@ export const signIn = validatedAction(signInSchema, async data => {
     const { email, password } = data;
     const dict = await getDictionary();
 
-    const user = await prisma.user.findUnique({
-        where: { email },
+    // Look up user in a case-insensitive way to avoid email casing issues
+    const user = await prisma.user.findFirst({
+        where: {
+            email: {
+                equals: email,
+                mode: 'insensitive',
+            },
+        },
     });
 
     if (!user) {

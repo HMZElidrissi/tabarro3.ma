@@ -16,6 +16,8 @@ export interface User {
     createdAt: Date;
     updatedAt: Date;
     deletedAt: Date | null;
+    receiveCampaignDigests: boolean;
+    receiveBloodRequestEmails: boolean;
     invitationsSent?: Invitation[];
     campaigns?: Campaign[];
     participatedCampaigns?: CampaignParticipant[];

@@ -1,6 +1,6 @@
 'use client';
 
-import { sendCustomEmail } from '@/actions/email';
+import { sendCustomEmail, type DigestTestTemplate } from '@/actions/email';
 import { toast } from '@/hooks/use-toast';
 import { useState } from 'react';
 import { EmailData, PRESET_CONTENT } from '@/types/email';
@@ -8,8 +8,23 @@ import { generatePreviewHTML } from '@/lib/email-composer';
 import EmailEditorHeader from './email-editor-header';
 import EmailEditorPanel from './email-editor-panel';
 import EmailPreviewPanel from './email-preview-panel';
+import DigestTestForm from './digest-test-form';
+import BloodRequestTestForm from './blood-request-test-form';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function EmailPreview() {
+    const [templateType, setTemplateType] = useState<DigestTestTemplate>('custom');
+    const [digestRegionId, setDigestRegionId] = useState(0);
+    const [digestUseRealCampaigns, setDigestUseRealCampaigns] = useState(false);
+    const [digestRecipientEmail, setDigestRecipientEmail] = useState('');
+    const [digestPreviewHtml, setDigestPreviewHtml] = useState<string | null>(null);
+    const [digestSending, setDigestSending] = useState(false);
+
+    const [bloodRequestId, setBloodRequestId] = useState<number | null>(null);
+    const [bloodRequestRecipientEmail, setBloodRequestRecipientEmail] = useState('');
+    const [bloodRequestPreviewHtml, setBloodRequestPreviewHtml] = useState<string | null>(null);
+    const [bloodRequestSending, setBloodRequestSending] = useState(false);
+
     const [emailData, setEmailData] = useState<EmailData>({
         showLogo: true,
         logoUrl: 'https://tabarro3.ma/logo.png',
@@ -51,13 +66,13 @@ export default function EmailPreview() {
     >('desktop');
 
     const [openSections, setOpenSections] = useState({
+        send: true,
         presets: true,
-        logo: true,
         content: true,
         highlight: false,
-        buttons: true,
+        logo: false,
+        buttons: false,
         signature: false,
-        send: true,
     });
 
     const toggleSection = (section: keyof typeof openSections) => {
@@ -182,29 +197,89 @@ export default function EmailPreview() {
 
     return (
         <div className="min-h-screen">
-            <EmailEditorHeader onCopy={copyToClipboard} />
+            <EmailEditorHeader
+                onCopy={copyToClipboard}
+                showCopyButton={templateType === 'custom'}
+            />
 
             <div className="container mx-auto p-6">
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                    <EmailEditorPanel
-                        emailData={emailData}
-                        openSections={openSections}
-                        isSending={isSending}
-                        onInputChange={handleInputChange}
-                        onApplyPreset={applyPreset}
-                        onToggleSection={toggleSection}
-                        onAddFooterLink={addFooterLink}
-                        onRemoveFooterLink={removeFooterLink}
-                        onUpdateFooterLink={updateFooterLink}
-                        onSendEmail={handleSendEmail}
-                    />
+                <Tabs
+                    value={templateType}
+                    onValueChange={v => setTemplateType(v as DigestTestTemplate)}
+                    className="space-y-4"
+                >
+                    <TabsList className="grid w-full max-w-2xl grid-cols-3">
+                        <TabsTrigger value="digest">
+                            Résumé campagnes
+                        </TabsTrigger>
+                        <TabsTrigger value="blood_request">
+                            Demande urgente sang
+                        </TabsTrigger>
+                        <TabsTrigger value="custom">
+                            Email personnalisé
+                        </TabsTrigger>
+                    </TabsList>
 
-                    <EmailPreviewPanel
-                        emailData={emailData}
-                        previewDevice={previewDevice}
-                        setPreviewDeviceAction={setPreviewDeviceAction}
-                    />
-                </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                        <div className="lg:col-span-2">
+                            <TabsContent value="digest" className="mt-0">
+                                <DigestTestForm
+                                    regionId={digestRegionId}
+                                    useRealCampaigns={digestUseRealCampaigns}
+                                    recipientEmail={digestRecipientEmail}
+                                    onRegionIdChange={setDigestRegionId}
+                                    onUseRealCampaignsChange={
+                                        setDigestUseRealCampaigns
+                                    }
+                                    onRecipientEmailChange={
+                                        setDigestRecipientEmail
+                                    }
+                                    onPreviewHtml={setDigestPreviewHtml}
+                                    isSending={digestSending}
+                                    onSendingChange={setDigestSending}
+                                />
+                            </TabsContent>
+                            <TabsContent value="blood_request" className="mt-0">
+                                <BloodRequestTestForm
+                                    requestId={bloodRequestId}
+                                    recipientEmail={bloodRequestRecipientEmail}
+                                    onRequestIdChange={setBloodRequestId}
+                                    onRecipientEmailChange={
+                                        setBloodRequestRecipientEmail
+                                    }
+                                    onPreviewHtml={setBloodRequestPreviewHtml}
+                                    isSending={bloodRequestSending}
+                                    onSendingChange={setBloodRequestSending}
+                                />
+                            </TabsContent>
+                            <TabsContent value="custom" className="mt-0">
+                                <EmailEditorPanel
+                                    emailData={emailData}
+                                    openSections={openSections}
+                                    isSending={isSending}
+                                    onInputChange={handleInputChange}
+                                    onApplyPreset={applyPreset}
+                                    onToggleSection={toggleSection}
+                                    onAddFooterLink={addFooterLink}
+                                    onRemoveFooterLink={removeFooterLink}
+                                    onUpdateFooterLink={updateFooterLink}
+                                    onSendEmail={handleSendEmail}
+                                />
+                            </TabsContent>
+                        </div>
+
+                        <div className="lg:col-span-3">
+                            <EmailPreviewPanel
+                                templateType={templateType}
+                                emailData={emailData}
+                                previewDevice={previewDevice}
+                                setPreviewDeviceAction={setPreviewDeviceAction}
+                                digestPreviewHtml={digestPreviewHtml}
+                                bloodRequestPreviewHtml={bloodRequestPreviewHtml}
+                            />
+                        </div>
+                    </div>
+                </Tabs>
             </div>
         </div>
     );

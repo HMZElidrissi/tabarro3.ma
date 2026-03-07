@@ -73,6 +73,8 @@ model User {
   createdAt       DateTime        @default(now()) @map("created_at")
   updatedAt       DateTime        @default(now()) @map("updated_at")
   deletedAt       DateTime?       @map("deleted_at")
+  receiveCampaignDigests    Boolean           @default(true) @map("receive_campaign_digests")
+  receiveBloodRequestEmails Boolean           @default(true) @map("receive_blood_request_emails")
   activities      ActivityLog[]
   invitationsSent Invitation[]    @relation("InvitedBy")
   PasswordReset   PasswordReset[]
@@ -81,6 +83,7 @@ model User {
   campaigns             Campaign[]            @relation("OrganizedCampaigns")
   participatedCampaigns CampaignParticipant[]
   bloodRequests         BloodRequest[]
+  unsubscribeFeedback   UnsubscribeFeedback[]
 
   @@map("users")
 }
@@ -198,6 +201,11 @@ enum JobType {
   CAMPAIGN_DIGEST
 }
 
+enum NotificationType {
+  CAMPAIGN_DIGEST
+  BLOOD_REQUEST
+}
+
 model Job {
   id          String    @id @default(uuid())
   type        JobType?
@@ -240,4 +248,16 @@ model CampaignDigestCampaign {
 
   @@unique([digestId, campaignId])
   @@map("campaign_digest_campaigns")
+}
+
+model UnsubscribeFeedback {
+  id        String           @id @default(uuid())
+  email     String           @db.VarChar(255)
+  userId    String?          @map("user_id")
+  user      User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  type      NotificationType
+  reason    String?          @db.Text
+  createdAt DateTime         @default(now()) @map("created_at")
+
+  @@map("unsubscribe_feedback")
 }

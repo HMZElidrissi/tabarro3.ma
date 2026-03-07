@@ -50,16 +50,18 @@ export default function EmailEditorPanel({
         <div className="lg:col-span-2">
             <ScrollArea className="h-[calc(100vh-200px)]">
                 <div className="space-y-4 pr-4">
+                    <SendEmailForm
+                        isOpen={openSections.send}
+                        onToggle={() => onToggleSection('send')}
+                        emailData={emailData}
+                        onInputChange={onInputChange}
+                        onSendEmail={onSendEmail}
+                        isSending={isSending}
+                    />
                     <PresetSelector
                         isOpen={openSections.presets}
                         onToggle={() => onToggleSection('presets')}
                         onApplyPreset={onApplyPreset}
-                    />
-                    <LogoOptions
-                        isOpen={openSections.logo}
-                        onToggle={() => onToggleSection('logo')}
-                        emailData={emailData}
-                        onInputChange={onInputChange}
                     />
                     <ContentEditor
                         isOpen={openSections.content}
@@ -70,6 +72,12 @@ export default function EmailEditorPanel({
                     <HighlightBoxEditor
                         isOpen={openSections.highlight}
                         onToggle={() => onToggleSection('highlight')}
+                        emailData={emailData}
+                        onInputChange={onInputChange}
+                    />
+                    <LogoOptions
+                        isOpen={openSections.logo}
+                        onToggle={() => onToggleSection('logo')}
                         emailData={emailData}
                         onInputChange={onInputChange}
                     />
@@ -87,14 +95,6 @@ export default function EmailEditorPanel({
                         onAddFooterLink={onAddFooterLink}
                         onRemoveFooterLink={onRemoveFooterLink}
                         onUpdateFooterLink={onUpdateFooterLink}
-                    />
-                    <SendEmailForm
-                        isOpen={openSections.send}
-                        onToggle={() => onToggleSection('send')}
-                        emailData={emailData}
-                        onInputChange={onInputChange}
-                        onSendEmail={onSendEmail}
-                        isSending={isSending}
                     />
                 </div>
             </ScrollArea>

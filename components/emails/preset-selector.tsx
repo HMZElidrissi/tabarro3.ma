@@ -22,7 +22,10 @@ export default function PresetSelector({
             onToggle={onToggle}
             variant="blue"
         >
-            <div className="grid grid-cols-2 gap-2 pt-4">
+            <p className="text-xs text-muted-foreground mb-3 pt-1">
+                Préremplir le titre, message et signature avec un modèle.
+            </p>
+            <div className="grid grid-cols-2 gap-2">
                 {Object.entries(PRESET_CONTENT).map(([key, preset]) => (
                     <Button
                         key={key}

@@ -235,6 +235,17 @@
             "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères"
         }
     },
+    "unsubscribe": {
+        "title": "Se désabonner des notifications",
+        "description": "Vous pouvez nous indiquer pourquoi vous ne souhaitez plus recevoir ces emails (optionnel). Votre réponse nous aide à améliorer nos notifications.",
+        "reasonLabel": "Pourquoi vous désabonnez-vous ?",
+        "reasonPlaceholder": "Exemples : je reçois trop d'emails, je n'habite plus dans cette région, autre...",
+        "submitButton": "Confirmer le désabonnement",
+        "submitButtonLoading": "Traitement en cours...",
+        "errorInvalidLink": "Lien de désabonnement invalide ou expiré.",
+        "successDigest": "Vous ne recevrez plus les résumés de campagnes.",
+        "successBloodRequest": "Vous ne recevrez plus les demandes urgentes de sang."
+    },
     "forms": {
         "labels": {
             "fullName": "Nom complet",
@@ -270,7 +281,8 @@
         }
     },
     "signIn": {
-        "invalidCredentials": "E-mail ou mot de passe invalide. Veuillez réessayer."
+        "invalidCredentials": "E-mail ou mot de passe invalide. Veuillez réessayer.",
+        "emailNotVerified": "Veuillez confirmer votre adresse e-mail avant de vous connecter. Consultez votre boîte de réception pour le lien de confirmation."
     },
     "signUp": {
         "passwordsDoNotMatch": "Les mots de passe ne correspondent pas.",
@@ -281,6 +293,9 @@
         "title": "Paramètres du profil",
         "description": "Gérez vos informations personnelles et vos demandes de don de sang",
         "accountInformation": "Informations du compte",
+        "notificationPreferences": "Préférences de notification par email",
+        "receiveCampaignDigests": "Recevoir le récapitulatif quotidien des campagnes dans ma région",
+        "receiveBloodRequestEmails": "Recevoir les emails pour les demandes urgentes de sang compatibles",
         "tabs": {
             "bloodRequests": "Demandes de sang",
             "accountInfo": "Informations du compte"
