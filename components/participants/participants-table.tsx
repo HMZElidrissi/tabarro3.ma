@@ -65,9 +65,9 @@ export function ParticipantsTable({
                                     {getBloodGroupLabel(participant.bloodGroup)}
                                 </Badge>
                             </TableCell>
-                            <TableCell>{participant.phone || 'N/A'}</TableCell>
+                            <TableCell>{participant.phone || '—'}</TableCell>
                             <TableCell>
-                                {participant.city?.name || 'N/A'}
+                                {participant.city?.name || '—'}
                             </TableCell>
                             <TableCell>
                                 {format(

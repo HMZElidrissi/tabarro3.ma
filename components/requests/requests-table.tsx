@@ -78,7 +78,7 @@ export function BloodRequestsTable({
                     {requests.map(request => (
                         <TableRow key={request.id}>
                             <TableCell className="font-medium whitespace-pre-line break-words max-w-xs">
-                                {request.description}
+                                {request.description || '—'}
                             </TableCell>
                             <TableCell>
                                 <Badge variant="outline">

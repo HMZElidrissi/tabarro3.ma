@@ -79,7 +79,7 @@ export function CampaignParticipantsTable({
                                                           participant.user
                                                               .bloodGroup,
                                                       )
-                                                    : 'N/A'}
+                                                    : '—'}
                                             </Badge>
                                         </TableCell>
                                     </TableRow>

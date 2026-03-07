@@ -10,24 +10,46 @@ import { usePathname } from 'next/navigation';
 
 export function BreadcrumbNav() {
     const pathname = usePathname();
-    const paths = pathname
+    const segments = pathname
         .split('/')
-        .filter(path => path !== 'dashboard' && Boolean(path));
+        .filter(segment => Boolean(segment));
+
+    const dashboardIndex = segments.indexOf('dashboard');
+
+    const paths =
+        dashboardIndex === -1
+            ? []
+            : segments
+                  .slice(dashboardIndex + 1)
+                  .filter(segment => {
+                      if (!segment) return false;
+                      if (/^\[.*\]$/.test(segment)) return false;
+                      if (/^\d+$/.test(segment)) return false;
+                      return true;
+                  });
+
+    const formatLabel = (segment: string) =>
+        segment
+            .split('-')
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+            .join(' ');
 
     return (
         <Breadcrumb className="flex items-center">
             <BreadcrumbItem>
                 <BreadcrumbLink
-                    className="text-gray-400 hover:text-gray-500 mr-3"
+                    className="flex items-center text-gray-400 hover:text-gray-500 mr-3"
                     href="/dashboard"
                 >
                     <Home className="h-4 w-4" />
                 </BreadcrumbLink>
             </BreadcrumbItem>
             {paths.map((path, index) => {
-                const href = `/${['dashboard', ...paths.slice(0, index + 1)].join('/')}`;
+                const href = `/dashboard/${paths
+                    .slice(0, index + 1)
+                    .join('/')}`;
                 const isLast = index === paths.length - 1;
-                const label = path.charAt(0).toUpperCase() + path.slice(1);
+                const label = formatLabel(path);
 
                 return (
                     <BreadcrumbItem key={path}>
@@ -36,7 +58,7 @@ export function BreadcrumbNav() {
                             href={href}
                             className={`text-gray-500 hover:text-gray-700 ${isLast ? 'font-semibold' : ''}`}
                         >
-                            {label !== 'Dashboard' ? label : 'Home'}
+                            {label}
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                 );

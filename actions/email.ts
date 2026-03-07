@@ -229,7 +229,7 @@ export async function getDigestPreviewHtml(regionId: number, useRealData: boolea
 
     const { regionName, campaigns, date } = data;
     const template = CampaignDigestEmail({
-        regionName,
+        regionName: regionName ?? 'Région',
         campaigns: campaigns ?? [],
         date: date ?? new Date().toISOString().split('T')[0],
         unsubscribeUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma'}/unsubscribe?token=preview`,
@@ -285,7 +285,7 @@ export async function sendTestDigestEmail(
         const unsubscribeUrl = getUnsubscribeUrl(token);
 
         const template = CampaignDigestEmail({
-            regionName,
+            regionName: regionName ?? 'Région',
             campaigns,
             date: date ?? new Date().toISOString().split('T')[0],
             unsubscribeUrl,

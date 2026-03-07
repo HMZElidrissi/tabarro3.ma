@@ -76,7 +76,7 @@ export function LatestCampaignParticipants({
                     {participants.map(participant => (
                         <TableRow key={participant.id}>
                             <TableCell className="font-medium">
-                                {participant.user.name || 'N/A'}
+                                {participant.user.name || '—'}
                             </TableCell>
                             <TableCell>
                                 <div className="flex flex-col text-sm">
@@ -96,7 +96,7 @@ export function LatestCampaignParticipants({
                                         ? getBloodGroupLabel(
                                               participant.user.bloodGroup,
                                           ) || 'Unknown'
-                                        : 'N/A'}
+                                        : '—'}
                                 </Badge>
                             </TableCell>
                             <TableCell>
@@ -109,12 +109,12 @@ export function LatestCampaignParticipants({
                                     </span>
                                 </div>
                             </TableCell>
-                            {showOrganizationColumn && (
-                                <TableCell className="text-muted-foreground">
-                                    {participant.campaign.organization.name ||
-                                        'N/A'}
-                                </TableCell>
-                            )}
+                                {showOrganizationColumn && (
+                                    <TableCell className="text-muted-foreground">
+                                        {participant.campaign.organization
+                                            .name || '—'}
+                                    </TableCell>
+                                )}
                             <TableCell className="text-muted-foreground">
                                 {participant.campaign.location}
                             </TableCell>
