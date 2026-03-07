@@ -352,7 +352,19 @@ const SAMPLE_BLOOD_REQUEST = {
     description: 'Patient en urgence, besoin de sang O+ pour intervention.',
 };
 
-export async function getBloodRequestsForTest() {
+type BloodRequestTestItem = {
+    id: number;
+    bloodGroup: BloodGroup;
+    location: string;
+    city: string;
+    phone: string | null;
+    description: string;
+};
+
+export async function getBloodRequestsForTest(): Promise<{
+    error?: string;
+    requests: BloodRequestTestItem[];
+}> {
     const user = await getUser();
     if (!user || (user.role !== 'ADMIN' && user.role !== 'ORGANIZATION')) {
         return { error: 'Non autorisé', requests: [] };
@@ -366,7 +378,7 @@ export async function getBloodRequestsForTest() {
     return {
         requests: requests.map(r => ({
             id: r.id,
-            bloodGroup: r.bloodGroup,
+            bloodGroup: r.bloodGroup as BloodGroup,
             location: r.location,
             city: r.city.name,
             phone: r.phone,

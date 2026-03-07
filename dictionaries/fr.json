@@ -224,6 +224,14 @@
             "invalidOrExpiredLink": "Ce lien de réinitialisation de mot de passe est invalide ou a expiré. Veuillez en demander un nouveau.",
             "passwordResetSuccess": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
         },
+        "verifyEmail": {
+            "checkInbox": "Nous vous avons envoyé un email de confirmation. Veuillez cliquer sur le lien dans l'email pour vérifier votre adresse avant de vous connecter.",
+            "successTitle": "Email vérifié",
+            "successMessage": "Votre adresse email a été vérifiée avec succès. Vous pouvez maintenant vous connecter à votre compte.",
+            "invalidTitle": "Lien invalide ou expiré",
+            "invalidMessage": "Ce lien de vérification est invalide ou a expiré. Veuillez demander un nouvel email de vérification en vous inscrivant de nouveau ou en contactant le support.",
+            "goToSignIn": "Aller à la page de connexion"
+        },
         "updatePassword": {
             "currentPasswordIncorrect": "Le mot de passe actuel est incorrect.",
             "newPasswordMustBeDifferent": "Le nouveau mot de passe doit être différent du mot de passe actuel.",
@@ -287,7 +295,8 @@
     "signUp": {
         "passwordsDoNotMatch": "Les mots de passe ne correspondent pas.",
         "userAlreadyExists": "Un utilisateur avec cet e-mail existe déjà.",
-        "invalidPhoneNumber": "Numéro de téléphone marocain invalide"
+        "invalidPhoneNumber": "Numéro de téléphone marocain invalide",
+        "verificationEmailFailed": "Nous n'avons pas pu envoyer l'email de vérification. Veuillez réessayer plus tard."
     },
     "profile": {
         "title": "Paramètres du profil",

@@ -78,7 +78,6 @@ export default async function VerifyEmailPage({
 
     return (
         <Suspense fallback={<AuthCardSkeleton />}>
-            {/* @ts-expect-error Async Server Component */}
             <VerifyEmailContent token={token} />
         </Suspense>
     );
