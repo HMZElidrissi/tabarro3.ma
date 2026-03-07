@@ -4,8 +4,8 @@ import { redirect } from 'next/navigation';
 import EmailPreview from '@/components/emails/email-preview';
 
 export const metadata: Metadata = {
-    title: 'Email Preview - Dashboard',
-    description: 'Preview and send email templates',
+    title: 'Test des emails - Dashboard',
+    description: 'Prévisualiser et envoyer des emails de test (digest ou personnalisé)',
 };
 
 export default async function EmailsPage() {

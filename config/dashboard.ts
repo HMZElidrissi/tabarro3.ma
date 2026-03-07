@@ -4,6 +4,7 @@ import {
     Droplets,
     Home,
     Mail,
+    MailMinus,
     MessageSquare,
     Settings,
     UsersIcon,
@@ -68,6 +69,13 @@ export const mainNavigation: NavigationItem[] = [
         icon: Mail,
         href: '/dashboard/emails',
         pattern: '^/dashboard/emails',
+        roles: [Role.ADMIN],
+    },
+    {
+        title: 'Unsubscribe feedback',
+        icon: MailMinus,
+        href: '/dashboard/unsubscribe-feedback',
+        pattern: '^/dashboard/unsubscribe-feedback',
         roles: [Role.ADMIN],
     },
     {

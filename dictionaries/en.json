@@ -260,6 +260,17 @@
             "passwordMinLength": "Password must be at least 8 characters"
         }
     },
+    "unsubscribe": {
+        "title": "Unsubscribe from notifications",
+        "description": "You can tell us why you no longer want to receive these emails (optional). Your feedback helps us improve our notifications.",
+        "reasonLabel": "Why are you unsubscribing?",
+        "reasonPlaceholder": "e.g. too many emails, I no longer live in this region, other...",
+        "submitButton": "Confirm unsubscribe",
+        "submitButtonLoading": "Processing...",
+        "errorInvalidLink": "Unsubscribe link is invalid or expired.",
+        "successDigest": "You will no longer receive campaign digests.",
+        "successBloodRequest": "You will no longer receive urgent blood request emails."
+    },
     "forms": {
         "labels": {
             "fullName": "Full Name",
@@ -308,6 +319,9 @@
         "title": "Profile Settings",
         "description": "Manage your personal information and blood donation requests",
         "accountInformation": "Account Information",
+        "notificationPreferences": "Email notification preferences",
+        "receiveCampaignDigests": "Receive the daily campaign digest for my region",
+        "receiveBloodRequestEmails": "Receive emails for compatible urgent blood requests",
         "tabs": {
             "bloodRequests": "Blood Requests",
             "accountInfo": "Account Information"

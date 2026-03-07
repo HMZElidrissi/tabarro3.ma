@@ -35,12 +35,14 @@ interface CampaignDigestEmailProps {
     regionName: string;
     campaigns: Campaign[];
     date: string;
+    unsubscribeUrl?: string;
 }
 
 export const CampaignDigestEmail = ({
     regionName,
     campaigns,
     date,
+    unsubscribeUrl,
 }: CampaignDigestEmailProps) => (
     <Html lang="fr" dir="ltr">
         <Preview>
@@ -91,8 +93,12 @@ export const CampaignDigestEmail = ({
                     </Text>
 
                     <Text className="text-lg text-gray-600 text-center mb-6">
-                        {format(date, 'dd MMMM yyyy', { locale: fr })} -{' '}
-                        {regionName}
+                        {format(
+                            typeof date === 'string' ? new Date(date) : date,
+                            'dd MMMM yyyy',
+                            { locale: fr },
+                        )}{' '}
+                        - {regionName}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-6">
@@ -196,14 +202,19 @@ export const CampaignDigestEmail = ({
                         dans la région {regionName}.
                     </Text>
 
-                    <Text className="text-gray-500 text-sm text-center">
-                        <Link
-                            href="https://tabarro3.ma/profile"
-                            className="text-brand-600 hover:text-brand-700"
-                        >
-                            Gérer mes préférences de notification
-                        </Link>
-                    </Text>
+                    {unsubscribeUrl && (
+                        <Text className="text-gray-500 text-xs text-center mb-4">
+                            Vous ne souhaitez plus recevoir le récapitulatif des
+                            campagnes dans votre région ?{' '}
+                            <Link
+                                href={unsubscribeUrl}
+                                className="text-brand-600 hover:text-brand-700"
+                            >
+                                Se désabonner
+                            </Link>
+                            .
+                        </Text>
+                    )}
 
                     <Hr className="border-gray-200 my-6" />
 

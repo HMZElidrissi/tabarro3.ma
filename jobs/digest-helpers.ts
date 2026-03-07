@@ -158,10 +158,11 @@ async function processDigestForRegion(digest: any) {
     try {
         const campaigns = digest.campaigns.map((dc: any) => dc.campaign);
 
-        // Get all participants in this region
+        // Get all participants in this region who did not unsubscribe
         const recipients = await prisma.user.findMany({
             where: {
                 role: 'PARTICIPANT',
+                receiveCampaignDigests: true,
                 city: {
                     regionId: digest.regionId,
                 },

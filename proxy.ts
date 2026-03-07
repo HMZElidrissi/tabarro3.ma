@@ -11,7 +11,7 @@ const guestRoutes = [
     '/reset-password',
 ];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     const isDashboard = pathname.startsWith('/dashboard');
     const isHandbook = pathname.startsWith('/handbook');

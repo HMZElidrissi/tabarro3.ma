@@ -31,6 +31,9 @@ export default function SendEmailForm({
             variant="red"
         >
             <div className="pt-4 space-y-4">
+                <p className="text-xs text-muted-foreground">
+                    Sujet, destinataire, puis envoyer.
+                </p>
                 <div className="space-y-3">
                     <div className="space-y-2">
                         <Label className="text-xs font-medium">Sujet</Label>
