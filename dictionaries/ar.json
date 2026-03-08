@@ -307,7 +307,10 @@
         "tabs": {
             "bloodRequests": "طلبات الدم",
             "accountInfo": "معلومات الحساب"
-        }
+        },
+        "updateSuccess": "تم تحديث الملف الشخصي بنجاح.",
+        "updateError": "فشل تحديث الملف الشخصي.",
+        "userNotFound": "المستخدم غير موجود."
     },
     "bloodRequests": {
         "myRequests": "طلبات الدم الخاصة بي",
@@ -329,7 +332,18 @@
         "updateRequest": "تحديث الطلب",
         "editRequest": "تعديل الطلب",
         "editRequestDescription": "تعديل طلب الدم الخاص بك",
-        "markAsFulfilled": "تحديد كتمت التلبية"
+        "markAsFulfilled": "تحديد كتمت التلبية",
+        "createSuccess": "تم إنشاء طلب الدم بنجاح.",
+        "createError": "فشل إنشاء طلب الدم.",
+        "updateSuccess": "تم تحديث طلب الدم بنجاح.",
+        "updateError": "فشل تحديث طلب الدم.",
+        "deleteSuccess": "تم حذف طلب الدم بنجاح.",
+        "deleteError": "فشل حذف طلب الدم.",
+        "markFulfilledSuccess": "تم تحديد طلب الدم كتمت تلبيةه.",
+        "markFulfilledError": "فشل تحديد طلب الدم كتمت تلبيةه.",
+        "notFound": "طلب الدم غير موجود.",
+        "notAuthorized": "غير مصرح لك بهذا الإجراء.",
+        "alreadyFulfilled": "تمت تلبية طلب الدم مسبقاً."
     },
     "how_it_works_title": "كيفاش تبرع تتخدم؟",
     "how_it_works_description": "تبرع هي منصة كتربط المتبرعين بالدم مع لي محتاجين. هاكيفاش كتخدم",

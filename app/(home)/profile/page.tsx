@@ -30,6 +30,9 @@ export default async function ProfilePage() {
     }
 
     const profile = await getProfile(user.id);
+    if (!profile) {
+        redirect('/dashboard');
+    }
     const bloodRequests = await getBloodRequests(user.id);
 
     return (
@@ -37,7 +40,7 @@ export default async function ProfilePage() {
             <div className="flex-1 flex items-center justify-center">
                 <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <ProfileLayout
-                        user={profile as User}
+                        user={profile as unknown as User}
                         bloodRequests={bloodRequests as BloodRequest[]}
                         dict={dict}
                         isRTL={isRTL}

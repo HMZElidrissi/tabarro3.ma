@@ -19,9 +19,8 @@ const ProfileSchema = z.object({
 export const updateProfile = validatedActionWithUser(
     ProfileSchema,
     async (data, formData, user) => {
+        const dict = await getDictionary();
         try {
-            const dict = await getDictionary();
-
             // Validate phone with internationalized message
             if (!isValidMoroccanPhone(data.phone)) {
                 return { error: dict.signUp.invalidPhoneNumber };
@@ -34,7 +33,7 @@ export const updateProfile = validatedActionWithUser(
             });
 
             if (!existingUser) {
-                return { error: 'User not found' };
+                return { error: dict.profile.userNotFound };
             }
 
             const receiveCampaignDigests =
@@ -43,61 +42,65 @@ export const updateProfile = validatedActionWithUser(
                 formData.get('receiveBloodRequestEmails') === 'on';
 
             // Update user profile
+            const updateData: any = {
+                name: data.name,
+                phone: normalizeMoroccanPhone(data.phone),
+                bloodGroup: data.bloodGroup,
+                cityId: data.cityId,
+                receiveCampaignDigests,
+                receiveBloodRequestEmails,
+                updatedAt: new Date(),
+            };
+
             await prisma.user.update({
                 where: { id: user.id },
-                data: {
-                    name: data.name,
-                    phone: normalizeMoroccanPhone(data.phone),
-                    bloodGroup: data.bloodGroup,
-                    cityId: data.cityId,
-                    receiveCampaignDigests,
-                    receiveBloodRequestEmails,
-                    updatedAt: new Date(),
-                },
+                data: updateData,
             });
 
             // Revalidate relevant paths
             revalidatePath('/profile');
 
-            return { success: 'Profile updated successfully' };
+            return { success: dict.profile.updateSuccess };
         } catch (error) {
             console.error('Profile update error:', error);
             return {
                 error:
                     error instanceof Error
                         ? error.message
-                        : 'Failed to update profile',
+                        : dict.profile.updateError,
             };
         }
     },
 );
 
 export const getProfile = async (userId: string) => {
+    const select: any = {
+        id: true,
+        name: true,
+        email: true,
+        phone: true,
+        bloodGroup: true,
+        city: {
+            select: {
+                id: true,
+                name: true,
+                regionId: true,
+            },
+        },
+        cityId: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+        receiveCampaignDigests: true,
+        receiveBloodRequestEmails: true,
+    };
+
     return prisma.user.findUnique({
         where: {
             id: userId,
             deletedAt: null,
         },
-        select: {
-            id: true,
-            name: true,
-            email: true,
-            phone: true,
-            bloodGroup: true,
-            city: {
-                select: {
-                    id: true,
-                    name: true,
-                    regionId: true,
-                },
-            },
-            cityId: true,
-            role: true,
-            createdAt: true,
-            updatedAt: true,
-            receiveCampaignDigests: true,
-            receiveBloodRequestEmails: true,
-        },
+        select,
     });
 };
 
@@ -163,8 +166,9 @@ export const getBloodRequest = async (id: number) => {
 export const createBloodRequest = validatedActionWithUser(
     BloodRequestSchema,
     async (data, _, user) => {
+        const dict = await getDictionary();
         if (user.id !== data.userId) {
-            return { error: 'Not authorized' };
+            return { error: dict.bloodRequests.notAuthorized };
         }
 
         try {
@@ -179,13 +183,13 @@ export const createBloodRequest = validatedActionWithUser(
             await queueBloodRequestNotification(newRequest.id);
 
             revalidatePath('/profile');
-            return { success: 'Blood request created successfully' };
+            return { success: dict.bloodRequests.createSuccess };
         } catch (error) {
             return {
                 error:
                     error instanceof Error
                         ? error.message
-                        : 'Failed to create blood request',
+                        : dict.bloodRequests.createError,
             };
         }
     },
@@ -196,8 +200,9 @@ export const updateBloodRequest = validatedActionWithUser(
         id: z.coerce.number(),
     }),
     async (data, _, user) => {
+        const dict = await getDictionary();
         if (user.id !== data.userId) {
-            return { error: 'Not authorized' };
+            return { error: dict.bloodRequests.notAuthorized };
         }
 
         try {
@@ -206,11 +211,11 @@ export const updateBloodRequest = validatedActionWithUser(
             });
 
             if (!request) {
-                return { error: 'Blood request not found' };
+                return { error: dict.bloodRequests.notFound };
             }
 
             if (request.userId !== user.id) {
-                return { error: 'Not authorized to update this request' };
+                return { error: dict.bloodRequests.notAuthorized };
             }
 
             const { id, ...updateData } = data;
@@ -221,13 +226,13 @@ export const updateBloodRequest = validatedActionWithUser(
             });
 
             revalidatePath('/profile');
-            return { success: 'Blood request updated successfully' };
+            return { success: dict.bloodRequests.updateSuccess };
         } catch (error) {
             return {
                 error:
                     error instanceof Error
                         ? error.message
-                        : 'Failed to update blood request',
+                        : dict.bloodRequests.updateError,
             };
         }
     },
@@ -236,17 +241,18 @@ export const updateBloodRequest = validatedActionWithUser(
 export const deleteBloodRequest = validatedActionWithUser(
     z.object({ id: z.coerce.number() }),
     async (data, _, user) => {
+        const dict = await getDictionary();
         try {
             const request = await prisma.bloodRequest.findUnique({
                 where: { id: data.id },
             });
 
             if (!request) {
-                return { error: 'Blood request not found' };
+                return { error: dict.bloodRequests.notFound };
             }
 
             if (request.userId !== user.id) {
-                return { error: 'Not authorized to delete this request' };
+                return { error: dict.bloodRequests.notAuthorized };
             }
 
             await prisma.bloodRequest.delete({
@@ -254,10 +260,10 @@ export const deleteBloodRequest = validatedActionWithUser(
             });
 
             revalidatePath('/profile');
-            return { success: 'Blood request deleted successfully' };
+            return { success: dict.bloodRequests.deleteSuccess };
         } catch (error) {
             return {
-                error: 'Failed to delete blood request',
+                error: dict.bloodRequests.deleteError,
             };
         }
     },
@@ -266,21 +272,22 @@ export const deleteBloodRequest = validatedActionWithUser(
 export const markAsFulfilled = validatedActionWithUser(
     z.object({ id: z.coerce.number() }),
     async (data, _, user) => {
+        const dict = await getDictionary();
         try {
             const request = await prisma.bloodRequest.findUnique({
                 where: { id: data.id },
             });
 
             if (!request) {
-                return { error: 'Blood request not found' };
+                return { error: dict.bloodRequests.notFound };
             }
 
             if (request.userId !== user.id && user.role !== 'ADMIN') {
-                return { error: 'Not authorized to update this request' };
+                return { error: dict.bloodRequests.notAuthorized };
             }
 
             if (request.status === 'fulfilled') {
-                return { error: 'Blood request is already fulfilled' };
+                return { error: dict.bloodRequests.alreadyFulfilled };
             }
 
             await prisma.bloodRequest.update({
@@ -293,14 +300,14 @@ export const markAsFulfilled = validatedActionWithUser(
 
             revalidatePath('/profile');
             return {
-                success: 'Blood request marked as fulfilled successfully',
+                success: dict.bloodRequests.markFulfilledSuccess,
             };
         } catch (error) {
             return {
                 error:
                     error instanceof Error
                         ? error.message
-                        : 'Failed to mark blood request as fulfilled',
+                        : dict.bloodRequests.markFulfilledError,
             };
         }
     },

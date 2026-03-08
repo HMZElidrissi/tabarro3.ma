@@ -26,6 +26,7 @@ import { bloodGroups, getBloodGroupLabel } from '@/config/blood-group';
 import { REGIONS_AND_CITIES } from '@/config/locations';
 import { ActionState } from '@/auth/middleware';
 import { cn } from '@/lib/utils';
+import { Checkbox } from '@/components/ui/checkbox';
 
 interface AccountFormProps {
     user: User;
@@ -38,6 +39,12 @@ export function AccountForm({ user, dict, isRTL }: AccountFormProps) {
     const formRef = useRef<HTMLFormElement>(null);
     const [selectedRegion, setSelectedRegion] = useState<string>(
         user.city?.regionId?.toString() || '',
+    );
+    const [receiveCampaignDigests, setReceiveCampaignDigests] = useState(
+        user.receiveCampaignDigests,
+    );
+    const [receiveBloodRequestEmails, setReceiveBloodRequestEmails] = useState(
+        user.receiveBloodRequestEmails,
     );
     const [state, formAction, pending] = useActionState<ActionState, FormData>(
         updateProfile,
@@ -199,34 +206,54 @@ export function AccountForm({ user, dict, isRTL }: AccountFormProps) {
                     </Label>
                     <div className="space-y-3">
                         <label
+                            htmlFor="receiveCampaignDigests"
                             className={cn(
                                 'flex items-center gap-3 cursor-pointer text-sm text-foreground',
                                 isRTL && 'flex-row-reverse',
                             )}
                         >
-                            <input
-                                type="checkbox"
-                                name="receiveCampaignDigests"
-                                defaultChecked={user.receiveCampaignDigests}
-                                className="h-4 w-4 rounded border border-input bg-background accent-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                            <Checkbox
+                                id="receiveCampaignDigests"
+                                checked={receiveCampaignDigests}
+                                onCheckedChange={checked =>
+                                    setReceiveCampaignDigests(checked === true)
+                                }
                             />
+                            {receiveCampaignDigests && (
+                                <input
+                                    type="hidden"
+                                    name="receiveCampaignDigests"
+                                    value="on"
+                                />
+                            )}
                             <span>
                                 {dict.profile?.receiveCampaignDigests ??
                                     'Recevoir le récapitulatif quotidien des campagnes dans ma région'}
                             </span>
                         </label>
                         <label
+                            htmlFor="receiveBloodRequestEmails"
                             className={cn(
                                 'flex items-center gap-3 cursor-pointer text-sm text-foreground',
                                 isRTL && 'flex-row-reverse',
                             )}
                         >
-                            <input
-                                type="checkbox"
-                                name="receiveBloodRequestEmails"
-                                defaultChecked={user.receiveBloodRequestEmails}
-                                className="h-4 w-4 rounded border border-input bg-background accent-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                            <Checkbox
+                                id="receiveBloodRequestEmails"
+                                checked={receiveBloodRequestEmails}
+                                onCheckedChange={checked =>
+                                    setReceiveBloodRequestEmails(
+                                        checked === true,
+                                    )
+                                }
                             />
+                            {receiveBloodRequestEmails && (
+                                <input
+                                    type="hidden"
+                                    name="receiveBloodRequestEmails"
+                                    value="on"
+                                />
+                            )}
                             <span>
                                 {dict.profile?.receiveBloodRequestEmails ??
                                     'Recevoir les emails pour les demandes urgentes de sang compatibles'}

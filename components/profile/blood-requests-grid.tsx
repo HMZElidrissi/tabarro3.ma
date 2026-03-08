@@ -35,6 +35,7 @@ import { useRouter } from 'next/navigation';
 import { ProgressLink as Link } from '@/components/custom/progress-link';
 import { getStatusColor } from '@/lib/utils';
 import { getLocation } from '@/config/locations';
+import { cn } from '@/lib/utils';
 
 interface BloodRequestsGridProps {
     initialRequests: BloodRequest[];
@@ -115,8 +116,18 @@ export function BloodRequestsGrid({
 
     return (
         <>
-            <div className="mb-6 flex justify-between items-center">
-                <h2 className="text-xl font-semibold">
+            <div
+                className={cn(
+                    'mb-6 flex justify-between items-center',
+                    isRTL && 'flex-row-reverse',
+                )}
+            >
+                <h2
+                    className={cn(
+                        'text-xl font-semibold',
+                        isRTL ? 'text-right' : 'text-left',
+                    )}
+                >
                     {dict.bloodRequests.myRequests}
                 </h2>
                 <Link href="/profile/requests/new">

@@ -325,7 +325,10 @@
         "tabs": {
             "bloodRequests": "Blood Requests",
             "accountInfo": "Account Information"
-        }
+        },
+        "updateSuccess": "Profile updated successfully.",
+        "updateError": "Failed to update profile.",
+        "userNotFound": "User not found."
     },
     "bloodRequests": {
         "myRequests": "My Blood Requests",
@@ -347,7 +350,18 @@
         "updateRequest": "Update Request",
         "editRequest": "Edit Blood Request",
         "editRequestDescription": "Update your blood request details",
-        "markAsFulfilled": "Mark as Fulfilled"
+        "markAsFulfilled": "Mark as Fulfilled",
+        "createSuccess": "Blood request created successfully.",
+        "createError": "Failed to create blood request.",
+        "updateSuccess": "Blood request updated successfully.",
+        "updateError": "Failed to update blood request.",
+        "deleteSuccess": "Blood request deleted successfully.",
+        "deleteError": "Failed to delete blood request.",
+        "markFulfilledSuccess": "Blood request marked as fulfilled.",
+        "markFulfilledError": "Failed to mark blood request as fulfilled.",
+        "notFound": "Blood request not found.",
+        "notAuthorized": "Not authorized to perform this action.",
+        "alreadyFulfilled": "Blood request is already fulfilled."
     },
     "how_it_works_title": "How It Works",
     "how_it_works_description": "tabarro3 is a platform that connects blood donors with those in need. Here's how it works:",

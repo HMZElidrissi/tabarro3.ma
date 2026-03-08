@@ -202,6 +202,7 @@ export function RequestForm({
                         defaultValue={request?.description || ''}
                         placeholder={dict.forms.placeholders.enterDescription}
                         rows={3}
+                        dir={isRTL ? 'rtl' : 'ltr'}
                     />
                 </div>
 

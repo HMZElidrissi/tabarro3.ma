@@ -308,7 +308,10 @@
         "tabs": {
             "bloodRequests": "Demandes de sang",
             "accountInfo": "Informations du compte"
-        }
+        },
+        "updateSuccess": "Profil mis à jour avec succès.",
+        "updateError": "Échec de la mise à jour du profil.",
+        "userNotFound": "Utilisateur introuvable."
     },
     "bloodRequests": {
         "myRequests": "Mes demandes de sang",
@@ -330,7 +333,18 @@
         "updateRequest": "Mettre à jour la demande",
         "editRequest": "Modifier la demande",
         "editRequestDescription": "Modifiez les détails de votre demande de sang",
-        "markAsFulfilled": "Marquer comme accomplie"
+        "markAsFulfilled": "Marquer comme accomplie",
+        "createSuccess": "Demande de sang créée avec succès.",
+        "createError": "Échec de la création de la demande de sang.",
+        "updateSuccess": "Demande de sang mise à jour avec succès.",
+        "updateError": "Échec de la mise à jour de la demande de sang.",
+        "deleteSuccess": "Demande de sang supprimée avec succès.",
+        "deleteError": "Échec de la suppression de la demande de sang.",
+        "markFulfilledSuccess": "Demande de sang marquée comme accomplie.",
+        "markFulfilledError": "Échec du marquage de la demande comme accomplie.",
+        "notFound": "Demande de sang introuvable.",
+        "notAuthorized": "Non autorisé à effectuer cette action.",
+        "alreadyFulfilled": "La demande de sang est déjà accomplie."
     },
     "how_it_works_title": "Comment ça marche",
     "how_it_works_description": "tabarro3 est une plateforme qui met en relation les donneurs de sang et les personnes ayant besoin de sang dans leur région. Voici comment ça marche :",
