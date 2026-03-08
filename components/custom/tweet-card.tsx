@@ -1,6 +1,8 @@
+'use client';
+
 import type React from 'react';
 /* eslint-disable @next/next/no-img-element */
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import {
     enrichTweet,
     type EnrichedTweet,
@@ -264,9 +266,9 @@ export const MagicTweet = ({
 };
 
 /**
- * TweetCard (Server Side Only)
+ * TweetCard – client component that fetches tweet on mount (used inside client trees e.g. TweetMarquee).
  */
-export const TweetCard = async ({
+export function TweetCard({
     id,
     components,
     fallback = <TweetSkeleton />,
@@ -274,33 +276,48 @@ export const TweetCard = async ({
     ...props
 }: TweetProps & {
     className?: string;
-}) => {
+}) {
+    const [tweet, setTweet] = useState<Tweet | null | undefined>(undefined);
+
+    useEffect(() => {
+        if (!id) {
+            setTweet(null);
+            return;
+        }
+        let cancelled = false;
+        getTweet(id)
+            .then(data => {
+                if (!cancelled) setTweet(data ?? null);
+            })
+            .catch(err => {
+                if (!cancelled) {
+                    if (onError) onError(err);
+                    else console.error('Error fetching tweet:', err);
+                    setTweet(null);
+                }
+            });
+        return () => {
+            cancelled = true;
+        };
+    }, [id, onError]);
+
     if (!id) {
         const NotFound = components?.TweetNotFound || TweetNotFound;
         return <NotFound {...props} />;
     }
 
-    try {
-        const tweet = await getTweet(id);
+    if (tweet === undefined) {
+        return <>{fallback}</>;
+    }
 
-        if (!tweet) {
-            const NotFound = components?.TweetNotFound || TweetNotFound;
-            return <NotFound {...props} />;
-        }
-
-        return (
-            <Suspense fallback={fallback}>
-                <MagicTweet tweet={tweet} components={components} {...props} />
-            </Suspense>
-        );
-    } catch (err) {
-        if (onError) {
-            onError(err);
-        } else {
-            console.error('Error fetching tweet:', err);
-        }
-
+    if (!tweet) {
         const NotFound = components?.TweetNotFound || TweetNotFound;
         return <NotFound {...props} />;
     }
-};
+
+    return (
+        <Suspense fallback={fallback}>
+            <MagicTweet tweet={tweet} components={components} {...props} />
+        </Suspense>
+    );
+}

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Nunito, Tajawal } from 'next/font/google';
+import { Nunito, Tajawal, Fraunces } from 'next/font/google';
 import './globals.css';
 import { Organization, WithContext } from 'schema-dts';
 import { cookies, headers } from 'next/headers';
@@ -24,6 +24,12 @@ const tajawal = Tajawal({
     subsets: ['arabic'],
     display: 'swap',
     fallback: ['nunito', 'sans-serif'],
+});
+
+const fraunces = Fraunces({
+    subsets: ['latin'],
+    variable: '--font-fraunces',
+    display: 'swap',
 });
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
@@ -141,12 +147,12 @@ export default async function RootLayout({
             suppressHydrationWarning
             className={cn(
                 'antialiased transition-all',
+                fraunces.variable,
                 isRTL
                     ? [
                           tajawal.className,
                           tajawal.variable,
                           'text-right',
-                          // '[&_*]:text-right',
                       ]
                     : [nunitoFont.className, 'text-left'],
             )}

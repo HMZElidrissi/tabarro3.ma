@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
+import { PageHeader } from '@/components/custom/page-header';
 
 interface CampaignsListProps {
     campaigns: Campaign[];
@@ -115,33 +116,14 @@ export default function CampaignsList({
 
     return (
         <div className="container mx-auto py-8">
-            <div className="text-center mb-10 relative">
-                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 opacity-10">
-                    <svg
-                        width="120"
-                        height="120"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="text-brand-600 dark:text-brand-400"
-                    >
-                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
-                    </svg>
-                </div>
-                <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
-                    {dict.New_Campaigns}
-                </h1>
-                <p className="text-muted-foreground max-w-2xl mx-auto text-base leading-relaxed">
-                    {dict.New_Campaigns_Description}
-                </p>
-                <div className="mt-4 w-16 h-1 bg-brand-500 mx-auto rounded-full"></div>
-
-                {/* Centered Filters Below Title and Line */}
-                <div className="flex justify-center mt-8">
+            <PageHeader
+                title={dict.New_Campaigns}
+                description={dict.New_Campaigns_Description}
+            >
+                <div className="flex justify-center">
                     <div className="w-full max-w-3xl">
-                        {/* Filters - Dashboard style */}
                         <div className="space-y-4">
                             <div className="grid gap-4 md:grid-cols-2">
-                                {/* Region Filter */}
                                 <div className="space-y-2">
                                     <Label>
                                         {dict.forms?.labels?.region ||
@@ -182,7 +164,6 @@ export default function CampaignsList({
                                     </Select>
                                 </div>
 
-                                {/* City Filter */}
                                 <div className="space-y-2">
                                     <Label>
                                         {dict.forms?.labels?.city ||
@@ -227,7 +208,6 @@ export default function CampaignsList({
                                     </Select>
                                 </div>
                             </div>
-                            {/* Reset Filters */}
                             {(selectedRegion || selectedCity) && (
                                 <div className="flex items-end">
                                     <Button
@@ -245,7 +225,7 @@ export default function CampaignsList({
                         </div>
                     </div>
                 </div>
-            </div>
+            </PageHeader>
 
             <div className="space-y-12">
                 {campaigns.length === 0 && (

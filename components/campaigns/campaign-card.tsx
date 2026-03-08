@@ -204,7 +204,7 @@ export function CampaignCard({
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel>{dict.Cancel}</AlertDialogCancel>
                         <AlertDialogAction
                             onClick={confirmParticipation}
                             disabled={isLoading}

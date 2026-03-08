@@ -61,26 +61,26 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
     const handlePrev = isRTL ? nextSlide : prevSlide;
 
     return (
-        <div className="relative bg-gradient-to-b from-brand-700 to-brand-900 dark:from-brand-900 dark:to-background py-12 md:py-16">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div className="relative overflow-hidden bg-gradient-to-b from-brand-700 via-brand-800 to-brand-900 dark:from-brand-900 dark:via-brand-950 dark:to-background py-14 md:py-20 noise-overlay">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
                     {/* Left Content Section */}
-                    <div className="space-y-6 text-white dark:text-foreground z-10">
+                    <div className="space-y-6 text-white dark:text-foreground">
                         <div className="inline-block py-4">
                             <Image
                                 src="/hero.svg"
                                 alt="tabarro3"
                                 width={300}
                                 height={300}
-                                className="filter drop-shadow-lg hover:drop-shadow-2xl transition-all duration-300"
+                                className="filter drop-shadow-lg hover:drop-shadow-2xl transition-all duration-300 hover:scale-[1.02]"
                             />
                         </div>
 
-                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
+                        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.15] tracking-tight">
                             {dict.hero_title}
                         </h1>
 
-                        <p className="text-lg text-white/90 dark:text-muted-foreground leading-relaxed max-w-xl">
+                        <p className="text-lg md:text-xl text-white/90 dark:text-muted-foreground leading-relaxed max-w-xl">
                             {dict.hero_description}
                         </p>
 
@@ -97,7 +97,7 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
 
                         <Button
                             asChild
-                            className="bg-white text-brand-700 hover:bg-brand-50 hover:text-brand-800 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90 shadow-xl transition-all duration-300 py-6 px-8 text-lg"
+                            className="bg-white text-brand-700 hover:bg-brand-50 hover:text-brand-800 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90 shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 py-6 px-8 text-lg rounded-xl font-semibold"
                         >
                             <Link
                                 href="/requests"
@@ -113,7 +113,7 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
                     <div
                         className={`relative aspect-[6/3] w-full ${isRTL ? 'lg:order-1' : 'lg:order-2'}`}
                     >
-                        <div className="absolute inset-0 bg-gradient-to-r from-brand-900/20 to-transparent rounded-2xl overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-brand-900/25 to-transparent rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
                             <div className="relative h-full w-full">
                                 {carouselImages.map((image, index) => (
                                     <div
@@ -185,9 +185,9 @@ export default function HeroComponent({ dict, isRTL }: HeroComponentProps) {
             </div>
 
             {/* Decorative Elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-radial from-brand-500/20 to-transparent opacity-50 dark:opacity-30" />
-                <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-radial from-brand-500/20 to-transparent opacity-50 dark:opacity-30" />
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-radial from-brand-500/25 to-transparent opacity-60 dark:opacity-35" />
+                <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-radial from-brand-500/20 to-transparent opacity-50 dark:opacity-25" />
             </div>
         </div>
     );

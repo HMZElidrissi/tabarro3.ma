@@ -18,12 +18,12 @@ export default async function LatestBlogPosts({
     const posts = await getBlogPosts(locale);
 
     return (
-        <div className="max-w-7xl py-16 mx-auto px-4">
-            <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
+        <div className="section-band max-w-7xl py-16 md:py-20 mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+                <h2 className="font-display text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300 tracking-tight sm:text-4xl">
                     {dictionary.blog?.title || 'Blood Donation Blog'}
                 </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
                     {dictionary.blog?.description ||
                         'Stories and insights on blood donation, donor experiences, and saving lives.'}
                 </p>
@@ -31,7 +31,7 @@ export default async function LatestBlogPosts({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {posts.slice(0, 3).map(post => (
                     <div key={post.id} className="group">
-                        <div className="bg-card rounded-xl shadow-md overflow-hidden h-full flex flex-col transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border">
+                        <div className="bg-card rounded-2xl shadow-md overflow-hidden h-full flex flex-col border border-border/60 card-lift">
                             {/* Image with hover zoom effect */}
                             <div className="relative h-52 overflow-hidden">
                                 <Image

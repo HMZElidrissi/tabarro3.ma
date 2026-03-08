@@ -9,6 +9,9 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                display: ['var(--font-fraunces)', 'var(--font-nunito)', 'system-ui', 'sans-serif'],
+            },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'gradient-conic':
@@ -124,6 +127,20 @@ const config: Config = {
                     from: { transform: 'translateY(0)' },
                     to: { transform: 'translateY(calc(-100% - var(--gap)))' },
                 },
+                'fade-in-up': {
+                    from: {
+                        opacity: '0',
+                        transform: 'translateY(16px)',
+                    },
+                    to: {
+                        opacity: '1',
+                        transform: 'translateY(0)',
+                    },
+                },
+                'fade-in': {
+                    from: { opacity: '0' },
+                    to: { opacity: '1' },
+                },
             },
             animation: {
                 'accordion-down': 'accordion-down 0.2s ease-out',
@@ -131,6 +148,15 @@ const config: Config = {
                 marquee: 'marquee var(--duration) linear infinite',
                 'marquee-vertical':
                     'marquee-vertical var(--duration) linear infinite',
+                'fade-in-up':
+                    'fade-in-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+                'fade-in': 'fade-in 0.4s ease-out forwards',
+            },
+            animationDelay: {
+                '100': '100ms',
+                '200': '200ms',
+                '300': '300ms',
+                '400': '400ms',
             },
         },
     },

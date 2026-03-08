@@ -35,50 +35,46 @@ export default function Partners({ dict }: { dict: any }) {
     ];
 
     return (
-        <section className="py-4 bg-background">
+        <section className="section-band py-12 md:py-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 className="text-3xl font-bold text-foreground sm:text-4xl bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
+                <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300 tracking-tight">
                     {dict.partners}
                 </h2>
 
-                <div className="py-4">
-                    {/* <Marquee gradient={false} speed={50}> */}
-                    <div className="flex items-center justify-center gap-4">
-                        {partners.map(partner => (
-                            <div
-                                key={partner.name}
-                                className="flex items-center justify-center overflow-hidden"
-                            >
-                                {partner.darkLogo ? (
-                                    <>
-                                        <Image
-                                            src={partner.logo}
-                                            alt={partner.name}
-                                            width={partner.width}
-                                            height={partner.height}
-                                            className={`${partner.className} mx-4 dark:hidden`}
-                                        />
-                                        <Image
-                                            src={partner.darkLogo}
-                                            alt={partner.name}
-                                            width={partner.width}
-                                            height={partner.height}
-                                            className={`${partner.className} mx-4 hidden dark:block`}
-                                        />
-                                    </>
-                                ) : (
+                <div className="mt-10 flex flex-wrap items-center justify-center gap-8 md:gap-12">
+                    {partners.map(partner => (
+                        <div
+                            key={partner.name}
+                            className="flex items-center justify-center"
+                        >
+                            {partner.darkLogo ? (
+                                <>
                                     <Image
                                         src={partner.logo}
                                         alt={partner.name}
                                         width={partner.width}
                                         height={partner.height}
-                                        className={`${partner.className} mx-4`}
+                                        className={`${partner.className} dark:hidden`}
                                     />
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                    {/* </Marquee> */}
+                                    <Image
+                                        src={partner.darkLogo}
+                                        alt={partner.name}
+                                        width={partner.width}
+                                        height={partner.height}
+                                        className={`${partner.className} hidden dark:block`}
+                                    />
+                                </>
+                            ) : (
+                                <Image
+                                    src={partner.logo}
+                                    alt={partner.name}
+                                    width={partner.width}
+                                    height={partner.height}
+                                    className={partner.className}
+                                />
+                            )}
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>

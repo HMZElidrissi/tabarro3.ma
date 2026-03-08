@@ -1,17 +1,19 @@
 import { BenefitsComponent } from '@/components/home/benefits';
 import CriteriasComponent from '@/components/home/criterias';
 import HeroComponent from '@/components/home/hero';
-import MapComponent from '@/components/home/map';
 import HowItWorksComponent from '@/components/home/how-it-works';
 import { getDictionary, getLocale } from '@/i18n/get-dictionary';
 import Partners from '@/components/home/partners';
 import LatestBlogPosts from '@/components/blog/latest-blog-posts';
+import { LazyTweetMarquee, LazyMap } from '@/components/home/lazy-home-sections';
 
 import { Metadata } from 'next';
 import { WithContext } from 'schema-dts';
 import Script from 'next/script';
 import { SEOOptimizer } from '@/components/custom/seo-optimizer';
-import TweetMarquee from '@/components/home/tweet-marquee';
+import { Suspense } from 'react';
+import { SectionSkeleton } from '@/components/home/section-skeleton';
+import { RevealOnView } from '@/components/custom/reveal-on-view';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
 
@@ -127,15 +129,32 @@ export default async function Page() {
                 locale={lang}
                 structuredData={jsonLd}
             />
-            <div className="-mt-8">
+            <div className="-mt-8 bg-background">
                 <HeroComponent dict={dict} isRTL={isRTL} />
                 <HowItWorksComponent dict={dict} />
                 <Partners dict={dict} />
-                <TweetMarquee dict={dict} />
-                <LatestBlogPosts locale={lang} dictionary={dict} />
-                <BenefitsComponent dict={dict} />
-                <CriteriasComponent dict={dict} />
-                <MapComponent dict={dict} />
+
+                <LazyTweetMarquee dict={dict} />
+
+                <Suspense fallback={<SectionSkeleton />}>
+                    <RevealOnView>
+                        <LatestBlogPosts locale={lang} dictionary={dict} />
+                    </RevealOnView>
+                </Suspense>
+
+                <Suspense fallback={<SectionSkeleton />}>
+                    <RevealOnView>
+                        <BenefitsComponent dict={dict} />
+                    </RevealOnView>
+                </Suspense>
+
+                <Suspense fallback={<SectionSkeleton />}>
+                    <RevealOnView>
+                        <CriteriasComponent dict={dict} />
+                    </RevealOnView>
+                </Suspense>
+
+                <LazyMap dict={dict} />
             </div>
         </>
     );

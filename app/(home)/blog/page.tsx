@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { cn, formatDate } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import BlogPostGrid from '@/components/blog/blog-post-grid';
+import { PageHeader } from '@/components/custom/page-header';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
 
@@ -73,29 +74,10 @@ export default async function BlogPage() {
     return (
         <div className="bg-background">
             <div className="container mx-auto px-4 py-16">
-                {/* Page Header */}
-                <div className="text-center mb-10 relative">
-                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 opacity-10">
-                        <svg
-                            width="120"
-                            height="120"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            className="text-brand-600 dark:text-brand-400"
-                        >
-                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
-                        </svg>
-                    </div>
-
-                    <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
-                        {dict.blog?.title}
-                    </h1>
-                    <p className="text-muted-foreground max-w-2xl mx-auto text-base leading-relaxed">
-                        {dict.blog?.description}
-                    </p>
-
-                    <div className="mt-4 w-16 h-1 bg-brand-500 mx-auto rounded-full"></div>
-                </div>
+                <PageHeader
+                    title={dict.blog?.title}
+                    description={dict.blog?.description}
+                />
 
                 {/* Featured Post */}
                 {featuredPost && (

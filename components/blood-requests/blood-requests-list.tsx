@@ -5,6 +5,7 @@ import { BloodRequest } from '@/types/blood-request';
 import { PaginationControls } from '@/components/custom/pagination-controls';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { PageHeader } from '@/components/custom/page-header';
 
 interface BloodRequestsListProps {
     requests: BloodRequest[];
@@ -44,28 +45,10 @@ export default function BloodRequestsList({
     return (
         <div className="container mx-auto py-16">
             <div className="space-y-6">
-                <div className="text-center mb-10 relative">
-                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 opacity-10">
-                        <svg
-                            width="120"
-                            height="120"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            className="text-brand-600 dark:text-brand-400"
-                        >
-                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
-                        </svg>
-                    </div>
-
-                    <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
-                        {dict.Blood_Requests}
-                    </h1>
-                    <p className="text-muted-foreground max-w-2xl mx-auto text-base leading-relaxed">
-                        {dict.Blood_Requests_Description}
-                    </p>
-
-                    <div className="mt-4 w-16 h-1 bg-brand-500 mx-auto rounded-full"></div>
-                </div>
+                <PageHeader
+                    title={dict.Blood_Requests}
+                    description={dict.Blood_Requests_Description}
+                />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {requests.map(request => (

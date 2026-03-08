@@ -20,14 +20,14 @@ interface TweetMarqueeProps {
 export default function TweetMarquee({ dict }: TweetMarqueeProps) {
     return (
         <div
-            className="relative flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-col items-center justify-center overflow-hidden bg-background"
+            className="section-band relative flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 flex-col items-center justify-center overflow-hidden"
             dir="ltr"
         >
-            <h1 className="text-3xl font-bold text-foreground sm:text-4xl bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300">
+            <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-400 dark:to-brand-300 tracking-tight text-center">
                 {dict.testimonials?.title || 'What they say about us'}
-            </h1>
+            </h2>
 
-            <div className="mt-8">
+            <div className="mt-10">
                 <Marquee reverse pauseOnHover className="[--duration:60s]">
                     {tweetIds
                         .slice()
