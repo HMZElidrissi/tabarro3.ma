@@ -36,7 +36,7 @@ export function RevealOnView({
                     return () => clearTimeout(t);
                 }
             },
-            { threshold: 0.1, rootMargin }
+            { threshold: 0.1, rootMargin },
         );
 
         observer.observe(el);
@@ -51,7 +51,7 @@ export function RevealOnView({
                 visible
                     ? 'animate-fade-in-up opacity-100'
                     : 'opacity-0 translate-y-4',
-                className
+                className,
             )}
         >
             {children}

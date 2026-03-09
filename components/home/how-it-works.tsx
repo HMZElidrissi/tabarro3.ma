@@ -58,7 +58,9 @@ export default function HowItWorksComponent({ dict }: { dict: any }) {
                                 {index < steps.length - 1 && (
                                     <div
                                         className="hidden lg:block absolute top-1/2 start-[calc(50%+4rem)] w-[calc(100%-8rem)] h-px bg-gradient-to-r from-brand-200/80 via-brand-300/60 to-transparent dark:from-brand-800 dark:via-brand-700/60 dark:to-transparent rtl:rotate-180 rtl:start-auto rtl:end-[calc(50%+4rem)]"
-                                        style={{ transform: 'translateY(-50%)' }}
+                                        style={{
+                                            transform: 'translateY(-50%)',
+                                        }}
                                         aria-hidden
                                     />
                                 )}

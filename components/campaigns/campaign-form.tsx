@@ -37,11 +37,7 @@ import {
     CommandList,
 } from '@/components/ui/command';
 import { Calendar } from '@/components/ui/calendar';
-import {
-    Field,
-    FieldGroup,
-    FieldLabel,
-} from '@/components/ui/field';
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import {
     InputGroup,
     InputGroupAddon,
@@ -318,7 +314,10 @@ export default function CampaignForm({
                                 value={startDateTimeISO}
                                 required
                             />
-                            <Popover open={startCalOpen} onOpenChange={setStartCalOpen}>
+                            <Popover
+                                open={startCalOpen}
+                                onOpenChange={setStartCalOpen}
+                            >
                                 <PopoverTrigger asChild>
                                     <Button
                                         variant="outline"
@@ -331,7 +330,10 @@ export default function CampaignForm({
                                             : 'Pick a start date & time'}
                                     </Button>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-auto p-0" align="start">
+                                <PopoverContent
+                                    className="w-auto p-0"
+                                    align="start"
+                                >
                                     <Calendar
                                         mode="single"
                                         selected={startDate}
@@ -351,7 +353,9 @@ export default function CampaignForm({
                                                         step="1"
                                                         value={startTimeStr}
                                                         onChange={e =>
-                                                            setStartTimeStr(e.target.value)
+                                                            setStartTimeStr(
+                                                                e.target.value,
+                                                            )
                                                         }
                                                         className="appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
                                                         required
@@ -366,7 +370,9 @@ export default function CampaignForm({
                                             type="button"
                                             size="sm"
                                             className="mt-2 w-full"
-                                            onClick={() => setStartCalOpen(false)}
+                                            onClick={() =>
+                                                setStartCalOpen(false)
+                                            }
                                         >
                                             Done
                                         </Button>
@@ -383,7 +389,10 @@ export default function CampaignForm({
                                 value={endDateTimeISO}
                                 required
                             />
-                            <Popover open={endCalOpen} onOpenChange={setEndCalOpen}>
+                            <Popover
+                                open={endCalOpen}
+                                onOpenChange={setEndCalOpen}
+                            >
                                 <PopoverTrigger asChild>
                                     <Button
                                         variant="outline"
@@ -396,7 +405,10 @@ export default function CampaignForm({
                                             : 'Pick an end date & time'}
                                     </Button>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-auto p-0" align="start">
+                                <PopoverContent
+                                    className="w-auto p-0"
+                                    align="start"
+                                >
                                     <Calendar
                                         mode="single"
                                         selected={endDate}
@@ -416,7 +428,9 @@ export default function CampaignForm({
                                                         step="1"
                                                         value={endTimeStr}
                                                         onChange={e =>
-                                                            setEndTimeStr(e.target.value)
+                                                            setEndTimeStr(
+                                                                e.target.value,
+                                                            )
                                                         }
                                                         className="appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
                                                         required

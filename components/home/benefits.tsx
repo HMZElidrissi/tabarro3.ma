@@ -29,10 +29,7 @@ export function BenefitsComponent({ dict }: { dict: any }) {
     ];
 
     return (
-        <div
-            className="py-16 section-band"
-            id="benefits"
-        >
+        <div className="py-16 section-band" id="benefits">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center">
                     <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl tracking-tight">

@@ -116,12 +116,24 @@
         opacity: 0;
         animation: fade-in-up 0.55s var(--ease-spring) forwards;
     }
-    .section-reveal > *:nth-child(1) { animation-delay: 0ms; }
-    .section-reveal > *:nth-child(2) { animation-delay: 80ms; }
-    .section-reveal > *:nth-child(3) { animation-delay: 160ms; }
-    .section-reveal > *:nth-child(4) { animation-delay: 240ms; }
-    .section-reveal > *:nth-child(5) { animation-delay: 320ms; }
-    .section-reveal > *:nth-child(6) { animation-delay: 400ms; }
+    .section-reveal > *:nth-child(1) {
+        animation-delay: 0ms;
+    }
+    .section-reveal > *:nth-child(2) {
+        animation-delay: 80ms;
+    }
+    .section-reveal > *:nth-child(3) {
+        animation-delay: 160ms;
+    }
+    .section-reveal > *:nth-child(4) {
+        animation-delay: 240ms;
+    }
+    .section-reveal > *:nth-child(5) {
+        animation-delay: 320ms;
+    }
+    .section-reveal > *:nth-child(6) {
+        animation-delay: 400ms;
+    }
 
     /* Subtle section depth: soft gradient band */
     .section-band {
@@ -137,14 +149,20 @@
 
     /* Card lift on hover: depth + motion */
     .card-lift {
-        transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+        transition:
+            transform 0.3s var(--ease-spring),
+            box-shadow 0.3s ease;
     }
     .card-lift:hover {
         transform: translateY(-4px);
-        box-shadow: 0 12px 40px -12px rgb(0 0 0 / 0.15), 0 0 0 1px hsl(var(--border) / 0.5);
+        box-shadow:
+            0 12px 40px -12px rgb(0 0 0 / 0.15),
+            0 0 0 1px hsl(var(--border) / 0.5);
     }
     .dark .card-lift:hover {
-        box-shadow: 0 12px 40px -12px rgb(0 0 0 / 0.4), 0 0 0 1px hsl(var(--border) / 0.5);
+        box-shadow:
+            0 12px 40px -12px rgb(0 0 0 / 0.4),
+            0 0 0 1px hsl(var(--border) / 0.5);
     }
 
     /* Subtle noise texture overlay (use on hero/sections for depth) */

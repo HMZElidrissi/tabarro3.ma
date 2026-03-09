@@ -4,10 +4,10 @@ import dynamic from 'next/dynamic';
 import { RevealOnView } from '@/components/custom/reveal-on-view';
 import { SectionSkeleton } from '@/components/home/section-skeleton';
 
-const TweetMarquee = dynamic(
-    () => import('@/components/home/tweet-marquee'),
-    { loading: () => <SectionSkeleton />, ssr: false }
-);
+const TweetMarquee = dynamic(() => import('@/components/home/tweet-marquee'), {
+    loading: () => <SectionSkeleton />,
+    ssr: false,
+});
 
 const MapComponent = dynamic(() => import('@/components/home/map'), {
     loading: () => <SectionSkeleton />,

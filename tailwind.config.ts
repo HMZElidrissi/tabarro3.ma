@@ -10,7 +10,12 @@ const config: Config = {
     theme: {
         extend: {
             fontFamily: {
-                display: ['var(--font-fraunces)', 'var(--font-nunito)', 'system-ui', 'sans-serif'],
+                display: [
+                    'var(--font-fraunces)',
+                    'var(--font-nunito)',
+                    'system-ui',
+                    'sans-serif',
+                ],
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

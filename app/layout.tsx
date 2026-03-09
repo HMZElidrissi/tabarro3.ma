@@ -151,7 +151,8 @@ export default async function RootLayout({
                 isRTL
                     ? [tajawal.className, tajawal.variable, 'text-right']
                     : [nunitoFont.className, 'text-left'],
-            )}>
+            )}
+        >
             <head>
                 <link rel="canonical" href={baseUrl} />
                 <script
