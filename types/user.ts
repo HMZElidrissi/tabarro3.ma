@@ -15,6 +15,7 @@ export interface User {
     cityId: number | null;
     createdAt: Date;
     updatedAt: Date;
+    emailVerifiedAt?: Date | null;
     deletedAt: Date | null;
     receiveCampaignDigests: boolean;
     receiveBloodRequestEmails: boolean;

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import CampaignsClient from '@/components/campaigns/campaigns-client';
 import { getUser } from '@/auth/session';
 import { Role } from '@/types/enums';
+import { redirect } from 'next/navigation';
 
 export default async function CampaignsPage({
     searchParams,
@@ -22,10 +23,13 @@ export default async function CampaignsPage({
     const currentPage = page || 1;
     const currentSearch = search ?? '';
     const currentUser = await getUser();
+    if (!currentUser) {
+        redirect('/sign-in');
+    }
 
     // For organization users, pass their organization ID to filter campaigns
     const organizationId =
-        currentUser?.role === Role.ORGANIZATION ? currentUser.id : undefined;
+        currentUser.role === Role.ORGANIZATION ? currentUser.id : undefined;
 
     return (
         <DashboardShell
@@ -45,7 +49,7 @@ export default async function CampaignsPage({
                 currentPage={currentPage}
                 currentSearch={currentSearch}
                 currentStatus={status}
-                userRole={currentUser!.role as Role}
+                userRole={currentUser.role as Role}
                 organizationId={organizationId}
                 currentRegion={region}
                 currentCityId={cityId}

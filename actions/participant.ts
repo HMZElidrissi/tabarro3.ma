@@ -88,6 +88,7 @@ export async function getParticipants({
                 city: { select: { id: true, name: true } },
                 createdAt: true,
                 updatedAt: true,
+                emailVerifiedAt: true,
             },
             take: pageSize,
             orderBy: { createdAt: 'desc' },

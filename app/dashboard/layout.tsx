@@ -20,7 +20,10 @@ export default async function DashboardLayout({
     let userPromise = getUser();
 
     const user = await userPromise;
-    if (user?.role === Role.PARTICIPANT) {
+    if (!user) {
+        redirect('/sign-in');
+    }
+    if (user.role === Role.PARTICIPANT) {
         redirect('/profile');
     }
 

@@ -108,7 +108,7 @@ export function BloodRequestsTable({
                             <TableCell>
                                 {format(
                                     new Date(request.createdAt),
-                                    'dd-MM-yyyy',
+                                    'MMM d, yyyy',
                                 )}
                             </TableCell>
                             <TableCell className="text-right">

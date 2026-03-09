@@ -237,7 +237,7 @@ export function BloodRequestsGrid({
                                     <CalendarClock className="h-4 w-4" />
                                     {format(
                                         new Date(request.createdAt),
-                                        'dd-MM-yyyy',
+                                        'MMM d, yyyy',
                                     )}
                                 </div>
                             </div>

@@ -149,14 +149,9 @@ export default async function RootLayout({
                 'antialiased transition-all',
                 fraunces.variable,
                 isRTL
-                    ? [
-                          tajawal.className,
-                          tajawal.variable,
-                          'text-right',
-                      ]
+                    ? [tajawal.className, tajawal.variable, 'text-right']
                     : [nunitoFont.className, 'text-left'],
-            )}
-        >
+            )}>
             <head>
                 <link rel="canonical" href={baseUrl} />
                 <script

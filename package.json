@@ -67,6 +67,7 @@
         "prisma": "6.19.2",
         "react": "19.2.4",
         "react-chartjs-2": "^5.2.0",
+        "react-day-picker": "^9.14.0",
         "react-dom": "19.2.4",
         "react-email": "^3.0.2",
         "react-fast-marquee": "^1.6.5",

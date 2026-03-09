@@ -114,13 +114,13 @@ export function CampaignsTable({
                                 <TableCell>
                                     {format(
                                         new Date(campaign.startTime),
-                                        'dd-MM-yyyy',
+                                        'MMM d, yyyy',
                                     )}
                                 </TableCell>
                                 <TableCell>
                                     {format(
                                         new Date(campaign.endTime),
-                                        'dd-MM-yyyy',
+                                        'MMM d, yyyy',
                                     )}
                                 </TableCell>
                                 <TableCell>

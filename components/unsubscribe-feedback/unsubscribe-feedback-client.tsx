@@ -210,7 +210,7 @@ export default function UnsubscribeFeedbackClient({
                                         <TableCell className="text-muted-foreground whitespace-nowrap">
                                             {format(
                                                 new Date(item.createdAt),
-                                                'dd MMM yyyy, HH:mm',
+                                                'MMM d, yyyy HH:mm',
                                             )}
                                         </TableCell>
                                     </TableRow>

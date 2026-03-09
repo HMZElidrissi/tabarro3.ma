@@ -114,8 +114,7 @@ export default async function ParticipatePage({
                                 className={cn(
                                     'text-xs font-medium px-2 py-1 shrink-0',
                                     statusBadge.className,
-                                )}
-                            >
+                                )}>
                                 <Clock className="w-3 h-3 me-1" />
                                 {statusBadge.text}
                             </Badge>

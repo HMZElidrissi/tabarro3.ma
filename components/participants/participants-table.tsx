@@ -15,7 +15,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Loader2, MoreHorizontal } from 'lucide-react';
+import { Loader2, Mail, MoreHorizontal } from 'lucide-react';
 import { User } from '@/types/user';
 import { getBloodGroupLabel } from '@/config/blood-group';
 
@@ -59,7 +59,20 @@ export function ParticipantsTable({
                             <TableCell className="font-medium">
                                 {participant.name}
                             </TableCell>
-                            <TableCell>{participant.email}</TableCell>
+                            <TableCell>
+                                <div className="flex flex-col gap-1.5">
+                                    <span>{participant.email}</span>
+                                    {participant.emailVerifiedAt == null && (
+                                        <Badge
+                                            variant="outline"
+                                            className="w-fit gap-1 rounded-full border-diesel-200 bg-diesel-50 px-2 py-0.5 text-xs font-medium text-diesel-800 dark:border-diesel-800 dark:bg-diesel-950/50 dark:text-diesel-300"
+                                        >
+                                            <Mail className="h-3 w-3 shrink-0" />
+                                            Unverified email
+                                        </Badge>
+                                    )}
+                                </div>
+                            </TableCell>
                             <TableCell>
                                 <Badge variant="secondary">
                                     {getBloodGroupLabel(participant.bloodGroup)}
@@ -72,7 +85,7 @@ export function ParticipantsTable({
                             <TableCell>
                                 {format(
                                     new Date(participant.createdAt),
-                                    'MMM dd, yyyy',
+                                    'MMM d, yyyy',
                                 )}
                             </TableCell>
                             <TableCell className="text-right">

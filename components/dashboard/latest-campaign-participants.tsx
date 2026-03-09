@@ -121,7 +121,7 @@ export function LatestCampaignParticipants({
                             <TableCell className="text-right">
                                 {format(
                                     new Date(participant.createdAt),
-                                    'dd-MM-yyyy',
+                                    'MMM d, yyyy',
                                 )}
                             </TableCell>
                         </TableRow>

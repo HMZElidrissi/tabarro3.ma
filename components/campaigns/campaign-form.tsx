@@ -21,7 +21,7 @@ import {
 import { REGIONS_AND_CITIES } from '@/config/locations';
 import { User } from '@/types/user';
 import { Role } from '@/types/enums';
-import { Check, ChevronsUpDown } from 'lucide-react';
+import { Check, ChevronsUpDown, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
     Popover,
@@ -36,6 +36,18 @@ import {
     CommandItem,
     CommandList,
 } from '@/components/ui/command';
+import { Calendar } from '@/components/ui/calendar';
+import {
+    Field,
+    FieldGroup,
+    FieldLabel,
+} from '@/components/ui/field';
+import {
+    InputGroup,
+    InputGroupAddon,
+    InputGroupInput,
+} from '@/components/ui/input-group';
+import { format } from 'date-fns';
 
 interface CampaignFormProps {
     campaign?: Campaign;
@@ -69,6 +81,35 @@ export default function CampaignForm({
     const [selectedOrg, setSelectedOrg] = useState<string>(
         campaign?.organizationId || '',
     );
+
+    const [startCalOpen, setStartCalOpen] = useState(false);
+    const [endCalOpen, setEndCalOpen] = useState(false);
+
+    const [startDate, setStartDate] = useState<Date | undefined>(
+        campaign?.startTime ? new Date(campaign.startTime) : undefined,
+    );
+    const [startTimeStr, setStartTimeStr] = useState<string>(
+        campaign?.startTime
+            ? format(new Date(campaign.startTime), 'HH:mm')
+            : '09:00',
+    );
+    const [endDate, setEndDate] = useState<Date | undefined>(
+        campaign?.endTime ? new Date(campaign.endTime) : undefined,
+    );
+    const [endTimeStr, setEndTimeStr] = useState<string>(
+        campaign?.endTime
+            ? format(new Date(campaign.endTime), 'HH:mm')
+            : '18:00',
+    );
+
+    const startDateTimeISO =
+        startDate && startTimeStr
+            ? `${format(startDate, 'yyyy-MM-dd')}T${startTimeStr}`
+            : '';
+    const endDateTimeISO =
+        endDate && endTimeStr
+            ? `${format(endDate, 'yyyy-MM-dd')}T${endTimeStr}`
+            : '';
 
     useEffect(() => {
         if (state.success) {
@@ -268,38 +309,136 @@ export default function CampaignForm({
                         />
                     </div>
 
-                    <div className="space-y-2">
-                        <Label htmlFor="startTime">Start Time</Label>
-                        <Input
-                            id="startTime"
-                            name="startTime"
-                            type="datetime-local"
-                            defaultValue={
-                                campaign?.startTime
-                                    ? new Date(campaign.startTime)
-                                          .toISOString()
-                                          .slice(0, 16)
-                                    : ''
-                            }
-                            required
-                        />
-                    </div>
+                    <div className="grid gap-6 sm:grid-cols-2">
+                        <div className="space-y-2">
+                            <Label>Start date &amp; time</Label>
+                            <input
+                                type="hidden"
+                                name="startTime"
+                                value={startDateTimeISO}
+                                required
+                            />
+                            <Popover open={startCalOpen} onOpenChange={setStartCalOpen}>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        variant="outline"
+                                        className="w-full justify-start text-left font-normal"
+                                        type="button"
+                                    >
+                                        <Clock className="mr-2 size-4 text-muted-foreground" />
+                                        {startDate
+                                            ? `${format(startDate, 'PPP')} – ${startTimeStr}`
+                                            : 'Pick a start date & time'}
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-0" align="start">
+                                    <Calendar
+                                        mode="single"
+                                        selected={startDate}
+                                        onSelect={setStartDate}
+                                        initialFocus
+                                    />
+                                    <div className="border-t p-3">
+                                        <FieldGroup>
+                                            <Field>
+                                                <FieldLabel htmlFor="time-start">
+                                                    Start time
+                                                </FieldLabel>
+                                                <InputGroup>
+                                                    <InputGroupInput
+                                                        id="time-start"
+                                                        type="time"
+                                                        step="1"
+                                                        value={startTimeStr}
+                                                        onChange={e =>
+                                                            setStartTimeStr(e.target.value)
+                                                        }
+                                                        className="appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                                                        required
+                                                    />
+                                                    <InputGroupAddon>
+                                                        <Clock className="size-4 text-muted-foreground" />
+                                                    </InputGroupAddon>
+                                                </InputGroup>
+                                            </Field>
+                                        </FieldGroup>
+                                        <Button
+                                            type="button"
+                                            size="sm"
+                                            className="mt-2 w-full"
+                                            onClick={() => setStartCalOpen(false)}
+                                        >
+                                            Done
+                                        </Button>
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
+                        </div>
 
-                    <div className="space-y-2">
-                        <Label htmlFor="endTime">End Time</Label>
-                        <Input
-                            id="endTime"
-                            name="endTime"
-                            type="datetime-local"
-                            defaultValue={
-                                campaign?.endTime
-                                    ? new Date(campaign.endTime)
-                                          .toISOString()
-                                          .slice(0, 16)
-                                    : ''
-                            }
-                            required
-                        />
+                        <div className="space-y-2">
+                            <Label>End date &amp; time</Label>
+                            <input
+                                type="hidden"
+                                name="endTime"
+                                value={endDateTimeISO}
+                                required
+                            />
+                            <Popover open={endCalOpen} onOpenChange={setEndCalOpen}>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        variant="outline"
+                                        className="w-full justify-start text-left font-normal"
+                                        type="button"
+                                    >
+                                        <Clock className="mr-2 size-4 text-muted-foreground" />
+                                        {endDate
+                                            ? `${format(endDate, 'PPP')} – ${endTimeStr}`
+                                            : 'Pick an end date & time'}
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-0" align="start">
+                                    <Calendar
+                                        mode="single"
+                                        selected={endDate}
+                                        onSelect={setEndDate}
+                                        initialFocus
+                                    />
+                                    <div className="border-t p-3">
+                                        <FieldGroup>
+                                            <Field>
+                                                <FieldLabel htmlFor="time-end">
+                                                    End time
+                                                </FieldLabel>
+                                                <InputGroup>
+                                                    <InputGroupInput
+                                                        id="time-end"
+                                                        type="time"
+                                                        step="1"
+                                                        value={endTimeStr}
+                                                        onChange={e =>
+                                                            setEndTimeStr(e.target.value)
+                                                        }
+                                                        className="appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                                                        required
+                                                    />
+                                                    <InputGroupAddon>
+                                                        <Clock className="size-4 text-muted-foreground" />
+                                                    </InputGroupAddon>
+                                                </InputGroup>
+                                            </Field>
+                                        </FieldGroup>
+                                        <Button
+                                            type="button"
+                                            size="sm"
+                                            className="mt-2 w-full"
+                                            onClick={() => setEndCalOpen(false)}
+                                        >
+                                            Done
+                                        </Button>
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
+                        </div>
                     </div>
 
                     <div className="flex justify-end space-x-4">
