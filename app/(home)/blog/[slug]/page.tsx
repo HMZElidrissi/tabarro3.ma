@@ -30,7 +30,15 @@ export async function generateMetadata({
             };
         }
 
-        const ogImageUrl = `${baseUrl}/api/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.excerpt)}`;
+        // Use the post's cover image directly as the OG image when available;
+        // fall back to the dynamically-generated text card only when there is none.
+        const hasCover =
+            post.coverImage && post.coverImage !== '/blog-placeholder.jpg';
+        const ogImageUrl = hasCover
+            ? post.coverImage.startsWith('http')
+                ? post.coverImage
+                : `${baseUrl}${post.coverImage}`
+            : `${baseUrl}/api/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.excerpt)}`;
 
         return {
             title: post.title,
@@ -38,6 +46,7 @@ export async function generateMetadata({
             openGraph: {
                 title: post.title,
                 description: post.excerpt,
+                type: 'article',
                 images: [
                     {
                         url: ogImageUrl,
@@ -48,6 +57,7 @@ export async function generateMetadata({
                 ],
             },
             twitter: {
+                card: 'summary_large_image',
                 title: post.title,
                 description: post.excerpt,
                 images: [
@@ -108,8 +118,7 @@ export default async function BlogPostPage({
                                 <Badge
                                     key={tag}
                                     variant="outline"
-                                    className="text-xs text-white border-white/30 bg-white/10 backdrop-blur-sm px-2 py-1"
-                                >
+                                    className="text-xs text-white border-white/30 bg-white/10 backdrop-blur-sm px-2 py-1">
                                     <TagIcon className="w-2.5 h-2.5 mr-1" />
                                     {tag}
                                 </Badge>
@@ -164,8 +173,7 @@ export default async function BlogPostPage({
                                 {post.tags.map(tag => (
                                     <span
                                         key={tag}
-                                        className="px-2.5 py-1 bg-muted text-muted-foreground rounded-full text-xs font-medium hover:bg-muted/80 transition-colors"
-                                    >
+                                        className="px-2.5 py-1 bg-muted text-muted-foreground rounded-full text-xs font-medium hover:bg-muted/80 transition-colors">
                                         #{tag}
                                     </span>
                                 ))}
@@ -185,8 +193,7 @@ export default async function BlogPostPage({
                         {/* Back to blog */}
                         <Link
                             href="/blog"
-                            className="inline-flex items-center text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 font-medium text-sm group"
-                        >
+                            className="inline-flex items-center text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 font-medium text-sm group">
                             <ChevronLeft
                                 className={cn(
                                     'h-4 w-4 group-hover:-translate-x-0.5 transition-transform',
@@ -208,8 +215,7 @@ export default async function BlogPostPage({
                                     className={cn(
                                         'w-10 h-10 rounded-full bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center',
                                         isRTL ? 'ml-3' : 'mr-3',
-                                    )}
-                                >
+                                    )}>
                                     <User className="w-5 h-5 text-brand-600 dark:text-brand-400" />
                                 </div>
                                 <div>
@@ -231,8 +237,7 @@ export default async function BlogPostPage({
                             </p>
                             <Link
                                 href="/campaigns"
-                                className="inline-block bg-white text-brand-600 font-medium px-3 py-1.5 rounded text-xs hover:bg-white/95 transition-colors dark:text-brand-100 dark:bg-brand-500 dark:hover:bg-brand-400"
-                            >
+                                className="inline-block bg-white text-brand-600 font-medium px-3 py-1.5 rounded text-xs hover:bg-white/95 transition-colors dark:text-brand-100 dark:bg-brand-500 dark:hover:bg-brand-400">
                                 {dict.blog?.findCampaigns || 'Find Campaigns'}
                             </Link>
                         </div>
@@ -248,8 +253,7 @@ export default async function BlogPostPage({
                                         <Link
                                             key={post.id}
                                             href={`/blog/${post.slug}`}
-                                            className="block group"
-                                        >
+                                            className="block group">
                                             <div className="flex gap-3">
                                                 <div className="relative w-12 h-12 rounded overflow-hidden flex-shrink-0">
                                                     <Image
