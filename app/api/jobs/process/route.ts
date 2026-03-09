@@ -3,6 +3,10 @@ import { processPendingJobs } from '@/jobs/processor';
 
 export const maxDuration = 300; // 5 minutes in seconds
 
+/**
+ * Process pending jobs
+ * This endpoint should be called by a cron job every 30 min, 8am-6pm Morocco time
+ */
 export async function GET(request: NextRequest) {
     try {
         const authHeader = request.headers.get('authorization');
