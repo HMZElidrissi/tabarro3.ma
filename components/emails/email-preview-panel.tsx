@@ -41,7 +41,8 @@ export default function EmailPreviewPanel({
         ) : templateType === 'digest' ? (
             <div className="bg-gray-50 dark:bg-black p-6 min-h-96 flex items-center justify-center">
                 <p className="text-sm text-muted-foreground text-center max-w-xs">
-                    Sélectionnez une région à gauche pour afficher l&apos;aperçu.
+                    Sélectionnez une région à gauche pour afficher
+                    l&apos;aperçu.
                 </p>
             </div>
         ) : templateType === 'blood_request' && bloodRequestPreviewHtml ? (
@@ -63,7 +64,8 @@ export default function EmailPreviewPanel({
         ) : templateType === 'blood_request' ? (
             <div className="bg-gray-50 dark:bg-black p-6 min-h-96 flex items-center justify-center">
                 <p className="text-sm text-muted-foreground text-center max-w-xs">
-                    Choisissez une demande ou l&apos;exemple à gauche pour afficher l&apos;aperçu.
+                    Choisissez une demande ou l&apos;exemple à gauche pour
+                    afficher l&apos;aperçu.
                 </p>
             </div>
         ) : (
@@ -76,7 +78,11 @@ export default function EmailPreviewPanel({
                                 <span>De: notify@tabarro3.ma</span>
                             </div>
                             <div>
-                                <span>À: {emailData.recipientEmail || 'destinataire@exemple.com'}</span>
+                                <span>
+                                    À:{' '}
+                                    {emailData.recipientEmail ||
+                                        'destinataire@exemple.com'}
+                                </span>
                             </div>
                         </div>
                         <div className="mt-1.5 text-xs text-gray-800 dark:text-gray-200 font-medium">

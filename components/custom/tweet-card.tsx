@@ -192,7 +192,10 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
                     playsInline
                     className="rounded-xl border shadow-sm"
                 >
-                    <source src={tweet.video.variants[0].src} type="video/mp4" />
+                    <source
+                        src={tweet.video.variants[0].src}
+                        type="video/mp4"
+                    />
                     Your browser does not support the video tag.
                 </video>
             )}
@@ -216,10 +219,14 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
             {!tweet.video &&
                 !tweet.photos &&
                 // @ts-expect-error package doesn't have type definitions
-                tweet?.card?.binding_values?.thumbnail_image_large?.image_value?.url && (
+                tweet?.card?.binding_values?.thumbnail_image_large?.image_value
+                    ?.url && (
                     <img
                         // @ts-expect-error package doesn't have type definitions
-                        src={tweet.card.binding_values.thumbnail_image_large.image_value.url}
+                        src={
+                            tweet.card.binding_values.thumbnail_image_large
+                                .image_value.url
+                        }
                         className="h-64 rounded-xl border object-cover shadow-sm"
                         alt={tweet.text}
                     />

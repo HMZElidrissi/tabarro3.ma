@@ -7,7 +7,10 @@ export default function EmailEditorHeader() {
     return (
         <div className="bg-white dark:bg-background border-b border-gray-200 dark:border-gray-800 sticky top-0 z-10">
             <div className="container mx-auto px-6 py-3">
-                <nav className="flex items-center gap-1.5 text-sm" aria-label="Breadcrumb">
+                <nav
+                    className="flex items-center gap-1.5 text-sm"
+                    aria-label="Breadcrumb"
+                >
                     <Link
                         href="/dashboard"
                         className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"

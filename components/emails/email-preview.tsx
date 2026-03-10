@@ -36,7 +36,8 @@ const TEMPLATES: {
         description: 'Digest quotidien par région',
         icon: <CalendarDays className="w-4 h-4" />,
         accent: 'text-blue-600',
-        activeAccent: 'bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-800',
+        activeAccent:
+            'bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-800',
     },
     {
         id: 'blood_request',
@@ -44,7 +45,8 @@ const TEMPLATES: {
         description: 'Demande urgente aux donneurs',
         icon: <Droplets className="w-4 h-4" />,
         accent: 'text-red-600',
-        activeAccent: 'bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-800',
+        activeAccent:
+            'bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-800',
     },
     {
         id: 'custom',
@@ -52,7 +54,8 @@ const TEMPLATES: {
         description: 'Message libre avec éditeur',
         icon: <Pencil className="w-4 h-4" />,
         accent: 'text-violet-600',
-        activeAccent: 'bg-violet-50 dark:bg-violet-950/40 border-violet-200 dark:border-violet-800',
+        activeAccent:
+            'bg-violet-50 dark:bg-violet-950/40 border-violet-200 dark:border-violet-800',
     },
 ];
 
@@ -79,13 +82,18 @@ export default function EmailPreview() {
     const [digestRegionId, setDigestRegionId] = useState(0);
     const [digestUseRealCampaigns, setDigestUseRealCampaigns] = useState(false);
     const [digestRecipientEmail, setDigestRecipientEmail] = useState('');
-    const [digestPreviewHtml, setDigestPreviewHtml] = useState<string | null>(null);
+    const [digestPreviewHtml, setDigestPreviewHtml] = useState<string | null>(
+        null,
+    );
     const [digestSending, setDigestSending] = useState(false);
 
     // Blood request state
     const [bloodRequestId, setBloodRequestId] = useState<number | null>(null);
-    const [bloodRequestRecipientEmail, setBloodRequestRecipientEmail] = useState('');
-    const [bloodRequestPreviewHtml, setBloodRequestPreviewHtml] = useState<string | null>(null);
+    const [bloodRequestRecipientEmail, setBloodRequestRecipientEmail] =
+        useState('');
+    const [bloodRequestPreviewHtml, setBloodRequestPreviewHtml] = useState<
+        string | null
+    >(null);
     const [bloodRequestSending, setBloodRequestSending] = useState(false);
 
     // Custom email state
@@ -166,14 +174,19 @@ export default function EmailPreview() {
     const addFooterLink = () => {
         setEmailData(prev => ({
             ...prev,
-            customFooterLinks: [...prev.customFooterLinks, { text: '', url: '' }],
+            customFooterLinks: [
+                ...prev.customFooterLinks,
+                { text: '', url: '' },
+            ],
         }));
     };
 
     const removeFooterLink = (index: number) => {
         setEmailData(prev => ({
             ...prev,
-            customFooterLinks: prev.customFooterLinks.filter((_, i) => i !== index),
+            customFooterLinks: prev.customFooterLinks.filter(
+                (_, i) => i !== index,
+            ),
         }));
     };
 
@@ -199,7 +212,8 @@ export default function EmailPreview() {
         if (!emailData.recipientEmail) {
             toast({
                 title: 'Erreur',
-                description: 'Veuillez entrer une adresse email de destinataire.',
+                description:
+                    'Veuillez entrer une adresse email de destinataire.',
                 variant: 'destructive',
             });
             return;
@@ -212,7 +226,11 @@ export default function EmailPreview() {
                 toast({ title: 'Succès!', description: result.message });
                 setEmailData(prev => ({ ...prev, recipientEmail: '' }));
             } else {
-                toast({ title: 'Erreur', description: result.error, variant: 'destructive' });
+                toast({
+                    title: 'Erreur',
+                    description: result.error,
+                    variant: 'destructive',
+                });
             }
         } catch {
             toast({
@@ -233,7 +251,6 @@ export default function EmailPreview() {
 
     return (
         <div className="flex flex-col flex-1 overflow-hidden">
-
             <div className="flex flex-1 overflow-hidden">
                 {/* ── Left Sidebar: Template Gallery ────────────────────────── */}
                 <aside className="w-56 shrink-0 border-r border-gray-200 dark:border-gray-800 bg-gray-50/60 dark:bg-black/20 flex flex-col gap-1 p-3 overflow-y-auto">
@@ -315,7 +332,9 @@ export default function EmailPreview() {
                                 useRealCampaigns={digestUseRealCampaigns}
                                 recipientEmail={digestRecipientEmail}
                                 onRegionIdChange={setDigestRegionId}
-                                onUseRealCampaignsChange={setDigestUseRealCampaigns}
+                                onUseRealCampaignsChange={
+                                    setDigestUseRealCampaigns
+                                }
                                 onRecipientEmailChange={setDigestRecipientEmail}
                                 onPreviewHtml={setDigestPreviewHtml}
                                 isSending={digestSending}
@@ -328,7 +347,9 @@ export default function EmailPreview() {
                                 requestId={bloodRequestId}
                                 recipientEmail={bloodRequestRecipientEmail}
                                 onRequestIdChange={setBloodRequestId}
-                                onRecipientEmailChange={setBloodRequestRecipientEmail}
+                                onRecipientEmailChange={
+                                    setBloodRequestRecipientEmail
+                                }
                                 onPreviewHtml={setBloodRequestPreviewHtml}
                                 isSending={bloodRequestSending}
                                 onSendingChange={setBloodRequestSending}
@@ -381,7 +402,9 @@ export default function EmailPreview() {
                                 templateType={templateType}
                                 emailData={emailData}
                                 digestPreviewHtml={digestPreviewHtml}
-                                bloodRequestPreviewHtml={bloodRequestPreviewHtml}
+                                bloodRequestPreviewHtml={
+                                    bloodRequestPreviewHtml
+                                }
                             />
                         </div>
                     </aside>
