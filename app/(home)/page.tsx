@@ -5,10 +5,8 @@ import HowItWorksComponent from '@/components/home/how-it-works';
 import { getDictionary, getLocale } from '@/i18n/get-dictionary';
 import Partners from '@/components/home/partners';
 import LatestBlogPosts from '@/components/blog/latest-blog-posts';
-import {
-    LazyTweetMarquee,
-    LazyMap,
-} from '@/components/home/lazy-home-sections';
+import { LazyTweetMarquee } from '@/components/home/lazy-home-sections';
+import { LazyMap } from '@/components/home/lazy-map';
 
 import { Metadata } from 'next';
 import { WithContext } from 'schema-dts';

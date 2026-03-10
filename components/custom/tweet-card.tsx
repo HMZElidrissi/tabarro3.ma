@@ -1,31 +1,32 @@
-'use client';
-
-import type React from 'react';
-/* eslint-disable @next/next/no-img-element */
-import { Suspense, useEffect, useState } from 'react';
-import {
-    enrichTweet,
-    type EnrichedTweet,
-    type TweetProps,
-    type TwitterComponents,
-} from 'react-tweet';
+import { Suspense } from 'react';
+import { enrichTweet, type EnrichedTweet, type TweetProps } from 'react-tweet';
 import { getTweet, type Tweet } from 'react-tweet/api';
 
 import { cn } from '@/lib/utils';
+
+/* eslint-disable @next/next/no-img-element */
 
 interface TwitterIconProps {
     className?: string;
     [key: string]: unknown;
 }
+
 const Twitter = ({ className, ...props }: TwitterIconProps) => (
     <svg
-        viewBox="0 0 128 128"
-        className={`fill-black dark:fill-white ${className}`}
+        stroke="currentColor"
+        fill="currentColor"
+        strokeWidth="0"
+        viewBox="0 0 24 24"
         height="1em"
         width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
         {...props}
     >
-        <path d="M75.916 54.2 122.542 0h-11.05L71.008 47.06 38.672 0H1.376l48.898 71.164L1.376 128h11.05L55.18 78.303 89.328 128h37.296L75.913 54.2ZM60.782 71.79l-4.955-7.086-39.42-56.386h16.972L65.19 53.824l4.954 7.086 41.353 59.15h-16.97L60.782 71.793Z"></path>
+        <g>
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path d="M22.162 5.656a8.384 8.384 0 0 1-2.402.658A4.196 4.196 0 0 0 21.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 0 0-7.126 3.814 11.874 11.874 0 0 1-8.62-4.37 4.168 4.168 0 0 0-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 0 1-1.894-.523v.052a4.185 4.185 0 0 0 3.355 4.101 4.21 4.21 0 0 1-1.89.072A4.185 4.185 0 0 0 7.97 16.65a8.394 8.394 0 0 1-6.191 1.732 11.83 11.83 0 0 0 6.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.496 8.496 0 0 0 2.087-2.165z"></path>
+        </g>
     </svg>
 );
 
@@ -50,11 +51,9 @@ export const truncate = (str: string | null, length: number) => {
 const Skeleton = ({
     className,
     ...props
-}: React.HTMLAttributes<HTMLDivElement>) => {
-    return (
-        <div className={cn('rounded-md bg-primary/10', className)} {...props} />
-    );
-};
+}: React.HTMLAttributes<HTMLDivElement>) => (
+    <div className={cn('rounded-md bg-primary/10', className)} {...props} />
+);
 
 export const TweetSkeleton = ({
     className,
@@ -65,7 +64,7 @@ export const TweetSkeleton = ({
 }) => (
     <div
         className={cn(
-            'flex size-full max-h-max min-w-72 flex-col gap-2 rounded-lg border p-4',
+            'flex size-full max-h-max min-w-72 flex-col gap-2 rounded-xl border p-4',
             className,
         )}
         {...props}
@@ -87,7 +86,7 @@ export const TweetNotFound = ({
 }) => (
     <div
         className={cn(
-            'flex size-full flex-col items-center justify-center gap-2 rounded-lg border p-4',
+            'flex size-full flex-col items-center justify-center gap-2 rounded-xl border p-4',
             className,
         )}
         {...props}
@@ -97,26 +96,29 @@ export const TweetNotFound = ({
 );
 
 export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
-    <div className="flex flex-row justify-between tracking-tight">
-        <div className="flex items-center space-x-2">
-            <a href={tweet.user.url} target="_blank" rel="noreferrer">
+    <div className="flex flex-row items-start justify-between tracking-normal">
+        <div className="flex items-center space-x-3">
+            <a
+                href={tweet.user.url}
+                target="_blank"
+                rel="noreferrer"
+                className="shrink-0"
+            >
                 <img
                     title={`Profile picture of ${tweet.user.name}`}
                     alt={tweet.user.screen_name}
                     height={48}
                     width={48}
-                    src={
-                        tweet.user.profile_image_url_https || '/placeholder.svg'
-                    }
-                    className="overflow-hidden rounded-full border border-transparent"
+                    src={tweet.user.profile_image_url_https}
+                    className="overflow-hidden rounded-full border border-border/50"
                 />
             </a>
-            <div>
+            <div className="flex flex-col gap-0.5">
                 <a
                     href={tweet.user.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center whitespace-nowrap font-semibold"
+                    className="flex items-center whitespace-nowrap font-medium text-foreground transition-opacity hover:opacity-80"
                 >
                     {truncate(tweet.user.name, 20)}
                     {tweet.user.verified ||
@@ -129,7 +131,7 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
                         href={tweet.user.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-sm text-gray-500 transition-all duration-75"
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                         @{truncate(tweet.user.screen_name, 16)}
                     </a>
@@ -138,13 +140,13 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
         </div>
         <a href={tweet.url} target="_blank" rel="noreferrer">
             <span className="sr-only">Link to tweet</span>
-            <Twitter className="size-5 items-start text-[#3BA9EE] transition-all ease-in-out hover:scale-105" />
+            <Twitter className="size-5 text-muted-foreground transition-all ease-in-out hover:scale-105 hover:text-foreground" />
         </a>
     </div>
 );
 
 export const TweetBody = ({ tweet }: { tweet: EnrichedTweet }) => (
-    <div className="break-words leading-normal tracking-tighter">
+    <div className="text-[15px] leading-relaxed tracking-normal wrap-break-word">
         {tweet.entities.map((entity, idx) => {
             switch (entity.type) {
                 case 'url':
@@ -157,7 +159,7 @@ export const TweetBody = ({ tweet }: { tweet: EnrichedTweet }) => (
                             href={entity.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm font-normal text-blue-500 hover:underline"
+                            className="text-[15px] font-normal text-muted-foreground transition-colors hover:text-foreground"
                         >
                             <span>{entity.text}</span>
                         </a>
@@ -166,10 +168,12 @@ export const TweetBody = ({ tweet }: { tweet: EnrichedTweet }) => (
                     return (
                         <span
                             key={idx}
-                            className="text-sm font-normal"
+                            className="text-[15px] font-normal text-foreground"
                             dangerouslySetInnerHTML={{ __html: entity.text }}
                         />
                     );
+                default:
+                    return null;
             }
         })}
     </div>
@@ -186,12 +190,9 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
                     loop
                     muted
                     playsInline
-                    className="h-48 rounded-xl border shadow-sm"
+                    className="rounded-xl border shadow-sm"
                 >
-                    <source
-                        src={tweet.video.variants[0].src}
-                        type="video/mp4"
-                    />
+                    <source src={tweet.video.variants[0].src} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             )}
@@ -201,10 +202,12 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
                     {tweet.photos.map(photo => (
                         <img
                             key={photo.url}
-                            src={photo.url || '/placeholder.svg'}
+                            src={photo.url}
+                            width={photo.width}
+                            height={photo.height}
                             title={'Photo by ' + tweet.user.name}
                             alt={tweet.text}
-                            className="h-48 w-5/6 shrink-0 snap-center snap-always rounded-xl border object-cover shadow-sm"
+                            className="h-64 w-5/6 shrink-0 snap-center snap-always rounded-xl border object-cover shadow-sm"
                         />
                     ))}
                     <div className="shrink-0 snap-center sm:w-2" />
@@ -212,15 +215,11 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
             )}
             {!tweet.video &&
                 !tweet.photos &&
-                // @ts-ignore
-                tweet?.card?.binding_values?.thumbnail_image_large?.image_value
-                    .url && (
+                // @ts-expect-error package doesn't have type definitions
+                tweet?.card?.binding_values?.thumbnail_image_large?.image_value?.url && (
                     <img
-                        src={
-                            // @ts-ignore
-                            tweet.card.binding_values.thumbnail_image_large
-                                .image_value.url || '/placeholder.svg'
-                        }
+                        // @ts-expect-error package doesn't have type definitions
+                        src={tweet.card.binding_values.thumbnail_image_large.image_value.url}
                         className="h-64 rounded-xl border object-cover shadow-sm"
                         alt={tweet.text}
                     />
@@ -231,29 +230,17 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
 
 export const MagicTweet = ({
     tweet,
-    components,
     className,
     ...props
 }: {
     tweet: Tweet;
-    components?: TwitterComponents;
     className?: string;
 }) => {
-    // Add null check before enriching tweet
-    if (!tweet) {
-        const NotFound = components?.TweetNotFound || TweetNotFound;
-        return <NotFound className={className} {...props} />;
-    }
-
     const enrichedTweet = enrichTweet(tweet);
     return (
         <div
             className={cn(
-                'relative flex w-full max-w-lg flex-col gap-2 overflow-hidden rounded-lg border bg-card p-4 backdrop-blur-md',
-                // Dynamic height based on media content
-                enrichedTweet.photos || enrichedTweet.video
-                    ? 'h-auto min-h-[400px]'
-                    : 'h-auto min-h-[200px]',
+                'relative flex h-fit w-full max-w-lg flex-col gap-4 overflow-hidden rounded-xl border bg-card p-5',
                 className,
             )}
             {...props}
@@ -266,9 +253,10 @@ export const MagicTweet = ({
 };
 
 /**
- * TweetCard – client component that fetches tweet on mount (used inside client trees e.g. TweetMarquee).
+ * TweetCard — Server Component (RSC).
+ * Fetches the tweet server-side via react-tweet/api, no CORS issues, no client JS needed.
  */
-export function TweetCard({
+export const TweetCard = async ({
     id,
     components,
     fallback = <TweetSkeleton />,
@@ -276,48 +264,25 @@ export function TweetCard({
     ...props
 }: TweetProps & {
     className?: string;
-}) {
-    const [tweet, setTweet] = useState<Tweet | null | undefined>(undefined);
-
-    useEffect(() => {
-        if (!id) {
-            setTweet(null);
-            return;
-        }
-        let cancelled = false;
-        getTweet(id)
-            .then(data => {
-                if (!cancelled) setTweet(data ?? null);
-            })
-            .catch(err => {
-                if (!cancelled) {
-                    if (onError) onError(err);
-                    else console.error('Error fetching tweet:', err);
-                    setTweet(null);
-                }
-            });
-        return () => {
-            cancelled = true;
-        };
-    }, [id, onError]);
-
-    if (!id) {
-        const NotFound = components?.TweetNotFound || TweetNotFound;
-        return <NotFound {...props} />;
-    }
-
-    if (tweet === undefined) {
-        return <>{fallback}</>;
-    }
+}) => {
+    const tweet = id
+        ? await getTweet(id).catch(err => {
+              if (onError) {
+                  onError(err);
+              } else {
+                  console.error(err);
+              }
+          })
+        : undefined;
 
     if (!tweet) {
-        const NotFound = components?.TweetNotFound || TweetNotFound;
+        const NotFound = components?.TweetNotFound ?? TweetNotFound;
         return <NotFound {...props} />;
     }
 
     return (
         <Suspense fallback={fallback}>
-            <MagicTweet tweet={tweet} components={components} {...props} />
+            <MagicTweet tweet={tweet} {...props} />
         </Suspense>
     );
-}
+};

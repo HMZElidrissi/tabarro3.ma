@@ -29,6 +29,7 @@ export default function HowItWorksComponent({ dict }: { dict: any }) {
                     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                         {steps.map((step) => (
                             <div key={step.title} className="relative group">
+                                {/* 
                                 <svg
                                     className="border-travel absolute inset-0 w-full h-full pointer-events-none"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +39,6 @@ export default function HowItWorksComponent({ dict }: { dict: any }) {
                                         '--trail': `${trailLength}px`,
                                     } as React.CSSProperties}
                                 >
-                                    {/* Static border */}
                                     <rect
                                         x="0.5" y="0.5"
                                         width="calc(100% - 1px)"
@@ -50,7 +50,6 @@ export default function HowItWorksComponent({ dict }: { dict: any }) {
                                         strokeWidth="1"
                                         className="text-border"
                                     />
-                                    {/* Traveling line */}
                                     <rect
                                         className="trail"
                                         x="0.5" y="0.5"
@@ -62,7 +61,8 @@ export default function HowItWorksComponent({ dict }: { dict: any }) {
                                         strokeWidth="2"
                                         strokeLinecap="round"
                                     />
-                                </svg>
+                                </svg> 
+                                */}
 
                                 <div className="flex flex-col items-center rounded-2xl bg-card/60 dark:bg-card/40 p-6 border border-transparent shadow-sm card-lift h-full">
                                     <div className="flex items-center justify-center h-14 w-14 rounded-xl bg-brand-50 group-hover:bg-brand-100 text-brand-600 dark:bg-brand-900/50 dark:group-hover:bg-brand-800 dark:text-brand-400 transition-all duration-300 ring-1 ring-brand-100/80 dark:ring-brand-800/80 shadow-inner">
