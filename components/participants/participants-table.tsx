@@ -74,8 +74,10 @@ export function ParticipantsTable({
                                 </div>
                             </TableCell>
                             <TableCell>
-                                <Badge variant="secondary">
-                                    {getBloodGroupLabel(participant.bloodGroup)}
+                                <Badge variant="secondary" dir="ltr">
+                                    <span className="latin">
+                                        {getBloodGroupLabel(participant.bloodGroup)}
+                                    </span>
                                 </Badge>
                             </TableCell>
                             <TableCell>{participant.phone || '—'}</TableCell>
