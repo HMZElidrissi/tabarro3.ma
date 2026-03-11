@@ -27,6 +27,7 @@ export async function getDashboardStats(userId: string, userRole: Role) {
             totalOrganizations,
             totalCampaigns,
             totalBloodRequests,
+            unknownBloodGroupCount,
         ] = await Promise.all([
             prisma.user.count({
                 where: {
@@ -54,6 +55,13 @@ export async function getDashboardStats(userId: string, userRole: Role) {
             prisma.bloodRequest.count({
                 where: {
                     status: 'active',
+                },
+            }),
+            prisma.user.count({
+                where: {
+                    role: Role.PARTICIPANT,
+                    bloodGroup: 'UNKNOWN',
+                    deletedAt: null,
                 },
             }),
         ]);
@@ -85,6 +93,7 @@ export async function getDashboardStats(userId: string, userRole: Role) {
             totalCampaigns,
             totalBloodRequests,
             previousChange,
+            unknownBloodGroupCount,
         };
     } else {
         // Get organization stats

@@ -1,13 +1,7 @@
-import { Metadata } from 'next';
 import { getUser } from '@/auth/session';
 import { redirect } from 'next/navigation';
 import EmailPreview from '@/components/emails/email-preview';
-
-export const metadata: Metadata = {
-    title: 'Test des emails - Dashboard',
-    description:
-        'Prévisualiser et envoyer des emails de test (digest ou personnalisé)',
-};
+import { DashboardShell } from '@/components/dashboard/shell';
 
 export default async function EmailsPage() {
     const user = await getUser();
@@ -16,5 +10,12 @@ export default async function EmailsPage() {
         redirect('/sign-in');
     }
 
-    return <EmailPreview />;
+    return (
+        <DashboardShell
+            header="Emails management"
+            description="Test email templates and send customized ones."
+        >
+            <EmailPreview />
+        </DashboardShell>
+    );
 }

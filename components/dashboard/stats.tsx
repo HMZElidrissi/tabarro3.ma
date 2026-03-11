@@ -7,6 +7,7 @@ import {
     Droplets,
     TentTree,
     CalendarCheck,
+    CircleHelp,
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Role } from '@/types/enums';
@@ -34,6 +35,7 @@ interface DashboardStatsProps {
         activeCampaigns: number;
         upcomingCampaigns: number;
         previousChange?: number;
+        unknownBloodGroupCount?: number;
     };
 }
 
@@ -77,6 +79,14 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
             className:
                 'bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/50 dark:to-rose-950/50 border-red-100 dark:border-red-900',
         },
+        {
+            title: 'Unknown Blood Group',
+            value: stats.unknownBloodGroupCount?.toLocaleString(),
+            icon: CircleHelp,
+            description: 'Participants yet to set blood group',
+            className:
+                'bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/50 dark:to-amber-950/50 border-orange-100 dark:border-orange-900',
+        },
     ];
 
     const organizationStats: StatItem[] = [
@@ -118,7 +128,7 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
         userRole === Role.ADMIN ? adminStats : organizationStats;
 
     return (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {currentStats.map((stat, index) => (
                 <Card
                     key={index}
@@ -157,41 +167,45 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
                             <div
                                 className={cn(
                                     'rounded-full p-2 ring-2 ring-opacity-25',
-                                    stat.className?.includes('blue')
-                                        ? 'ring-blue-500'
-                                        : stat.className?.includes('purple')
-                                          ? 'ring-purple-500'
-                                          : stat.className?.includes('amber')
-                                            ? 'ring-amber-500'
-                                            : stat.className?.includes('red')
-                                              ? 'ring-red-500'
-                                              : stat.className?.includes(
-                                                      'emerald',
-                                                  )
-                                                ? 'ring-emerald-500'
-                                                : 'ring-gray-500',
+                                    stat.className?.includes('orange')
+                                        ? 'ring-orange-500'
+                                        : stat.className?.includes('blue')
+                                          ? 'ring-blue-500'
+                                          : stat.className?.includes('purple')
+                                            ? 'ring-purple-500'
+                                            : stat.className?.includes('amber')
+                                              ? 'ring-amber-500'
+                                              : stat.className?.includes('red')
+                                                ? 'ring-red-500'
+                                                : stat.className?.includes(
+                                                        'emerald',
+                                                    )
+                                                  ? 'ring-emerald-500'
+                                                  : 'ring-gray-500',
                                 )}
                             >
                                 <stat.icon
                                     className={cn(
                                         'h-5 w-5',
-                                        stat.className?.includes('blue')
-                                            ? 'text-blue-500'
-                                            : stat.className?.includes('purple')
-                                              ? 'text-purple-500'
-                                              : stat.className?.includes(
-                                                      'amber',
-                                                  )
-                                                ? 'text-amber-500'
+                                        stat.className?.includes('orange')
+                                            ? 'text-orange-500'
+                                            : stat.className?.includes('blue')
+                                              ? 'text-blue-500'
+                                              : stat.className?.includes('purple')
+                                                ? 'text-purple-500'
                                                 : stat.className?.includes(
-                                                        'red',
+                                                        'amber',
                                                     )
-                                                  ? 'text-red-500'
+                                                  ? 'text-amber-500'
                                                   : stat.className?.includes(
-                                                          'emerald',
+                                                          'red',
                                                       )
-                                                    ? 'text-emerald-500'
-                                                    : 'text-gray-500',
+                                                    ? 'text-red-500'
+                                                    : stat.className?.includes(
+                                                              'emerald',
+                                                          )
+                                                      ? 'text-emerald-500'
+                                                      : 'text-gray-500',
                                     )}
                                 />
                             </div>

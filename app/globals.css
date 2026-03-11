@@ -174,4 +174,26 @@
         pointer-events: none;
         opacity: 1;
     }
+
+    /* ── Traveling border (how-it-works cards) ───────────────────────────
+       Set --perimeter and --trail as inline CSS vars on the element.
+    ──────────────────────────────────────────────────────────────────── */
+    @keyframes travel {
+        from {
+            stroke-dashoffset: 0;
+        }
+        to {
+            stroke-dashoffset: calc(-1 * var(--perimeter));
+        }
+    }
+
+    .border-travel .trail {
+        stroke-dasharray: var(--trail) calc(var(--perimeter) - var(--trail));
+        animation: travel 6s linear infinite;
+        filter: drop-shadow(0 0 3px #e22021) drop-shadow(0 0 7px #fc6d6e80);
+    }
+
+    .group:hover .border-travel .trail {
+        animation-duration: 1.8s;
+    }
 }

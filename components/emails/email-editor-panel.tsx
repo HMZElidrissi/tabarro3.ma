@@ -47,7 +47,7 @@ export default function EmailEditorPanel({
     onSendEmail,
 }: EmailEditorPanelProps) {
     return (
-        <div className="lg:col-span-2">
+        <div>
             <ScrollArea className="h-[calc(100vh-200px)]">
                 <div className="space-y-4 pr-4">
                     <SendEmailForm

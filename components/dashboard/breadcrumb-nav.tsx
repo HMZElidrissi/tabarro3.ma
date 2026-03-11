@@ -31,34 +31,40 @@ export function BreadcrumbNav() {
             .join(' ');
 
     return (
-        <Breadcrumb className="flex items-center">
-            <BreadcrumbItem>
-                <BreadcrumbLink
-                    className="flex items-center text-gray-400 hover:text-gray-500 mr-3"
-                    href="/dashboard"
-                >
-                    <Home className="h-4 w-4" />
-                </BreadcrumbLink>
-            </BreadcrumbItem>
-            {paths.map((path, index) => {
-                const href = `/dashboard/${paths
-                    .slice(0, index + 1)
-                    .join('/')}`;
-                const isLast = index === paths.length - 1;
-                const label = formatLabel(path);
+        <div className="flex h-10 items-center bg-background px-6">
+            <Breadcrumb className="flex items-center">
+                <BreadcrumbItem>
+                    <BreadcrumbLink
+                        className="flex items-center text-muted-foreground hover:text-foreground transition-colors mr-3"
+                        href="/dashboard"
+                    >
+                        <Home className="h-3.5 w-3.5" />
+                    </BreadcrumbLink>
+                </BreadcrumbItem>
+                {paths.map((path, index) => {
+                    const href = `/dashboard/${paths
+                        .slice(0, index + 1)
+                        .join('/')}`;
+                    const isLast = index === paths.length - 1;
+                    const label = formatLabel(path);
 
-                return (
-                    <BreadcrumbItem key={path}>
-                        <ChevronRight className="h-4 w-4 text-gray-400 mx-2" />
-                        <BreadcrumbLink
-                            href={href}
-                            className={`text-gray-500 hover:text-gray-700 ${isLast ? 'font-semibold' : ''}`}
-                        >
-                            {label}
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                );
-            })}
-        </Breadcrumb>
+                    return (
+                        <BreadcrumbItem key={path}>
+                            <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50 mx-1.5" />
+                            <BreadcrumbLink
+                                href={href}
+                                className={`text-xs transition-colors ${
+                                    isLast
+                                        ? 'font-semibold text-foreground'
+                                        : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                            >
+                                {label}
+                            </BreadcrumbLink>
+                        </BreadcrumbItem>
+                    );
+                })}
+            </Breadcrumb>
+        </div>
     );
 }

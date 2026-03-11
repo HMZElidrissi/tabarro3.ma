@@ -1,35 +1,18 @@
-'use client';
-
-import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 import { RevealOnView } from '@/components/custom/reveal-on-view';
 import { SectionSkeleton } from '@/components/home/section-skeleton';
+import TweetMarquee from '@/components/home/tweet-marquee';
 
-const TweetMarquee = dynamic(() => import('@/components/home/tweet-marquee'), {
-    loading: () => <SectionSkeleton />,
-    ssr: false,
-});
-
-const MapComponent = dynamic(() => import('@/components/home/map'), {
-    loading: () => <SectionSkeleton />,
-    ssr: false,
-});
-
-interface LazyHomeSectionsProps {
+interface LazyTweetMarqueeProps {
     dict: Record<string, unknown>;
 }
 
-export function LazyTweetMarquee({ dict }: LazyHomeSectionsProps) {
+export function LazyTweetMarquee({ dict }: LazyTweetMarqueeProps) {
     return (
         <RevealOnView>
-            <TweetMarquee dict={dict} />
-        </RevealOnView>
-    );
-}
-
-export function LazyMap({ dict }: LazyHomeSectionsProps) {
-    return (
-        <RevealOnView>
-            <MapComponent dict={dict} />
+            <Suspense fallback={<SectionSkeleton />}>
+                <TweetMarquee dict={dict} />
+            </Suspense>
         </RevealOnView>
     );
 }
