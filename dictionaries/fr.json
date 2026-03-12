@@ -230,7 +230,15 @@
             "successMessage": "Votre adresse email a été vérifiée avec succès. Vous pouvez maintenant vous connecter à votre compte.",
             "invalidTitle": "Lien invalide ou expiré",
             "invalidMessage": "Ce lien de vérification est invalide ou a expiré. Veuillez demander un nouvel email de vérification en vous inscrivant de nouveau ou en contactant le support.",
-            "goToSignIn": "Aller à la page de connexion"
+            "goToSignIn": "Aller à la page de connexion",
+            "pendingTitle": "Vérifiez votre email",
+            "pendingDescription": "Nous avons envoyé un lien de confirmation à votre adresse email. Vous devez la vérifier avant de vous connecter.",
+            "resendLink": "Renvoyer le lien de confirmation",
+            "resending": "Envoi en cours...",
+            "resendCooldown": "Veuillez patienter {seconds}s",
+            "resendSuccess": "Lien de confirmation envoyé ! Veuillez vérifier votre boîte de réception.",
+            "resendFailed": "Échec de l'envoi du lien de confirmation. Veuillez réessayer plus tard.",
+            "alreadyVerified": "Cet email est déjà vérifié. Vous pouvez vous connecter."
         },
         "updatePassword": {
             "currentPasswordIncorrect": "Le mot de passe actuel est incorrect.",

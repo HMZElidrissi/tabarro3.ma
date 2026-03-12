@@ -252,7 +252,15 @@
             "successMessage": "Your email has been successfully verified. You can now sign in to your account.",
             "invalidTitle": "Invalid or expired link",
             "invalidMessage": "This verification link is invalid or has expired. Please request a new verification email by signing up again or contacting support.",
-            "goToSignIn": "Go to sign in"
+            "goToSignIn": "Go to sign in",
+            "pendingTitle": "Verify your email",
+            "pendingDescription": "We sent a verification link to your email. You need to verify it before signing in.",
+            "resendLink": "Resend verification link",
+            "resending": "Sending...",
+            "resendCooldown": "Please wait {seconds}s",
+            "resendSuccess": "Verification link sent! Please check your inbox.",
+            "resendFailed": "Failed to send verification link. Please try again later.",
+            "alreadyVerified": "This email is already verified. You can sign in."
         },
         "validation": {
             "passwordsDontMatch": "Passwords don't match",

@@ -44,7 +44,7 @@ export const signIn = validatedAction(signInSchema, async data => {
     });
 
     if (hasVerificationFlow > 0 && !user.emailVerifiedAt) {
-        return { error: dict.signIn.emailNotVerified };
+        return redirect(`/verify-email?email=${encodeURIComponent(email)}`);
     }
 
     const clientInfo = await getClientInfo();
