@@ -271,12 +271,14 @@ export default function EmailPreview() {
                                 templateType === tpl.id
                                     ? tpl.activeAccent + ' border-current'
                                     : 'border-transparent hover:bg-gray-100 dark:hover:bg-gray-800/50 text-muted-foreground hover:text-foreground',
-                            )}>
+                            )}
+                        >
                             <span
                                 className={cn(
                                     'mt-0.5',
                                     templateType === tpl.id ? tpl.accent : '',
-                                )}>
+                                )}
+                            >
                                 {tpl.icon}
                             </span>
                             <div className="min-w-0">
@@ -286,7 +288,8 @@ export default function EmailPreview() {
                                         templateType === tpl.id
                                             ? 'text-foreground'
                                             : '',
-                                    )}>
+                                    )}
+                                >
                                     {tpl.label}
                                 </div>
                                 <div className="text-[10px] text-muted-foreground mt-0.5 leading-snug line-clamp-2">
@@ -312,7 +315,8 @@ export default function EmailPreview() {
                                         variant="outline"
                                         size="sm"
                                         onClick={() => applyPreset(model.key)}
-                                        className="h-8 px-3 text-xs gap-1.5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                                        className="h-8 px-3 text-xs gap-1.5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                                    >
                                         <span>{model.emoji}</span>
                                         <span>{model.label}</span>
                                     </Button>
@@ -388,7 +392,8 @@ export default function EmailPreview() {
                                 size="sm"
                                 onClick={() => setShowPreview(false)}
                                 className="h-6 w-6 p-0 text-muted-foreground hover:text-foreground"
-                                title="Masquer l'aperçu">
+                                title="Masquer l'aperçu"
+                            >
                                 <EyeOff className="w-3.5 h-3.5" />
                             </Button>
                         </div>
@@ -411,7 +416,8 @@ export default function EmailPreview() {
                     <button
                         onClick={() => setShowPreview(true)}
                         className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
-                        title="Afficher l'aperçu">
+                        title="Afficher l'aperçu"
+                    >
                         <Eye className="w-3.5 h-3.5" />
                         <span>Aperçu</span>
                     </button>

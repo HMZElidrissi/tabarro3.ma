@@ -29,10 +29,10 @@ export function DeleteAccountSection({ dict }: DeleteAccountSectionProps) {
     const [open, setOpen] = useState(false);
     const [typed, setTyped] = useState('');
 
-    const [, deleteAction, deletePending] = useActionState<ActionState, FormData>(
-        deleteAccount,
-        { error: '', success: '' },
-    );
+    const [, deleteAction, deletePending] = useActionState<
+        ActionState,
+        FormData
+    >(deleteAccount, { error: '', success: '' });
 
     const isConfirmed = typed.trim().toLowerCase() === confirmWord;
 
@@ -106,7 +106,7 @@ export function DeleteAccountSection({ dict }: DeleteAccountSectionProps) {
                                 autoComplete="off"
                                 spellCheck={false}
                                 value={typed}
-                                onChange={(e) => setTyped(e.target.value)}
+                                onChange={e => setTyped(e.target.value)}
                                 placeholder={t.confirmPlaceholder}
                                 className={
                                     typed.length > 0

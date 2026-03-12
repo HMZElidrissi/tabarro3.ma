@@ -48,7 +48,11 @@ export const updateAccount = validatedActionWithUser(
         const { name, email, notificationLanguage } = data;
         const ipAddress = (await getClientInfo()).basic.ip;
 
-        const updateData: { name: string; email: string; notificationLanguage?: string } = {
+        const updateData: {
+            name: string;
+            email: string;
+            notificationLanguage?: string;
+        } = {
             name,
             email,
         };

@@ -93,12 +93,7 @@ const jobHandlers = {
             const emailText = await render(template, { plainText: true });
 
             const subject = `${t.subjectPrefix} ${bloodGroupLabel} - ${request.city.name}`;
-            await sendEmail(
-                recipient.email,
-                subject,
-                emailHtml,
-                emailText,
-            );
+            await sendEmail(recipient.email, subject, emailHtml, emailText);
 
             await new Promise(resolve => setTimeout(resolve, 200));
         }
@@ -120,9 +115,13 @@ const jobHandlers = {
             const dict = await getDictionaryForLocale(locale);
             const t = dict.emails.campaignDigest;
             const dateLocale = dateLocales[locale] ?? fr;
-            const formattedDate = format(new Date(dateStr + 'T12:00:00'), 'dd MMMM yyyy', {
-                locale: dateLocale,
-            });
+            const formattedDate = format(
+                new Date(dateStr + 'T12:00:00'),
+                'dd MMMM yyyy',
+                {
+                    locale: dateLocale,
+                },
+            );
 
             const token = await createUnsubscribeToken(
                 recipient.email,
@@ -143,12 +142,7 @@ const jobHandlers = {
             const emailText = await render(template, { plainText: true });
 
             const subject = `📅 ${t.subjectPrefix} - ${regionName} - ${formattedDate}`;
-            await sendEmail(
-                recipient.email,
-                subject,
-                emailHtml,
-                emailText,
-            );
+            await sendEmail(recipient.email, subject, emailHtml, emailText);
 
             await new Promise(resolve => setTimeout(resolve, 200));
         }

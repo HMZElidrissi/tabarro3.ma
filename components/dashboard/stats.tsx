@@ -191,7 +191,9 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
                                             ? 'text-orange-500'
                                             : stat.className?.includes('blue')
                                               ? 'text-blue-500'
-                                              : stat.className?.includes('purple')
+                                              : stat.className?.includes(
+                                                      'purple',
+                                                  )
                                                 ? 'text-purple-500'
                                                 : stat.className?.includes(
                                                         'amber',
@@ -202,8 +204,8 @@ export function DashboardStats({ userRole, stats }: DashboardStatsProps) {
                                                       )
                                                     ? 'text-red-500'
                                                     : stat.className?.includes(
-                                                              'emerald',
-                                                          )
+                                                            'emerald',
+                                                        )
                                                       ? 'text-emerald-500'
                                                       : 'text-gray-500',
                                     )}

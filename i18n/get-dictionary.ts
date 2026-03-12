@@ -19,7 +19,9 @@ export const getDictionary = async () => {
 };
 
 /** Load the full dictionary for a given locale (e.g. for emails, where locale is explicit). */
-export async function getDictionaryForLocale(locale: string | null | undefined) {
+export async function getDictionaryForLocale(
+    locale: string | null | undefined,
+) {
     const loc = getResolvedLocale(locale);
     if (!(loc in dictionaries)) {
         return dictionaries.ar();

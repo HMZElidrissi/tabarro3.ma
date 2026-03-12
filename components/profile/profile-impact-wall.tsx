@@ -31,10 +31,16 @@ function computeImpact(requests: BloodRequest[]): number {
     return requests.filter(r => r.status === 'fulfilled').length * 3;
 }
 
-function computeBadges(user: User, requests: BloodRequest[], dict: any): Badge[] {
+function computeBadges(
+    user: User,
+    requests: BloodRequest[],
+    dict: any,
+): Badge[] {
     const fulfilled = requests.filter(r => r.status === 'fulfilled').length;
     const total = requests.length;
-    const isRareBlood = ['O-', 'AB-', 'B-', 'A-'].includes(user.bloodGroup ?? '');
+    const isRareBlood = ['O-', 'AB-', 'B-', 'A-'].includes(
+        user.bloodGroup ?? '',
+    );
     const hasPhone = !!user.phone;
     const hasBlood = !!user.bloodGroup;
     const hasCity = !!user.cityId;
@@ -124,7 +130,9 @@ function BadgeStamp({ badge }: { badge: Badge }) {
                         className="absolute inset-0 h-full w-full opacity-25"
                     >
                         <circle
-                            cx="40" cy="40" r="37"
+                            cx="40"
+                            cy="40"
+                            r="37"
                             fill="none"
                             stroke="#6b7280"
                             strokeWidth="4"
@@ -157,14 +165,18 @@ function BadgeStamp({ badge }: { badge: Badge }) {
                 >
                     {/* Thick outer ring */}
                     <circle
-                        cx="40" cy="40" r="37"
+                        cx="40"
+                        cy="40"
+                        r="37"
                         fill="none"
                         stroke={badge.ringColor}
                         strokeWidth="5"
                     />
                     {/* Inner decorative dot ring */}
                     <circle
-                        cx="40" cy="40" r="31"
+                        cx="40"
+                        cy="40"
+                        r="31"
                         fill="none"
                         stroke={badge.ringColor}
                         strokeWidth="1.2"
@@ -208,7 +220,6 @@ export function ProfileImpactWall({
 
     return (
         <aside className="flex flex-col gap-5 w-full">
-
             {/* Stats summary */}
             <div className="grid grid-cols-2 gap-3">
                 <Card className="border-0 bg-muted/50">
@@ -227,7 +238,11 @@ export function ProfileImpactWall({
                             {dict.bloodRequests.status.fulfilled}
                         </p>
                         <p className="latin mt-1 text-2xl font-black text-brand-700 dark:text-brand-400">
-                            {bloodRequests.filter(r => r.status === 'fulfilled').length}
+                            {
+                                bloodRequests.filter(
+                                    r => r.status === 'fulfilled',
+                                ).length
+                            }
                         </p>
                     </CardContent>
                 </Card>
@@ -247,10 +262,13 @@ export function ProfileImpactWall({
                                 {dict.profile.achievementBadges}
                             </h3>
                             <p className="text-[10px] text-muted-foreground mt-0.5">
-                                <span className="latin font-bold">{earnedCount}</span>
+                                <span className="latin font-bold">
+                                    {earnedCount}
+                                </span>
                                 {' / '}
-                                <span className="latin">{badges.length}</span>
-                                {' '}
+                                <span className="latin">
+                                    {badges.length}
+                                </span>{' '}
                                 {dict.profile.badgesEarned}
                             </p>
                         </div>

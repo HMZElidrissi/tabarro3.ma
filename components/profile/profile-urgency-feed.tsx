@@ -83,7 +83,8 @@ function UrgencyCard({
 }) {
     const isActive = request.status === 'active';
     const bgTint = BLOOD_BG[request.bloodGroup as string] ?? 'bg-muted/30';
-    const gradClass = URGENCY_GRADIENTS[request.status] ?? URGENCY_GRADIENTS.active;
+    const gradClass =
+        URGENCY_GRADIENTS[request.status] ?? URGENCY_GRADIENTS.active;
 
     return (
         <Card
@@ -116,7 +117,11 @@ function UrgencyCard({
                         </span>
                         <div>
                             <p className="font-semibold text-sm leading-tight">
-                                {getBloodGroupLabel(request.bloodGroup, dict, 'request')}
+                                {getBloodGroupLabel(
+                                    request.bloodGroup,
+                                    dict,
+                                    'request',
+                                )}
                             </p>
                             {isActive && (
                                 <span className="flex items-center gap-1 text-[10px] text-brand-600 dark:text-brand-400 font-semibold uppercase tracking-wider">
@@ -131,9 +136,14 @@ function UrgencyCard({
                     </div>
                     <Badge
                         variant="outline"
-                        className={cn('text-[10px] shrink-0', getStatusColor(request.status))}
+                        className={cn(
+                            'text-[10px] shrink-0',
+                            getStatusColor(request.status),
+                        )}
                     >
-                        {dict.bloodRequests.status[request.status.toLowerCase()] ?? request.status}
+                        {dict.bloodRequests.status[
+                            request.status.toLowerCase()
+                        ] ?? request.status}
                     </Badge>
                 </div>
 
@@ -200,7 +210,11 @@ function UrgencyCard({
                             </Button>
                         )}
                         <Link href={`/profile/requests/${request.id}`}>
-                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                className="h-8 w-8 p-0"
+                            >
                                 <Pencil className="h-3.5 w-3.5" />
                             </Button>
                         </Link>
@@ -229,33 +243,49 @@ export function ProfileUrgencyFeed({
     const router = useRouter();
     const { toast } = useToast();
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-    const [selectedRequest, setSelectedRequest] = useState<BloodRequest | null>(null);
+    const [selectedRequest, setSelectedRequest] = useState<BloodRequest | null>(
+        null,
+    );
 
-    const [deleteState, deleteAction, deletePending] = useActionState<ActionState, FormData>(
-        deleteBloodRequest,
-        { error: '', success: '' },
-    );
-    const [fulfillState, fulfillAction, fulfillPending] = useActionState<ActionState, FormData>(
-        markAsFulfilled,
-        { error: '', success: '' },
-    );
+    const [deleteState, deleteAction, deletePending] = useActionState<
+        ActionState,
+        FormData
+    >(deleteBloodRequest, { error: '', success: '' });
+    const [fulfillState, fulfillAction, fulfillPending] = useActionState<
+        ActionState,
+        FormData
+    >(markAsFulfilled, { error: '', success: '' });
 
     useEffect(() => {
         if (deleteState.success) {
-            toast({ title: dict.common.success, description: deleteState.success });
+            toast({
+                title: dict.common.success,
+                description: deleteState.success,
+            });
             setDeleteDialogOpen(false);
             router.refresh();
         } else if (deleteState.error) {
-            toast({ title: dict.common.error, description: deleteState.error, variant: 'destructive' });
+            toast({
+                title: dict.common.error,
+                description: deleteState.error,
+                variant: 'destructive',
+            });
         }
     }, [deleteState, toast, router, dict]);
 
     useEffect(() => {
         if (fulfillState.success) {
-            toast({ title: dict.common.success, description: fulfillState.success });
+            toast({
+                title: dict.common.success,
+                description: fulfillState.success,
+            });
             router.refresh();
         } else if (fulfillState.error) {
-            toast({ title: dict.common.error, description: fulfillState.error, variant: 'destructive' });
+            toast({
+                title: dict.common.error,
+                description: fulfillState.error,
+                variant: 'destructive',
+            });
         }
     }, [fulfillState, toast, router, dict]);
 
@@ -307,7 +337,10 @@ export function ProfileUrgencyFeed({
                 </TabsList>
 
                 {/* ── Blood Requests tab ── */}
-                <TabsContent value="requests" className="mt-0 flex flex-col gap-5">
+                <TabsContent
+                    value="requests"
+                    className="mt-0 flex flex-col gap-5"
+                >
                     {/* Header */}
                     <div
                         className={cn(
@@ -347,7 +380,10 @@ export function ProfileUrgencyFeed({
                                     dict={dict}
                                     isRTL={isRTL}
                                     onMarkFulfilled={handleMarkFulfilled}
-                                    onDelete={req => { setSelectedRequest(req); setDeleteDialogOpen(true); }}
+                                    onDelete={req => {
+                                        setSelectedRequest(req);
+                                        setDeleteDialogOpen(true);
+                                    }}
                                     fulfillPending={fulfillPending}
                                     deletePending={deletePending}
                                 />
@@ -371,7 +407,10 @@ export function ProfileUrgencyFeed({
                                         dict={dict}
                                         isRTL={isRTL}
                                         onMarkFulfilled={handleMarkFulfilled}
-                                        onDelete={req => { setSelectedRequest(req); setDeleteDialogOpen(true); }}
+                                        onDelete={req => {
+                                            setSelectedRequest(req);
+                                            setDeleteDialogOpen(true);
+                                        }}
                                         fulfillPending={fulfillPending}
                                         deletePending={deletePending}
                                     />
@@ -389,7 +428,11 @@ export function ProfileUrgencyFeed({
                                     {dict.bloodRequests.noRequests}
                                 </p>
                                 <Link href="/profile/requests/new">
-                                    <Button size="sm" variant="outline" className="gap-1.5">
+                                    <Button
+                                        size="sm"
+                                        variant="outline"
+                                        className="gap-1.5"
+                                    >
                                         <Plus className="h-4 w-4" />
                                         {dict.bloodRequests.newRequest}
                                     </Button>
@@ -408,24 +451,35 @@ export function ProfileUrgencyFeed({
             </Tabs>
 
             {/* Delete confirmation dialog */}
-            <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+            <AlertDialog
+                open={deleteDialogOpen}
+                onOpenChange={setDeleteDialogOpen}
+            >
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
-                            {dict.bloodRequests?.deleteDialog?.title ?? 'Delete request?'}
+                            {dict.bloodRequests?.deleteDialog?.title ??
+                                'Delete request?'}
                         </AlertDialogTitle>
                         <AlertDialogDescription>
-                            {dict.bloodRequests?.deleteDialog?.description ?? 'This action cannot be undone.'}
+                            {dict.bloodRequests?.deleteDialog?.description ??
+                                'This action cannot be undone.'}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>{dict.common?.cancel ?? 'Cancel'}</AlertDialogCancel>
+                        <AlertDialogCancel>
+                            {dict.common?.cancel ?? 'Cancel'}
+                        </AlertDialogCancel>
                         <AlertDialogAction
-                            onClick={() => selectedRequest && handleDelete(selectedRequest)}
+                            onClick={() =>
+                                selectedRequest && handleDelete(selectedRequest)
+                            }
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                             disabled={deletePending}
                         >
-                            {deletePending ? dict.common?.deleting ?? 'Deleting…' : dict.common?.delete ?? 'Delete'}
+                            {deletePending
+                                ? (dict.common?.deleting ?? 'Deleting…')
+                                : (dict.common?.delete ?? 'Delete')}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>

@@ -67,7 +67,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
             bloodGroup: s.bloodGroup ?? prev.bloodGroup,
             region: s.region ?? prev.region,
             cityId: s.cityId ?? prev.cityId,
-            notificationLanguage: s.notificationLanguage ?? prev.notificationLanguage,
+            notificationLanguage:
+                s.notificationLanguage ?? prev.notificationLanguage,
         }));
         if (s.region) setSelectedRegion(s.region);
     }, [mode, state]);
@@ -466,7 +467,10 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                 <Select
                                     name="notificationLanguage"
                                     dir={isRTL ? 'rtl' : 'ltr'}
-                                    value={signupFormData.notificationLanguage || 'fr'}
+                                    value={
+                                        signupFormData.notificationLanguage ||
+                                        'fr'
+                                    }
                                     onValueChange={value =>
                                         setSignupFormData(prev => ({
                                             ...prev,

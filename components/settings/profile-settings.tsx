@@ -115,7 +115,9 @@ export default function ProfileSettings() {
                 <CardHeader>
                     <CardTitle>Account &amp; notifications</CardTitle>
                     <CardDescription>
-                        Choose the language for emails sent to you (verification, password reset, digests, urgent requests, etc.).
+                        Choose the language for emails sent to you
+                        (verification, password reset, digests, urgent requests,
+                        etc.).
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">

@@ -85,6 +85,7 @@ export async function getParticipants({
                 email: true,
                 phone: true,
                 bloodGroup: true,
+                notificationLanguage: true,
                 city: { select: { id: true, name: true } },
                 createdAt: true,
                 updatedAt: true,

@@ -115,8 +115,10 @@ export function generatePreviewHTML(
         if (data.showCopyright) {
             const year = new Date().getFullYear();
             const copyright =
-                CUSTOM_EMAIL_COPYRIGHT[locale]?.replace('{year}', String(year)) ??
-                CUSTOM_EMAIL_COPYRIGHT.fr.replace('{year}', String(year));
+                CUSTOM_EMAIL_COPYRIGHT[locale]?.replace(
+                    '{year}',
+                    String(year),
+                ) ?? CUSTOM_EMAIL_COPYRIGHT.fr.replace('{year}', String(year));
             html += `<p style="color: ${colors.footerText}; font-size: 14px; text-align: center;">${copyright}</p>`;
         }
     }

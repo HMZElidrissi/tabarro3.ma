@@ -214,10 +214,8 @@
     :root[dir='rtl'] {
         /* Inject Nunito before Tajawal in the stack so the browser uses it for
            any character that Tajawal doesn't cover (Latin, digits, punctuation). */
-        font-family:
-            var(--font-nunito, 'Nunito'),
-            var(--font-tajawal, 'Tajawal'),
-            sans-serif;
+        font-family: var(--font-nunito, 'Nunito'),
+            var(--font-tajawal, 'Tajawal'), sans-serif;
     }
 
     /*
@@ -225,9 +223,7 @@
      * in a <span className="latin"> to pin the direction and font explicitly.
      */
     .latin {
-        font-family:
-            var(--font-nunito, 'Nunito'),
-            sans-serif;
+        font-family: var(--font-nunito, 'Nunito'), sans-serif;
         direction: ltr;
         unicode-bidi: isolate;
         display: inline-block;

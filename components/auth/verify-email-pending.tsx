@@ -17,10 +17,10 @@ export function VerifyEmailPending({ dict }: VerifyEmailPendingProps) {
     const email = searchParams.get('email') ?? '';
     const t = dict.auth.verifyEmail;
 
-    const [state, formAction, isPending] = useActionState<ActionState, FormData>(
-        resendVerification,
-        { error: '', success: '' },
-    );
+    const [state, formAction, isPending] = useActionState<
+        ActionState,
+        FormData
+    >(resendVerification, { error: '', success: '' });
     const [cooldown, setCooldown] = useState(0);
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export function VerifyEmailPending({ dict }: VerifyEmailPendingProps) {
 
     useEffect(() => {
         if (cooldown <= 0) return;
-        const timer = setTimeout(() => setCooldown((c) => c - 1), 1000);
+        const timer = setTimeout(() => setCooldown(c => c - 1), 1000);
         return () => clearTimeout(timer);
     }, [cooldown]);
 

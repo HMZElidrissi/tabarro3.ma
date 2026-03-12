@@ -32,7 +32,9 @@ export function ProfileLayout({
             dir={isRTL ? 'rtl' : 'ltr'}
             className={cn(
                 'py-8 transition-all duration-500 ease-out',
-                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
+                mounted
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-4',
             )}
         >
             {/* ── Three-column grid ── */}

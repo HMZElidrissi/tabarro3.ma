@@ -96,14 +96,12 @@ export async function sendPasswordChangedEmail(
     const dict = await getDictionaryForLocale(loc);
     const t = dict.emails.passwordChanged;
 
-    const emailHtml = await render(
-        PasswordChangedEmail({ locale: loc, t }),
-        { pretty: true },
-    );
-    const emailText = await render(
-        PasswordChangedEmail({ locale: loc, t }),
-        { plainText: true },
-    );
+    const emailHtml = await render(PasswordChangedEmail({ locale: loc, t }), {
+        pretty: true,
+    });
+    const emailText = await render(PasswordChangedEmail({ locale: loc, t }), {
+        plainText: true,
+    });
 
     try {
         await sendEmail(email, t.subject, emailHtml, emailText);

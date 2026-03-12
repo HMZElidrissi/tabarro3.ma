@@ -7,7 +7,6 @@ import { CheckCircle2, ShieldAlert } from 'lucide-react';
 import { getBloodGroupLabel } from '@/config/blood-group';
 import { DeleteAccountSection } from '@/components/profile/delete-account-section';
 
-
 interface ProfileSidebarProps {
     user: User;
     dict: any;
@@ -62,7 +61,7 @@ export function ProfileSidebar({ user, dict, isRTL }: ProfileSidebarProps) {
         : user.email.slice(0, 2).toUpperCase();
 
     const bloodGradient = user.bloodGroup
-        ? BLOOD_GROUP_COLORS[user.bloodGroup] ?? 'from-brand-500 to-brand-800'
+        ? (BLOOD_GROUP_COLORS[user.bloodGroup] ?? 'from-brand-500 to-brand-800')
         : null;
 
     return (
@@ -109,7 +108,9 @@ export function ProfileSidebar({ user, dict, isRTL }: ProfileSidebarProps) {
                                 strokeDasharray={`${strokeDash} 251`}
                                 strokeDashoffset="0"
                                 transform="rotate(-90 50 50)"
-                                style={{ transition: 'stroke-dasharray 1s ease' }}
+                                style={{
+                                    transition: 'stroke-dasharray 1s ease',
+                                }}
                             />
                         </svg>
                         <div className="h-[88px] w-[88px] rounded-full bg-white/10 ring-2 ring-white/20 backdrop-blur-sm flex items-center justify-center">
@@ -161,15 +162,18 @@ export function ProfileSidebar({ user, dict, isRTL }: ProfileSidebarProps) {
                                 bloodGradient,
                             )}
                         >
-                            <svg viewBox="0 0 24 24" className="h-5 w-5 fill-white/90">
+                            <svg
+                                viewBox="0 0 24 24"
+                                className="h-5 w-5 fill-white/90"
+                            >
                                 <path d="M12 2C12 2 5 10.5 5 15a7 7 0 0014 0c0-4.5-7-13-7-13z" />
                             </svg>
                             <span className="latin font-display text-2xl font-black tracking-wider">
                                 {getBloodGroupLabel(
-                                                                    user.bloodGroup,
-                                                                    dict,
-                                                                    'request',
-                                                                )}
+                                    user.bloodGroup,
+                                    dict,
+                                    'request',
+                                )}
                             </span>
                         </div>
                     ) : (
@@ -183,7 +187,9 @@ export function ProfileSidebar({ user, dict, isRTL }: ProfileSidebarProps) {
                     <div className="w-full space-y-1.5">
                         <div className="flex justify-between text-xs text-white/60">
                             <span>{dict.profile.profileComplete}</span>
-                            <span className="latin font-bold text-white/80">{pct}%</span>
+                            <span className="latin font-bold text-white/80">
+                                {pct}%
+                            </span>
                         </div>
                         <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
                             <div

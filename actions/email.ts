@@ -324,9 +324,13 @@ export async function sendTestDigestEmail(
         const dateLocales = { fr, en: enUS, ar } as const;
         const dateLocale = dateLocales[loc] ?? fr;
         const dateStr = date ?? new Date().toISOString().split('T')[0];
-        const formattedDate = format(new Date(dateStr + 'T12:00:00'), 'dd MMMM yyyy', {
-            locale: dateLocale,
-        });
+        const formattedDate = format(
+            new Date(dateStr + 'T12:00:00'),
+            'dd MMMM yyyy',
+            {
+                locale: dateLocale,
+            },
+        );
 
         const token = await createUnsubscribeToken(
             recipientEmail.trim(),
@@ -347,12 +351,7 @@ export async function sendTestDigestEmail(
         const emailText = await render(template, { plainText: true });
 
         const subject = `📅 ${t.subjectPrefix} - ${regionName} - ${formattedDate}`;
-        await sendEmail(
-            recipientEmail.trim(),
-            subject,
-            emailHtml,
-            emailText,
-        );
+        await sendEmail(recipientEmail.trim(), subject, emailHtml, emailText);
 
         return {
             success: true,
@@ -536,12 +535,7 @@ export async function sendTestBloodRequestEmail(
         const emailText = await render(template, { plainText: true });
 
         const subject = `${t.subjectPrefix} ${bloodGroup} - ${city}`;
-        await sendEmail(
-            recipientEmail.trim(),
-            subject,
-            emailHtml,
-            emailText,
-        );
+        await sendEmail(recipientEmail.trim(), subject, emailHtml, emailText);
 
         return {
             success: true,
