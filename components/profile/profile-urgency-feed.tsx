@@ -27,7 +27,6 @@ import { deleteBloodRequest, markAsFulfilled } from '@/actions/profile';
 import { useToast } from '@/hooks/use-toast';
 import { ActionState } from '@/auth/middleware';
 import { useRouter } from 'next/navigation';
-import { ProgressLink as Link } from '@/components/custom/progress-link';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -38,7 +37,10 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import { AccountForm } from '@/components/profile/account-form';
+import { RequestForm } from '@/components/profile/request-form';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 interface ProfileUrgencyFeedProps {
     user: User;
@@ -68,7 +70,8 @@ function UrgencyCard({
     request,
     dict,
     isRTL,
-    onMarkFulfilled,
+    onOpenFulfillDialog,
+    onEdit,
     onDelete,
     fulfillPending,
     deletePending,
@@ -76,7 +79,8 @@ function UrgencyCard({
     request: BloodRequest;
     dict: any;
     isRTL?: boolean;
-    onMarkFulfilled: (r: BloodRequest) => void;
+    onOpenFulfillDialog: (r: BloodRequest) => void;
+    onEdit: (r: BloodRequest) => void;
     onDelete: (r: BloodRequest) => void;
     fulfillPending: boolean;
     deletePending: boolean;
@@ -91,8 +95,7 @@ function UrgencyCard({
             className={cn(
                 'card-lift relative overflow-hidden border-0 shadow-md',
                 bgTint,
-            )}
-        >
+            )}>
             {/* Status top bar */}
             <div
                 className={cn(
@@ -109,20 +112,16 @@ function UrgencyCard({
                             className={cn(
                                 'flex items-center justify-center h-10 w-10 rounded-xl bg-gradient-to-br text-white font-display font-black text-sm shadow-md',
                                 gradClass,
-                            )}
-                        >
+                            )}>
                             <span className="latin text-base">
-                                {request.bloodGroup}
-                            </span>
-                        </span>
-                        <div>
-                            <p className="font-semibold text-sm leading-tight">
                                 {getBloodGroupLabel(
                                     request.bloodGroup,
                                     dict,
                                     'request',
                                 )}
-                            </p>
+                            </span>
+                        </span>
+                        <div>
                             {isActive && (
                                 <span className="flex items-center gap-1 text-[10px] text-brand-600 dark:text-brand-400 font-semibold uppercase tracking-wider">
                                     <span className="relative flex h-1.5 w-1.5">
@@ -139,8 +138,7 @@ function UrgencyCard({
                         className={cn(
                             'text-[10px] shrink-0',
                             getStatusColor(request.status),
-                        )}
-                    >
+                        )}>
                         {dict.bloodRequests.status[
                             request.status.toLowerCase()
                         ] ?? request.status}
@@ -177,55 +175,65 @@ function UrgencyCard({
                     </p>
                 )}
 
-                {/* CTAs */}
+                {/* Actions */}
                 <div
                     className={cn(
-                        'flex gap-2 pt-1 border-t border-border/40',
-                        isRTL ? 'flex-row-reverse' : 'flex-row',
-                    )}
-                >
+                        'flex flex-col gap-2 pt-3 border-t border-border/40',
+                    )}>
+                    {/* Primary: Help now (active + has phone) */}
                     {isActive && request.phone && (
-                        <a href={`tel:${request.phone}`} className="flex-1">
+                        <a href={`tel:${request.phone}`} className="block">
                             <Button
                                 size="sm"
                                 variant="default"
-                                className="w-full text-xs font-bold bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white border-0 shadow-sm"
-                            >
-                                <Phone className="h-3.5 w-3.5 mr-1" />
+                                className="w-full text-xs font-bold bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white border-0 shadow-sm">
+                                <Phone className="h-3.5 w-3.5 mr-1.5" />
                                 {dict.profile.helpNow}
                             </Button>
                         </a>
                     )}
-                    <div className="flex gap-1">
+                    {/* Secondary: Mark fulfilled (active only), Edit, Delete */}
+                    <div
+                        className={cn(
+                            'flex items-center gap-2 flex-wrap',
+                            isRTL ? 'flex-row-reverse' : 'flex-row',
+                        )}>
                         {isActive && (
                             <Button
-                                variant="ghost"
+                                variant="outline"
                                 size="sm"
-                                className="h-8 w-8 p-0 text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950"
-                                onClick={() => onMarkFulfilled(request)}
+                                className="gap-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/50"
+                                onClick={() => onOpenFulfillDialog(request)}
                                 disabled={fulfillPending}
-                                title={dict.bloodRequests.markAsFulfilled}
-                            >
-                                <CheckCircle className="h-4 w-4" />
+                                title={dict.bloodRequests.markAsFulfilled}>
+                                <CheckCircle className="h-3.5 w-3.5 shrink-0" />
+                                <span>
+                                    {dict.bloodRequests.markAsFulfilled}
+                                </span>
                             </Button>
                         )}
-                        <Link href={`/profile/requests/${request.id}`}>
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                className="h-8 w-8 p-0"
-                            >
-                                <Pencil className="h-3.5 w-3.5" />
-                            </Button>
-                        </Link>
                         <Button
                             variant="ghost"
                             size="sm"
-                            className="h-8 w-8 p-0 text-destructive hover:bg-destructive/10"
+                            className="gap-1.5 text-xs h-8"
+                            title={dict.bloodRequests.editRequest}
+                            onClick={() => onEdit(request)}>
+                            <Pencil className="h-3.5 w-3.5 shrink-0" />
+                            <span className="sr-only sm:not-sr-only">
+                                {dict.bloodRequests.editRequest}
+                            </span>
+                        </Button>
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            className="gap-1.5 text-xs h-8 text-destructive hover:bg-destructive/10"
                             onClick={() => onDelete(request)}
                             disabled={deletePending}
-                        >
-                            <Trash2 className="h-3.5 w-3.5" />
+                            title={dict.common.delete}>
+                            <Trash2 className="h-3.5 w-3.5 shrink-0" />
+                            <span className="sr-only sm:not-sr-only">
+                                {dict.common.delete}
+                            </span>
                         </Button>
                     </div>
                 </div>
@@ -243,7 +251,15 @@ export function ProfileUrgencyFeed({
     const router = useRouter();
     const { toast } = useToast();
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [fulfillDialogOpen, setFulfillDialogOpen] = useState(false);
     const [selectedRequest, setSelectedRequest] = useState<BloodRequest | null>(
+        null,
+    );
+    const [requestSheetOpen, setRequestSheetOpen] = useState(false);
+    const [requestSheetMode, setRequestSheetMode] = useState<'new' | 'edit'>(
+        'new',
+    );
+    const [requestToEdit, setRequestToEdit] = useState<BloodRequest | null>(
         null,
     );
 
@@ -295,6 +311,18 @@ export function ProfileUrgencyFeed({
         startTransition(() => fulfillAction(fd));
     };
 
+    const openFulfillDialog = (request: BloodRequest) => {
+        setSelectedRequest(request);
+        setFulfillDialogOpen(true);
+    };
+
+    const confirmFulfill = () => {
+        if (selectedRequest) {
+            handleMarkFulfilled(selectedRequest);
+            setFulfillDialogOpen(false);
+        }
+    };
+
     const handleDelete = (request: BloodRequest) => {
         const fd = new FormData();
         fd.append('id', request.id.toString());
@@ -314,8 +342,7 @@ export function ProfileUrgencyFeed({
                         className={cn(
                             'flex items-center gap-2 rounded-lg py-2.5 text-sm font-semibold transition-all',
                             'data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-brand-700',
-                        )}
-                    >
+                        )}>
                         <Droplets className="h-4 w-4" />
                         <span>{dict.profile.tabs.bloodRequests}</span>
                         {activeRequests.length > 0 && (
@@ -329,8 +356,7 @@ export function ProfileUrgencyFeed({
                         className={cn(
                             'flex items-center gap-2 rounded-lg py-2.5 text-sm font-semibold transition-all',
                             'data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-brand-700',
-                        )}
-                    >
+                        )}>
                         <UserCog className="h-4 w-4" />
                         <span>{dict.profile.tabs.accountInfo}</span>
                     </TabsTrigger>
@@ -339,15 +365,13 @@ export function ProfileUrgencyFeed({
                 {/* ── Blood Requests tab ── */}
                 <TabsContent
                     value="requests"
-                    className="mt-0 flex flex-col gap-5"
-                >
+                    className="mt-0 flex flex-col gap-5">
                     {/* Header */}
                     <div
                         className={cn(
                             'flex items-center justify-between gap-2',
                             isRTL && 'flex-row-reverse',
-                        )}
-                    >
+                        )}>
                         <div>
                             <h2 className="font-display text-lg font-black tracking-tight flex items-center gap-2">
                                 <AlertTriangle className="h-5 w-5 text-brand-600" />
@@ -359,15 +383,17 @@ export function ProfileUrgencyFeed({
                                     : dict.profile.noActiveRequests}
                             </p>
                         </div>
-                        <Link href="/profile/requests/new">
-                            <Button
-                                size="sm"
-                                className="gap-1.5 font-bold bg-brand-600 hover:bg-brand-700 text-white border-0"
-                            >
-                                <Plus className="h-4 w-4" />
-                                {dict.bloodRequests.newRequest}
-                            </Button>
-                        </Link>
+                        <Button
+                            size="sm"
+                            className="gap-1.5 font-bold bg-brand-600 hover:bg-brand-700 text-white border-0"
+                            onClick={() => {
+                                setRequestSheetMode('new');
+                                setRequestToEdit(null);
+                                setRequestSheetOpen(true);
+                            }}>
+                            <Plus className="h-4 w-4" />
+                            {dict.bloodRequests.newRequest}
+                        </Button>
                     </div>
 
                     {/* Active requests */}
@@ -379,7 +405,12 @@ export function ProfileUrgencyFeed({
                                     request={r}
                                     dict={dict}
                                     isRTL={isRTL}
-                                    onMarkFulfilled={handleMarkFulfilled}
+                                    onOpenFulfillDialog={openFulfillDialog}
+                                    onEdit={req => {
+                                        setRequestToEdit(req);
+                                        setRequestSheetMode('edit');
+                                        setRequestSheetOpen(true);
+                                    }}
                                     onDelete={req => {
                                         setSelectedRequest(req);
                                         setDeleteDialogOpen(true);
@@ -406,7 +437,12 @@ export function ProfileUrgencyFeed({
                                         request={r}
                                         dict={dict}
                                         isRTL={isRTL}
-                                        onMarkFulfilled={handleMarkFulfilled}
+                                        onOpenFulfillDialog={openFulfillDialog}
+                                        onEdit={req => {
+                                            setRequestToEdit(req);
+                                            setRequestSheetMode('edit');
+                                            setRequestSheetOpen(true);
+                                        }}
                                         onDelete={req => {
                                             setSelectedRequest(req);
                                             setDeleteDialogOpen(true);
@@ -427,16 +463,18 @@ export function ProfileUrgencyFeed({
                                 <p className="text-muted-foreground font-medium">
                                     {dict.bloodRequests.noRequests}
                                 </p>
-                                <Link href="/profile/requests/new">
-                                    <Button
-                                        size="sm"
-                                        variant="outline"
-                                        className="gap-1.5"
-                                    >
-                                        <Plus className="h-4 w-4" />
-                                        {dict.bloodRequests.newRequest}
-                                    </Button>
-                                </Link>
+                                <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className="gap-1.5"
+                                    onClick={() => {
+                                        setRequestSheetMode('new');
+                                        setRequestToEdit(null);
+                                        setRequestSheetOpen(true);
+                                    }}>
+                                    <Plus className="h-4 w-4" />
+                                    {dict.bloodRequests.newRequest}
+                                </Button>
                             </CardContent>
                         </Card>
                     )}
@@ -453,8 +491,7 @@ export function ProfileUrgencyFeed({
             {/* Delete confirmation dialog */}
             <AlertDialog
                 open={deleteDialogOpen}
-                onOpenChange={setDeleteDialogOpen}
-            >
+                onOpenChange={setDeleteDialogOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
@@ -475,8 +512,7 @@ export function ProfileUrgencyFeed({
                                 selectedRequest && handleDelete(selectedRequest)
                             }
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                            disabled={deletePending}
-                        >
+                            disabled={deletePending}>
                             {deletePending
                                 ? (dict.common?.deleting ?? 'Deleting…')
                                 : (dict.common?.delete ?? 'Delete')}
@@ -484,6 +520,72 @@ export function ProfileUrgencyFeed({
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
+
+            {/* Mark as fulfilled confirmation dialog */}
+            <AlertDialog
+                open={fulfillDialogOpen}
+                onOpenChange={setFulfillDialogOpen}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>
+                            {dict.bloodRequests?.fulfillDialog?.title ??
+                                'Mark as fulfilled?'}
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                            {dict.bloodRequests?.fulfillDialog?.description ??
+                                'This request will no longer appear as active.'}
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>
+                            {dict.common?.cancel ?? 'Cancel'}
+                        </AlertDialogCancel>
+                        <AlertDialogAction
+                            onClick={confirmFulfill}
+                            disabled={fulfillPending}
+                            className="bg-emerald-600 text-white hover:bg-emerald-700">
+                            {fulfillPending
+                                ? (dict.common?.saving ?? 'Saving…')
+                                : (dict.bloodRequests?.markAsFulfilled ??
+                                  'Mark as Fulfilled')}
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+
+            {/* Request form sheet (new / edit) */}
+            <Sheet open={requestSheetOpen} onOpenChange={setRequestSheetOpen}>
+                <SheetContent
+                    side={isRTL ? 'left' : 'right'}
+                    className="w-full overflow-y-auto sm:max-w-xl p-0 flex flex-col">
+                    <VisuallyHidden>
+                        <SheetTitle>{dict.bloodRequests.newRequest}</SheetTitle>
+                    </VisuallyHidden>
+                    <div className="flex-1 overflow-y-auto p-6 pt-14">
+                        <RequestForm
+                            key={
+                                requestSheetMode === 'edit' && requestToEdit
+                                    ? `edit-${requestToEdit.id}`
+                                    : 'new'
+                            }
+                            request={
+                                requestSheetMode === 'edit'
+                                    ? requestToEdit
+                                    : undefined
+                            }
+                            userId={user.id}
+                            mode={requestSheetMode === 'new' ? 'add' : 'edit'}
+                            dict={dict}
+                            isRTL={isRTL}
+                            embedInSheet
+                            onSuccess={() => {
+                                setRequestSheetOpen(false);
+                                router.refresh();
+                            }}
+                        />
+                    </div>
+                </SheetContent>
+            </Sheet>
         </section>
     );
 }

@@ -44,7 +44,7 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
         bloodGroup: '',
         region: '',
         cityId: '',
-        notificationLanguage: 'fr',
+        notificationLanguage: 'ar',
     });
     const [state, formAction, pending] = useActionState<ActionState, FormData>(
         mode === 'signin'
@@ -474,7 +474,7 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                     onValueChange={value =>
                                         setSignupFormData(prev => ({
                                             ...prev,
-                                            notificationLanguage: value ?? 'fr',
+                                            notificationLanguage: value ?? 'ar',
                                         }))
                                     }
                                 >

@@ -43,7 +43,7 @@ function getSafeSignUpPayload(data: z.infer<typeof signUpSchema>) {
         bloodGroup: bloodGroup ?? '',
         cityId: cityId != null ? String(cityId) : '',
         region: regionId != null ? String(regionId) : '',
-        notificationLanguage: notificationLanguage ?? 'fr',
+        notificationLanguage: notificationLanguage ?? 'ar',
     };
 }
 
@@ -100,7 +100,7 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
             phone: phone ? normalizeMoroccanPhone(phone) : phone,
             bloodGroup,
             cityId,
-            notificationLanguage: notificationLanguage ?? 'fr',
+            notificationLanguage: notificationLanguage ?? 'ar',
         },
     });
 

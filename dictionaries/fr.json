@@ -370,6 +370,7 @@
     },
     "bloodRequests": {
         "myRequests": "Mes demandes de sang",
+        "requestDetails": "Détails de la demande",
         "newRequest": "Nouvelle demande",
         "createRequestDescription": "Créer une nouvelle demande de sang avec vos exigences",
         "noRequests": "Aucune demande de sang trouvée. Cliquez sur \"Nouvelle demande\" pour en créer une.",
@@ -381,6 +382,10 @@
         "deleteDialog": {
             "title": "Êtes-vous sûr ?",
             "description": "Cela supprimera définitivement cette demande de sang. Cette action ne peut pas être annulée."
+        },
+        "fulfillDialog": {
+            "title": "Marquer comme accomplie ?",
+            "description": "Cette demande n'apparaîtra plus comme active. Vous pourrez toujours la modifier ou la supprimer plus tard."
         },
         "creating": "Création en cours...",
         "updating": "Mise à jour en cours...",

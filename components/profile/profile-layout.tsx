@@ -37,15 +37,6 @@ export function ProfileLayout({
                     : 'opacity-0 translate-y-4',
             )}
         >
-            {/* ── Three-column grid ── */}
-            {/*
-                Layout strategy:
-                  - Left (sidebar)  : 280px fixed → Identity Card + account form
-                  - Center (feed)   : flex-1 → Urgency Center blood request grid
-                  - Right (impact)  : 260px fixed → Impact Wall / Rewards Panel
-                On tablet (< lg) the right column collapses below the feed.
-                On mobile everything stacks vertically.
-            */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr_256px] xl:grid-cols-[300px_1fr_272px] items-start">
                 {/* Column 1 – Identity Card / Sidebar */}
                 <div

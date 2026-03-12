@@ -208,8 +208,6 @@ export function ProfileSidebar({ user, dict, isRTL }: ProfileSidebarProps) {
                 </div>
             </Card>
 
-            {/* Hero card only — AccountForm lives in the center column tabs */}
-
             {/* ── Danger zone ── */}
             <DeleteAccountSection dict={dict} />
         </aside>
