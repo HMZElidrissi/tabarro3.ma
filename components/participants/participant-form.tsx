@@ -116,6 +116,27 @@ export default function ParticipantForm({
                     </div>
 
                     <div className="space-y-2">
+                        <Label htmlFor="notificationLanguage">
+                            Notification language
+                        </Label>
+                        <Select
+                            name="notificationLanguage"
+                            defaultValue={
+                                participant?.notificationLanguage || 'ar'
+                            }
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select notification language" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="ar">العربية</SelectItem>
+                                <SelectItem value="fr">Français</SelectItem>
+                                <SelectItem value="en">English</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className="space-y-2">
                         <Label htmlFor="bloodGroup">Blood Group</Label>
                         <Select
                             name="bloodGroup"

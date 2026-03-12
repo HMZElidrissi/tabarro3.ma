@@ -65,9 +65,9 @@ export function RequestForm({
     // When request comes from list (e.g. profile sheet), city may only have id — derive region from cityId
     const derivedRegion =
         request?.cityId != null && !request?.city?.regionId
-            ? REGIONS_AND_CITIES.find(r =>
+            ? (REGIONS_AND_CITIES.find(r =>
                   r.cities.some(c => c.id === request.cityId),
-              )?.id?.toString() ?? ''
+              )?.id?.toString() ?? '')
             : '';
     const initialRegion =
         request?.city?.regionId?.toString() ?? derivedRegion ?? '';
@@ -149,10 +149,12 @@ export function RequestForm({
                         className={cn(
                             'flex items-center gap-2 mb-2',
                             isRTL && 'flex-row-reverse',
-                        )}>
+                        )}
+                    >
                         <Link
                             href="/profile?tab=requests"
-                            className="text-muted-foreground hover:text-foreground text-sm font-medium inline-flex items-center gap-1.5">
+                            className="text-muted-foreground hover:text-foreground text-sm font-medium inline-flex items-center gap-1.5"
+                        >
                             <ArrowLeft className="h-4 w-4 shrink-0" />
                             {dict.bloodRequests.myRequests}
                         </Link>
@@ -171,10 +173,12 @@ export function RequestForm({
                     {/* Section: Request details (blood group, status in edit) */}
                     <section
                         className="space-y-4"
-                        aria-labelledby="request-details-heading">
+                        aria-labelledby="request-details-heading"
+                    >
                         <h2
                             id="request-details-heading"
-                            className="text-sm font-semibold text-foreground flex items-center gap-2">
+                            className="text-sm font-semibold text-foreground flex items-center gap-2"
+                        >
                             <Droplets className="h-4 w-4 text-brand-600" />
                             {dict.bloodRequests.requestDetails}
                         </h2>
@@ -182,7 +186,8 @@ export function RequestForm({
                             className={cn(
                                 'grid gap-4',
                                 mode === 'edit' && 'sm:grid-cols-2',
-                            )}>
+                            )}
+                        >
                             <div className="space-y-2">
                                 <Label htmlFor="bloodGroup">
                                     {dict.forms.labels.bloodGroup}
@@ -191,7 +196,8 @@ export function RequestForm({
                                     name="bloodGroup"
                                     defaultValue={request?.bloodGroup ?? ''}
                                     dir={isRTL ? 'rtl' : 'ltr'}
-                                    required>
+                                    required
+                                >
                                     <SelectTrigger id="bloodGroup">
                                         <SelectValue
                                             placeholder={
@@ -210,7 +216,8 @@ export function RequestForm({
                                             .map(group => (
                                                 <SelectItem
                                                     key={group.value}
-                                                    value={group.value}>
+                                                    value={group.value}
+                                                >
                                                     {getBloodGroupLabel(
                                                         group.value,
                                                         dict,
@@ -231,7 +238,8 @@ export function RequestForm({
                                         defaultValue={
                                             request?.status ?? 'active'
                                         }
-                                        dir={isRTL ? 'rtl' : 'ltr'}>
+                                        dir={isRTL ? 'rtl' : 'ltr'}
+                                    >
                                         <SelectTrigger id="status">
                                             <SelectValue
                                                 placeholder={
@@ -269,10 +277,12 @@ export function RequestForm({
                     {/* Section: Location */}
                     <section
                         className="space-y-4"
-                        aria-labelledby="location-heading">
+                        aria-labelledby="location-heading"
+                    >
                         <h2
                             id="location-heading"
-                            className="text-sm font-semibold text-foreground flex items-center gap-2">
+                            className="text-sm font-semibold text-foreground flex items-center gap-2"
+                        >
                             <MapPin className="h-4 w-4 text-brand-600" />
                             {dict.forms.labels.location}
                         </h2>
@@ -285,7 +295,8 @@ export function RequestForm({
                                     value={selectedRegion}
                                     onValueChange={setSelectedRegion}
                                     dir={isRTL ? 'rtl' : 'ltr'}
-                                    required>
+                                    required
+                                >
                                     <SelectTrigger id="region">
                                         <SelectValue
                                             placeholder={
@@ -298,7 +309,8 @@ export function RequestForm({
                                         {REGIONS_AND_CITIES.map(region => (
                                             <SelectItem
                                                 key={region.id}
-                                                value={region.id.toString()}>
+                                                value={region.id.toString()}
+                                            >
                                                 {isRTL
                                                     ? region.nameAr
                                                     : region.name}
@@ -317,7 +329,8 @@ export function RequestForm({
                                     onValueChange={setSelectedCityId}
                                     dir={isRTL ? 'rtl' : 'ltr'}
                                     disabled={!selectedRegion}
-                                    required>
+                                    required
+                                >
                                     <SelectTrigger id="cityId">
                                         <SelectValue
                                             placeholder={
@@ -330,7 +343,8 @@ export function RequestForm({
                                         {cities.map(city => (
                                             <SelectItem
                                                 key={city.id}
-                                                value={city.id.toString()}>
+                                                value={city.id.toString()}
+                                            >
                                                 {isRTL
                                                     ? city.nameAr
                                                     : city.name}
@@ -361,10 +375,12 @@ export function RequestForm({
                     {/* Section: Contact */}
                     <section
                         className="space-y-4"
-                        aria-labelledby="contact-heading">
+                        aria-labelledby="contact-heading"
+                    >
                         <h2
                             id="contact-heading"
-                            className="text-sm font-semibold text-foreground flex items-center gap-2">
+                            className="text-sm font-semibold text-foreground flex items-center gap-2"
+                        >
                             <Phone className="h-4 w-4 text-brand-600" />
                             {dict.forms.labels.phoneNumber}
                         </h2>
@@ -387,10 +403,12 @@ export function RequestForm({
                     {/* Section: Description */}
                     <section
                         className="space-y-4"
-                        aria-labelledby="description-heading">
+                        aria-labelledby="description-heading"
+                    >
                         <h2
                             id="description-heading"
-                            className="text-sm font-semibold text-foreground flex items-center gap-2">
+                            className="text-sm font-semibold text-foreground flex items-center gap-2"
+                        >
                             <FileText className="h-4 w-4 text-brand-600" />
                             {dict.forms.labels.description}
                         </h2>
@@ -412,7 +430,8 @@ export function RequestForm({
                         className={cn(
                             'flex flex-col-reverse sm:flex-row gap-3 pt-2 border-t',
                             isRTL ? 'sm:flex-row-reverse' : '',
-                        )}>
+                        )}
+                    >
                         <Button
                             type="button"
                             variant="outline"
@@ -421,14 +440,16 @@ export function RequestForm({
                                     ? onSuccess()
                                     : router.back()
                             }
-                            className="sm:min-w-[120px]">
+                            className="sm:min-w-[120px]"
+                        >
                             {dict.common.cancel}
                         </Button>
                         <Button
                             variant="default"
                             type="submit"
                             disabled={pending}
-                            className="bg-brand-600 hover:bg-brand-700 text-white border-0 sm:min-w-[160px]">
+                            className="bg-brand-600 hover:bg-brand-700 text-white border-0 sm:min-w-[160px]"
+                        >
                             {pending ? (
                                 <>
                                     <Loader2 className="mr-2 h-4 w-4 animate-spin shrink-0" />

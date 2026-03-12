@@ -33,6 +33,7 @@ const ParticipantSchema = z.object({
         .optional()
         .nullable(),
     cityId: z.coerce.number().optional().nullable(),
+    notificationLanguage: z.enum(['ar', 'fr', 'en']).optional(),
 });
 
 interface GetParticipantsParams {
@@ -57,6 +58,7 @@ export async function getParticipants({
         OR: search
             ? [
                   { name: { contains: search, mode: 'insensitive' as const } },
+                  { email: { contains: search, mode: 'insensitive' as const } },
                   {
                       city: {
                           name: {
@@ -109,6 +111,7 @@ export const getParticipant = async (id: string) => {
             email: true,
             phone: true,
             bloodGroup: true,
+            notificationLanguage: true,
             city: { select: { id: true, name: true, regionId: true } },
             cityId: true,
             createdAt: true,

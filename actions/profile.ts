@@ -16,10 +16,7 @@ const ProfileSchema = z.object({
     phone: z.string().min(1, 'Phone number is required'),
     bloodGroup: z.nativeEnum(BloodGroup).nullable(),
     cityId: z.coerce.number().nullable(),
-    notificationLanguage: z
-        .enum(NOTIFICATION_LANGUAGES)
-        .optional()
-        .nullable(),
+    notificationLanguage: z.enum(NOTIFICATION_LANGUAGES).optional().nullable(),
 });
 
 export const updateProfile = validatedActionWithUser(

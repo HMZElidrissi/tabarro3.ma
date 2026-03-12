@@ -147,9 +147,7 @@ export function AccountForm({ user, dict, isRTL }: AccountFormProps) {
                     </Label>
                     <Select
                         name="notificationLanguage"
-                        defaultValue={
-                            user.notificationLanguage || 'ar'
-                        }
+                        defaultValue={user.notificationLanguage || 'ar'}
                         dir={isRTL ? 'rtl' : 'ltr'}
                     >
                         <SelectTrigger>

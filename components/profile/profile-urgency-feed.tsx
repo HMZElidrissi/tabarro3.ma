@@ -95,7 +95,8 @@ function UrgencyCard({
             className={cn(
                 'card-lift relative overflow-hidden border-0 shadow-md',
                 bgTint,
-            )}>
+            )}
+        >
             {/* Status top bar */}
             <div
                 className={cn(
@@ -112,7 +113,8 @@ function UrgencyCard({
                             className={cn(
                                 'flex items-center justify-center h-10 w-10 rounded-xl bg-gradient-to-br text-white font-display font-black text-sm shadow-md',
                                 gradClass,
-                            )}>
+                            )}
+                        >
                             <span className="latin text-base">
                                 {getBloodGroupLabel(
                                     request.bloodGroup,
@@ -138,7 +140,8 @@ function UrgencyCard({
                         className={cn(
                             'text-[10px] shrink-0',
                             getStatusColor(request.status),
-                        )}>
+                        )}
+                    >
                         {dict.bloodRequests.status[
                             request.status.toLowerCase()
                         ] ?? request.status}
@@ -179,14 +182,16 @@ function UrgencyCard({
                 <div
                     className={cn(
                         'flex flex-col gap-2 pt-3 border-t border-border/40',
-                    )}>
+                    )}
+                >
                     {/* Primary: Help now (active + has phone) */}
                     {isActive && request.phone && (
                         <a href={`tel:${request.phone}`} className="block">
                             <Button
                                 size="sm"
                                 variant="default"
-                                className="w-full text-xs font-bold bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white border-0 shadow-sm">
+                                className="w-full text-xs font-bold bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white border-0 shadow-sm"
+                            >
                                 <Phone className="h-3.5 w-3.5 mr-1.5" />
                                 {dict.profile.helpNow}
                             </Button>
@@ -197,7 +202,8 @@ function UrgencyCard({
                         className={cn(
                             'flex items-center gap-2 flex-wrap',
                             isRTL ? 'flex-row-reverse' : 'flex-row',
-                        )}>
+                        )}
+                    >
                         {isActive && (
                             <Button
                                 variant="outline"
@@ -205,7 +211,8 @@ function UrgencyCard({
                                 className="gap-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/50"
                                 onClick={() => onOpenFulfillDialog(request)}
                                 disabled={fulfillPending}
-                                title={dict.bloodRequests.markAsFulfilled}>
+                                title={dict.bloodRequests.markAsFulfilled}
+                            >
                                 <CheckCircle className="h-3.5 w-3.5 shrink-0" />
                                 <span>
                                     {dict.bloodRequests.markAsFulfilled}
@@ -217,7 +224,8 @@ function UrgencyCard({
                             size="sm"
                             className="gap-1.5 text-xs h-8"
                             title={dict.bloodRequests.editRequest}
-                            onClick={() => onEdit(request)}>
+                            onClick={() => onEdit(request)}
+                        >
                             <Pencil className="h-3.5 w-3.5 shrink-0" />
                             <span className="sr-only sm:not-sr-only">
                                 {dict.bloodRequests.editRequest}
@@ -229,7 +237,8 @@ function UrgencyCard({
                             className="gap-1.5 text-xs h-8 text-destructive hover:bg-destructive/10"
                             onClick={() => onDelete(request)}
                             disabled={deletePending}
-                            title={dict.common.delete}>
+                            title={dict.common.delete}
+                        >
                             <Trash2 className="h-3.5 w-3.5 shrink-0" />
                             <span className="sr-only sm:not-sr-only">
                                 {dict.common.delete}
@@ -342,7 +351,8 @@ export function ProfileUrgencyFeed({
                         className={cn(
                             'flex items-center gap-2 rounded-lg py-2.5 text-sm font-semibold transition-all',
                             'data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-brand-700',
-                        )}>
+                        )}
+                    >
                         <Droplets className="h-4 w-4" />
                         <span>{dict.profile.tabs.bloodRequests}</span>
                         {activeRequests.length > 0 && (
@@ -356,7 +366,8 @@ export function ProfileUrgencyFeed({
                         className={cn(
                             'flex items-center gap-2 rounded-lg py-2.5 text-sm font-semibold transition-all',
                             'data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-brand-700',
-                        )}>
+                        )}
+                    >
                         <UserCog className="h-4 w-4" />
                         <span>{dict.profile.tabs.accountInfo}</span>
                     </TabsTrigger>
@@ -365,13 +376,15 @@ export function ProfileUrgencyFeed({
                 {/* ── Blood Requests tab ── */}
                 <TabsContent
                     value="requests"
-                    className="mt-0 flex flex-col gap-5">
+                    className="mt-0 flex flex-col gap-5"
+                >
                     {/* Header */}
                     <div
                         className={cn(
                             'flex items-center justify-between gap-2',
                             isRTL && 'flex-row-reverse',
-                        )}>
+                        )}
+                    >
                         <div>
                             <h2 className="font-display text-lg font-black tracking-tight flex items-center gap-2">
                                 <AlertTriangle className="h-5 w-5 text-brand-600" />
@@ -390,7 +403,8 @@ export function ProfileUrgencyFeed({
                                 setRequestSheetMode('new');
                                 setRequestToEdit(null);
                                 setRequestSheetOpen(true);
-                            }}>
+                            }}
+                        >
                             <Plus className="h-4 w-4" />
                             {dict.bloodRequests.newRequest}
                         </Button>
@@ -471,7 +485,8 @@ export function ProfileUrgencyFeed({
                                         setRequestSheetMode('new');
                                         setRequestToEdit(null);
                                         setRequestSheetOpen(true);
-                                    }}>
+                                    }}
+                                >
                                     <Plus className="h-4 w-4" />
                                     {dict.bloodRequests.newRequest}
                                 </Button>
@@ -491,7 +506,8 @@ export function ProfileUrgencyFeed({
             {/* Delete confirmation dialog */}
             <AlertDialog
                 open={deleteDialogOpen}
-                onOpenChange={setDeleteDialogOpen}>
+                onOpenChange={setDeleteDialogOpen}
+            >
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
@@ -512,7 +528,8 @@ export function ProfileUrgencyFeed({
                                 selectedRequest && handleDelete(selectedRequest)
                             }
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                            disabled={deletePending}>
+                            disabled={deletePending}
+                        >
                             {deletePending
                                 ? (dict.common?.deleting ?? 'Deleting…')
                                 : (dict.common?.delete ?? 'Delete')}
@@ -524,7 +541,8 @@ export function ProfileUrgencyFeed({
             {/* Mark as fulfilled confirmation dialog */}
             <AlertDialog
                 open={fulfillDialogOpen}
-                onOpenChange={setFulfillDialogOpen}>
+                onOpenChange={setFulfillDialogOpen}
+            >
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
@@ -543,7 +561,8 @@ export function ProfileUrgencyFeed({
                         <AlertDialogAction
                             onClick={confirmFulfill}
                             disabled={fulfillPending}
-                            className="bg-emerald-600 text-white hover:bg-emerald-700">
+                            className="bg-emerald-600 text-white hover:bg-emerald-700"
+                        >
                             {fulfillPending
                                 ? (dict.common?.saving ?? 'Saving…')
                                 : (dict.bloodRequests?.markAsFulfilled ??
@@ -557,7 +576,8 @@ export function ProfileUrgencyFeed({
             <Sheet open={requestSheetOpen} onOpenChange={setRequestSheetOpen}>
                 <SheetContent
                     side={isRTL ? 'left' : 'right'}
-                    className="w-full overflow-y-auto sm:max-w-xl p-0 flex flex-col">
+                    className="w-full overflow-y-auto sm:max-w-xl p-0 flex flex-col"
+                >
                     <VisuallyHidden>
                         <SheetTitle>{dict.bloodRequests.newRequest}</SheetTitle>
                     </VisuallyHidden>

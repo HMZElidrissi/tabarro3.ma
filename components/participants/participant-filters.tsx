@@ -122,7 +122,7 @@ export function ParticipantFilters() {
                     <Label htmlFor="search">Search</Label>
                     <Input
                         id="search"
-                        placeholder="Search by name..."
+                        placeholder="Search by name or email..."
                         defaultValue={currentSearch}
                         onChange={e => debouncedSearch(e.target.value)}
                     />
