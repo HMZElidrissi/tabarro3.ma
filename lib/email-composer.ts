@@ -1,5 +1,12 @@
 import { EmailData } from '@/types/email';
 
+/** Copyright text by locale (sync, for preview). Must match dictionaries/emails/{locale}.json common.copyright */
+const CUSTOM_EMAIL_COPYRIGHT: Record<string, string> = {
+    fr: '© {year} tabarro3. Tous droits réservés.',
+    en: '© {year} tabarro3. All rights reserved.',
+    ar: '© {year} tabarro3. جميع الحقوق محفوظة.',
+};
+
 function getButtonStyle(style: string): string {
     switch (style) {
         case 'primary':
@@ -17,6 +24,12 @@ export function generatePreviewHTML(
     data: EmailData,
     isDarkMode = false,
 ): string {
+    const locale = data.notificationLanguage ?? 'fr';
+    const isRtl = locale === 'ar';
+    const dir = isRtl ? 'rtl' : 'ltr';
+    const lang = locale === 'ar' ? 'ar' : locale === 'en' ? 'en' : 'fr';
+    const textAlign = isRtl ? 'right' : 'left';
+
     const colors = {
         bg: isDarkMode ? '#000000' : '#f9fafb',
         containerBg: isDarkMode ? '#030712' : '#ffffff',
@@ -28,8 +41,8 @@ export function generatePreviewHTML(
         highlightText: isDarkMode ? '#e5e7eb' : '#374151',
     };
 
-    let html = `<div style="background: ${colors.bg}; padding: 40px;">`;
-    html += `<div style="max-width: 600px; margin: 0 auto; background: ${colors.containerBg}; border-radius: 8px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); padding: 32px; font-family: Arial, sans-serif;">`;
+    let html = `<div style="background: ${colors.bg}; padding: 40px;" dir="${dir}" lang="${lang}">`;
+    html += `<div style="max-width: 600px; margin: 0 auto; background: ${colors.containerBg}; border-radius: 8px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); padding: 32px; font-family: Arial, sans-serif; text-align: ${textAlign};">`;
 
     // Header with logo
     if (data.showLogo) {
@@ -42,22 +55,23 @@ export function generatePreviewHTML(
     html += `<h1 style="text-align: center; font-size: 24px; font-weight: bold; color: ${colors.text}; margin-bottom: 24px;">${data.title}</h1>`;
 
     // Content
-    html += `<p style="color: ${colors.subtext}; margin-bottom: 16px; text-align: left;">${data.greeting}</p>`;
-    html += `<p style="color: ${colors.subtext}; margin-bottom: 24px; white-space: pre-wrap; text-align: left;">${data.message}</p>`;
+    html += `<p style="color: ${colors.subtext}; margin-bottom: 16px; text-align: ${textAlign};">${data.greeting}</p>`;
+    html += `<p style="color: ${colors.subtext}; margin-bottom: 24px; white-space: pre-wrap; text-align: ${textAlign};">${data.message}</p>`;
 
     // Highlight box
     if (data.showHighlight && data.highlightContent) {
-        html += `<div style="background: ${colors.highlightBg}; padding: 24px; border-radius: 8px; margin-bottom: 24px; border-left: 4px solid #e22021;">`;
+        const borderSide = isRtl ? 'border-right' : 'border-left';
+        html += `<div style="background: ${colors.highlightBg}; padding: 24px; border-radius: 8px; margin-bottom: 24px; ${borderSide}: 4px solid #e22021;">`;
         if (data.highlightTitle) {
-            html += `<p style="color: ${colors.highlightText}; font-weight: 600; margin-bottom: 12px; text-align: left;">${data.highlightIcon} ${data.highlightTitle}</p>`;
+            html += `<p style="color: ${colors.highlightText}; font-weight: 600; margin-bottom: 12px; text-align: ${textAlign};">${data.highlightIcon} ${data.highlightTitle}</p>`;
         }
-        html += `<p style="color: ${colors.subtext}; margin: 0; text-align: left; white-space: pre-wrap;">${data.highlightContent}</p>`;
+        html += `<p style="color: ${colors.subtext}; margin: 0; text-align: ${textAlign}; white-space: pre-wrap;">${data.highlightContent}</p>`;
         html += `</div>`;
     }
 
     // Additional content
     if (data.additionalContent) {
-        html += `<p style="color: ${colors.subtext}; margin-bottom: 24px; white-space: pre-wrap; text-align: left;">${data.additionalContent}</p>`;
+        html += `<p style="color: ${colors.subtext}; margin-bottom: 24px; white-space: pre-wrap; text-align: ${textAlign};">${data.additionalContent}</p>`;
     }
 
     // Buttons
@@ -76,7 +90,7 @@ export function generatePreviewHTML(
 
     // Signature
     if (data.showSignature && data.signature) {
-        html += `<p style="color: ${colors.subtext}; margin-bottom: 24px; white-space: pre-wrap; text-align: left;">${data.signature}</p>`;
+        html += `<p style="color: ${colors.subtext}; margin-bottom: 24px; white-space: pre-wrap; text-align: ${textAlign};">${data.signature}</p>`;
     }
 
     // Footer
@@ -84,11 +98,11 @@ export function generatePreviewHTML(
         html += `<hr style="border: none; border-top: 1px solid ${colors.borderColor}; margin: 32px 0;" />`;
 
         if (data.footerText) {
-            html += `<p style="color: ${colors.footerText}; font-size: 14px; text-align: left; margin-bottom: 16px;">${data.footerText}</p>`;
+            html += `<p style="color: ${colors.footerText}; font-size: 14px; text-align: ${textAlign}; margin-bottom: 16px;">${data.footerText}</p>`;
         }
 
         if (data.customFooterLinks.length > 0) {
-            html += `<div style="text-align: left; margin-bottom: 16px;">`;
+            html += `<div style="text-align: ${textAlign}; margin-bottom: 16px;">`;
             data.customFooterLinks.forEach((link, index) => {
                 html += `<a href="${link.url}" style="color: #e22021; font-size: 14px; text-decoration: none; margin: 0 8px;">${link.text}</a>`;
                 if (index < data.customFooterLinks.length - 1) {
@@ -99,7 +113,11 @@ export function generatePreviewHTML(
         }
 
         if (data.showCopyright) {
-            html += `<p style="color: ${colors.footerText}; font-size: 14px; text-align: center;">© ${new Date().getFullYear()} tabarro3. Tous droits réservés.</p>`;
+            const year = new Date().getFullYear();
+            const copyright =
+                CUSTOM_EMAIL_COPYRIGHT[locale]?.replace('{year}', String(year)) ??
+                CUSTOM_EMAIL_COPYRIGHT.fr.replace('{year}', String(year));
+            html += `<p style="color: ${colors.footerText}; font-size: 14px; text-align: center;">${copyright}</p>`;
         }
     }
 

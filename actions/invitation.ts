@@ -162,7 +162,7 @@ export const inviteUser = validatedActionWithUser(
             },
         });
 
-        await sendInvitationEmail(email, token);
+        await sendInvitationEmail(email, token, user.notificationLanguage);
 
         return {
             success: 'Invitation sent successfully',

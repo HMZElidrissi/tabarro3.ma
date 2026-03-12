@@ -289,6 +289,7 @@
             "bloodGroup": "Blood Group",
             "region": "Region",
             "city": "City",
+            "notificationLanguage": "Notification language",
             "location": "Location Details",
             "description": "Description",
             "status": "Status"
@@ -301,6 +302,7 @@
             "selectBloodGroup": "Select your blood group",
             "selectRegion": "Select your region",
             "selectCity": "Select your city",
+            "selectNotificationLanguage": "Choose email language",
             "enterLocation": "Enter specific location",
             "enterDescription": "Enter additional details or requirements",
             "selectStatus": "Select status"

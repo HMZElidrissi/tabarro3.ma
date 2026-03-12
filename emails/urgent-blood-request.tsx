@@ -11,6 +11,7 @@ import {
     Hr,
     Tailwind,
 } from '@react-email/components';
+import type { EmailTranslations } from '@/lib/email-i18n';
 
 interface UrgentBloodRequestEmailProps {
     bloodGroup: string;
@@ -19,7 +20,27 @@ interface UrgentBloodRequestEmailProps {
     phone?: string;
     description: string;
     unsubscribeUrl?: string;
+    locale?: string;
+    t?: EmailTranslations['bloodRequest'];
 }
+
+const defaultBloodT: EmailTranslations['bloodRequest'] = {
+    subjectPrefix: 'Besoin urgent de sang',
+    title: 'BESOIN URGENT DE SANG',
+    intro: 'Un donneur de sang du groupe {bloodGroup} est urgemment recherché. Votre sang est compatible et peut sauver une vie !',
+    detailsTitle: 'Détails de la demande :',
+    bloodGroup: 'Groupe sanguin :',
+    location: 'Lieu :',
+    city: 'Ville :',
+    contact: 'Contact :',
+    description: 'Description :',
+    cta: 'Voir les détails',
+    shareNote: "Si vous ne pouvez pas donner, merci de partager cette demande avec votre entourage. Chaque partage peut aider à sauver une vie.",
+    unsubscribe: 'Se désabonner',
+    unsubscribePrompt: 'Vous ne souhaitez plus recevoir de notifications pour les demandes urgentes de sang ?',
+    autoSent: "Cet email est envoyé automatiquement. Veuillez ne pas y répondre directement.",
+    footer: '© {year} tabarro3. Tous droits réservés.',
+};
 
 export const UrgentBloodRequestEmail = ({
     bloodGroup,
@@ -28,12 +49,17 @@ export const UrgentBloodRequestEmail = ({
     phone,
     description,
     unsubscribeUrl,
-}: UrgentBloodRequestEmailProps) => (
-    <Html lang="fr" dir="ltr">
+    locale = 'fr',
+    t = defaultBloodT,
+}: UrgentBloodRequestEmailProps) => {
+    const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const year = new Date().getFullYear();
+    const intro = t.intro.replace('{bloodGroup}', bloodGroup);
+    return (
+    <Html lang={locale} dir={dir}>
         <Head />
         <Preview>
-            🩸 Besoin urgent de sang {bloodGroup} à {city} — vous pouvez sauver
-            une vie
+            🩸 {t.subjectPrefix} {bloodGroup} — {city}
         </Preview>
         <Tailwind
             config={{
@@ -71,35 +97,33 @@ export const UrgentBloodRequestEmail = ({
                     </Section>
 
                     <Text className="text-2xl font-bold text-brand-600 text-center mb-6">
-                        BESOIN URGENT DE SANG
+                        {t.title}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Un donneur de sang du groupe {bloodGroup} est urgemment
-                        recherché. Votre sang est compatible et peut sauver une
-                        vie !
+                        {intro}
                     </Text>
 
                     <Section className="bg-gray-50 p-4 rounded-lg mb-6">
                         <Text className="text-gray-700 font-semibold mb-2">
-                            Détails de la demande :
+                            {t.detailsTitle}
                         </Text>
                         <Text className="text-gray-600 mb-2">
-                            🩸 Groupe sanguin : {bloodGroup}
+                            🩸 {t.bloodGroup} {bloodGroup}
                         </Text>
                         <Text className="text-gray-600 mb-2">
-                            📍 Lieu : {location}
+                            📍 {t.location} {location}
                         </Text>
                         <Text className="text-gray-600 mb-2">
-                            🏢 Ville : {city}
+                            🏢 {t.city} {city}
                         </Text>
                         {phone && (
                             <Text className="text-gray-600">
-                                📞 Contact : {phone}
+                                📞 {t.contact} {phone}
                             </Text>
                         )}
                         <Text className="text-gray-600">
-                            ℹ️ Description : {description}
+                            ℹ️ {t.description} {description}
                         </Text>
                     </Section>
 
@@ -108,45 +132,41 @@ export const UrgentBloodRequestEmail = ({
                             href="https://tabarro3.ma/requests"
                             className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors"
                         >
-                            Voir les détails
+                            {t.cta}
                         </Button>
                     </Section>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Si vous ne pouvez pas donner, merci de partager cette
-                        demande avec votre entourage. Chaque partage peut aider
-                        à sauver une vie.
+                        {t.shareNote}
                     </Text>
 
                     <Hr className="border-gray-200 my-8" />
 
                     {unsubscribeUrl && (
                         <Text className="text-gray-500 text-xs text-center mb-3">
-                            Vous ne souhaitez plus recevoir de notifications
-                            pour les demandes urgentes de sang ?{' '}
+                            {t.unsubscribePrompt}{' '}
                             <a
                                 href={unsubscribeUrl}
                                 className="text-brand-600 hover:text-brand-700"
                             >
-                                Se désabonner
+                                {t.unsubscribe}
                             </a>
                             .
                         </Text>
                     )}
 
                     <Text className="text-gray-400 text-xs text-center mb-2">
-                        Cet email est envoyé automatiquement. Veuillez ne pas y
-                        répondre directement.
+                        {t.autoSent}
                     </Text>
 
                     <Text className="text-gray-500 text-sm text-center">
-                        © {new Date().getFullYear()} tabarro3. Tous droits
-                        réservés.
+                        {t.footer.replace('{year}', String(year))}
                     </Text>
                 </Container>
             </Body>
         </Tailwind>
     </Html>
-);
+    );
+};
 
 export default UrgentBloodRequestEmail;

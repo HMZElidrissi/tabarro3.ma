@@ -272,6 +272,7 @@
             "bloodGroup": "Groupe sanguin",
             "region": "Région",
             "city": "Ville",
+            "notificationLanguage": "Langue des notifications",
             "location": "Détails de l'emplacement",
             "description": "Description",
             "status": "Statut"
@@ -284,6 +285,7 @@
             "selectBloodGroup": "Sélectionnez votre groupe sanguin",
             "selectRegion": "Sélectionnez votre région",
             "selectCity": "Sélectionnez votre ville",
+            "selectNotificationLanguage": "Choisir la langue des e-mails",
             "enterLocation": "Entrez l'emplacement spécifique",
             "enterDescription": "Entrez les détails ou exigences supplémentaires",
             "selectStatus": "Sélectionnez le statut"

@@ -13,8 +13,11 @@ import {
     Link,
 } from '@react-email/components';
 import { fr } from 'date-fns/locale';
+import { ar } from 'date-fns/locale';
+import { enUS } from 'date-fns/locale';
 import { format } from 'date-fns';
 import * as React from 'react';
+import type { EmailTranslations } from '@/lib/email-i18n';
 
 interface Campaign {
     id: number;
@@ -36,21 +39,51 @@ interface CampaignDigestEmailProps {
     campaigns: Campaign[];
     date: string;
     unsubscribeUrl?: string;
+    locale?: string;
+    t?: EmailTranslations['campaignDigest'];
 }
+
+const defaultDigestT: EmailTranslations['campaignDigest'] = {
+    subjectPrefix: 'Résumé des campagnes de don de sang',
+    title: 'Résumé des campagnes du jour',
+    dateLabel: '{date} - {regionName}',
+    intro: "Voici les nouvelles campagnes de don de sang organisées aujourd'hui dans votre région :",
+    organizedBy: 'Organisé par :',
+    date: 'Date :',
+    time: 'Horaire :',
+    location: 'Lieu :',
+    city: 'Ville :',
+    participate: 'Je participe',
+    tipsTitle: 'Conseils pour votre don',
+    tip1: 'Bien manger et vous hydrater avant le don',
+    tip2: "Apporter une pièce d'identité",
+    tip3: 'Prévoir environ 45 minutes pour l\'ensemble du processus',
+    tip4: 'Éviter les activités physiques intenses après le don',
+    viewAll: 'Voir toutes les campagnes',
+    footerReason: 'Vous recevez ce résumé quotidien car vous êtes inscrit dans la région {regionName}.',
+    unsubscribe: 'Se désabonner',
+    unsubscribePrompt: 'Vous ne souhaitez plus recevoir le récapitulatif des campagnes dans votre région ?',
+    autoSent: "Cet email est envoyé automatiquement. Veuillez ne pas y répondre directement.",
+    footer: '© {year} tabarro3. Tous droits réservés.',
+};
 
 export const CampaignDigestEmail = ({
     regionName,
     campaigns,
     date,
     unsubscribeUrl,
-}: CampaignDigestEmailProps) => (
-    <Html lang="fr" dir="ltr">
+    locale = 'fr',
+    t = defaultDigestT,
+}: CampaignDigestEmailProps) => {
+    const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const dateLocale = locale === 'ar' ? ar : locale === 'en' ? enUS : fr;
+    const dateObj = typeof date === 'string' ? new Date(date) : date;
+    const formattedDate = format(dateObj, 'dd MMMM yyyy', { locale: dateLocale });
+    const year = new Date().getFullYear();
+    return (
+    <Html lang={locale} dir={dir}>
         <Preview>
-            {`📅 ${campaigns.length} nouvelle${
-                campaigns.length > 1 ? 's' : ''
-            } campagne${
-                campaigns.length > 1 ? 's' : ''
-            } de don de sang aujourd'hui dans votre région`}
+            📅 {t.title} - {regionName}
         </Preview>
         <Head />
         <Tailwind
@@ -89,21 +122,15 @@ export const CampaignDigestEmail = ({
                     </Section>
 
                     <Text className="text-2xl font-bold text-gray-900 text-center mb-2">
-                        📅 Résumé des campagnes du jour
+                        📅 {t.title}
                     </Text>
 
                     <Text className="text-lg text-gray-600 text-center mb-6">
-                        {format(
-                            typeof date === 'string' ? new Date(date) : date,
-                            'dd MMMM yyyy',
-                            { locale: fr },
-                        )}{' '}
-                        - {regionName}
+                        {formattedDate} - {regionName}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-6">
-                        Voici les nouvelles campagnes de don de sang organisées
-                        aujourd'hui dans votre région :
+                        {t.intro}
                     </Text>
 
                     {campaigns.map((campaign, index) => {
@@ -125,31 +152,31 @@ export const CampaignDigestEmail = ({
 
                                 <Section className="mb-4">
                                     <Text className="text-gray-600 mb-2">
-                                        🏥 <strong>Organisé par :</strong>{' '}
+                                        🏥 <strong>{t.organizedBy}</strong>{' '}
                                         {campaign.organization.name}
                                     </Text>
                                     <Text className="text-gray-600 mb-2">
-                                        📅 <strong>Date :</strong>{' '}
-                                        {startDate.toLocaleDateString('fr-FR')}
+                                        📅 <strong>{t.date}</strong>{' '}
+                                        {startDate.toLocaleDateString(locale === 'ar' ? 'ar-MA' : locale === 'en' ? 'en-GB' : 'fr-FR')}
                                     </Text>
                                     <Text className="text-gray-600 mb-2">
-                                        🕒 <strong>Horaire :</strong>{' '}
-                                        {startDate.toLocaleTimeString('fr-FR', {
+                                        🕒 <strong>{t.time}</strong>{' '}
+                                        {startDate.toLocaleTimeString(locale === 'ar' ? 'ar-MA' : locale === 'en' ? 'en-GB' : 'fr-FR', {
                                             hour: '2-digit',
                                             minute: '2-digit',
                                         })}{' '}
                                         -{' '}
-                                        {endDate.toLocaleTimeString('fr-FR', {
+                                        {endDate.toLocaleTimeString(locale === 'ar' ? 'ar-MA' : locale === 'en' ? 'en-GB' : 'fr-FR', {
                                             hour: '2-digit',
                                             minute: '2-digit',
                                         })}
                                     </Text>
                                     <Text className="text-gray-600 mb-2">
-                                        📍 <strong>Lieu :</strong>{' '}
+                                        📍 <strong>{t.location}</strong>{' '}
                                         {campaign.location}
                                     </Text>
                                     <Text className="text-gray-600">
-                                        🏢 <strong>Ville :</strong>{' '}
+                                        🏢 <strong>{t.city}</strong>{' '}
                                         {campaign.city.name}
                                     </Text>
                                 </Section>
@@ -159,7 +186,7 @@ export const CampaignDigestEmail = ({
                                         href={`https://tabarro3.ma/campaigns`}
                                         className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-4 py-2 rounded-md font-semibold text-sm inline-block transition-colors"
                                     >
-                                        Je participe
+                                        {t.participate}
                                     </Button>
                                 </Section>
                             </Section>
@@ -168,21 +195,19 @@ export const CampaignDigestEmail = ({
 
                     <Section className="bg-brand-50 p-6 rounded-lg mb-6">
                         <Text className="text-brand-800 font-semibold text-center mb-3">
-                            💡 Conseils pour votre don
+                            💡 {t.tipsTitle}
                         </Text>
                         <Text className="text-brand-700 text-sm mb-2">
-                            • Bien manger et vous hydrater avant le don
+                            • {t.tip1}
                         </Text>
                         <Text className="text-brand-700 text-sm mb-2">
-                            • Apporter une pièce d'identité
+                            • {t.tip2}
                         </Text>
                         <Text className="text-brand-700 text-sm mb-2">
-                            • Prévoir environ 45 minutes pour l'ensemble du
-                            processus
+                            • {t.tip3}
                         </Text>
                         <Text className="text-brand-700 text-sm">
-                            • Éviter les activités physiques intenses après le
-                            don
+                            • {t.tip4}
                         </Text>
                     </Section>
 
@@ -191,26 +216,24 @@ export const CampaignDigestEmail = ({
                             href="https://tabarro3.ma/campaigns"
                             className="bg-gray-800 hover:bg-gray-900 active:bg-gray-950 focus:outline-none focus:border-gray-950 focus:ring ring-gray-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors"
                         >
-                            Voir toutes les campagnes
+                            {t.viewAll}
                         </Button>
                     </Section>
 
                     <Hr className="border-gray-200 my-8" />
 
                     <Text className="text-gray-500 text-sm text-center mb-4">
-                        Vous recevez ce résumé quotidien car vous êtes inscrit
-                        dans la région {regionName}.
+                        {t.footerReason.replace('{regionName}', regionName)}
                     </Text>
 
                     {unsubscribeUrl && (
                         <Text className="text-gray-500 text-xs text-center mb-4">
-                            Vous ne souhaitez plus recevoir le récapitulatif des
-                            campagnes dans votre région ?{' '}
+                            {t.unsubscribePrompt}{' '}
                             <Link
                                 href={unsubscribeUrl}
                                 className="text-brand-600 hover:text-brand-700"
                             >
-                                Se désabonner
+                                {t.unsubscribe}
                             </Link>
                             .
                         </Text>
@@ -219,18 +242,17 @@ export const CampaignDigestEmail = ({
                     <Hr className="border-gray-200 my-6" />
 
                     <Text className="text-gray-400 text-xs text-center mb-2">
-                        Cet email est envoyé automatiquement. Veuillez ne pas y
-                        répondre directement.
+                        {t.autoSent}
                     </Text>
 
                     <Text className="text-gray-500 text-sm text-center">
-                        © {new Date().getFullYear()} tabarro3. Tous droits
-                        réservés.
+                        {t.footer.replace('{year}', String(year))}
                     </Text>
                 </Container>
             </Body>
         </Tailwind>
     </Html>
-);
+    );
+};
 
 export default CampaignDigestEmail;

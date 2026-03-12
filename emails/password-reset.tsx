@@ -12,18 +12,38 @@ import {
     Hr,
     Tailwind,
 } from '@react-email/components';
+import type { EmailTranslations } from '@/lib/email-i18n';
 
 interface PasswordResetEmailProps {
     resetLink: string;
+    locale?: string;
+    t?: EmailTranslations['passwordReset'];
 }
 
-export const PasswordResetEmail = ({ resetLink }: PasswordResetEmailProps) => (
-    <Html lang="fr" dir="ltr">
+const defaultT = {
+    subject: 'Réinitialisation de votre mot de passe',
+    preview: 'Réinitialisez votre mot de passe tabarro3 — ce lien expire dans 60 minutes',
+    title: 'Réinitialisation du mot de passe',
+    greeting: 'Bonjour,',
+    body: 'Nous avons reçu une demande de réinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour en choisir un nouveau :',
+    cta: 'Réinitialiser le mot de passe',
+    expiryNote: "Pour des raisons de sécurité, cette demande expirera dans 60 minutes. Après ce délai, vous devrez soumettre une nouvelle demande.",
+    ignoreNote: "Si vous n'avez pas demandé ce changement, vous pouvez ignorer cet email en toute sécurité.",
+    linkHint: 'Si le bouton ne fonctionne pas, copiez et collez ce lien dans votre navigateur :',
+    footer: '© {year} tabarro3. Tous droits réservés.',
+};
+
+export const PasswordResetEmail = ({
+    resetLink,
+    locale = 'fr',
+    t = defaultT,
+}: PasswordResetEmailProps) => {
+    const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const year = new Date().getFullYear();
+    return (
+    <Html lang={locale} dir={dir}>
         <Head />
-        <Preview>
-            Réinitialisez votre mot de passe tabarro3 — ce lien expire dans 60
-            minutes
-        </Preview>
+        <Preview>{t.preview}</Preview>
         <Tailwind
             config={{
                 theme: {
@@ -60,17 +80,15 @@ export const PasswordResetEmail = ({ resetLink }: PasswordResetEmailProps) => (
                     </Section>
 
                     <Text className="text-2xl font-bold text-gray-900 text-center mb-6">
-                        Réinitialisation du mot de passe
+                        {t.title}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Bonjour,
+                        {t.greeting}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Nous avons reçu une demande de réinitialisation de votre
-                        mot de passe. Cliquez sur le bouton ci-dessous pour en
-                        choisir un nouveau :
+                        {t.body}
                     </Text>
 
                     <Section className="text-center my-8">
@@ -78,24 +96,20 @@ export const PasswordResetEmail = ({ resetLink }: PasswordResetEmailProps) => (
                             href={resetLink}
                             className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors"
                         >
-                            Réinitialiser le mot de passe
+                            {t.cta}
                         </Button>
                     </Section>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Pour des raisons de sécurité, cette demande expirera
-                        dans 60 minutes. Après ce délai, vous devrez soumettre
-                        une nouvelle demande.
+                        {t.expiryNote}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Si vous n'avez pas demandé ce changement, vous pouvez
-                        ignorer cet email en toute sécurité.
+                        {t.ignoreNote}
                     </Text>
 
                     <Text className="text-gray-500 text-sm mt-6 mb-2">
-                        Si le bouton ne fonctionne pas, copiez et collez ce lien
-                        dans votre navigateur :
+                        {t.linkHint}
                     </Text>
                     <Link
                         href={resetLink}
@@ -107,13 +121,13 @@ export const PasswordResetEmail = ({ resetLink }: PasswordResetEmailProps) => (
                     <Hr className="border-gray-200 my-8" />
 
                     <Text className="text-gray-500 text-sm text-center">
-                        © {new Date().getFullYear()} tabarro3. Tous droits
-                        réservés.
+                        {t.footer.replace('{year}', String(year))}
                     </Text>
                 </Container>
             </Body>
         </Tailwind>
     </Html>
-);
+    );
+};
 
 export default PasswordResetEmail;

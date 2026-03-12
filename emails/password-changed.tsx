@@ -11,14 +11,34 @@ import {
     Tailwind,
     Text,
 } from '@react-email/components';
+import type { EmailTranslations } from '@/lib/email-i18n';
 
-export const PasswordChangedEmail = () => (
-    <Html lang="fr" dir="ltr">
+interface PasswordChangedEmailProps {
+    locale?: string;
+    t?: EmailTranslations['passwordChanged'];
+}
+
+const defaultT = {
+    subject: 'Votre mot de passe a été changé',
+    preview: "Votre mot de passe a été modifié — ce n'était pas vous ? Contactez-nous immédiatement",
+    title: 'Mot de passe modifié avec succès',
+    greeting: 'Bonjour,',
+    body: "Cet email confirme que votre mot de passe a été modifié avec succès.",
+    contactNote: "Si vous n'êtes pas à l'origine de ce changement, veuillez contacter notre équipe support immédiatement :",
+    cta: 'Contacter le support',
+    footer: '© {year} tabarro3. Tous droits réservés.',
+};
+
+export const PasswordChangedEmail = ({
+    locale = 'fr',
+    t = defaultT,
+}: PasswordChangedEmailProps = {}) => {
+    const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const year = new Date().getFullYear();
+    return (
+    <Html lang={locale} dir={dir}>
         <Head />
-        <Preview>
-            Votre mot de passe a été modifié — ce n'était pas vous ?
-            Contactez-nous immédiatement
-        </Preview>
+        <Preview>{t.preview}</Preview>
         <Tailwind
             config={{
                 theme: {
@@ -55,21 +75,19 @@ export const PasswordChangedEmail = () => (
                     </Section>
 
                     <Text className="text-2xl font-bold text-gray-900 text-center mb-6">
-                        Mot de passe modifié avec succès
+                        {t.title}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Bonjour,
+                        {t.greeting}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Cet email confirme que votre mot de passe a été modifié
-                        avec succès.
+                        {t.body}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Si vous n'êtes pas à l'origine de ce changement,
-                        veuillez contacter notre équipe support immédiatement :
+                        {t.contactNote}
                     </Text>
 
                     <Section className="text-center my-8">
@@ -77,20 +95,20 @@ export const PasswordChangedEmail = () => (
                             href="mailto:dondesang.ma@gmail.com"
                             className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors"
                         >
-                            Contacter le support
+                            {t.cta}
                         </Button>
                     </Section>
 
                     <Hr className="border-gray-200 my-8" />
 
                     <Text className="text-gray-500 text-sm text-center">
-                        © {new Date().getFullYear()} tabarro3. Tous droits
-                        réservés.
+                        {t.footer.replace('{year}', String(year))}
                     </Text>
                 </Container>
             </Body>
         </Tailwind>
     </Html>
-);
+    );
+};
 
 export default PasswordChangedEmail;

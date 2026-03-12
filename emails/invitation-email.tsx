@@ -12,18 +12,40 @@ import {
     Hr,
     Tailwind,
 } from '@react-email/components';
+import type { EmailTranslations } from '@/lib/email-i18n';
 
 interface InvitationEmailProps {
     inviteLink: string;
+    locale?: string;
+    t?: EmailTranslations['invitation'];
 }
 
-export const InvitationEmail = ({ inviteLink }: InvitationEmailProps) => (
-    <Html lang="fr" dir="ltr">
+const defaultT = {
+    subject: 'Invitation à rejoindre tabarro3.ma',
+    preview: 'Vous avez été invité à rejoindre tabarro3 — acceptez votre invitation',
+    title: 'Invitation à rejoindre tabarro3',
+    greeting: 'Cher partenaire potentiel,',
+    body: "Nous sommes ravis de vous inviter à rejoindre tabarro3, une plateforme innovante dédiée à la sensibilisation et à la promotion du don de sang au Maroc. En tant qu'organisation engagée dans ce domaine, votre participation serait précieuse pour notre mission commune.",
+    bullet1: 'Organiser et gérer des campagnes de don de sang de manière efficace',
+    bullet2: 'Connecter directement avec une communauté active de donneurs potentiels',
+    bullet3: "Rejoindre un réseau national d'organisations engagées dans le don de sang",
+    cta: "Accepter l'invitation",
+    expiryNote: "Pour des raisons de sécurité, cette invitation expirera dans 7 jours. Après ce délai, vous devrez demander une nouvelle invitation.",
+    linkHint: 'Si le bouton ne fonctionne pas, copiez et collez ce lien dans votre navigateur :',
+    footer: '© {year} tabarro3. Tous droits réservés.',
+};
+
+export const InvitationEmail = ({
+    inviteLink,
+    locale = 'fr',
+    t = defaultT,
+}: InvitationEmailProps) => {
+    const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const year = new Date().getFullYear();
+    return (
+    <Html lang={locale} dir={dir}>
         <Head />
-        <Preview>
-            Vous avez été invité à rejoindre tabarro3 — acceptez votre
-            invitation
-        </Preview>
+        <Preview>{t.preview}</Preview>
         <Tailwind
             config={{
                 theme: {
@@ -60,36 +82,28 @@ export const InvitationEmail = ({ inviteLink }: InvitationEmailProps) => (
                     </Section>
 
                     <Text className="text-2xl font-bold text-gray-900 text-center mb-6">
-                        Invitation à rejoindre tabarro3
+                        {t.title}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Cher partenaire potentiel,
+                        {t.greeting}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Nous sommes ravis de vous inviter à rejoindre tabarro3,
-                        une plateforme innovante dédiée à la sensibilisation et
-                        à la promotion du don de sang au Maroc. En tant
-                        qu'organisation engagée dans ce domaine, votre
-                        participation serait précieuse pour notre mission
-                        commune.
+                        {t.body}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
                         En rejoignant tabarro3, vous pourrez :
                     </Text>
                     <Text className="text-gray-500 text-base ml-6 mb-2">
-                        • Organiser et gérer des campagnes de don de sang de
-                        manière efficace
+                        • {t.bullet1}
                     </Text>
                     <Text className="text-gray-500 text-base ml-6 mb-2">
-                        • Connecter directement avec une communauté active de
-                        donneurs potentiels
+                        • {t.bullet2}
                     </Text>
                     <Text className="text-gray-500 text-base ml-6 mb-4">
-                        • Rejoindre un réseau national d'organisations engagées
-                        dans le don de sang
+                        • {t.bullet3}
                     </Text>
 
                     <Section className="text-center my-8">
@@ -97,19 +111,16 @@ export const InvitationEmail = ({ inviteLink }: InvitationEmailProps) => (
                             href={inviteLink}
                             className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors"
                         >
-                            Accepter l'invitation
+                            {t.cta}
                         </Button>
                     </Section>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Pour des raisons de sécurité, cette invitation expirera
-                        dans 7 jours. Après ce délai, vous devrez demander une
-                        nouvelle invitation.
+                        {t.expiryNote}
                     </Text>
 
                     <Text className="text-gray-500 text-sm mt-6 mb-2">
-                        Si le bouton ne fonctionne pas, copiez et collez ce lien
-                        dans votre navigateur :
+                        {t.linkHint}
                     </Text>
                     <Link
                         href={inviteLink}
@@ -121,13 +132,13 @@ export const InvitationEmail = ({ inviteLink }: InvitationEmailProps) => (
                     <Hr className="border-gray-200 my-8" />
 
                     <Text className="text-gray-500 text-sm text-center">
-                        © {new Date().getFullYear()} tabarro3. Tous droits
-                        réservés.
+                        {t.footer.replace('{year}', String(year))}
                     </Text>
                 </Container>
             </Body>
         </Tailwind>
     </Html>
-);
+    );
+};
 
 export default InvitationEmail;

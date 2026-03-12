@@ -60,6 +60,7 @@ export default function BloodRequestTestForm({
         }[]
     >([]);
     const [previewLoading, setPreviewLoading] = useState(false);
+    const [testLocale, setTestLocale] = useState<string>('fr');
     const initialLoad = useRef(true);
 
     useEffect(() => {
@@ -71,7 +72,7 @@ export default function BloodRequestTestForm({
     useEffect(() => {
         let cancelled = false;
         setPreviewLoading(true);
-        getBloodRequestPreviewHtml(requestId)
+        getBloodRequestPreviewHtml(requestId, testLocale)
             .then(result => {
                 if (cancelled) return;
                 if (result.html) onPreviewHtml(result.html);
@@ -90,12 +91,15 @@ export default function BloodRequestTestForm({
         return () => {
             cancelled = true;
         };
-    }, [requestId]);
+    }, [requestId, testLocale]);
 
     const handleRefreshPreview = async () => {
         setPreviewLoading(true);
         try {
-            const result = await getBloodRequestPreviewHtml(requestId);
+            const result = await getBloodRequestPreviewHtml(
+                requestId,
+                testLocale,
+            );
             if (result.html) onPreviewHtml(result.html);
             if (result.error)
                 toast({
@@ -122,6 +126,7 @@ export default function BloodRequestTestForm({
             const result = await sendTestBloodRequestEmail(
                 recipientEmail.trim(),
                 requestId,
+                testLocale,
             );
             if (result.success)
                 toast({ title: 'Envoyé', description: result.message });
@@ -186,6 +191,23 @@ export default function BloodRequestTestForm({
                                             – {r.city}
                                         </SelectItem>
                                     ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label>Langue de l&apos;email</Label>
+                            <Select
+                                value={testLocale}
+                                onValueChange={setTestLocale}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="fr">Français</SelectItem>
+                                    <SelectItem value="en">English</SelectItem>
+                                    <SelectItem value="ar">العربية</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>

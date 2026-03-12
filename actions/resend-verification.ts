@@ -61,7 +61,7 @@ export const resendVerification = validatedAction(
         });
 
         try {
-            await sendVerificationEmail(email, token);
+            await sendVerificationEmail(email, token, user.notificationLanguage);
         } catch (error) {
             console.error('Error resending verification email:', error);
             return { error: dict.auth.verifyEmail.resendFailed };

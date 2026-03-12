@@ -272,6 +272,7 @@
             "bloodGroup": "فصيلة الدم",
             "region": "الجهة",
             "city": "المدينة",
+            "notificationLanguage": "لغة الإشعارات",
             "location": "تفاصيل الموقع",
             "description": "الوصف",
             "status": "الحالة"
@@ -284,6 +285,7 @@
             "selectBloodGroup": "اختر فصيلة الدم",
             "selectRegion": "اختر المنطقة",
             "selectCity": "اختر المدينة",
+            "selectNotificationLanguage": "اختر لغة البريد الإلكتروني",
             "enterLocation": "أدخل الموقع المحدد",
             "enterDescription": "أدخل التفاصيل أو المتطلبات الإضافية",
             "selectStatus": "اختر الحالة"

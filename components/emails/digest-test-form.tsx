@@ -53,6 +53,7 @@ export default function DigestTestForm({
     const { toast } = useToast();
     const [regions, setRegions] = useState<{ id: number; name: string }[]>([]);
     const [previewLoading, setPreviewLoading] = useState(false);
+    const [testLocale, setTestLocale] = useState<string>('fr');
     const initialLoad = useRef(true);
 
     // Load regions on mount and set default region
@@ -65,13 +66,13 @@ export default function DigestTestForm({
         });
     }, []);
 
-    // Auto-load preview when region or data source changes (and regions are loaded)
+    // Auto-load preview when region, data source or language changes (and regions are loaded)
     useEffect(() => {
         if (!regionId || regions.length === 0) return;
 
         let cancelled = false;
         setPreviewLoading(true);
-        getDigestPreviewHtml(regionId, useRealCampaigns)
+        getDigestPreviewHtml(regionId, useRealCampaigns, testLocale)
             .then(result => {
                 if (cancelled) return;
                 if (result.html) onPreviewHtml(result.html);
@@ -90,7 +91,7 @@ export default function DigestTestForm({
         return () => {
             cancelled = true;
         };
-    }, [regionId, useRealCampaigns, regions.length]);
+    }, [regionId, useRealCampaigns, testLocale, regions.length]);
 
     const handleRefreshPreview = async () => {
         if (!regionId) return;
@@ -99,6 +100,7 @@ export default function DigestTestForm({
             const result = await getDigestPreviewHtml(
                 regionId,
                 useRealCampaigns,
+                testLocale,
             );
             if (result.html) onPreviewHtml(result.html);
             if (result.error)
@@ -135,6 +137,7 @@ export default function DigestTestForm({
                 recipientEmail.trim(),
                 regionId,
                 useRealCampaigns,
+                testLocale,
             );
             if (result.success)
                 toast({ title: 'Envoyé', description: result.message });
@@ -199,6 +202,23 @@ export default function DigestTestForm({
                                 Utiliser les campagnes du jour pour cette région
                             </span>
                         </label>
+
+                        <div className="space-y-2">
+                            <Label>Langue de l&apos;email</Label>
+                            <Select
+                                value={testLocale}
+                                onValueChange={setTestLocale}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="fr">Français</SelectItem>
+                                    <SelectItem value="en">English</SelectItem>
+                                    <SelectItem value="ar">العربية</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
 
                         <div className="space-y-2">
                             <Label>Envoyer le test à</Label>

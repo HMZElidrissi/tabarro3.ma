@@ -10,17 +10,34 @@ import {
     Img,
     Tailwind,
 } from '@react-email/components';
+import type { EmailTranslations } from '@/lib/email-i18n';
 
 interface EmailVerificationProps {
     verifyLink: string;
+    locale?: string;
+    t?: EmailTranslations['verification'];
 }
+
+const defaultT = {
+    subject: 'Confirmez votre adresse e-mail',
+    preview: 'Confirmez votre adresse e-mail',
+    title: 'Confirmez votre adresse e-mail',
+    bodyThanks: 'Merci de rejoindre tabarro3, la plateforme dédiée à la sensibilisation et à la promotion du don de sang au Maroc.',
+    bodyConfirm: 'Pour finaliser la création de votre compte et accéder à toutes les fonctionnalités, veuillez confirmer votre adresse e-mail en cliquant sur le bouton ci-dessous.',
+    cta: 'Confirmer mon e-mail',
+    securityNote: "Pour des raisons de sécurité, ce lien expirera dans 24 heures. Si vous n'êtes pas à l'origine de cette inscription, vous pouvez ignorer cet e-mail.",
+};
 
 export const EmailVerificationEmail = ({
     verifyLink,
-}: EmailVerificationProps) => (
-    <Html lang="fr" dir="ltr">
+    locale = 'fr',
+    t = defaultT,
+}: EmailVerificationProps) => {
+    const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    return (
+    <Html lang={locale} dir={dir}>
         <Head />
-        <Preview>Confirmez votre adresse e-mail</Preview>
+        <Preview>{t.preview}</Preview>
         <Tailwind
             config={{
                 theme: {
@@ -57,19 +74,15 @@ export const EmailVerificationEmail = ({
                     </Section>
 
                     <Text className="text-2xl font-bold text-gray-900 text-center mb-6">
-                        Confirmez votre adresse e-mail
+                        {t.title}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Merci de rejoindre tabarro3, la plateforme dédiée à la
-                        sensibilisation et à la promotion du don de sang au
-                        Maroc.
+                        {t.bodyThanks}
                     </Text>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Pour finaliser la création de votre compte et accéder à
-                        toutes les fonctionnalités, veuillez confirmer votre
-                        adresse e-mail en cliquant sur le bouton ci-dessous.
+                        {t.bodyConfirm}
                     </Text>
 
                     <Section className="text-center my-8">
@@ -77,19 +90,18 @@ export const EmailVerificationEmail = ({
                             href={verifyLink}
                             className="bg-brand-600 hover:bg-brand-700 active:bg-brand-800 focus:outline-none focus:border-brand-900 focus:ring ring-brand-300 text-white shadow px-6 py-3 rounded-md font-semibold text-base inline-block transition-colors"
                         >
-                            Confirmer mon e-mail
+                            {t.cta}
                         </Button>
                     </Section>
 
                     <Text className="text-gray-600 text-base mb-4">
-                        Pour des raisons de sécurité, ce lien expirera dans 24
-                        heures. Si vous n&apos;êtes pas à l&apos;origine de
-                        cette inscription, vous pouvez ignorer cet e-mail.
+                        {t.securityNote}
                     </Text>
                 </Container>
             </Body>
         </Tailwind>
     </Html>
-);
+    );
+};
 
 export default EmailVerificationEmail;

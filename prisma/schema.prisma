@@ -75,6 +75,7 @@ model User {
   deletedAt       DateTime?       @map("deleted_at")
   receiveCampaignDigests    Boolean           @default(true) @map("receive_campaign_digests")
   receiveBloodRequestEmails Boolean           @default(true) @map("receive_blood_request_emails")
+  notificationLanguage      String            @default("fr") @map("notification_language") // fr | en | ar
   activities      ActivityLog[]
   invitationsSent Invitation[]    @relation("InvitedBy")
   PasswordReset   PasswordReset[]

@@ -43,6 +43,8 @@ export interface EmailData {
     // Email meta
     recipientEmail: string;
     subject: string;
+    /** Language for the email (fr | en | ar). Used for lang/dir and localized footers. */
+    notificationLanguage?: string;
 }
 
 export const PRESET_CONTENT = {

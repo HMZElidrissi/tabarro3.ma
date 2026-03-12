@@ -170,6 +170,7 @@ async function processDigestForRegion(digest: any) {
             select: {
                 email: true,
                 name: true,
+                notificationLanguage: true,
             },
         });
 

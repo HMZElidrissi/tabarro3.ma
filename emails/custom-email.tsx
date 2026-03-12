@@ -53,6 +53,10 @@ interface CustomEmailProps {
     footerText?: string;
     showCopyright: boolean;
     customFooterLinks?: Array<{ text: string; url: string }>;
+    /** Language for email (fr | en | ar). Sets lang and dir on the document. */
+    locale?: string;
+    /** Translated copyright line (e.g. from email dictionary). If not set, French is used. */
+    copyrightText?: string;
 }
 
 export function CustomEmail({
@@ -75,7 +79,11 @@ export function CustomEmail({
     footerText = '',
     showCopyright = true,
     customFooterLinks = [],
+    locale = 'fr',
+    copyrightText,
 }: CustomEmailProps) {
+    const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const lang = locale === 'ar' ? 'ar' : locale === 'en' ? 'en' : 'fr';
     const getButtonStyles = (style: 'primary' | 'secondary' | 'outline') => {
         switch (style) {
             case 'primary':
@@ -93,7 +101,7 @@ export function CustomEmail({
         'bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[580px]';
 
     return (
-        <Html lang="fr" dir="ltr">
+        <Html lang={lang} dir={dir}>
             <Head />
             <Preview>{title}</Preview>
             <Tailwind
@@ -240,8 +248,8 @@ export function CustomEmail({
 
                                 {showCopyright && (
                                     <Text className="text-gray-500 text-sm text-center">
-                                        © {new Date().getFullYear()} tabarro3.
-                                        Tous droits réservés.
+                                        {copyrightText ??
+                                            `© ${new Date().getFullYear()} tabarro3. Tous droits réservés.`}
                                     </Text>
                                 )}
                             </>
