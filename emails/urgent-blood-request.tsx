@@ -11,20 +11,7 @@ import {
     Hr,
     Tailwind,
 } from '@react-email/components';
-import type { EmailTranslations } from '@/lib/email-i18n';
-
-interface UrgentBloodRequestEmailProps {
-    bloodGroup: string;
-    location: string;
-    city: string;
-    phone?: string;
-    description: string;
-    unsubscribeUrl?: string;
-    locale?: string;
-    t?: EmailTranslations['bloodRequest'];
-}
-
-const defaultBloodT: EmailTranslations['bloodRequest'] = {
+const defaultBloodT = {
     subjectPrefix: 'Besoin urgent de sang',
     title: 'BESOIN URGENT DE SANG',
     intro: 'Un donneur de sang du groupe {bloodGroup} est urgemment recherché. Votre sang est compatible et peut sauver une vie !',
@@ -42,6 +29,17 @@ const defaultBloodT: EmailTranslations['bloodRequest'] = {
     footer: '© {year} tabarro3. Tous droits réservés.',
 };
 
+interface UrgentBloodRequestEmailProps {
+    bloodGroup: string;
+    location: string;
+    city: string;
+    phone?: string;
+    description: string;
+    unsubscribeUrl?: string;
+    locale?: string;
+    t?: typeof defaultBloodT;
+}
+
 export const UrgentBloodRequestEmail = ({
     bloodGroup,
     location,
@@ -53,6 +51,10 @@ export const UrgentBloodRequestEmail = ({
     t = defaultBloodT,
 }: UrgentBloodRequestEmailProps) => {
     const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const bodyStyle =
+        dir === 'rtl'
+            ? { direction: 'rtl' as const, textAlign: 'right' as const }
+            : undefined;
     const year = new Date().getFullYear();
     const intro = t.intro.replace('{bloodGroup}', bloodGroup);
     return (
@@ -84,7 +86,7 @@ export const UrgentBloodRequestEmail = ({
                 },
             }}
         >
-            <Body className="bg-gray-50 py-10">
+            <Body className="bg-gray-50 py-10" style={bodyStyle}>
                 <Container className="bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[580px]">
                     <Section className="text-center mb-8">
                         <Img

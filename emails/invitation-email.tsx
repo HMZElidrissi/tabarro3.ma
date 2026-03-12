@@ -12,14 +12,6 @@ import {
     Hr,
     Tailwind,
 } from '@react-email/components';
-import type { EmailTranslations } from '@/lib/email-i18n';
-
-interface InvitationEmailProps {
-    inviteLink: string;
-    locale?: string;
-    t?: EmailTranslations['invitation'];
-}
-
 const defaultT = {
     subject: 'Invitation à rejoindre tabarro3.ma',
     preview: 'Vous avez été invité à rejoindre tabarro3 — acceptez votre invitation',
@@ -35,12 +27,22 @@ const defaultT = {
     footer: '© {year} tabarro3. Tous droits réservés.',
 };
 
+interface InvitationEmailProps {
+    inviteLink: string;
+    locale?: string;
+    t?: typeof defaultT;
+}
+
 export const InvitationEmail = ({
     inviteLink,
     locale = 'fr',
     t = defaultT,
 }: InvitationEmailProps) => {
     const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const bodyStyle =
+        dir === 'rtl'
+            ? { direction: 'rtl' as const, textAlign: 'right' as const }
+            : undefined;
     const year = new Date().getFullYear();
     return (
     <Html lang={locale} dir={dir}>
@@ -69,7 +71,7 @@ export const InvitationEmail = ({
                 },
             }}
         >
-            <Body className="bg-gray-50 py-10">
+            <Body className="bg-gray-50 py-10" style={bodyStyle}>
                 <Container className="bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[580px]">
                     <Section className="text-center mb-8">
                         <Img
@@ -96,13 +98,19 @@ export const InvitationEmail = ({
                     <Text className="text-gray-600 text-base mb-4">
                         En rejoignant tabarro3, vous pourrez :
                     </Text>
-                    <Text className="text-gray-500 text-base ml-6 mb-2">
+                    <Text
+                        className={`text-gray-500 text-base mb-2 ${dir === 'rtl' ? 'mr-6' : 'ml-6'}`}
+                    >
                         • {t.bullet1}
                     </Text>
-                    <Text className="text-gray-500 text-base ml-6 mb-2">
+                    <Text
+                        className={`text-gray-500 text-base mb-2 ${dir === 'rtl' ? 'mr-6' : 'ml-6'}`}
+                    >
                         • {t.bullet2}
                     </Text>
-                    <Text className="text-gray-500 text-base ml-6 mb-4">
+                    <Text
+                        className={`text-gray-500 text-base mb-4 ${dir === 'rtl' ? 'mr-6' : 'ml-6'}`}
+                    >
                         • {t.bullet3}
                     </Text>
 

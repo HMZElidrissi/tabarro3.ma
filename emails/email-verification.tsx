@@ -10,14 +10,6 @@ import {
     Img,
     Tailwind,
 } from '@react-email/components';
-import type { EmailTranslations } from '@/lib/email-i18n';
-
-interface EmailVerificationProps {
-    verifyLink: string;
-    locale?: string;
-    t?: EmailTranslations['verification'];
-}
-
 const defaultT = {
     subject: 'Confirmez votre adresse e-mail',
     preview: 'Confirmez votre adresse e-mail',
@@ -28,12 +20,22 @@ const defaultT = {
     securityNote: "Pour des raisons de sécurité, ce lien expirera dans 24 heures. Si vous n'êtes pas à l'origine de cette inscription, vous pouvez ignorer cet e-mail.",
 };
 
+interface EmailVerificationProps {
+    verifyLink: string;
+    locale?: string;
+    t?: typeof defaultT;
+}
+
 export const EmailVerificationEmail = ({
     verifyLink,
     locale = 'fr',
     t = defaultT,
 }: EmailVerificationProps) => {
     const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const bodyStyle =
+        dir === 'rtl'
+            ? { direction: 'rtl' as const, textAlign: 'right' as const }
+            : undefined;
     return (
     <Html lang={locale} dir={dir}>
         <Head />
@@ -61,7 +63,7 @@ export const EmailVerificationEmail = ({
                 },
             }}
         >
-            <Body className="bg-gray-50 py-10">
+            <Body className="bg-gray-50 py-10" style={bodyStyle}>
                 <Container className="bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[580px]">
                     <Section className="text-center mb-8">
                         <Img

@@ -11,13 +11,6 @@ import {
     Tailwind,
     Text,
 } from '@react-email/components';
-import type { EmailTranslations } from '@/lib/email-i18n';
-
-interface PasswordChangedEmailProps {
-    locale?: string;
-    t?: EmailTranslations['passwordChanged'];
-}
-
 const defaultT = {
     subject: 'Votre mot de passe a été changé',
     preview: "Votre mot de passe a été modifié — ce n'était pas vous ? Contactez-nous immédiatement",
@@ -29,11 +22,20 @@ const defaultT = {
     footer: '© {year} tabarro3. Tous droits réservés.',
 };
 
+interface PasswordChangedEmailProps {
+    locale?: string;
+    t?: typeof defaultT;
+}
+
 export const PasswordChangedEmail = ({
     locale = 'fr',
     t = defaultT,
 }: PasswordChangedEmailProps = {}) => {
     const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const bodyStyle =
+        dir === 'rtl'
+            ? { direction: 'rtl' as const, textAlign: 'right' as const }
+            : undefined;
     const year = new Date().getFullYear();
     return (
     <Html lang={locale} dir={dir}>
@@ -62,7 +64,7 @@ export const PasswordChangedEmail = ({
                 },
             }}
         >
-            <Body className="bg-gray-50 py-10">
+            <Body className="bg-gray-50 py-10" style={bodyStyle}>
                 <Container className="bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[580px]">
                     <Section className="text-center mb-8">
                         <Img

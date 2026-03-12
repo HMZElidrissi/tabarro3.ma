@@ -84,6 +84,11 @@ export function CustomEmail({
 }: CustomEmailProps) {
     const dir = locale === 'ar' ? 'rtl' : 'ltr';
     const lang = locale === 'ar' ? 'ar' : locale === 'en' ? 'en' : 'fr';
+    const bodyStyle =
+        dir === 'rtl'
+            ? { direction: 'rtl' as const, textAlign: 'right' as const }
+            : undefined;
+    const textAlignClass = dir === 'rtl' ? 'text-right' : 'text-left';
     const getButtonStyles = (style: 'primary' | 'secondary' | 'outline') => {
         switch (style) {
             case 'primary':
@@ -127,7 +132,7 @@ export function CustomEmail({
                     },
                 }}
             >
-                <Body className="bg-gray-50 py-10">
+                <Body className="bg-gray-50 py-10" style={bodyStyle}>
                     <Container className={containerStyles}>
                         {/* Header Section - Centered Layout */}
                         {showLogo && (
@@ -148,24 +153,34 @@ export function CustomEmail({
 
                         <Section>
                             {/* Greeting */}
-                            <Text className="text-gray-600 text-base mb-4 text-left">
+                            <Text
+                                className={`text-gray-600 text-base mb-4 ${textAlignClass}`}
+                            >
                                 {greeting}
                             </Text>
 
                             {/* Main Message */}
-                            <Text className="text-gray-600 text-base mb-6 whitespace-pre-wrap text-left">
+                            <Text
+                                className={`text-gray-600 text-base mb-6 whitespace-pre-wrap ${textAlignClass}`}
+                            >
                                 {message}
                             </Text>
 
                             {/* Highlight Box */}
                             {showHighlight && highlightContent && (
-                                <Section className="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-brand-600">
+                                <Section
+                                    className={`bg-gray-50 p-6 rounded-lg mb-6 border-brand-600 ${dir === 'rtl' ? 'border-r-4' : 'border-l-4'}`}
+                                >
                                     {highlightTitle && (
-                                        <Text className="text-gray-700 font-semibold mb-3 text-left">
+                                        <Text
+                                            className={`text-gray-700 font-semibold mb-3 ${textAlignClass}`}
+                                        >
                                             {highlightIcon} {highlightTitle}
                                         </Text>
                                     )}
-                                    <Text className="text-gray-600 text-left whitespace-pre-wrap m-0">
+                                    <Text
+                                        className={`text-gray-600 whitespace-pre-wrap m-0 ${textAlignClass}`}
+                                    >
                                         {highlightContent}
                                     </Text>
                                 </Section>
@@ -173,7 +188,9 @@ export function CustomEmail({
 
                             {/* Additional Content */}
                             {additionalContent && (
-                                <Text className="text-gray-600 text-base mb-6 whitespace-pre-wrap text-left">
+                                <Text
+                                    className={`text-gray-600 text-base mb-6 whitespace-pre-wrap ${textAlignClass}`}
+                                >
                                     {additionalContent}
                                 </Text>
                             )}
@@ -204,7 +221,9 @@ export function CustomEmail({
 
                             {/* Signature */}
                             {showSignature && signature && (
-                                <Text className="text-gray-600 text-base mb-6 whitespace-pre-wrap text-left">
+                                <Text
+                                    className={`text-gray-600 text-base mb-6 whitespace-pre-wrap ${textAlignClass}`}
+                                >
                                     {signature}
                                 </Text>
                             )}

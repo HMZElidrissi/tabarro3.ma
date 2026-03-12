@@ -1,5 +1,5 @@
 import 'server-only';
-import { i18n } from './i18n-config';
+import { i18n, getResolvedLocale } from './i18n-config';
 import { cookies } from 'next/headers';
 
 const dictionaries = {
@@ -17,6 +17,15 @@ export const getDictionary = async () => {
     }
     return dictionaries[locale as keyof typeof dictionaries]();
 };
+
+/** Load the full dictionary for a given locale (e.g. for emails, where locale is explicit). */
+export async function getDictionaryForLocale(locale: string | null | undefined) {
+    const loc = getResolvedLocale(locale);
+    if (!(loc in dictionaries)) {
+        return dictionaries.ar();
+    }
+    return dictionaries[loc as keyof typeof dictionaries]();
+}
 
 export const getLocale = async () => {
     const cookieStore = await cookies();

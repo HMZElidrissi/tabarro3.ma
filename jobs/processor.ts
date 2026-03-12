@@ -10,7 +10,8 @@ import {
 import { BloodGroup } from '@/types/enums';
 import { sendEmail } from '@/lib/mail';
 import { createUnsubscribeToken, getUnsubscribeUrl } from '@/lib/unsubscribe';
-import { getEmailDictionary, getNotificationLocale } from '@/lib/email-i18n';
+import { getResolvedLocale } from '@/i18n/i18n-config';
+import { getDictionaryForLocale } from '@/i18n/get-dictionary';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { enUS } from 'date-fns/locale';
@@ -68,9 +69,9 @@ const jobHandlers = {
         );
 
         for (const recipient of recipients) {
-            const locale = getNotificationLocale(recipient.notificationLanguage);
-            const dict = await getEmailDictionary(locale);
-            const t = dict.bloodRequest;
+            const locale = getResolvedLocale(recipient.notificationLanguage);
+            const dict = await getDictionaryForLocale(locale);
+            const t = dict.emails.bloodRequest;
             const token = await createUnsubscribeToken(
                 recipient.email,
                 'BLOOD_REQUEST',
@@ -115,9 +116,9 @@ const jobHandlers = {
         const dateLocales = { fr, en: enUS, ar } as const;
 
         for (const recipient of recipients) {
-            const locale = getNotificationLocale(recipient.notificationLanguage);
-            const dict = await getEmailDictionary(locale);
-            const t = dict.campaignDigest;
+            const locale = getResolvedLocale(recipient.notificationLanguage);
+            const dict = await getDictionaryForLocale(locale);
+            const t = dict.emails.campaignDigest;
             const dateLocale = dateLocales[locale] ?? fr;
             const formattedDate = format(new Date(dateStr + 'T12:00:00'), 'dd MMMM yyyy', {
                 locale: dateLocale,

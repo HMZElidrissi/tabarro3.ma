@@ -12,14 +12,6 @@ import {
     Hr,
     Tailwind,
 } from '@react-email/components';
-import type { EmailTranslations } from '@/lib/email-i18n';
-
-interface PasswordResetEmailProps {
-    resetLink: string;
-    locale?: string;
-    t?: EmailTranslations['passwordReset'];
-}
-
 const defaultT = {
     subject: 'Réinitialisation de votre mot de passe',
     preview: 'Réinitialisez votre mot de passe tabarro3 — ce lien expire dans 60 minutes',
@@ -33,12 +25,22 @@ const defaultT = {
     footer: '© {year} tabarro3. Tous droits réservés.',
 };
 
+interface PasswordResetEmailProps {
+    resetLink: string;
+    locale?: string;
+    t?: typeof defaultT;
+}
+
 export const PasswordResetEmail = ({
     resetLink,
     locale = 'fr',
     t = defaultT,
 }: PasswordResetEmailProps) => {
     const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const bodyStyle =
+        dir === 'rtl'
+            ? { direction: 'rtl' as const, textAlign: 'right' as const }
+            : undefined;
     const year = new Date().getFullYear();
     return (
     <Html lang={locale} dir={dir}>
@@ -67,7 +69,7 @@ export const PasswordResetEmail = ({
                 },
             }}
         >
-            <Body className="bg-gray-50 py-10">
+            <Body className="bg-gray-50 py-10" style={bodyStyle}>
                 <Container className="bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[580px]">
                     <Section className="text-center mb-8">
                         <Img

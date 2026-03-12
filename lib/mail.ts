@@ -5,7 +5,8 @@ import { EmailVerificationEmail } from '@/emails/email-verification';
 import nodemailer from 'nodemailer';
 import { render } from '@react-email/components';
 import { Resend } from 'resend';
-import { getEmailDictionary, getNotificationLocale } from '@/lib/email-i18n';
+import { getResolvedLocale } from '@/i18n/i18n-config';
+import { getDictionaryForLocale } from '@/i18n/get-dictionary';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -65,21 +66,22 @@ export async function sendPasswordResetEmail(
     token: string,
     locale?: string | null,
 ) {
-    const loc = getNotificationLocale(locale);
-    const t = await getEmailDictionary(loc);
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.passwordReset;
     const resetLink = `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password/${token}`;
 
     const emailHtml = await render(
-        PasswordResetEmail({ resetLink, locale: loc, t: t.passwordReset }),
+        PasswordResetEmail({ resetLink, locale: loc, t }),
         { pretty: true },
     );
     const emailText = await render(
-        PasswordResetEmail({ resetLink, locale: loc, t: t.passwordReset }),
+        PasswordResetEmail({ resetLink, locale: loc, t }),
         { plainText: true },
     );
 
     try {
-        await sendEmail(email, t.passwordReset.subject, emailHtml, emailText);
+        await sendEmail(email, t.subject, emailHtml, emailText);
         console.log('Password reset email sent successfully.');
     } catch (error) {
         console.error('Error sending password reset email:', error);
@@ -90,20 +92,21 @@ export async function sendPasswordChangedEmail(
     email: string,
     locale?: string | null,
 ) {
-    const loc = getNotificationLocale(locale);
-    const t = await getEmailDictionary(loc);
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.passwordChanged;
 
     const emailHtml = await render(
-        PasswordChangedEmail({ locale: loc, t: t.passwordChanged }),
+        PasswordChangedEmail({ locale: loc, t }),
         { pretty: true },
     );
     const emailText = await render(
-        PasswordChangedEmail({ locale: loc, t: t.passwordChanged }),
+        PasswordChangedEmail({ locale: loc, t }),
         { plainText: true },
     );
 
     try {
-        await sendEmail(email, t.passwordChanged.subject, emailHtml, emailText);
+        await sendEmail(email, t.subject, emailHtml, emailText);
         console.log('Password changed email sent successfully.');
     } catch (error) {
         console.error('Error sending password changed email:', error);
@@ -115,21 +118,22 @@ export async function sendInvitationEmail(
     token: string,
     locale?: string | null,
 ) {
-    const loc = getNotificationLocale(locale);
-    const t = await getEmailDictionary(loc);
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.invitation;
     const inviteLink = `${process.env.NEXT_PUBLIC_BASE_URL}/accept-invitation?token=${token}&email=${encodeURIComponent(email)}`;
 
     try {
         const emailHtml = await render(
-            InvitationEmail({ inviteLink, locale: loc, t: t.invitation }),
+            InvitationEmail({ inviteLink, locale: loc, t }),
             { pretty: true },
         );
         const emailText = await render(
-            InvitationEmail({ inviteLink, locale: loc, t: t.invitation }),
+            InvitationEmail({ inviteLink, locale: loc, t }),
             { plainText: true },
         );
 
-        await sendEmail(email, t.invitation.subject, emailHtml, emailText);
+        await sendEmail(email, t.subject, emailHtml, emailText);
     } catch (error) {
         console.error('Error sending invitation email:', error);
         throw error;
@@ -141,21 +145,22 @@ export async function sendVerificationEmail(
     token: string,
     locale?: string | null,
 ) {
-    const loc = getNotificationLocale(locale);
-    const t = await getEmailDictionary(loc);
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.verification;
     const verifyLink = `${process.env.NEXT_PUBLIC_BASE_URL}/verify-email/${token}`;
 
     try {
         const emailHtml = await render(
-            EmailVerificationEmail({ verifyLink, locale: loc, t: t.verification }),
+            EmailVerificationEmail({ verifyLink, locale: loc, t }),
             { pretty: true },
         );
         const emailText = await render(
-            EmailVerificationEmail({ verifyLink, locale: loc, t: t.verification }),
+            EmailVerificationEmail({ verifyLink, locale: loc, t }),
             { plainText: true },
         );
 
-        await sendEmail(email, t.verification.subject, emailHtml, emailText);
+        await sendEmail(email, t.subject, emailHtml, emailText);
     } catch (error) {
         console.error('Error sending verification email:', error);
         throw error;

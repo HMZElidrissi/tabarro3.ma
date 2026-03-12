@@ -1,6 +1,6 @@
 import { EmailData } from '@/types/email';
 
-/** Copyright text by locale (sync, for preview). Must match dictionaries/emails/{locale}.json common.copyright */
+/** Copyright text by locale (sync, for preview). Must match dictionaries/{locale}.json → emails.common.copyright */
 const CUSTOM_EMAIL_COPYRIGHT: Record<string, string> = {
     fr: '© {year} tabarro3. Tous droits réservés.',
     en: '© {year} tabarro3. All rights reserved.',

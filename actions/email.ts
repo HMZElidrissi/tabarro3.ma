@@ -8,7 +8,8 @@ import { UrgentBloodRequestEmail } from '@/emails/urgent-blood-request';
 import { sendEmail } from '@/lib/mail';
 import { prisma } from '@/lib/prisma';
 import { createUnsubscribeToken, getUnsubscribeUrl } from '@/lib/unsubscribe';
-import { getEmailDictionary, getNotificationLocale } from '@/lib/email-i18n';
+import { getResolvedLocale } from '@/i18n/i18n-config';
+import { getDictionaryForLocale } from '@/i18n/get-dictionary';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { enUS } from 'date-fns/locale';
@@ -49,6 +50,7 @@ interface EmailData {
     customFooterLinks: Array<{ text: string; url: string }>;
     recipientEmail: string;
     subject: string;
+    notificationLanguage?: string;
 }
 
 export async function sendCustomEmail(emailData: EmailData) {
@@ -71,8 +73,8 @@ export async function sendCustomEmail(emailData: EmailData) {
         }
 
         const locale = emailData.notificationLanguage ?? 'fr';
-        const emailDict = await getEmailDictionary(locale);
-        const copyrightText = emailDict.common.copyright.replace(
+        const dict = await getDictionaryForLocale(locale);
+        const copyrightText = dict.emails.common.copyright.replace(
             '{year}',
             String(new Date().getFullYear()),
         );
@@ -248,8 +250,9 @@ export async function getDigestPreviewHtml(
         return { error: data.error, html: null };
     }
 
-    const loc = getNotificationLocale(locale);
-    const t = (await getEmailDictionary(loc)).campaignDigest;
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.campaignDigest;
 
     const { regionName, campaigns, date } = data;
     const normalizedCampaigns = (campaigns ?? []).map(c => ({
@@ -315,8 +318,9 @@ export async function sendTestDigestEmail(
             },
         }));
 
-        const loc = getNotificationLocale(locale);
-        const t = (await getEmailDictionary(loc)).campaignDigest;
+        const loc = getResolvedLocale(locale);
+        const dict = await getDictionaryForLocale(loc);
+        const t = dict.emails.campaignDigest;
         const dateLocales = { fr, en: enUS, ar } as const;
         const dateLocale = dateLocales[loc] ?? fr;
         const dateStr = date ?? new Date().toISOString().split('T')[0];
@@ -420,8 +424,9 @@ export async function getBloodRequestPreviewHtml(
         return { error: 'Non autorisé', html: null };
     }
 
-    const loc = getNotificationLocale(locale);
-    const t = (await getEmailDictionary(loc)).bloodRequest;
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.bloodRequest;
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
     const unsubscribeUrl = `${baseUrl}/unsubscribe?token=preview`;
@@ -507,8 +512,9 @@ export async function sendTestBloodRequestEmail(
                 SAMPLE_BLOOD_REQUEST);
         }
 
-        const loc = getNotificationLocale(locale);
-        const t = (await getEmailDictionary(loc)).bloodRequest;
+        const loc = getResolvedLocale(locale);
+        const dict = await getDictionaryForLocale(loc);
+        const t = dict.emails.bloodRequest;
 
         const token = await createUnsubscribeToken(
             recipientEmail.trim(),

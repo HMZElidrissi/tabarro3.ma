@@ -17,8 +17,6 @@ import { ar } from 'date-fns/locale';
 import { enUS } from 'date-fns/locale';
 import { format } from 'date-fns';
 import * as React from 'react';
-import type { EmailTranslations } from '@/lib/email-i18n';
-
 interface Campaign {
     id: number;
     name: string;
@@ -34,16 +32,7 @@ interface Campaign {
     };
 }
 
-interface CampaignDigestEmailProps {
-    regionName: string;
-    campaigns: Campaign[];
-    date: string;
-    unsubscribeUrl?: string;
-    locale?: string;
-    t?: EmailTranslations['campaignDigest'];
-}
-
-const defaultDigestT: EmailTranslations['campaignDigest'] = {
+const defaultDigestT = {
     subjectPrefix: 'Résumé des campagnes de don de sang',
     title: 'Résumé des campagnes du jour',
     dateLabel: '{date} - {regionName}',
@@ -67,6 +56,15 @@ const defaultDigestT: EmailTranslations['campaignDigest'] = {
     footer: '© {year} tabarro3. Tous droits réservés.',
 };
 
+interface CampaignDigestEmailProps {
+    regionName: string;
+    campaigns: Campaign[];
+    date: string;
+    unsubscribeUrl?: string;
+    locale?: string;
+    t?: typeof defaultDigestT;
+}
+
 export const CampaignDigestEmail = ({
     regionName,
     campaigns,
@@ -76,6 +74,10 @@ export const CampaignDigestEmail = ({
     t = defaultDigestT,
 }: CampaignDigestEmailProps) => {
     const dir = locale === 'ar' ? 'rtl' : 'ltr';
+    const bodyStyle =
+        dir === 'rtl'
+            ? { direction: 'rtl' as const, textAlign: 'right' as const }
+            : undefined;
     const dateLocale = locale === 'ar' ? ar : locale === 'en' ? enUS : fr;
     const dateObj = typeof date === 'string' ? new Date(date) : date;
     const formattedDate = format(dateObj, 'dd MMMM yyyy', { locale: dateLocale });
@@ -109,7 +111,7 @@ export const CampaignDigestEmail = ({
                 },
             }}
         >
-            <Body className="bg-gray-50 py-10">
+            <Body className="bg-gray-50 py-10" style={bodyStyle}>
                 <Container className="bg-white rounded-lg shadow-lg mx-auto p-8 max-w-[600px]">
                     <Section className="text-center mb-8">
                         <Img
@@ -140,7 +142,7 @@ export const CampaignDigestEmail = ({
                         return (
                             <Section
                                 key={campaign.id}
-                                className="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-brand-500"
+                                className={`bg-gray-50 p-6 rounded-lg mb-6 border-brand-500 ${dir === 'rtl' ? 'border-r-4' : 'border-l-4'}`}
                             >
                                 <Text className="text-xl font-bold text-gray-900 mb-3">
                                     {campaign.name}
