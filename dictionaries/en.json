@@ -322,13 +322,58 @@
         "notificationPreferences": "Email notification preferences",
         "receiveCampaignDigests": "Receive the daily campaign digest for my region",
         "receiveBloodRequestEmails": "Receive emails for compatible urgent blood requests",
+        "memberSince": "Member of tabarro3",
+        "quickStats": "Your blood requests at a glance",
         "tabs": {
             "bloodRequests": "Blood Requests",
             "accountInfo": "Account Information"
         },
         "updateSuccess": "Profile updated successfully.",
         "updateError": "Failed to update profile.",
-        "userNotFound": "User not found."
+        "userNotFound": "User not found.",
+        "readyToSaveLives": "Your profile is complete",
+        "missingFields": "Still needed:",
+        "missing": {
+            "name": "Full name",
+            "phone": "Phone number",
+            "bloodGroup": "Blood group",
+            "city": "City",
+            "emailVerified": "Email not verified"
+        },
+        "completeProfile": "Complete your profile to become a ready donor",
+        "noBloodGroup": "Blood group not set",
+        "profileComplete": "Profile complete",
+        "helpNow": "Help Now",
+        "noActiveRequests": "No active requests",
+        "achievementBadges": "Achievement Badges",
+        "badgesEarned": "earned",
+        "impactQuote": "\"Every drop counts. Every donor matters.\"",
+        "badges": {
+            "firstRequest": "First Responder",
+            "firstRequestDesc": "Created your first blood request",
+            "hero": "Community Hero",
+            "heroDesc": "Fulfilled 3+ blood requests",
+            "lifeSaver": "Life Saver",
+            "lifeSaverDesc": "Saved your first life",
+            "rareDonor": "Rare Donor",
+            "rareDonorDesc": "Your blood type is rare & precious",
+            "profileComplete": "Ready to Give",
+            "profileCompleteDesc": "Filled in all profile info",
+            "community": "Camp Volunteer",
+            "communityDesc": "Participated in a campaign"
+        },
+        "deleteAccount": {
+            "dangerZone": "Danger Zone",
+            "trigger": "Delete Account",
+            "title": "Delete Your Account",
+            "description": "This action is permanent and cannot be undone. All your data, blood requests, and profile information will be permanently deleted.",
+            "confirmLabel": "Type to confirm",
+            "confirmHint": "Type \"delete\" to confirm",
+            "confirmPlaceholder": "delete",
+            "confirm": "Yes, delete my account",
+            "deleting": "Deleting...",
+            "cancel": "Cancel"
+        }
     },
     "bloodRequests": {
         "myRequests": "My Blood Requests",

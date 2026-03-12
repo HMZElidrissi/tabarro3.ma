@@ -2,7 +2,6 @@
 
 import { z } from 'zod';
 import { validatedActionWithUser } from '@/auth/middleware';
-import { comparePasswords } from '@/auth/session';
 import { getClientInfo } from '@/lib/ip';
 import { logActivity } from '@/lib/utils';
 import { ActivityType } from '@/types/enums';
@@ -10,9 +9,8 @@ import { prisma } from '@/lib/prisma';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-const deleteAccountSchema = z.object({
-    password: z.string().min(8).max(100),
-});
+// No payload needed — confirmation is handled client-side (typed word check)
+const deleteAccountSchema = z.object({});
 
 const updateAccountSchema = z.object({
     name: z.string().min(1, 'Name is required').max(100),
@@ -21,17 +19,7 @@ const updateAccountSchema = z.object({
 
 export const deleteAccount = validatedActionWithUser(
     deleteAccountSchema,
-    async (data, _, user) => {
-        const { password } = data;
-
-        const isPasswordValid = await comparePasswords(
-            password,
-            user.passwordHash,
-        );
-        if (!isPasswordValid) {
-            return { error: 'Incorrect password. Account deletion failed.' };
-        }
-
+    async (_data, __, user) => {
         const clientInfo = await getClientInfo();
         const ipAddress = clientInfo?.basic?.ip || 'Unknown';
 

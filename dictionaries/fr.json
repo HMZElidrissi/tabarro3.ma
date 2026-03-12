@@ -305,13 +305,58 @@
         "notificationPreferences": "Préférences de notification par email",
         "receiveCampaignDigests": "Recevoir le récapitulatif quotidien des campagnes dans ma région",
         "receiveBloodRequestEmails": "Recevoir les emails pour les demandes urgentes de sang compatibles",
+        "memberSince": "Membre de tabarro3",
+        "quickStats": "Vos demandes de sang en un coup d'œil",
         "tabs": {
             "bloodRequests": "Demandes de sang",
             "accountInfo": "Informations du compte"
         },
         "updateSuccess": "Profil mis à jour avec succès.",
         "updateError": "Échec de la mise à jour du profil.",
-        "userNotFound": "Utilisateur introuvable."
+        "userNotFound": "Utilisateur introuvable.",
+        "readyToSaveLives": "Votre profil est complet",
+        "missingFields": "Encore manquant :",
+        "missing": {
+            "name": "Nom complet",
+            "phone": "Numéro de téléphone",
+            "bloodGroup": "Groupe sanguin",
+            "city": "Ville",
+            "emailVerified": "Email non vérifié"
+        },
+        "completeProfile": "Complétez votre profil pour devenir un donneur prêt",
+        "noBloodGroup": "Groupe sanguin non défini",
+        "profileComplete": "Profil complété",
+        "helpNow": "Aider maintenant",
+        "noActiveRequests": "Aucune demande active",
+        "achievementBadges": "Badges de réussite",
+        "badgesEarned": "obtenus",
+        "impactQuote": "\"Chaque goutte compte. Chaque don est précieux.\"",
+        "badges": {
+            "firstRequest": "Premier Intervenant",
+            "firstRequestDesc": "Créé votre première demande de sang",
+            "hero": "Héros Communautaire",
+            "heroDesc": "3+ demandes de sang accomplies",
+            "lifeSaver": "Sauveur de Vie",
+            "lifeSaverDesc": "Sauvé votre première vie",
+            "rareDonor": "Donneur Rare",
+            "rareDonorDesc": "Votre groupe sanguin est rare et précieux",
+            "profileComplete": "Prêt à Donner",
+            "profileCompleteDesc": "Toutes les informations du profil remplies",
+            "community": "Bénévole de Campagne",
+            "communityDesc": "Participé à une campagne"
+        },
+        "deleteAccount": {
+            "dangerZone": "Zone de danger",
+            "trigger": "Supprimer le compte",
+            "title": "Supprimer votre compte",
+            "description": "Cette action est permanente et ne peut pas être annulée. Toutes vos données, demandes de sang et informations de profil seront définitivement supprimées.",
+            "confirmLabel": "Tapez pour confirmer",
+            "confirmHint": "Tapez \"supprimer\" pour confirmer",
+            "confirmPlaceholder": "supprimer",
+            "confirm": "Oui, supprimer mon compte",
+            "deleting": "Suppression...",
+            "cancel": "Annuler"
+        }
     },
     "bloodRequests": {
         "myRequests": "Mes demandes de sang",

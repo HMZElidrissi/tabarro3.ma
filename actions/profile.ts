@@ -93,6 +93,7 @@ export const getProfile = async (userId: string) => {
         updatedAt: true,
         receiveCampaignDigests: true,
         receiveBloodRequestEmails: true,
+        emailVerifiedAt: true,
     };
 
     return prisma.user.findUnique({

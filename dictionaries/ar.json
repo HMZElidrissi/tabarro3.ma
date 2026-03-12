@@ -304,14 +304,60 @@
         "notificationPreferences": "تفضيلات الإشعارات بالبريد الإلكتروني",
         "receiveCampaignDigests": "استلام الملخص اليومي للحملات في منطقتي",
         "receiveBloodRequestEmails": "استلام رسائل طلبات الدم العاجلة المتوافقة مع فصيلتي",
+        "memberSince": "عضو في تبرع",
+        "quickStats": "نظرة سريعة على طلباتك",
         "tabs": {
             "bloodRequests": "طلبات الدم",
             "accountInfo": "معلومات الحساب"
         },
         "updateSuccess": "تم تحديث الملف الشخصي بنجاح.",
         "updateError": "فشل تحديث الملف الشخصي.",
-        "userNotFound": "المستخدم غير موجود."
+        "userNotFound": "المستخدم غير موجود.",
+        "readyToSaveLives": "ملفك الشخصي مكتمل",
+        "missingFields": "لا يزال ناقصاً:",
+        "missing": {
+            "name": "الاسم الكامل",
+            "phone": "رقم الهاتف",
+            "bloodGroup": "فصيلة الدم",
+            "city": "المدينة",
+            "emailVerified": "البريد غير مؤكد"
+        },
+        "completeProfile": "أكمل ملفك الشخصي لتصبح متبرعاً جاهزاً",
+        "noBloodGroup": "فصيلة الدم غير محددة",
+        "profileComplete": "اكتمال الملف",
+        "helpNow": "ساعد الآن",
+        "noActiveRequests": "لا توجد طلبات نشطة",
+        "achievementBadges": "شارات الإنجاز",
+        "badgesEarned": "تم الحصول عليها",
+        "impactQuote": "\"كل قطرة تحسب. كل متبرع مهم.\"",
+        "badges": {
+            "firstRequest": "أول مستجيب",
+            "firstRequestDesc": "أنشأت أول طلب دم",
+            "hero": "بطل المجتمع",
+            "heroDesc": "3 طلبات دم وأكثر تمت تلبيتها",
+            "lifeSaver": "منقذ الأرواح",
+            "lifeSaverDesc": "أنقذت حياتك الأولى",
+            "rareDonor": "متبرع نادر",
+            "rareDonorDesc": "فصيلة دمك نادرة وثمينة",
+            "profileComplete": "مستعد للتبرع",
+            "profileCompleteDesc": "تم تعبئة جميع بيانات الملف",
+            "community": "متطوع حملات",
+            "communityDesc": "شارك في حملة تبرع"
+        },
+        "deleteAccount": {
+            "dangerZone": "منطقة خطرة",
+            "trigger": "حذف الحساب",
+            "title": "حذف حسابك",
+            "description": "هذا الإجراء نهائي ولا يمكن التراجع عنه. سيتم حذف جميع بياناتك وطلبات الدم ومعلومات ملفك الشخصي بشكل دائم.",
+            "confirmLabel": "اكتب للتأكيد",
+            "confirmHint": "اكتب \"حذف\" للتأكيد",
+            "confirmPlaceholder": "حذف",
+            "confirm": "نعم، احذف حسابي",
+            "deleting": "جاري الحذف...",
+            "cancel": "إلغاء"
+        }
     },
+
     "bloodRequests": {
         "myRequests": "طلبات الدم الخاصة بي",
         "newRequest": "طلب جديد",

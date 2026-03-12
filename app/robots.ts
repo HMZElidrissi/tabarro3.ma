@@ -19,8 +19,8 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: [
                     '/api/jobs/*',
                     '/dashboard/*',
-                    '/signin',
-                    '/signup',
+                    '/sign-in',
+                    '/sign-up',
                     '/accept-invitation',
                     '/reset-password',
                     '/forgot-password',

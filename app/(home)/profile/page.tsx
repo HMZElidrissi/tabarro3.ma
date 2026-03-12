@@ -22,7 +22,7 @@ export default async function ProfilePage() {
     const isRTL = lang === 'ar';
 
     if (!user) {
-        redirect('/signin');
+        redirect('/sign-in');
     }
 
     if (user.role !== Role.PARTICIPANT) {
@@ -36,17 +36,13 @@ export default async function ProfilePage() {
     const bloodRequests = await getBloodRequests(user.id);
 
     return (
-        <div className="flex flex-col bg-background">
-            <div className="flex-1 flex items-center justify-center">
-                <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <ProfileLayout
-                        user={profile as unknown as User}
-                        bloodRequests={bloodRequests as BloodRequest[]}
-                        dict={dict}
-                        isRTL={isRTL}
-                    />
-                </div>
-            </div>
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ProfileLayout
+                user={profile as unknown as User}
+                bloodRequests={bloodRequests as BloodRequest[]}
+                dict={dict}
+                isRTL={isRTL}
+            />
         </div>
     );
 }

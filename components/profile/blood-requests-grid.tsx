@@ -170,7 +170,7 @@ export function BloodRequestsGrid({
                                                     .markAsFulfilled
                                             }
                                         >
-                                            <CheckCircle className="h-4 w-4 text-green-600" />
+                                            <CheckCircle className="h-4 w-4 text-amber-600" />
                                         </Button>
                                     )}
                                     <Link
