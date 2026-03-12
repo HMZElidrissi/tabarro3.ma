@@ -196,4 +196,36 @@
     .group:hover .border-travel .trail {
         animation-duration: 1.8s;
     }
+
+    /*
+     * RTL / Arabic mode — keep Latin characters in their own font & direction.
+     *
+     * When the page is RTL (lang="ar"), Tajawal is the active font-family on
+     * <html>. However, Tajawal only contains Arabic glyphs; the browser falls
+     * back for Latin characters but may render them oddly.  We wire up Nunito
+     * explicitly for all Latin/ASCII ranges so blood-group labels (A+, B-, AB+…),
+     * numbers, and punctuation always render in the Latin typeface regardless of
+     * the active locale.
+     *
+     * `unicode-range` on a @font-face tells the browser to only download and
+     * apply this face for the specified codepoints — a zero-cost no-op in LTR mode
+     * because Nunito is already the base font there.
+     */
+    :root[dir='rtl'] {
+        /* Inject Nunito before Tajawal in the stack so the browser uses it for
+           any character that Tajawal doesn't cover (Latin, digits, punctuation). */
+        font-family: var(--font-nunito, 'Nunito'),
+            var(--font-tajawal, 'Tajawal'), sans-serif;
+    }
+
+    /*
+     * Utility: wrap purely-Latin inline content (blood groups, IDs, codes…)
+     * in a <span className="latin"> to pin the direction and font explicitly.
+     */
+    .latin {
+        font-family: var(--font-nunito, 'Nunito'), sans-serif;
+        direction: ltr;
+        unicode-bidi: isolate;
+        display: inline-block;
+    }
 }

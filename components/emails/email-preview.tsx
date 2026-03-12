@@ -131,6 +131,7 @@ export default function EmailPreview() {
         customFooterLinks: [],
         recipientEmail: '',
         subject: 'Bienvenue sur tabarro3',
+        notificationLanguage: 'fr',
     });
     const [isSending, setIsSending] = useState(false);
 
@@ -362,7 +363,6 @@ export default function EmailPreview() {
                                 openSections={openSections}
                                 isSending={isSending}
                                 onInputChange={handleInputChange}
-                                onApplyPreset={applyPreset}
                                 onToggleSection={toggleSection}
                                 onAddFooterLink={addFooterLink}
                                 onRemoveFooterLink={removeFooterLink}
@@ -399,6 +399,7 @@ export default function EmailPreview() {
                         </div>
                         <div className="flex-1 overflow-y-auto">
                             <EmailPreviewPanel
+                                key={`preview-panel-${templateType}-${emailData.notificationLanguage ?? 'fr'}`}
                                 templateType={templateType}
                                 emailData={emailData}
                                 digestPreviewHtml={digestPreviewHtml}

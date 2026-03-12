@@ -140,7 +140,7 @@ export const forgotPassword = validatedAction(
             },
         });
 
-        await sendPasswordResetEmail(email, token);
+        await sendPasswordResetEmail(email, token, user.notificationLanguage);
 
         // Log activity
         await logActivity(
@@ -205,7 +205,10 @@ export const resetPassword = validatedAction(
             ipAddress,
         );
 
-        await sendPasswordChangedEmail(resetRequest.user.email);
+        await sendPasswordChangedEmail(
+            resetRequest.user.email,
+            resetRequest.user.notificationLanguage,
+        );
 
         redirect('/sign-in?reset=success');
     },

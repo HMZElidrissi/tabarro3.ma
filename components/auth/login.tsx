@@ -44,6 +44,7 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
         bloodGroup: '',
         region: '',
         cityId: '',
+        notificationLanguage: 'ar',
     });
     const [state, formAction, pending] = useActionState<ActionState, FormData>(
         mode === 'signin'
@@ -66,6 +67,8 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
             bloodGroup: s.bloodGroup ?? prev.bloodGroup,
             region: s.region ?? prev.region,
             cityId: s.cityId ?? prev.cityId,
+            notificationLanguage:
+                s.notificationLanguage ?? prev.notificationLanguage,
         }));
         if (s.region) setSelectedRegion(s.region);
     }, [mode, state]);
@@ -455,6 +458,48 @@ export function Login({ mode = 'signin', dict, isRTL }: LoginProps) {
                                 </SelectContent>
                             </Select>
                         </div>
+
+                        {mode === 'signup' && (
+                            <div>
+                                <Label2 htmlFor="notificationLanguage">
+                                    {dict.forms.labels.notificationLanguage}
+                                </Label2>
+                                <Select
+                                    name="notificationLanguage"
+                                    dir={isRTL ? 'rtl' : 'ltr'}
+                                    value={
+                                        signupFormData.notificationLanguage ||
+                                        'fr'
+                                    }
+                                    onValueChange={value =>
+                                        setSignupFormData(prev => ({
+                                            ...prev,
+                                            notificationLanguage: value ?? 'ar',
+                                        }))
+                                    }
+                                >
+                                    <SelectTrigger>
+                                        <SelectValue
+                                            placeholder={
+                                                dict.forms.placeholders
+                                                    .selectNotificationLanguage
+                                            }
+                                        />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="fr">
+                                            Français
+                                        </SelectItem>
+                                        <SelectItem value="en">
+                                            English
+                                        </SelectItem>
+                                        <SelectItem value="ar">
+                                            العربية
+                                        </SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                        )}
                     </>
                 )}
 

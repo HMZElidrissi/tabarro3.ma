@@ -17,6 +17,8 @@ import { nanoid } from 'nanoid';
 import { sendVerificationEmail } from '@/lib/mail';
 import { REGIONS_AND_CITIES } from '@/config/locations';
 
+const NOTIFICATION_LANGUAGES = ['fr', 'en', 'ar'] as const;
+
 const signUpSchema = z.object({
     email: z.string().email().min(3).max(255),
     password: z.string().min(8).max(100),
@@ -25,10 +27,12 @@ const signUpSchema = z.object({
     phone: z.string().max(20).optional(),
     bloodGroup: z.nativeEnum(BloodGroup).optional(),
     cityId: z.coerce.number().int().positive().optional(),
+    notificationLanguage: z.enum(NOTIFICATION_LANGUAGES).optional(),
 });
 
 function getSafeSignUpPayload(data: z.infer<typeof signUpSchema>) {
-    const { email, name, phone, bloodGroup, cityId } = data;
+    const { email, name, phone, bloodGroup, cityId, notificationLanguage } =
+        data;
     const regionId = cityId
         ? REGIONS_AND_CITIES.find(r => r.cities.some(c => c.id === cityId))?.id
         : undefined;
@@ -39,6 +43,7 @@ function getSafeSignUpPayload(data: z.infer<typeof signUpSchema>) {
         bloodGroup: bloodGroup ?? '',
         cityId: cityId != null ? String(cityId) : '',
         region: regionId != null ? String(regionId) : '',
+        notificationLanguage: notificationLanguage ?? 'ar',
     };
 }
 
@@ -61,6 +66,7 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
         phone,
         bloodGroup,
         cityId,
+        notificationLanguage,
     } = data;
 
     if (password !== confirmPassword) {
@@ -94,6 +100,7 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
             phone: phone ? normalizeMoroccanPhone(phone) : phone,
             bloodGroup,
             cityId,
+            notificationLanguage: notificationLanguage ?? 'ar',
         },
     });
 
@@ -110,7 +117,7 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
             },
         });
 
-        await sendVerificationEmail(email, token);
+        await sendVerificationEmail(email, token, user.notificationLanguage);
     } catch (error) {
         console.error('Error creating email verification:', error);
         return {

@@ -9,11 +9,17 @@ import { queueBloodRequestNotification } from '@/jobs/helpers';
 import { isValidMoroccanPhone, normalizeMoroccanPhone } from '@/lib/utils';
 import { getDictionary } from '@/i18n/get-dictionary';
 
+const NOTIFICATION_LANGUAGES = ['fr', 'en', 'ar'] as const;
+
 const ProfileSchema = z.object({
     name: z.string().min(1, 'Name is required'),
     phone: z.string().min(1, 'Phone number is required'),
     bloodGroup: z.nativeEnum(BloodGroup).nullable(),
     cityId: z.coerce.number().nullable(),
+    notificationLanguage: z
+        .enum(NOTIFICATION_LANGUAGES)
+        .optional()
+        .nullable(),
 });
 
 export const updateProfile = validatedActionWithUser(
@@ -51,6 +57,14 @@ export const updateProfile = validatedActionWithUser(
                 receiveBloodRequestEmails,
                 updatedAt: new Date(),
             };
+            if (
+                data.notificationLanguage &&
+                NOTIFICATION_LANGUAGES.includes(
+                    data.notificationLanguage as (typeof NOTIFICATION_LANGUAGES)[number],
+                )
+            ) {
+                updateData.notificationLanguage = data.notificationLanguage;
+            }
 
             await prisma.user.update({
                 where: { id: user.id },
@@ -80,6 +94,7 @@ export const getProfile = async (userId: string) => {
         email: true,
         phone: true,
         bloodGroup: true,
+        notificationLanguage: true,
         city: {
             select: {
                 id: true,
@@ -93,6 +108,7 @@ export const getProfile = async (userId: string) => {
         updatedAt: true,
         receiveCampaignDigests: true,
         receiveBloodRequestEmails: true,
+        emailVerifiedAt: true,
     };
 
     return prisma.user.findUnique({

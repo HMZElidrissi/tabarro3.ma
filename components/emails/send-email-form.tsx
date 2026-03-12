@@ -1,5 +1,12 @@
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { EmailData } from '@/types/email';
 import CollapsibleCard from './collapsible-card';
@@ -35,6 +42,29 @@ export default function SendEmailForm({
                     Sujet, destinataire, puis envoyer.
                 </p>
                 <div className="space-y-3">
+                    <div className="space-y-2">
+                        <Label className="text-xs font-medium">
+                            Langue de l&apos;email
+                        </Label>
+                        <Select
+                            value={emailData.notificationLanguage ?? 'fr'}
+                            onValueChange={value =>
+                                onInputChange(
+                                    'notificationLanguage',
+                                    value ?? 'fr',
+                                )
+                            }
+                        >
+                            <SelectTrigger className="h-9">
+                                <SelectValue placeholder="Choisir la langue" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="fr">Français</SelectItem>
+                                <SelectItem value="en">English</SelectItem>
+                                <SelectItem value="ar">العربية</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
                     <div className="space-y-2">
                         <Label className="text-xs font-medium">Sujet</Label>
                         <Input

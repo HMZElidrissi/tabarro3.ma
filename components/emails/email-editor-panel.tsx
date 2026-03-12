@@ -1,15 +1,13 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
-import PresetSelector from './preset-selector';
 import LogoOptions from './logo-options';
 import ContentEditor from './content-editor';
 import HighlightBoxEditor from './highlight-box-editor';
 import ButtonEditor from './button-editor';
 import FooterEditor from './footer-editor';
 import SendEmailForm from './send-email-form';
-import { EmailData, PRESET_CONTENT } from '@/types/email';
+import { EmailData } from '@/types/email';
 
 type Section =
-    | 'presets'
     | 'logo'
     | 'content'
     | 'highlight'
@@ -22,7 +20,6 @@ interface EmailEditorPanelProps {
     openSections: Record<Section, boolean>;
     isSending: boolean;
     onInputChange: (field: string, value: any) => void;
-    onApplyPreset: (preset: keyof typeof PRESET_CONTENT) => void;
     onToggleSection: (section: Section) => void;
     onAddFooterLink: () => void;
     onRemoveFooterLink: (index: number) => void;
@@ -39,7 +36,6 @@ export default function EmailEditorPanel({
     openSections,
     isSending,
     onInputChange,
-    onApplyPreset,
     onToggleSection,
     onAddFooterLink,
     onRemoveFooterLink,
@@ -57,11 +53,6 @@ export default function EmailEditorPanel({
                         onInputChange={onInputChange}
                         onSendEmail={onSendEmail}
                         isSending={isSending}
-                    />
-                    <PresetSelector
-                        isOpen={openSections.presets}
-                        onToggle={() => onToggleSection('presets')}
-                        onApplyPreset={onApplyPreset}
                     />
                     <ContentEditor
                         isOpen={openSections.content}

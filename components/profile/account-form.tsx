@@ -142,6 +142,28 @@ export function AccountForm({ user, dict, isRTL }: AccountFormProps) {
                 </div>
 
                 <div className="space-y-2">
+                    <Label htmlFor="notificationLanguage">
+                        {dict.forms.labels.notificationLanguage}
+                    </Label>
+                    <Select
+                        name="notificationLanguage"
+                        defaultValue={
+                            user.notificationLanguage || 'ar'
+                        }
+                        dir={isRTL ? 'rtl' : 'ltr'}
+                    >
+                        <SelectTrigger>
+                            <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="fr">Français</SelectItem>
+                            <SelectItem value="en">English</SelectItem>
+                            <SelectItem value="ar">العربية</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+
+                <div className="space-y-2">
                     <Label htmlFor="region">{dict.forms.labels.region}</Label>
                     <Select
                         value={selectedRegion}

@@ -5,6 +5,8 @@ import { EmailVerificationEmail } from '@/emails/email-verification';
 import nodemailer from 'nodemailer';
 import { render } from '@react-email/components';
 import { Resend } from 'resend';
+import { getResolvedLocale } from '@/i18n/i18n-config';
+import { getDictionaryForLocale } from '@/i18n/get-dictionary';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -59,86 +61,104 @@ export async function sendEmail(
 
 // ─── Public email functions ───────────────────────────────────────────────────
 
-export async function sendPasswordResetEmail(email: string, token: string) {
+export async function sendPasswordResetEmail(
+    email: string,
+    token: string,
+    locale?: string | null,
+) {
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.passwordReset;
     const resetLink = `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password/${token}`;
 
-    const emailHtml = await render(PasswordResetEmail({ resetLink }), {
-        pretty: true,
-    });
-    const emailText = await render(PasswordResetEmail({ resetLink }), {
-        plainText: true,
-    });
+    const emailHtml = await render(
+        PasswordResetEmail({ resetLink, locale: loc, t }),
+        { pretty: true },
+    );
+    const emailText = await render(
+        PasswordResetEmail({ resetLink, locale: loc, t }),
+        { plainText: true },
+    );
 
     try {
-        await sendEmail(
-            email,
-            'Réinitialisation de votre mot de passe',
-            emailHtml,
-            emailText,
-        );
+        await sendEmail(email, t.subject, emailHtml, emailText);
         console.log('Password reset email sent successfully.');
     } catch (error) {
         console.error('Error sending password reset email:', error);
     }
 }
 
-export async function sendPasswordChangedEmail(email: string) {
-    const emailHtml = await render(PasswordChangedEmail(), { pretty: true });
-    const emailText = await render(PasswordChangedEmail(), { plainText: true });
+export async function sendPasswordChangedEmail(
+    email: string,
+    locale?: string | null,
+) {
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.passwordChanged;
+
+    const emailHtml = await render(PasswordChangedEmail({ locale: loc, t }), {
+        pretty: true,
+    });
+    const emailText = await render(PasswordChangedEmail({ locale: loc, t }), {
+        plainText: true,
+    });
 
     try {
-        await sendEmail(
-            email,
-            'Votre mot de passe a été changé',
-            emailHtml,
-            emailText,
-        );
+        await sendEmail(email, t.subject, emailHtml, emailText);
         console.log('Password changed email sent successfully.');
     } catch (error) {
         console.error('Error sending password changed email:', error);
     }
 }
 
-export async function sendInvitationEmail(email: string, token: string) {
+export async function sendInvitationEmail(
+    email: string,
+    token: string,
+    locale?: string | null,
+) {
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.invitation;
+    const inviteLink = `${process.env.NEXT_PUBLIC_BASE_URL}/accept-invitation?token=${token}&email=${encodeURIComponent(email)}`;
+
     try {
-        const inviteLink = `${process.env.NEXT_PUBLIC_BASE_URL}/accept-invitation?token=${token}&email=${encodeURIComponent(email)}`;
-
-        const emailHtml = await render(InvitationEmail({ inviteLink }), {
-            pretty: true,
-        });
-        const emailText = await render(InvitationEmail({ inviteLink }), {
-            plainText: true,
-        });
-
-        await sendEmail(
-            email,
-            'Invitation à rejoindre tabarro3.ma',
-            emailHtml,
-            emailText,
+        const emailHtml = await render(
+            InvitationEmail({ inviteLink, locale: loc, t }),
+            { pretty: true },
         );
+        const emailText = await render(
+            InvitationEmail({ inviteLink, locale: loc, t }),
+            { plainText: true },
+        );
+
+        await sendEmail(email, t.subject, emailHtml, emailText);
     } catch (error) {
         console.error('Error sending invitation email:', error);
         throw error;
     }
 }
 
-export async function sendVerificationEmail(email: string, token: string) {
+export async function sendVerificationEmail(
+    email: string,
+    token: string,
+    locale?: string | null,
+) {
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.verification;
+    const verifyLink = `${process.env.NEXT_PUBLIC_BASE_URL}/verify-email/${token}`;
+
     try {
-        const verifyLink = `${process.env.NEXT_PUBLIC_BASE_URL}/verify-email/${token}`;
-
-        const emailHtml = await render(EmailVerificationEmail({ verifyLink }), {
-            pretty: true,
-        });
-        const emailText = await render(EmailVerificationEmail({ verifyLink }), {
-            plainText: true,
-        });
-
-        await sendEmail(
-            email,
-            'Confirmez votre adresse e-mail',
-            emailHtml,
-            emailText,
+        const emailHtml = await render(
+            EmailVerificationEmail({ verifyLink, locale: loc, t }),
+            { pretty: true },
         );
+        const emailText = await render(
+            EmailVerificationEmail({ verifyLink, locale: loc, t }),
+            { plainText: true },
+        );
+
+        await sendEmail(email, t.subject, emailHtml, emailText);
     } catch (error) {
         console.error('Error sending verification email:', error);
         throw error;

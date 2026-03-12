@@ -10,6 +10,12 @@ import {
 import { BloodGroup } from '@/types/enums';
 import { sendEmail } from '@/lib/mail';
 import { createUnsubscribeToken, getUnsubscribeUrl } from '@/lib/unsubscribe';
+import { getResolvedLocale } from '@/i18n/i18n-config';
+import { getDictionaryForLocale } from '@/i18n/get-dictionary';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
+import { enUS } from 'date-fns/locale';
+import { ar } from 'date-fns/locale';
 
 const jobHandlers = {
     [JobType.BLOOD_REQUEST_NOTIFICATION]: async (payload: any) => {
@@ -47,7 +53,8 @@ const jobHandlers = {
             select: {
                 email: true,
                 name: true,
-                bloodGroup: true, // Include blood group for logging/debugging
+                bloodGroup: true,
+                notificationLanguage: true,
             },
         });
 
@@ -55,8 +62,16 @@ const jobHandlers = {
             `Found ${recipients.length} compatible donors in region ${request.city.regionId} for blood request ${request.id}`,
         );
 
-        // Send individual emails to each recipient
+        const bloodGroupLabel = getBloodGroupLabel(
+            request.bloodGroup as BloodGroup,
+            null,
+            'request',
+        );
+
         for (const recipient of recipients) {
+            const locale = getResolvedLocale(recipient.notificationLanguage);
+            const dict = await getDictionaryForLocale(locale);
+            const t = dict.emails.bloodRequest;
             const token = await createUnsubscribeToken(
                 recipient.email,
                 'BLOOD_REQUEST',
@@ -64,27 +79,22 @@ const jobHandlers = {
             const unsubscribeUrl = getUnsubscribeUrl(token);
 
             const template = UrgentBloodRequestEmail({
-                bloodGroup: getBloodGroupLabel(
-                    request.bloodGroup as BloodGroup,
-                ),
+                bloodGroup: bloodGroupLabel,
                 location: request.location,
                 city: request.city.name,
                 phone: request.phone || undefined,
                 description: request.description,
                 unsubscribeUrl,
+                locale,
+                t,
             });
 
             const emailHtml = await render(template, { pretty: true });
             const emailText = await render(template, { plainText: true });
 
-            await sendEmail(
-                recipient.email,
-                `Besoin urgent de sang ${getBloodGroupLabel(request.bloodGroup as BloodGroup, null, 'request')} à ${request.city.name} - Votre sang est compatible`,
-                emailHtml,
-                emailText,
-            );
+            const subject = `${t.subjectPrefix} ${bloodGroupLabel} - ${request.city.name}`;
+            await sendEmail(recipient.email, subject, emailHtml, emailText);
 
-            // Small delay between emails to prevent overwhelming the SMTP server
             await new Promise(resolve => setTimeout(resolve, 200));
         }
     },
@@ -97,15 +107,22 @@ const jobHandlers = {
             return;
         }
 
-        const today = new Date().toLocaleDateString('fr-FR', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        });
+        const dateStr = new Date().toISOString().split('T')[0];
+        const dateLocales = { fr, en: enUS, ar } as const;
 
-        // Send individual digest emails to each recipient
         for (const recipient of recipients) {
+            const locale = getResolvedLocale(recipient.notificationLanguage);
+            const dict = await getDictionaryForLocale(locale);
+            const t = dict.emails.campaignDigest;
+            const dateLocale = dateLocales[locale] ?? fr;
+            const formattedDate = format(
+                new Date(dateStr + 'T12:00:00'),
+                'dd MMMM yyyy',
+                {
+                    locale: dateLocale,
+                },
+            );
+
             const token = await createUnsubscribeToken(
                 recipient.email,
                 'CAMPAIGN_DIGEST',
@@ -115,21 +132,18 @@ const jobHandlers = {
             const template = CampaignDigestEmail({
                 regionName,
                 campaigns,
-                date: today,
+                date: dateStr,
                 unsubscribeUrl,
+                locale,
+                t,
             });
 
             const emailHtml = await render(template, { pretty: true });
             const emailText = await render(template, { plainText: true });
 
-            await sendEmail(
-                recipient.email,
-                `📅 Résumé des campagnes de don de sang - ${regionName} - ${today}`,
-                emailHtml,
-                emailText,
-            );
+            const subject = `📅 ${t.subjectPrefix} - ${regionName} - ${formattedDate}`;
+            await sendEmail(recipient.email, subject, emailHtml, emailText);
 
-            // Small delay between emails
             await new Promise(resolve => setTimeout(resolve, 200));
         }
 

@@ -230,7 +230,15 @@
             "successMessage": "Votre adresse email a été vérifiée avec succès. Vous pouvez maintenant vous connecter à votre compte.",
             "invalidTitle": "Lien invalide ou expiré",
             "invalidMessage": "Ce lien de vérification est invalide ou a expiré. Veuillez demander un nouvel email de vérification en vous inscrivant de nouveau ou en contactant le support.",
-            "goToSignIn": "Aller à la page de connexion"
+            "goToSignIn": "Aller à la page de connexion",
+            "pendingTitle": "Vérifiez votre email",
+            "pendingDescription": "Nous avons envoyé un lien de confirmation à votre adresse email. Vous devez la vérifier avant de vous connecter.",
+            "resendLink": "Renvoyer le lien de confirmation",
+            "resending": "Envoi en cours...",
+            "resendCooldown": "Veuillez patienter {seconds}s",
+            "resendSuccess": "Lien de confirmation envoyé ! Veuillez vérifier votre boîte de réception.",
+            "resendFailed": "Échec de l'envoi du lien de confirmation. Veuillez réessayer plus tard.",
+            "alreadyVerified": "Cet email est déjà vérifié. Vous pouvez vous connecter."
         },
         "updatePassword": {
             "currentPasswordIncorrect": "Le mot de passe actuel est incorrect.",
@@ -264,6 +272,7 @@
             "bloodGroup": "Groupe sanguin",
             "region": "Région",
             "city": "Ville",
+            "notificationLanguage": "Langue des notifications",
             "location": "Détails de l'emplacement",
             "description": "Description",
             "status": "Statut"
@@ -276,6 +285,7 @@
             "selectBloodGroup": "Sélectionnez votre groupe sanguin",
             "selectRegion": "Sélectionnez votre région",
             "selectCity": "Sélectionnez votre ville",
+            "selectNotificationLanguage": "Choisir la langue des e-mails",
             "enterLocation": "Entrez l'emplacement spécifique",
             "enterDescription": "Entrez les détails ou exigences supplémentaires",
             "selectStatus": "Sélectionnez le statut"
@@ -305,16 +315,62 @@
         "notificationPreferences": "Préférences de notification par email",
         "receiveCampaignDigests": "Recevoir le récapitulatif quotidien des campagnes dans ma région",
         "receiveBloodRequestEmails": "Recevoir les emails pour les demandes urgentes de sang compatibles",
+        "memberSince": "Membre de tabarro3",
+        "quickStats": "Vos demandes de sang en un coup d'œil",
         "tabs": {
             "bloodRequests": "Demandes de sang",
             "accountInfo": "Informations du compte"
         },
         "updateSuccess": "Profil mis à jour avec succès.",
         "updateError": "Échec de la mise à jour du profil.",
-        "userNotFound": "Utilisateur introuvable."
+        "userNotFound": "Utilisateur introuvable.",
+        "readyToSaveLives": "Votre profil est complet",
+        "missingFields": "Encore manquant :",
+        "missing": {
+            "name": "Nom complet",
+            "phone": "Numéro de téléphone",
+            "bloodGroup": "Groupe sanguin",
+            "city": "Ville",
+            "emailVerified": "Email non vérifié"
+        },
+        "completeProfile": "Complétez votre profil pour devenir un donneur prêt",
+        "noBloodGroup": "Groupe sanguin non défini",
+        "profileComplete": "Profil complété",
+        "helpNow": "Aider maintenant",
+        "noActiveRequests": "Aucune demande active",
+        "achievementBadges": "Badges de réussite",
+        "badgesEarned": "obtenus",
+        "impactQuote": "\"Chaque goutte compte. Chaque don est précieux.\"",
+        "badges": {
+            "firstRequest": "Premier Intervenant",
+            "firstRequestDesc": "Créé votre première demande de sang",
+            "hero": "Héros Communautaire",
+            "heroDesc": "3+ demandes de sang accomplies",
+            "lifeSaver": "Sauveur de Vie",
+            "lifeSaverDesc": "Sauvé votre première vie",
+            "rareDonor": "Donneur Rare",
+            "rareDonorDesc": "Votre groupe sanguin est rare et précieux",
+            "profileComplete": "Prêt à Donner",
+            "profileCompleteDesc": "Toutes les informations du profil remplies",
+            "community": "Bénévole de Campagne",
+            "communityDesc": "Participé à une campagne"
+        },
+        "deleteAccount": {
+            "dangerZone": "Zone de danger",
+            "trigger": "Supprimer le compte",
+            "title": "Supprimer votre compte",
+            "description": "Cette action est permanente et ne peut pas être annulée. Toutes vos données, demandes de sang et informations de profil seront définitivement supprimées.",
+            "confirmLabel": "Tapez pour confirmer",
+            "confirmHint": "Tapez \"supprimer\" pour confirmer",
+            "confirmPlaceholder": "supprimer",
+            "confirm": "Oui, supprimer mon compte",
+            "deleting": "Suppression...",
+            "cancel": "Annuler"
+        }
     },
     "bloodRequests": {
         "myRequests": "Mes demandes de sang",
+        "requestDetails": "Détails de la demande",
         "newRequest": "Nouvelle demande",
         "createRequestDescription": "Créer une nouvelle demande de sang avec vos exigences",
         "noRequests": "Aucune demande de sang trouvée. Cliquez sur \"Nouvelle demande\" pour en créer une.",
@@ -326,6 +382,10 @@
         "deleteDialog": {
             "title": "Êtes-vous sûr ?",
             "description": "Cela supprimera définitivement cette demande de sang. Cette action ne peut pas être annulée."
+        },
+        "fulfillDialog": {
+            "title": "Marquer comme accomplie ?",
+            "description": "Cette demande n'apparaîtra plus comme active. Vous pourrez toujours la modifier ou la supprimer plus tard."
         },
         "creating": "Création en cours...",
         "updating": "Mise à jour en cours...",
@@ -562,5 +622,95 @@
         "successTitle": "Inscription réussie !",
         "successMessage": "Vous vous êtes inscrit avec succès à cette campagne. Vous allez être redirigé dans un instant.",
         "signUpAlert": "En soumettant ce formulaire, vous acceptez d'être inscrit sur la plateforme avec l'adresse e-mail que vous fournissez."
+    },
+    "emails": {
+        "verification": {
+            "subject": "Confirmez votre adresse e-mail",
+            "preview": "Confirmez votre adresse e-mail",
+            "title": "Confirmez votre adresse e-mail",
+            "bodyThanks": "Merci de rejoindre tabarro3, la plateforme dédiée à la sensibilisation et à la promotion du don de sang au Maroc.",
+            "bodyConfirm": "Pour finaliser la création de votre compte et accéder à toutes les fonctionnalités, veuillez confirmer votre adresse e-mail en cliquant sur le bouton ci-dessous.",
+            "cta": "Confirmer mon e-mail",
+            "securityNote": "Pour des raisons de sécurité, ce lien expirera dans 24 heures. Si vous n'êtes pas à l'origine de cette inscription, vous pouvez ignorer cet e-mail."
+        },
+        "passwordReset": {
+            "subject": "Réinitialisation de votre mot de passe",
+            "preview": "Réinitialisez votre mot de passe tabarro3 — ce lien expire dans 60 minutes",
+            "title": "Réinitialisation du mot de passe",
+            "greeting": "Bonjour,",
+            "body": "Nous avons reçu une demande de réinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour en choisir un nouveau :",
+            "cta": "Réinitialiser le mot de passe",
+            "expiryNote": "Pour des raisons de sécurité, cette demande expirera dans 60 minutes. Après ce délai, vous devrez soumettre une nouvelle demande.",
+            "ignoreNote": "Si vous n'avez pas demandé ce changement, vous pouvez ignorer cet email en toute sécurité.",
+            "linkHint": "Si le bouton ne fonctionne pas, copiez et collez ce lien dans votre navigateur :",
+            "footer": "© {year} tabarro3. Tous droits réservés."
+        },
+        "passwordChanged": {
+            "subject": "Votre mot de passe a été changé",
+            "preview": "Votre mot de passe a été modifié — ce n'était pas vous ? Contactez-nous immédiatement",
+            "title": "Mot de passe modifié avec succès",
+            "greeting": "Bonjour,",
+            "body": "Cet email confirme que votre mot de passe a été modifié avec succès.",
+            "contactNote": "Si vous n'êtes pas à l'origine de ce changement, veuillez contacter notre équipe support immédiatement :",
+            "cta": "Contacter le support",
+            "footer": "© {year} tabarro3. Tous droits réservés."
+        },
+        "invitation": {
+            "subject": "Invitation à rejoindre tabarro3.ma",
+            "preview": "Vous avez été invité à rejoindre tabarro3 — acceptez votre invitation",
+            "title": "Invitation à rejoindre tabarro3",
+            "greeting": "Cher partenaire potentiel,",
+            "body": "Nous sommes ravis de vous inviter à rejoindre tabarro3, une plateforme innovante dédiée à la sensibilisation et à la promotion du don de sang au Maroc. En tant qu'organisation engagée dans ce domaine, votre participation serait précieuse pour notre mission commune.",
+            "bullet1": "Organiser et gérer des campagnes de don de sang de manière efficace",
+            "bullet2": "Connecter directement avec une communauté active de donneurs potentiels",
+            "bullet3": "Rejoindre un réseau national d'organisations engagées dans le don de sang",
+            "cta": "Accepter l'invitation",
+            "expiryNote": "Pour des raisons de sécurité, cette invitation expirera dans 7 jours. Après ce délai, vous devrez demander une nouvelle invitation.",
+            "linkHint": "Si le bouton ne fonctionne pas, copiez et collez ce lien dans votre navigateur :",
+            "footer": "© {year} tabarro3. Tous droits réservés."
+        },
+        "campaignDigest": {
+            "subjectPrefix": "Résumé des campagnes de don de sang",
+            "title": "Résumé des campagnes du jour",
+            "dateLabel": "{date} - {regionName}",
+            "intro": "Voici les nouvelles campagnes de don de sang organisées aujourd'hui dans votre région :",
+            "organizedBy": "Organisé par :",
+            "date": "Date :",
+            "time": "Horaire :",
+            "location": "Lieu :",
+            "city": "Ville :",
+            "participate": "Je participe",
+            "tipsTitle": "Conseils pour votre don",
+            "tip1": "Bien manger et vous hydrater avant le don",
+            "tip2": "Apporter une pièce d'identité",
+            "tip3": "Prévoir environ 45 minutes pour l'ensemble du processus",
+            "tip4": "Éviter les activités physiques intenses après le don",
+            "viewAll": "Voir toutes les campagnes",
+            "footerReason": "Vous recevez ce résumé quotidien car vous êtes inscrit dans la région {regionName}.",
+            "unsubscribe": "Se désabonner",
+            "unsubscribePrompt": "Vous ne souhaitez plus recevoir le récapitulatif des campagnes dans votre région ?",
+            "autoSent": "Cet email est envoyé automatiquement. Veuillez ne pas y répondre directement.",
+            "footer": "© {year} tabarro3. Tous droits réservés."
+        },
+        "bloodRequest": {
+            "subjectPrefix": "Besoin urgent de sang",
+            "title": "BESOIN URGENT DE SANG",
+            "intro": "Un donneur de sang du groupe {bloodGroup} est urgemment recherché. Votre sang est compatible et peut sauver une vie !",
+            "detailsTitle": "Détails de la demande :",
+            "bloodGroup": "Groupe sanguin :",
+            "location": "Lieu :",
+            "city": "Ville :",
+            "contact": "Contact :",
+            "description": "Description :",
+            "cta": "Voir les détails",
+            "shareNote": "Si vous ne pouvez pas donner, merci de partager cette demande avec votre entourage. Chaque partage peut aider à sauver une vie.",
+            "unsubscribe": "Se désabonner",
+            "unsubscribePrompt": "Vous ne souhaitez plus recevoir de notifications pour les demandes urgentes de sang ?",
+            "autoSent": "Cet email est envoyé automatiquement. Veuillez ne pas y répondre directement.",
+            "footer": "© {year} tabarro3. Tous droits réservés."
+        },
+        "common": {
+            "copyright": "© {year} tabarro3. Tous droits réservés."
+        }
     }
 }

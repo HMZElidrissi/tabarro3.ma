@@ -47,6 +47,7 @@ export function ParticipantsTable({
                         <TableHead>Name</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Blood Group</TableHead>
+                        <TableHead>Notification language</TableHead>
                         <TableHead>Phone</TableHead>
                         <TableHead>City</TableHead>
                         <TableHead>Joined Date</TableHead>
@@ -74,9 +75,24 @@ export function ParticipantsTable({
                                 </div>
                             </TableCell>
                             <TableCell>
-                                <Badge variant="secondary">
-                                    {getBloodGroupLabel(participant.bloodGroup)}
+                                <Badge variant="secondary" dir="ltr">
+                                    <span className="latin">
+                                        {getBloodGroupLabel(
+                                            participant.bloodGroup,
+                                        )}
+                                    </span>
                                 </Badge>
+                            </TableCell>
+                            <TableCell>
+                                {participant.notificationLanguage === 'ar'
+                                    ? 'العربية'
+                                    : participant.notificationLanguage === 'en'
+                                      ? 'English'
+                                      : participant.notificationLanguage ===
+                                          'fr'
+                                        ? 'Français'
+                                        : participant.notificationLanguage ||
+                                          '—'}
                             </TableCell>
                             <TableCell>{participant.phone || '—'}</TableCell>
                             <TableCell>

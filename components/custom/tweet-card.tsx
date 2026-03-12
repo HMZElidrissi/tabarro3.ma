@@ -1,5 +1,19 @@
 import { Suspense } from 'react';
 import { enrichTweet, type EnrichedTweet, type TweetProps } from 'react-tweet';
+
+/** Extended type to account for the `card` field that the Twitter/X API returns
+ *  at runtime but is not yet reflected in react-tweet's EnrichedTweet typings. */
+type EnrichedTweetWithCard = EnrichedTweet & {
+    card?: {
+        binding_values?: {
+            thumbnail_image_large?: {
+                image_value?: {
+                    url?: string;
+                };
+            };
+        };
+    };
+};
 import { getTweet, type Tweet } from 'react-tweet/api';
 
 import { cn } from '@/lib/utils';
@@ -180,7 +194,12 @@ export const TweetBody = ({ tweet }: { tweet: EnrichedTweet }) => (
 );
 
 export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
-    if (!tweet.video && !tweet.photos) return null;
+    const tweetWithCard = tweet as EnrichedTweetWithCard;
+    const cardImageUrl =
+        tweetWithCard.card?.binding_values?.thumbnail_image_large?.image_value
+            ?.url;
+
+    if (!tweet.video && !tweet.photos && !cardImageUrl) return null;
     return (
         <div className="flex flex-1 items-center justify-center">
             {tweet.video && (
@@ -216,21 +235,13 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
                     <div className="shrink-0 snap-center sm:w-2" />
                 </div>
             )}
-            {!tweet.video &&
-                !tweet.photos &&
-                // @ts-expect-error package doesn't have type definitions
-                tweet?.card?.binding_values?.thumbnail_image_large?.image_value
-                    ?.url && (
-                    <img
-                        // @ts-expect-error package doesn't have type definitions
-                        src={
-                            tweet.card.binding_values.thumbnail_image_large
-                                .image_value.url
-                        }
-                        className="h-64 rounded-xl border object-cover shadow-sm"
-                        alt={tweet.text}
-                    />
-                )}
+            {!tweet.video && !tweet.photos && cardImageUrl && (
+                <img
+                    src={cardImageUrl}
+                    className="h-64 rounded-xl border object-cover shadow-sm"
+                    alt={tweet.text}
+                />
+            )}
         </div>
     );
 };

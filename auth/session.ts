@@ -76,6 +76,7 @@ export async function getUser(): Promise<User | null> {
                 name: true,
                 createdAt: true,
                 updatedAt: true,
+                notificationLanguage: true,
             },
         });
 

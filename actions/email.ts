@@ -8,6 +8,12 @@ import { UrgentBloodRequestEmail } from '@/emails/urgent-blood-request';
 import { sendEmail } from '@/lib/mail';
 import { prisma } from '@/lib/prisma';
 import { createUnsubscribeToken, getUnsubscribeUrl } from '@/lib/unsubscribe';
+import { getResolvedLocale } from '@/i18n/i18n-config';
+import { getDictionaryForLocale } from '@/i18n/get-dictionary';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
+import { enUS } from 'date-fns/locale';
+import { ar } from 'date-fns/locale';
 import { REGIONS_AND_CITIES } from '@/config/locations';
 import { getBloodGroupLabel } from '@/config/blood-group';
 import { BloodGroup } from '@/types/enums';
@@ -44,6 +50,7 @@ interface EmailData {
     customFooterLinks: Array<{ text: string; url: string }>;
     recipientEmail: string;
     subject: string;
+    notificationLanguage?: string;
 }
 
 export async function sendCustomEmail(emailData: EmailData) {
@@ -64,6 +71,13 @@ export async function sendCustomEmail(emailData: EmailData) {
                 error: 'Email du destinataire et sujet sont requis.',
             };
         }
+
+        const locale = emailData.notificationLanguage ?? 'fr';
+        const dict = await getDictionaryForLocale(locale);
+        const copyrightText = dict.emails.common.copyright.replace(
+            '{year}',
+            String(new Date().getFullYear()),
+        );
 
         // Render the email template
         const template = CustomEmail({
@@ -98,6 +112,8 @@ export async function sendCustomEmail(emailData: EmailData) {
             footerText: emailData.footerText,
             showCopyright: emailData.showCopyright,
             customFooterLinks: emailData.customFooterLinks,
+            locale,
+            copyrightText,
         });
 
         const emailHtml = await render(template, { pretty: true });
@@ -222,6 +238,7 @@ export async function getDigestTestData(
 export async function getDigestPreviewHtml(
     regionId: number,
     useRealData: boolean,
+    locale?: string | null,
 ) {
     const user = await getUser();
     if (!user || (user.role !== 'ADMIN' && user.role !== 'ORGANIZATION')) {
@@ -232,6 +249,10 @@ export async function getDigestPreviewHtml(
     if (data.error && !data.regionName) {
         return { error: data.error, html: null };
     }
+
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.campaignDigest;
 
     const { regionName, campaigns, date } = data;
     const normalizedCampaigns = (campaigns ?? []).map(c => ({
@@ -247,6 +268,8 @@ export async function getDigestPreviewHtml(
         campaigns: normalizedCampaigns,
         date: date ?? new Date().toISOString().split('T')[0],
         unsubscribeUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma'}/unsubscribe?token=preview`,
+        locale: loc,
+        t,
     });
 
     const html = await render(template, { pretty: true });
@@ -257,6 +280,7 @@ export async function sendTestDigestEmail(
     recipientEmail: string,
     regionId: number,
     useRealData: boolean,
+    locale?: string | null,
 ) {
     try {
         const user = await getUser();
@@ -294,14 +318,19 @@ export async function sendTestDigestEmail(
             },
         }));
 
-        const dateForSubject = new Date(
-            (date ?? '') + 'T12:00:00',
-        ).toLocaleDateString('fr-FR', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        });
+        const loc = getResolvedLocale(locale);
+        const dict = await getDictionaryForLocale(loc);
+        const t = dict.emails.campaignDigest;
+        const dateLocales = { fr, en: enUS, ar } as const;
+        const dateLocale = dateLocales[loc] ?? fr;
+        const dateStr = date ?? new Date().toISOString().split('T')[0];
+        const formattedDate = format(
+            new Date(dateStr + 'T12:00:00'),
+            'dd MMMM yyyy',
+            {
+                locale: dateLocale,
+            },
+        );
 
         const token = await createUnsubscribeToken(
             recipientEmail.trim(),
@@ -312,19 +341,17 @@ export async function sendTestDigestEmail(
         const template = CampaignDigestEmail({
             regionName: regionName ?? 'Région',
             campaigns: normalizedCampaigns,
-            date: date ?? new Date().toISOString().split('T')[0],
+            date: dateStr,
             unsubscribeUrl,
+            locale: loc,
+            t,
         });
 
         const emailHtml = await render(template, { pretty: true });
         const emailText = await render(template, { plainText: true });
 
-        await sendEmail(
-            recipientEmail.trim(),
-            `📅 Résumé des campagnes de don de sang - ${regionName} - ${dateForSubject}`,
-            emailHtml,
-            emailText,
-        );
+        const subject = `📅 ${t.subjectPrefix} - ${regionName} - ${formattedDate}`;
+        await sendEmail(recipientEmail.trim(), subject, emailHtml, emailText);
 
         return {
             success: true,
@@ -387,11 +414,18 @@ export async function getBloodRequestsForTest(): Promise<{
     };
 }
 
-export async function getBloodRequestPreviewHtml(requestId: number | null) {
+export async function getBloodRequestPreviewHtml(
+    requestId: number | null,
+    locale?: string | null,
+) {
     const user = await getUser();
     if (!user || (user.role !== 'ADMIN' && user.role !== 'ORGANIZATION')) {
         return { error: 'Non autorisé', html: null };
     }
+
+    const loc = getResolvedLocale(locale);
+    const dict = await getDictionaryForLocale(loc);
+    const t = dict.emails.bloodRequest;
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tabarro3.ma';
     const unsubscribeUrl = `${baseUrl}/unsubscribe?token=preview`;
@@ -400,6 +434,8 @@ export async function getBloodRequestPreviewHtml(requestId: number | null) {
         const template = UrgentBloodRequestEmail({
             ...SAMPLE_BLOOD_REQUEST,
             unsubscribeUrl,
+            locale: loc,
+            t,
         });
         const html = await render(template, { pretty: true });
         return { html };
@@ -422,6 +458,8 @@ export async function getBloodRequestPreviewHtml(requestId: number | null) {
         phone: request.phone ?? undefined,
         description: request.description,
         unsubscribeUrl,
+        locale: loc,
+        t,
     });
     const html = await render(template, { pretty: true });
     return { html };
@@ -430,6 +468,7 @@ export async function getBloodRequestPreviewHtml(requestId: number | null) {
 export async function sendTestBloodRequestEmail(
     recipientEmail: string,
     requestId: number | null,
+    locale?: string | null,
 ) {
     try {
         const user = await getUser();
@@ -472,6 +511,10 @@ export async function sendTestBloodRequestEmail(
                 SAMPLE_BLOOD_REQUEST);
         }
 
+        const loc = getResolvedLocale(locale);
+        const dict = await getDictionaryForLocale(loc);
+        const t = dict.emails.bloodRequest;
+
         const token = await createUnsubscribeToken(
             recipientEmail.trim(),
             'BLOOD_REQUEST',
@@ -485,16 +528,14 @@ export async function sendTestBloodRequestEmail(
             phone,
             description,
             unsubscribeUrl,
+            locale: loc,
+            t,
         });
         const emailHtml = await render(template, { pretty: true });
         const emailText = await render(template, { plainText: true });
 
-        await sendEmail(
-            recipientEmail.trim(),
-            `Besoin urgent de sang ${bloodGroup} à ${city} - Votre sang est compatible`,
-            emailHtml,
-            emailText,
-        );
+        const subject = `${t.subjectPrefix} ${bloodGroup} - ${city}`;
+        await sendEmail(recipientEmail.trim(), subject, emailHtml, emailText);
 
         return {
             success: true,

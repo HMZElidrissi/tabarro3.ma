@@ -19,6 +19,7 @@ export interface User {
     deletedAt: Date | null;
     receiveCampaignDigests: boolean;
     receiveBloodRequestEmails: boolean;
+    notificationLanguage: string;
     invitationsSent?: Invitation[];
     campaigns?: Campaign[];
     participatedCampaigns?: CampaignParticipant[];

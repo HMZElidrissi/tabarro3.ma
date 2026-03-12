@@ -61,7 +61,9 @@ export function RecentParticipants({ participants }: RecentParticipantsProps) {
                                 className={`flex items-center font-medium ${bloodGroupColors[participant.bloodGroup]}`}
                             >
                                 <Droplets className="h-4 w-4 mr-1" />
-                                {getBloodGroupLabel(participant.bloodGroup)}
+                                <span className="latin">
+                                    {getBloodGroupLabel(participant.bloodGroup)}
+                                </span>
                             </div>
                         )}
                     </div>

@@ -2,7 +2,6 @@
 
 import { EmailData } from '@/types/email';
 import { generatePreviewHTML } from '@/lib/email-composer';
-import { useTheme } from 'next-themes';
 import type { DigestTestTemplate } from '@/actions/email';
 
 interface EmailPreviewPanelProps {
@@ -18,12 +17,10 @@ export default function EmailPreviewPanel({
     digestPreviewHtml = null,
     bloodRequestPreviewHtml = null,
 }: EmailPreviewPanelProps) {
-    const { theme } = useTheme();
-    const isDark = theme === 'dark';
-
+    // Preview always uses light theme so the email looks the same as in a typical inbox
     const previewContent =
         templateType === 'digest' && digestPreviewHtml ? (
-            <div className="bg-gray-50 dark:bg-black p-3 min-h-96 overflow-auto">
+            <div className="bg-gray-50 dark:bg-black p-3 min-h-[calc(100vh-6rem)] overflow-auto">
                 <div className="mx-auto bg-white dark:bg-background rounded-lg shadow-sm max-w-full">
                     <div className="border-b border-gray-200 dark:border-gray-800 p-2 bg-gray-50 dark:bg-black rounded-t-lg">
                         <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -33,20 +30,20 @@ export default function EmailPreviewPanel({
                     <iframe
                         title="Digest preview"
                         srcDoc={digestPreviewHtml}
-                        className="w-full min-h-96 border-0 rounded-b-lg"
+                        className="w-full min-h-[calc(100vh-10rem)] border-0 rounded-b-lg"
                         sandbox="allow-same-origin"
                     />
                 </div>
             </div>
         ) : templateType === 'digest' ? (
-            <div className="bg-gray-50 dark:bg-black p-6 min-h-96 flex items-center justify-center">
+            <div className="bg-gray-50 dark:bg-black p-6 min-h-[calc(100vh-6rem)] flex items-center justify-center">
                 <p className="text-sm text-muted-foreground text-center max-w-xs">
                     Sélectionnez une région à gauche pour afficher
                     l&apos;aperçu.
                 </p>
             </div>
         ) : templateType === 'blood_request' && bloodRequestPreviewHtml ? (
-            <div className="bg-gray-50 dark:bg-black p-3 min-h-96 overflow-auto">
+            <div className="bg-gray-50 dark:bg-black p-3 min-h-[calc(100vh-6rem)] overflow-auto">
                 <div className="mx-auto bg-white dark:bg-background rounded-lg shadow-sm max-w-full">
                     <div className="border-b border-gray-200 dark:border-gray-800 p-2 bg-gray-50 dark:bg-black rounded-t-lg">
                         <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -56,20 +53,20 @@ export default function EmailPreviewPanel({
                     <iframe
                         title="Blood request preview"
                         srcDoc={bloodRequestPreviewHtml}
-                        className="w-full min-h-96 border-0 rounded-b-lg"
+                        className="w-full min-h-[calc(100vh-10rem)] border-0 rounded-b-lg"
                         sandbox="allow-same-origin"
                     />
                 </div>
             </div>
         ) : templateType === 'blood_request' ? (
-            <div className="bg-gray-50 dark:bg-black p-6 min-h-96 flex items-center justify-center">
+            <div className="bg-gray-50 dark:bg-black p-6 min-h-[calc(100vh-6rem)] flex items-center justify-center">
                 <p className="text-sm text-muted-foreground text-center max-w-xs">
                     Choisissez une demande ou l&apos;exemple à gauche pour
                     afficher l&apos;aperçu.
                 </p>
             </div>
         ) : (
-            <div className="bg-gray-50 dark:bg-black p-3 min-h-96 overflow-auto">
+            <div className="bg-gray-50 dark:bg-black p-3 min-h-[calc(100vh-6rem)] overflow-auto">
                 <div className="mx-auto bg-white dark:bg-background rounded-lg shadow-sm max-w-full">
                     <div className="border-b border-gray-200 dark:border-gray-800 p-2 bg-gray-50 dark:bg-black rounded-t-lg">
                         <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
@@ -89,12 +86,12 @@ export default function EmailPreviewPanel({
                             {emailData.subject}
                         </div>
                     </div>
-                    <div
-                        className="email-preview"
-                        style={{ fontFamily: 'Arial, sans-serif' }}
-                        dangerouslySetInnerHTML={{
-                            __html: generatePreviewHTML(emailData, isDark),
-                        }}
+                    <iframe
+                        key={`custom-preview-${emailData.notificationLanguage ?? 'fr'}`}
+                        title="Custom email preview"
+                        srcDoc={generatePreviewHTML(emailData, false)}
+                        className="w-full min-h-[calc(100vh-10rem)] border-0 rounded-b-lg"
+                        sandbox="allow-same-origin"
                     />
                 </div>
             </div>

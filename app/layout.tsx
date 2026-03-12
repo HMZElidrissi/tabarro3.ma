@@ -15,6 +15,7 @@ import Script from 'next/script';
 
 const nunitoFont = Nunito({
     subsets: ['latin'],
+    variable: '--font-nunito',
     display: 'swap',
 });
 
@@ -148,6 +149,7 @@ export default async function RootLayout({
             className={cn(
                 'antialiased transition-all',
                 fraunces.variable,
+                nunitoFont.variable,
                 isRTL
                     ? [tajawal.className, tajawal.variable, 'text-right']
                     : [nunitoFont.className, 'text-left'],

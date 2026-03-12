@@ -7,7 +7,6 @@ import { getBloodGroupLabel } from '@/config/blood-group';
 import { getLocation } from '@/config/locations';
 import { getStatusColor } from '@/lib/utils';
 import { BloodRequest } from '@/types/blood-request';
-import { BloodGroup } from '@/types/enums';
 import { InboxIcon } from '@heroicons/react/24/outline';
 import { formatDate } from '@/lib/utils';
 import { Calendar, Mailbox, MapPin, Phone, User } from 'lucide-react';

@@ -125,9 +125,11 @@ export function OrganizationRecentParticipants({
                                         className={`flex items-center font-medium ${bloodGroupColors[participant.user.bloodGroup]}`}
                                     >
                                         <Droplets className="h-4 w-4 mr-1" />
-                                        {getBloodGroupLabel(
-                                            participant.user.bloodGroup,
-                                        )}
+                                        <span className="latin">
+                                            {getBloodGroupLabel(
+                                                participant.user.bloodGroup,
+                                            )}
+                                        </span>
                                     </div>
                                 )}
                             </div>
