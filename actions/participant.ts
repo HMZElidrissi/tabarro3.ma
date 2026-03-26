@@ -55,6 +55,7 @@ export async function getParticipants({
 }: GetParticipantsParams) {
     const where: any = {
         role: Role.PARTICIPANT,
+        deletedAt: null, // Exclude soft-deleted users
         OR: search
             ? [
                   { name: { contains: search, mode: 'insensitive' as const } },
@@ -204,7 +205,24 @@ export const deleteParticipant = validatedActionWithUser(
         }
 
         try {
-            await prisma.user.delete({ where: { id: data.id } });
+            const targetUser = await prisma.user.findUnique({
+                where: { id: data.id },
+                select: { email: true },
+            });
+
+            if (!targetUser) {
+                return { error: 'Participant not found' };
+            }
+
+            // Soft delete — consistent with self-delete and org removal
+            await prisma.user.update({
+                where: { id: data.id },
+                data: {
+                    deletedAt: new Date(),
+                    email: `${targetUser.email}-${data.id}-deleted`, // Ensure email uniqueness
+                    emailVerifiedAt: null, // Clear verification state on deletion
+                },
+            });
             revalidatePath('/dashboard/participants');
             return { success: 'Participant deleted successfully' };
         } catch (error) {

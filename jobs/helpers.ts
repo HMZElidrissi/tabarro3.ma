@@ -53,6 +53,7 @@ export async function sendWeeklyStatistics() {
             prisma.user.count({
                 where: {
                     role: Role.PARTICIPANT,
+                    deletedAt: null,
                 },
             }),
             prisma.campaign.count(),
@@ -60,6 +61,7 @@ export async function sendWeeklyStatistics() {
             prisma.user.count({
                 where: {
                     role: Role.PARTICIPANT,
+                    deletedAt: null,
                     createdAt: {
                         gte: oneWeekAgo,
                     },

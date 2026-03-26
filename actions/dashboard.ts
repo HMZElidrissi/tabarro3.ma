@@ -362,8 +362,9 @@ export async function getLatestCampaignParticipants(
                       campaign: {
                           organizationId: userId,
                       },
+                      user: { deletedAt: null },
                   }
-                : {},
+                : { user: { deletedAt: null } },
         include: {
             user: {
                 select: {
@@ -412,8 +413,9 @@ export async function getParticipantAnalytics(userId: string, userRole: Role) {
                       campaign: {
                           organizationId: userId,
                       },
+                      user: { deletedAt: null },
                   }
-                : {},
+                : { user: { deletedAt: null } },
         include: {
             user: {
                 select: {

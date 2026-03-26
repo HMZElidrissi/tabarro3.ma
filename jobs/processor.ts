@@ -42,6 +42,7 @@ const jobHandlers = {
         const recipients = await prisma.user.findMany({
             where: {
                 role: 'PARTICIPANT',
+                deletedAt: null,
                 receiveBloodRequestEmails: true,
                 bloodGroup: {
                     in: compatibleBloodGroups,

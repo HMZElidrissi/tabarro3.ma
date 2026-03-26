@@ -177,12 +177,23 @@ export const removeOrganization = validatedActionWithUser(
             return { error: 'Cannot remove yourself' };
         }
 
+        // Fetch the target user's own email before mangling it
+        const targetUser = await prisma.user.findUnique({
+            where: { id: userId },
+            select: { email: true },
+        });
+
+        if (!targetUser) {
+            return { error: 'Organization not found' };
+        }
+
         // Soft delete the user
         await prisma.user.update({
             where: { id: userId },
             data: {
                 deletedAt: new Date(),
-                email: `${user.email}-${user.id}-deleted`, // Ensure email uniqueness
+                email: `${targetUser.email}-${userId}-deleted`, // Ensure email uniqueness
+                emailVerifiedAt: null, // Clear verification state on deletion
             },
         });
 

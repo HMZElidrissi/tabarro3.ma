@@ -162,6 +162,7 @@ async function processDigestForRegion(digest: any) {
         const recipients = await prisma.user.findMany({
             where: {
                 role: 'PARTICIPANT',
+                deletedAt: null,
                 receiveCampaignDigests: true,
                 city: {
                     regionId: digest.regionId,

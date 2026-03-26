@@ -21,6 +21,7 @@ export const resendVerification = validatedAction(resendSchema, async data => {
                 equals: email,
                 mode: 'insensitive',
             },
+            deletedAt: null,
         },
     });
 

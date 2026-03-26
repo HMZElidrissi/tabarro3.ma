@@ -34,6 +34,7 @@ export const deleteAccount = validatedActionWithUser(
             data: {
                 deletedAt: new Date(),
                 email: `${user.email}-${user.id}-deleted`, // Ensure email uniqueness
+                emailVerifiedAt: null, // Clear verification state on deletion
             },
         });
 

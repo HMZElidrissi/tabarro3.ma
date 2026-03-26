@@ -26,6 +26,7 @@ export const signIn = validatedAction(signInSchema, async data => {
                 equals: email,
                 mode: 'insensitive',
             },
+            deletedAt: null,
         },
     });
 
