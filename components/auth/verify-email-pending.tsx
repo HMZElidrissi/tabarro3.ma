@@ -57,6 +57,7 @@ export function VerifyEmailPending({ dict }: VerifyEmailPendingProps) {
                         {email}
                     </p>
                 )}
+                <p className="text-xs text-muted-foreground">{t.spamHint}</p>
             </div>
 
             {/* Feedback messages */}

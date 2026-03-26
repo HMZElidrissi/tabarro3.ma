@@ -43,7 +43,20 @@ export async function sendEmail(
         ?.statusCode;
 
     if (statusCode === 429) {
-        console.warn('Resend rate limit hit, falling back to nodemailer.');
+        // Cast to string because the Resend SDK type union is incomplete and
+        // doesn't include 'monthly_quota_exceeded' / 'daily_quota_exceeded'.
+        const errorName = (error as { name?: string } | null)?.name;
+        if (errorName === 'monthly_quota_exceeded') {
+            console.error(
+                'Resend monthly quota exceeded — falling back to nodemailer. Consider upgrading your plan.',
+            );
+        } else if (errorName === 'daily_quota_exceeded') {
+            console.error(
+                'Resend daily quota exceeded — falling back to nodemailer. Quota resets after 24 hours.',
+            );
+        } else {
+            console.warn('Resend rate limit hit — falling back to nodemailer.');
+        }
         await transporter.sendMail(mailOptions);
         return;
     }

@@ -233,6 +233,7 @@
             "goToSignIn": "Aller à la page de connexion",
             "pendingTitle": "Vérifiez votre email",
             "pendingDescription": "Nous avons envoyé un lien de confirmation à votre adresse email. Vous devez la vérifier avant de vous connecter.",
+            "spamHint": "Vous ne trouvez pas l'email ? Vérifiez votre dossier spam ou courrier indésirable.",
             "resendLink": "Renvoyer le lien de confirmation",
             "resending": "Envoi en cours...",
             "resendCooldown": "Veuillez patienter {seconds}s",
