@@ -14,7 +14,7 @@ type EnrichedTweetWithCard = EnrichedTweet & {
         };
     };
 };
-import { getTweet, type Tweet } from 'react-tweet/api';
+import { getTweet, type Tweet, type QuotedTweet } from 'react-tweet/api';
 
 import { cn } from '@/lib/utils';
 
@@ -257,10 +257,8 @@ function normalizeTweetEntities(t: Tweet): Tweet {
     return {
         ...t,
         entities,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        quoted_tweet: (t as any).quoted_tweet
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ? normalizeTweetEntities((t as any).quoted_tweet)
+        quoted_tweet: t.quoted_tweet
+            ? (normalizeTweetEntities(t.quoted_tweet as unknown as Tweet) as unknown as QuotedTweet)
             : undefined,
     };
 }
