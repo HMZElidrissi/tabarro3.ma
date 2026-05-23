@@ -246,6 +246,25 @@ export const TweetMedia = ({ tweet }: { tweet: EnrichedTweet }) => {
     );
 };
 
+function normalizeTweetEntities(t: Tweet): Tweet {
+    const entities = {
+        ...t.entities,
+        hashtags: t.entities?.hashtags ?? [],
+        user_mentions: t.entities?.user_mentions ?? [],
+        urls: t.entities?.urls ?? [],
+        symbols: t.entities?.symbols ?? [],
+    };
+    return {
+        ...t,
+        entities,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        quoted_tweet: (t as any).quoted_tweet
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ? normalizeTweetEntities((t as any).quoted_tweet)
+            : undefined,
+    };
+}
+
 export const MagicTweet = ({
     tweet,
     className,
@@ -254,7 +273,7 @@ export const MagicTweet = ({
     tweet: Tweet;
     className?: string;
 }) => {
-    const enrichedTweet = enrichTweet(tweet);
+    const enrichedTweet = enrichTweet(normalizeTweetEntities(tweet));
     return (
         <div
             className={cn(
