@@ -109,12 +109,5 @@
         "ts-node": "^10.9.2",
         "tsx": "^4.7.0",
         "typescript": "^5"
-    },
-    "devEngines": {
-        "packageManager": {
-            "name": "pnpm",
-            "version": "12.11.2",
-            "onFail": "download"
-        }
     }
 }
