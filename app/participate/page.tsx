@@ -90,18 +90,10 @@ export default async function ParticipatePage({
             <div className="w-full max-w-2xl space-y-6">
                 <Link href="/" className="flex items-center justify-center">
                     <Image
-                        src="/partners/jlm.png"
-                        alt="JLM ENCG Agadir"
+                        src="/partners/lionstangier.png"
+                        alt="Lions Club Tangier Doctors"
                         width={150}
                         height={150}
-                        className="dark:hidden"
-                    />
-                    <Image
-                        src="/partners/jlm_white.png"
-                        alt="JLM ENCG Agadir"
-                        width={150}
-                        height={150}
-                        className="hidden dark:block"
                     />
                 </Link>
                 {/* <div className="text-center space-y-2">
