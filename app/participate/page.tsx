@@ -90,8 +90,8 @@ export default async function ParticipatePage({
             <div className="w-full max-w-2xl space-y-6">
                 <Link href="/" className="flex items-center justify-center">
                     <Image
-                        src="/partners/lionstangier.png"
-                        alt="Lions Club Tangier Doctors"
+                        src="/logo.svg"
+                        alt="tabarro3"
                         width={150}
                         height={150}
                     />

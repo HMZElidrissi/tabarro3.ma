@@ -32,13 +32,13 @@ export default function Partners({ dict }: { dict: any }) {
             height: 200,
             className: 'w-60 h-auto object-contain',
         },
-        {
-            name: 'Lions Club Tangier Doctors',
-            logo: '/partners/lionstangier.png',
-            width: 600,
-            height: 600,
-            className: 'w-32 h-auto object-contain',
-        },
+        // {
+        //     name: 'Lions Club Tangier Doctors',
+        //     logo: '/partners/lionstangier.png',
+        //     width: 600,
+        //     height: 600,
+        //     className: 'w-32 h-auto object-contain',
+        // },
     ];
 
     return (
